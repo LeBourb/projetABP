@@ -41,6 +41,8 @@ if ( storefront_is_woocommerce_activated() ) {
 
 	require 'inc/woocommerce/storefront-woocommerce-template-hooks.php';
 	require 'inc/woocommerce/storefront-woocommerce-template-functions.php';
+        require 'inc/woocommerce/wc-custom-admin-order.php';
+        require 'inc/woocommerce/wc-custom-admin-production.php';
 }
 
 if ( is_admin() ) {
@@ -240,3 +242,291 @@ function bbloomer_save_name_fields( $customer_id ) {
     
     update_user_status( $customer_id, 'spam', 1 );
 }
+
+add_action('admin_menu', 'register_my_custom_submenu_page');
+
+function register_my_custom_submenu_page() {
+    
+    //add_submenu_page( 'edit.php?post_type=shop_production', __( 'Attributes', 'woocommerce' ), __( 'Attributes', 'woocommerce' ), 'manage_product_terms', 'product_attributes', array( $this, 'attributes_page' ) );
+    
+    add_submenu_page( 'woocommerce', 'Productions', 'Productions', 'manage_options', 'edit.php?post_type=shop_production');//, 'my_custom_submenu_page_callback' ); 
+}
+
+function my_custom_submenu_page_callback() {
+    echo '<h3>My Custom Submenu Page</h3>';
+    echo '<h3>hello you</h3>';
+    //$loop = new WP_Query( array( 'post_type' => 'production', 'posts_per_page' => 10 ) );
+    if ( !class_exists( 'WC_Report_Production_List' ) ) {
+	require_once 'inc/woocommerce/class-admin-wc-prod-list.php';
+    }
+    $myListTable = new WC_Report_Production_List();
+    echo '<div class="wrap"><h2>My List Table Test</h2>'; 
+    $myListTable->prepare_items(); 
+    $myListTable->display(); 
+    echo '</div>'; 
+    /*while ( $loop->have_posts() ) : $loop->the_post();
+      the_title();
+      echo '<div>';
+      the_content();
+      echo '</div>';
+    endwhile;*/ 
+
+}
+
+add_action( 'manage_prod_posts_custom_column', 'render_prod_columns' );
+
+/**
+* Output custom columns for prods.
+*
+* @param string $column
+*/
+function render_prod_columns( $column ) {
+    global $post, $the_prod;
+
+    if ( empty( $the_prod ) || $the_prod->get_id() != $post->ID ) {
+            $the_prod = wc_get_prod( $post );
+    }
+
+    // Only continue if we have a prod.
+    if ( empty( $the_prod ) ) {
+            return;
+    }
+
+    switch ( $column ) {
+            case 'thumb' :
+                    echo '<a href="' . get_edit_post_link( $post->ID ) . '">' . $the_prod->get_image( 'thumbnail' ) . '</a>';
+                    break;
+            case 'name' :
+                    $edit_link = get_edit_post_link( $post->ID );
+                    $title     = _draft_or_post_title();
+
+                    echo '<strong><a class="row-title" href="' . esc_url( $edit_link ) . '">' . esc_html( $title ) . '</a>';
+
+                    _post_states( $post );
+
+                    echo '</strong>';
+
+                    if ( $post->post_parent > 0 ) {
+                            echo '&nbsp;&nbsp;&larr; <a href="' . get_edit_post_link( $post->post_parent ) . '">' . get_the_title( $post->post_parent ) . '</a>';
+                    }
+
+                    // Excerpt view
+                    if ( isset( $_GET['mode'] ) && 'excerpt' == $_GET['mode'] ) {
+                            echo apply_filters( 'the_excerpt', $post->post_excerpt );
+                    }
+
+                    get_inline_data( $post );
+
+                    /* Custom inline data for woocommerce. */
+                    echo '
+                            <div class="hidden" id="woocommerce_inline_' . absint( $post->ID ) . '">
+                                    <div class="menu_order">' . absint( $the_prod->get_menu_order() ) . '</div>
+                                    <div class="sku">' . esc_html( $the_prod->get_sku() ) . '</div>
+                                    <div class="regular_price">' . esc_html( $the_prod->get_regular_price() ) . '</div>
+                                    <div class="sale_price">' . esc_html( $the_prod->get_sale_price() ) . '</div>
+                                    <div class="weight">' . esc_html( $the_prod->get_weight() ) . '</div>
+                                    <div class="length">' . esc_html( $the_prod->get_length() ) . '</div>
+                                    <div class="width">' . esc_html( $the_prod->get_width() ) . '</div>
+                                    <div class="height">' . esc_html( $the_prod->get_height() ) . '</div>
+                                    <div class="shipping_class">' . esc_html( $the_prod->get_shipping_class() ) . '</div>
+                                    <div class="visibility">' . esc_html( $the_prod->get_catalog_visibility() ) . '</div>
+                                    <div class="stock_status">' . esc_html( $the_prod->get_stock_status() ) . '</div>
+                                    <div class="stock">' . esc_html( $the_prod->get_stock_quantity() ) . '</div>
+                                    <div class="manage_stock">' . esc_html( wc_bool_to_string( $the_prod->get_manage_stock() ) ) . '</div>
+                                    <div class="featured">' . esc_html( wc_bool_to_string( $the_prod->get_featured() ) ) . '</div>
+                                    <div class="prod_type">' . esc_html( $the_prod->get_type() ) . '</div>
+                                    <div class="prod_is_virtual">' . esc_html( wc_bool_to_string( $the_prod->get_virtual() ) ) . '</div>
+                                    <div class="tax_status">' . esc_html( $the_prod->get_tax_status() ) . '</div>
+                                    <div class="tax_class">' . esc_html( $the_prod->get_tax_class() ) . '</div>
+                                    <div class="backorders">' . esc_html( $the_prod->get_backorders() ) . '</div>
+                            </div>
+                    ';
+
+            break;
+            case 'sku' :
+                    echo $the_prod->get_sku() ? esc_html( $the_prod->get_sku() ) : '<span class="na">&ndash;</span>';
+                    break;
+            case 'prod_type' :
+                    if ( $the_prod->is_type( 'grouped' ) ) {
+                            echo '<span class="prod-type tips grouped" data-tip="' . esc_attr__( 'Grouped', 'woocommerce' ) . '"></span>';
+                    } elseif ( $the_prod->is_type( 'external' ) ) {
+                            echo '<span class="prod-type tips external" data-tip="' . esc_attr__( 'External/Affiliate', 'woocommerce' ) . '"></span>';
+                    } elseif ( $the_prod->is_type( 'simple' ) ) {
+
+                            if ( $the_prod->is_virtual() ) {
+                                    echo '<span class="prod-type tips virtual" data-tip="' . esc_attr__( 'Virtual', 'woocommerce' ) . '"></span>';
+                            } elseif ( $the_prod->is_downloadable() ) {
+                                    echo '<span class="prod-type tips downloadable" data-tip="' . esc_attr__( 'Downloadable', 'woocommerce' ) . '"></span>';
+                            } else {
+                                    echo '<span class="prod-type tips simple" data-tip="' . esc_attr__( 'Simple', 'woocommerce' ) . '"></span>';
+                            }
+                    } elseif ( $the_prod->is_type( 'variable' ) ) {
+                            echo '<span class="prod-type tips variable" data-tip="' . esc_attr__( 'Variable', 'woocommerce' ) . '"></span>';
+                    } else {
+                            // Assuming that we have other types in future
+                            echo '<span class="prod-type tips ' . esc_attr( sanitize_html_class( $the_prod->get_type() ) ) . '" data-tip="' . esc_attr( ucfirst( $the_prod->get_type() ) ) . '"></span>';
+                    }
+                    break;
+            case 'price' :
+                    echo $the_prod->get_price_html() ? $the_prod->get_price_html() : '<span class="na">&ndash;</span>';
+                    break;
+            case 'prod_cat' :
+            case 'prod_tag' :
+                    if ( ! $terms = get_the_terms( $post->ID, $column ) ) {
+                            echo '<span class="na">&ndash;</span>';
+                    } else {
+                            $termlist = array();
+                            foreach ( $terms as $term ) {
+                                    $termlist[] = '<a href="' . admin_url( 'edit.php?' . $column . '=' . $term->slug . '&post_type=prod' ) . ' ">' . $term->name . '</a>';
+                            }
+
+                            echo implode( ', ', $termlist );
+                    }
+                    break;
+            case 'featured' :
+                    $url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_feature_prod&prod_id=' . $post->ID ), 'woocommerce-feature-prod' );
+                    echo '<a href="' . esc_url( $url ) . '" aria-label="' . __( 'Toggle featured', 'woocommerce' ) . '">';
+                    if ( $the_prod->is_featured() ) {
+                            echo '<span class="wc-featured tips" data-tip="' . esc_attr__( 'Yes', 'woocommerce' ) . '">' . __( 'Yes', 'woocommerce' ) . '</span>';
+                    } else {
+                            echo '<span class="wc-featured not-featured tips" data-tip="' . esc_attr__( 'No', 'woocommerce' ) . '">' . __( 'No', 'woocommerce' ) . '</span>';
+                    }
+                    echo '</a>';
+                    break;
+            case 'is_in_stock' :
+
+                    if ( $the_prod->is_in_stock() ) {
+                            $stock_html = '<mark class="instock">' . __( 'In stock', 'woocommerce' ) . '</mark>';
+                    } else {
+                            $stock_html = '<mark class="outofstock">' . __( 'Out of stock', 'woocommerce' ) . '</mark>';
+                    }
+
+                    if ( $the_prod->managing_stock() ) {
+                            $stock_html .= ' (' . wc_stock_amount( $the_prod->get_stock_quantity() ) . ')';
+                    }
+
+                    echo apply_filters( 'woocommerce_admin_stock_html', $stock_html, $the_prod );
+
+                    break;
+            default :
+                    break;
+    }
+}
+add_filter( 'manage_prod_posts_columns', 'prod_columns' );
+/**
+* Define custom columns for prods.
+* @param  array $existing_columns
+* @return array
+*/
+function prod_columns( $existing_columns ) {
+       if ( empty( $existing_columns ) && ! is_array( $existing_columns ) ) {
+               $existing_columns = array();
+       }
+
+       unset( $existing_columns['title'], $existing_columns['comments'], $existing_columns['date'] );
+
+       $columns          = array();
+       $columns['cb']    = '<input type="checkbox" />';
+       $columns['thumb'] = '<span class="wc-image tips" data-tip="' . esc_attr__( 'Image', 'woocommerce' ) . '">' . __( 'Image', 'woocommerce' ) . '</span>';
+       $columns['name']  = __( 'Name', 'woocommerce' );
+
+       if ( wc_prod_sku_enabled() ) {
+               $columns['sku'] = __( 'SKU', 'woocommerce' );
+       }
+
+       if ( 'yes' === get_option( 'woocommerce_manage_stock' ) ) {
+               $columns['is_in_stock'] = __( 'Stock', 'woocommerce' );
+       }
+
+       $columns['price']        = __( 'Price', 'woocommerce' );
+       $columns['prod_cat']  = __( 'Categories', 'woocommerce' );
+       $columns['prod_tag']  = __( 'Tags', 'woocommerce' );
+       $columns['featured']     = '<span class="wc-featured parent-tips" data-tip="' . esc_attr__( 'Featured', 'woocommerce' ) . '">' . __( 'Featured', 'woocommerce' ) . '</span>';
+       $columns['prod_type'] = '<span class="wc-type parent-tips" data-tip="' . esc_attr__( 'Type', 'woocommerce' ) . '">' . __( 'Type', 'woocommerce' ) . '</span>';
+       $columns['date']         = __( 'Date', 'woocommerce' );
+
+       return array_merge( $columns, $existing_columns );
+
+}
+
+add_action( 'init', 'create_prod_post_type' );
+function create_prod_post_type() {
+  register_post_type( 'production',
+    array(
+      'labels' => array(
+        'name' => __( 'Productions' ),
+        'singular_name' => __( 'Production' )
+      ),
+      'public' => true
+    )
+  );
+}
+
+
+/**
+ * Legacy product contains all deprecated methods for this class and can be
+ * removed in the future.
+ */
+
+function wc_production_data_store( $stores ) {
+	$stores['production'] = 'WC_Prod_Data_Store';
+	return $stores;
+}
+
+add_filter( 'woocommerce_data_stores', 'wc_production_data_store' , 98);
+
+
+add_action( 'woocommerce_review_order_before_order_total', 'custom_cart_total' );
+add_action( 'woocommerce_before_cart_totals', 'custom_cart_total' );
+function custom_cart_total() {
+
+    if ( is_admin() && ! defined( 'DOING_AJAX' ) )
+            return;
+
+    WC()->cart->total *= 0.30;
+    //var_dump( WC()->cart->total);
+}
+
+add_action( 'woocommerce_before_checkout_form', 'my_checkout_msg' );
+
+function my_checkout_msg() {
+	echo '<p>To validate your order, you must pay 30% of the total price, Thank you!</p>';
+}
+
+function create_post_type_production() {
+  register_post_type( 'shop_production',
+    array(
+      'labels' => array(
+        'name' => __( 'Productions' ),
+        'singular_name' => __( 'Production' )
+      ),
+      'public' => true,
+      'has_archive' => true,
+    )
+  );
+}
+add_action( 'init', 'create_post_type_production' );
+if (!function_exists('get_post_id_by_meta_key_and_value')) {
+	/**
+	 * Get post id from meta key and value
+	 * @param string $key
+	 * @param mixed $value
+	 * @return int|bool
+	 * @author David M&aring;rtensson <david.martensson@gmail.com>
+	 */
+	function get_post_id_by_meta_key_and_value($key, $value) {
+		global $wpdb;
+		$meta = $wpdb->get_results("SELECT * FROM `".$wpdb->postmeta."` WHERE meta_key='".$wpdb->escape($key)."' AND meta_value='".$wpdb->escape($value)."'");
+		if (is_array($meta) && !empty($meta) && isset($meta[0])) {
+			$meta = $meta[0];
+		}		
+		if (is_object($meta)) {
+			return $meta->post_id;
+		}
+		else {
+			return null;
+		}
+	}
+}
+
+

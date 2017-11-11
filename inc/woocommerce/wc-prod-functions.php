@@ -12,6 +12,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( ! class_exists( 'WC_Production' ) ) {
+    require_once 'wc-production.php';
+}
+
+
+function wc_get_orders_of_production($production_id) {
+    global $wpdb;
+    $meta = $wpdb->get_results("SELECT * FROM `".$wpdb->postmeta."` WHERE meta_key='".$wpdb->escape('_production_id')."' AND meta_value='". $production_id ."'");
+    $order = array();
+    if (is_array($meta) && !empty($meta) && isset($meta[0])) {
+        foreach ($meta as $order) {
+            $orders[] = wc_get_order($order->post_id);            
+        }        
+    }
+    return $orders;
+}
+
+function wc_get_production_order_items($production_id, $order_id) {
+    $order = wc_get_order($order_id);//<--check this line
+    
+    $product_id = get_post_meta($production_id, '_product_id', true);
+    $items = $order->get_items();
+    $prod_items = array();
+
+    foreach ( $items as $item ) {        
+        $tp_product_id = $item['product_id'];
+        if($tp_product_id == $product_id) {
+            $prod_items[] = $item;
+        }        
+    }
+    return $prod_items;
+}
+
 /**
  * Standard way of retrieving prods based on certain parameters.
  *
@@ -82,7 +115,7 @@ function wc_get_prod( $the_prod = false ) {
 		wc_doing_it_wrong( __FUNCTION__, 'wc_get_prod should not be called before post types are registered (woocommerce_after_register_post_type action)', '2.5' );
 		return false;
 	}
-	return WC()->prod_factory->get_prod( $the_prod );
+	return new WC_Production( $the_prod );
 }
 
 /**
@@ -119,10 +152,10 @@ function wc_is_prod_status( $maybe_status ) {
  * Get list of statuses which are consider 'paid'.
  * @since  3.0.0
  * @return array
- */
+ 
 function wc_get_is_paid_statuses() {
 	return apply_filters( 'woocommerce_prod_is_paid_statuses', array( 'processing', 'completed' ) );
-}
+}*/
 
 /**
  * Get the nice name for an prod status.
@@ -336,6 +369,27 @@ function wc_prods_count( $status ) {
 	return $count;
 }
 
+function wc_create_prod_table() {
+    // create db
+    global $wpdb;
+
+    $charset_collate = $wpdb->get_charset_collate();
+    
+    $table_name = $wpdb->prefix . '_woocommerce_production_items';
+    if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+        $sql = "CREATE TABLE $table_name (
+          prod_item_id mediumint(9) NOT NULL AUTO_INCREMENT,
+          product_id time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+          name tinytext NOT NULL,      
+          PRIMARY KEY  (prod_item_id)
+        ) $charset_collate;";
+
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        dbDelta( $sql );
+    }
+  
+}
+
 /**
  * Grant downloadable product access to the file identified by $download_id.
  *
@@ -344,7 +398,7 @@ function wc_prods_count( $status ) {
  * @param  WC_Order $prod the prod
  * @param  int $qty purchased
  * @return int|bool insert id or false on failure
- */
+ 
 function wc_downloadable_file_permission( $download_id, $product, $prod, $qty = 1 ) {
 	if ( is_numeric( $product ) ) {
 		$product = wc_get_product( $product );
@@ -375,7 +429,7 @@ function wc_downloadable_file_permission( $download_id, $product, $prod, $qty = 
  *
  * @param int $prod_id
  * @param bool $force
- */
+ 
 function wc_downloadable_product_permissions( $prod_id, $force = false ) {
 	$prod = wc_get_prod( $prod_id );
 
@@ -452,7 +506,7 @@ function wc_delete_shop_prod_transients( $prod = 0 ) {
 /**
  * See if we only ship to billing addresses.
  * @return bool
- */
+ 
 function wc_ship_to_billing_address_only() {
 	return 'billing_only' === get_option( 'woocommerce_ship_to_destination' );
 }
@@ -465,7 +519,7 @@ function wc_ship_to_billing_address_only() {
  * @since 2.2
  * @param array $args
  * @return WC_Order_Refund|WP_Error
- */
+ 
 function wc_create_refund( $args = array() ) {
 	$default_args = array(
 		'amount'         => 0,
@@ -552,7 +606,7 @@ function wc_create_refund( $args = array() ) {
 		/**
 		 * Action hook to adjust refund before save.
 		 * @since 3.0.0
-		 */
+		 
 		do_action( 'woocommerce_create_refund', $refund, $args );
 
 		if ( $refund->save() ) {
@@ -601,7 +655,7 @@ function wc_create_refund( $args = array() ) {
  * @param string $amount
  * @param string $reason
  * @return bool|WP_Error
- */
+ 
 function wc_refund_payment( $prod, $amount, $reason = '' ) {
 	try {
 		if ( ! is_a( $prod, 'WC_Order' ) ) {
@@ -644,7 +698,7 @@ function wc_refund_payment( $prod, $amount, $reason = '' ) {
  * @since  3.0.0
  * @param  WC_Order $prod
  * @param  array $refunded_line_items
- */
+ 
 function wc_restock_refunded_items( $prod, $refunded_line_items ) {
 	$line_items = $prod->get_items();
 
@@ -664,19 +718,19 @@ function wc_restock_refunded_items( $prod, $refunded_line_items ) {
 		}
 	}
 }
-
+*/
 /**
  * Get tax class by tax id.
  *
  * @since 2.2
  * @param int $tax_id
  * @return string
- */
+ 
 function wc_get_tax_class_by_tax_id( $tax_id ) {
 	global $wpdb;
 	return $wpdb->get_var( $wpdb->prepare( "SELECT tax_rate_class FROM {$wpdb->prefix}woocommerce_tax_rates WHERE tax_rate_id = %d", $tax_id ) );
 }
-
+*/
 /**
  * Get payment gateway class by prod data.
  *
@@ -742,7 +796,7 @@ function wc_prod_search( $term ) {
  *
  * @since 3.0.0
  * @param int $prod_id
- */
+ 
 function wc_update_total_sales_counts( $prod_id ) {
 	$prod = wc_get_prod( $prod_id );
 
@@ -765,20 +819,20 @@ function wc_update_total_sales_counts( $prod_id ) {
 	 * Called when sales for an prod are recorded
 	 *
 	 * @param int $prod_id prod id
-	 */
+	 
 	do_action( 'woocommerce_recorded_sales', $prod_id );
 }
 add_action( 'woocommerce_prod_status_completed', 'wc_update_total_sales_counts' );
 add_action( 'woocommerce_prod_status_processing', 'wc_update_total_sales_counts' );
 add_action( 'woocommerce_prod_status_on-hold', 'wc_update_total_sales_counts' );
-
+*/
 /**
  * Update used coupon amount for each coupon within an prod.
  *
  * @since 3.0.0
  * @param int $prod_id
  */
-function wc_update_coupon_usage_counts( $prod_id ) {
+/*function wc_update_coupon_usage_counts( $prod_id ) {
 	if ( ! $prod = wc_get_prod( $prod_id ) ) {
 		return;
 	}
@@ -823,7 +877,7 @@ add_action( 'woocommerce_prod_status_completed', 'wc_update_coupon_usage_counts'
 add_action( 'woocommerce_prod_status_processing', 'wc_update_coupon_usage_counts' );
 add_action( 'woocommerce_prod_status_on-hold', 'wc_update_coupon_usage_counts' );
 add_action( 'woocommerce_prod_status_cancelled', 'wc_update_coupon_usage_counts' );
-
+*/
 /**
  * Cancel all unpaid prods after held duration to prevent stock lock for those products.
  */

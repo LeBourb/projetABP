@@ -1,6 +1,6 @@
 <?php
 /**
- * WooCommerce Order Item Functions
+ * WooCommerce Production Item Functions
  *
  * Functions for prod specific things.
  *
@@ -19,26 +19,53 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param array $item_array
  * @return int|bool Item ID or false
  */
-function wc_add_prod_item( $prod_id, $item_array ) {
-	$prod_id = absint( $prod_id );
+function wc_add_prod_items( $order_id ) {
+	$prod_id = absint( $order_id );
+        
 
 	if ( ! $prod_id ) {
 		return false;
 	}
+        
+        $order = wc_get_order($order_id);//<--check this line
 
-	$defaults = array(
-		'prod_item_name' => '',
-		'prod_item_type' => 'line_item',
-	);
+        $paymethod = $order->payment_method_title;
+        $orderstat = $order->get_status();
 
-	$item_array = wp_parse_args( $item_array, $defaults );
-	$data_store = WC_Data_Store::load( 'prod-item' );
-	$item_id    = $data_store->add_prod_item( $prod_id, $item_array );
-	$item       = WC_Order_Factory::get_prod_item( $item_id );
+        $items = $order->get_items();
+        $array_ids = array();
 
-	do_action( 'woocommerce_new_prod_item', $item_id, $item, $prod_id );
+        foreach ( $items as $item ) {
+            $product_name = $item['name'];
+            $product_id = $item['product_id'];
+            $product_variation_id = $item['variation_id'];
 
-	return $item_id;
+            
+            $defaults = array(
+                    'prod_item_name' => '',
+                    'prod_item_type' => 'line_item',
+            );
+            
+            
+
+            $product = wc_get_product( $product_id );
+            $post_id = get_post_id_by_meta_key_and_value('_product_id', $product_id);
+            if($post_id == null){
+                $id = wp_insert_post(array('post_title'=> $product->get_name().'_production', 'post_type'=>'shop_production', 'post_content'=>'demo text'));
+                add_post_meta($id, '_product_id', $product_id, true);
+                if(!in_array($id,$array_ids)) {
+                    $array_ids[] = $id;
+                }                
+            }else {
+                if(!in_array($post_id,$array_ids)) {
+                    $array_ids[] = $post_id;
+                }
+            }
+
+        }
+        
+        return $array_ids;
+
 }
 
 /**
@@ -87,7 +114,7 @@ function wc_delete_prod_item( $item_id ) {
 }
 
 /**
- * WooCommerce Order Item Meta API - Update term meta.
+ * WooCommerce Production Item Meta API - Update term meta.
  *
  * @access public
  * @param mixed $item_id
@@ -106,7 +133,7 @@ function wc_update_prod_item_meta( $item_id, $meta_key, $meta_value, $prev_value
 }
 
 /**
- * WooCommerce Order Item Meta API - Add term meta.
+ * WooCommerce Production Item Meta API - Add term meta.
  *
  * @access public
  * @param mixed $item_id
@@ -116,6 +143,7 @@ function wc_update_prod_item_meta( $item_id, $meta_key, $meta_value, $prev_value
  * @return int New row ID or 0
  */
 function wc_add_prod_item_meta( $item_id, $meta_key, $meta_value, $unique = false ) {
+        
 	$data_store = WC_Data_Store::load( 'prod-item' );
 	if ( $meta_id = $data_store->add_metadata( $item_id, $meta_key, $meta_value, $unique ) ) {
 		WC_Cache_Helper::incr_cache_prefix( 'object_' . $item_id ); // Invalidate cache.
@@ -125,7 +153,7 @@ function wc_add_prod_item_meta( $item_id, $meta_key, $meta_value, $unique = fals
 }
 
 /**
- * WooCommerce Order Item Meta API - Delete term meta.
+ * WooCommerce Production Item Meta API - Delete term meta.
  *
  * @access public
  * @param mixed $item_id
@@ -144,7 +172,7 @@ function wc_delete_prod_item_meta( $item_id, $meta_key, $meta_value = '', $delet
 }
 
 /**
- * WooCommerce Order Item Meta API - Get term meta.
+ * WooCommerce Production Item Meta API - Get term meta.
  *
  * @access public
  * @param mixed $item_id
@@ -166,4 +194,58 @@ function wc_get_prod_item_meta( $item_id, $key, $single = true ) {
 function wc_get_prod_id_by_prod_item_id( $item_id ) {
 	$data_store = WC_Data_Store::load( 'prod-item' );
 	return $data_store->get_prod_id_by_prod_item_id( $item_id );
+}
+
+
+add_action('woocommerce_thankyou', 'add_to_production_item', 10, 1);
+
+function add_to_production_item($order_id) { //<--check this line
+
+    //create an order instance
+    $order = wc_get_order($order_id);//<--check this line
+
+    $paymethod = $order->payment_method_title;
+    $orderstat = $order->get_status();
+    
+    $items = $order->get_items();
+
+
+    foreach ( $items as $item ) {
+        $product_name = $item['name'];
+        $product_id = $item['product_id'];
+        $product_variation_id = $item['variation_id'];
+        
+       // wc_add_prod_item($product_id, $order_id);
+        
+        
+    }
+
+    
+}
+
+
+
+/**
+ * Get all order statuses.
+ *
+ * @since 2.2
+ * @used-by WC_Production::set_status
+ * @return array
+ */
+function wc_get_production_statuses() {
+	$production_statuses = array(
+		'wc-pending'    => _x( 'Pending payment', 'Production status', 'woocommerce' ),
+		'wc-processing' => _x( 'Processing', 'Production status', 'woocommerce' ),
+		'wc-on-hold'    => _x( 'On hold', 'Production status', 'woocommerce' ),
+		'wc-completed'  => _x( 'Completed', 'Production status', 'woocommerce' ),
+		'wc-cancelled'  => _x( 'Cancelled', 'Production status', 'woocommerce' ),
+		'wc-refunded'   => _x( 'Refunded', 'Production status', 'woocommerce' ),
+		'wc-failed'     => _x( 'Failed', 'Production status', 'woocommerce' ),
+	);
+	return $production_statuses;
+}
+
+function wc_get_production_product($production_id) {
+    $product_id = get_post_meta($production_id, '_product_id', true);
+    return wc_get_product($product_id);
 }
