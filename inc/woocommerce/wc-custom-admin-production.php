@@ -18,6 +18,18 @@ function wc_meta_box_production_info() {
     WC_Meta_Box_Production_Data::output($post);
 }
 
+function wc_meta_box_production_total_table() {
+    if(!class_exists('Production_Product_Total_Table')) {
+        require_once 'class_admin_production_product_total_table.php';
+    }
+    global $post,$production_id;
+    $production_id = $post->ID;
+    $prod_total_table = new Production_Product_Total_Table();
+    $prod_total_table->prepare_items();
+    $prod_total_table->display();
+}
+
+
 function wc_meta_box_production_product_image() {
     global $post;
     if(!function_exists('wc_get_production_product')) {
@@ -38,6 +50,7 @@ if ( ! function_exists( 'production_meta_boxes' ) ) {
     function production_meta_boxes() {                
         add_meta_box( 'woocommerce-production-meta', __( 'Meta', 'woocommerce' ), 'wc_meta_box_production_info',  "shop_production", 'normal', 'high' );
         add_meta_box( 'woocommerce-production-orders', __( 'Orders', 'woocommerce' ), 'wc_meta_box_production_orders', "shop_production", 'normal', 'high' );        
+        add_meta_box( 'woocommerce-production-total-table', __( 'Total Production', 'woocommerce' ), 'wc_meta_box_production_total_table', "shop_production", 'normal', 'high' );        
         add_meta_box( 'woocommerce-production-product-image', __( 'Product Image', 'woocommerce' ), 'wc_meta_box_production_product_image', "shop_production", 'side', 'default' );        
     }
 }

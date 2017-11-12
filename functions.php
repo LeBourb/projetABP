@@ -43,6 +43,9 @@ if ( storefront_is_woocommerce_activated() ) {
 	require 'inc/woocommerce/storefront-woocommerce-template-functions.php';
         require 'inc/woocommerce/wc-custom-admin-order.php';
         require 'inc/woocommerce/wc-custom-admin-production.php';
+        require 'inc/woocommerce/wc-custom-admin-workshop.php';
+        require 'inc/woocommerce/wc-custom-admin-supplier.php';
+        require 'inc/woocommerce/wc-product-attribute-manufacturer.php';
 }
 
 if ( is_admin() ) {
@@ -250,6 +253,8 @@ function register_my_custom_submenu_page() {
     //add_submenu_page( 'edit.php?post_type=shop_production', __( 'Attributes', 'woocommerce' ), __( 'Attributes', 'woocommerce' ), 'manage_product_terms', 'product_attributes', array( $this, 'attributes_page' ) );
     
     add_submenu_page( 'woocommerce', 'Productions', 'Productions', 'manage_options', 'edit.php?post_type=shop_production');//, 'my_custom_submenu_page_callback' ); 
+    add_submenu_page( 'woocommerce', 'Workshops', 'Workshops', 'manage_options', 'edit.php?post_type=shop_workshop');//, 'my_custom_submenu_page_callback' ); 
+    add_submenu_page( 'woocommerce', 'Suppliers', 'Suppliers', 'manage_options', 'edit.php?post_type=shop_supplier');//, 'my_custom_submenu_page_callback' ); 
 }
 
 function my_custom_submenu_page_callback() {
@@ -504,6 +509,26 @@ function create_post_type_production() {
       'has_archive' => true,
     )
   );
+  register_post_type( 'shop_workshop',
+    array(
+      'labels' => array(
+        'name' => __( 'Workshops' ),
+        'singular_name' => __( 'Workshop' )
+      ),
+      'public' => true,
+      'has_archive' => true,
+    )
+  );
+  register_post_type( 'shop_supplier',
+    array(
+      'labels' => array(
+        'name' => __( 'Suppliers' ),
+        'singular_name' => __( 'Supplier' )
+      ),
+      'public' => true,
+      'has_archive' => true,
+    )
+  );
 }
 add_action( 'init', 'create_post_type_production' );
 if (!function_exists('get_post_id_by_meta_key_and_value')) {
@@ -530,3 +555,4 @@ if (!function_exists('get_post_id_by_meta_key_and_value')) {
 }
 
 
+add_role( 'manufacturer_role', 'Manufacturer', array( 'read' => true, 'level_0' => true ) );

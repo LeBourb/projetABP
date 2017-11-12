@@ -20,7 +20,7 @@ if ( ! class_exists( 'WC_Production' ) ) {
 function wc_get_orders_of_production($production_id) {
     global $wpdb;
     $meta = $wpdb->get_results("SELECT * FROM `".$wpdb->postmeta."` WHERE meta_key='".$wpdb->escape('_production_id')."' AND meta_value='". $production_id ."'");
-    $order = array();
+    $orders = array();
     if (is_array($meta) && !empty($meta) && isset($meta[0])) {
         foreach ($meta as $order) {
             $orders[] = wc_get_order($order->post_id);            
