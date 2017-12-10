@@ -45,7 +45,9 @@ if ( storefront_is_woocommerce_activated() ) {
         require 'inc/woocommerce/wc-custom-admin-production.php';
         require 'inc/woocommerce/wc-custom-admin-workshop.php';
         require 'inc/woocommerce/wc-custom-admin-supplier.php';
-        require 'inc/woocommerce/wc-product-attribute-manufacturer.php';
+        require 'inc/woocommerce/wc-product-attribute-workshop.php';
+        require 'inc/woocommerce/wc-product-attribute-supply.php';
+        require 'inc/woocommerce/class-wc-product-attribute-supply-form.php';
 }
 
 if ( is_admin() ) {
@@ -75,12 +77,12 @@ if ( version_compare( get_bloginfo( 'version' ), '4.7.3', '>=' ) && ( is_admin()
 
 function my_translate() {
 
-  //$your_content = ob_get_contents();
-   //$your_content = preg_replace( '/\<label for="user_login"\>(.*?)\<br/', 'Usernumia: ', $content );
-   //$your_content = preg_replace( '/\<label for="user_email"\>(.*?)\<br/', 'Email Sior:', $content );
-    
-   //ob_get_clean();
-   echo $your_content;
+    //$your_content = ob_get_contents();
+    //$your_content = preg_replace( '/\<label for="user_login"\>(.*?)\<br/', 'Usernumia: ', $content );
+    //$your_content = preg_replace( '/\<label for="user_email"\>(.*?)\<br/', 'Email Sior:', $content );
+    bbloomer_add_name_woo_account_registration();
+    //ob_get_clean();
+   //echo $your_content;
 }
 add_action( 'register_form', 'my_translate', 40);
 
@@ -175,8 +177,10 @@ function bbloomer_add_name_woo_account_registration() {
 // 2. VALIDATE FIELDS
  
 add_filter( 'woocommerce_registration_errors', 'bbloomer_validate_name_fields', 10, 3 );
+add_filter( 'registration_errors', 'bbloomer_validate_name_fields',40, 3 );
  
 function bbloomer_validate_name_fields( $errors, $username, $email ) {
+    global $_POST;
     if ( isset( $_POST['billing_first_name'] ) && empty( $_POST['billing_first_name'] ) ) {
         $errors->add( 'billing_first_name_error', __( '<strong>Error</strong>: First name is required!', 'woocommerce' ) );
     }
@@ -202,6 +206,7 @@ function bbloomer_validate_name_fields( $errors, $username, $email ) {
 // 3. SAVE FIELDS
  
 add_action( 'woocommerce_created_customer', 'bbloomer_save_name_fields' );
+add_action('user_register', 'bbloomer_save_name_fields', 60, 1);
  
 function bbloomer_save_name_fields( $customer_id ) {
     if ( isset( $_POST['billing_first_name'] ) ) {
@@ -223,30 +228,31 @@ function bbloomer_save_name_fields( $customer_id ) {
     }
     if ( isset( $_POST['billing_company'] ) ) {
         update_user_meta( $customer_id, 'billing_company', sanitize_text_field( $_POST['billing_company'] ) );     
-        update_user_meta( $customer_id, 'shipping_company', sanitize_text_field( $_POST['shipping_company'] ) );     
+        update_user_meta( $customer_id, 'shipping_company', sanitize_text_field( $_POST['billing_company'] ) );     
     }
     if ( isset( $_POST['billing_address_1'] ) ) {
         update_user_meta( $customer_id, 'billing_address_1', sanitize_text_field( $_POST['billing_address_1'] ) );     
-        update_user_meta( $customer_id, 'shipping_address_1', sanitize_text_field( $_POST['shipping_address_1'] ) );     
+        update_user_meta( $customer_id, 'shipping_address_1', sanitize_text_field( $_POST['billing_address_1'] ) );     
     }
     if ( isset( $_POST['billing_address_2'] ) ) {
         update_user_meta( $customer_id, 'billing_address_2', sanitize_text_field( $_POST['billing_address_2'] ) );     
-        update_user_meta( $customer_id, 'shipping_address_2', sanitize_text_field( $_POST['shipping_address_2'] ) );     
+        update_user_meta( $customer_id, 'shipping_address_2', sanitize_text_field( $_POST['billing_address_2'] ) );     
     }
     if ( isset( $_POST['billing_city'] ) ) {
         update_user_meta( $customer_id, 'billing_city', sanitize_text_field( $_POST['billing_city'] ) );     
-        update_user_meta( $customer_id, 'shipping_city', sanitize_text_field( $_POST['shipping_city'] ) );     
+        update_user_meta( $customer_id, 'shipping_city', sanitize_text_field( $_POST['billing_city'] ) );     
     }
     if ( isset( $_POST['billing_postcode'] ) ) {
         update_user_meta( $customer_id, 'billing_postcode', sanitize_text_field( $_POST['billing_postcode'] ) );     
-        update_user_meta( $customer_id, 'shipping_postcode', sanitize_text_field( $_POST['shipping_postcode'] ) );     
+        update_user_meta( $customer_id, 'shipping_postcode', sanitize_text_field( $_POST['billing_postcode'] ) );     
     }
-    update_user_meta( $customer_id, 'billing_country', 'Japan' );
+    update_user_meta( $customer_id, 'billing_country', 'JPY' );
     
-    update_user_status( $customer_id, 'spam', 1 );
+    //update_user_status( $customer_id, 'spam', 1 );
 }
 
 add_action('admin_menu', 'register_my_custom_submenu_page');
+
 
 function register_my_custom_submenu_page() {
     
@@ -507,6 +513,7 @@ function create_post_type_production() {
       ),
       'public' => true,
       'has_archive' => true,
+      'hierarchical' => true
     )
   );
   register_post_type( 'shop_workshop',
@@ -517,6 +524,7 @@ function create_post_type_production() {
       ),
       'public' => true,
       'has_archive' => true,
+      'hierarchical' => true
     )
   );
   register_post_type( 'shop_supplier',
@@ -527,6 +535,7 @@ function create_post_type_production() {
       ),
       'public' => true,
       'has_archive' => true,
+      'hierarchical' => true
     )
   );
 }
@@ -555,4 +564,21 @@ if (!function_exists('get_post_id_by_meta_key_and_value')) {
 }
 
 
-add_role( 'manufacturer_role', 'Manufacturer', array( 'read' => true, 'level_0' => true ) );
+
+
+/**
+ * WordPress function for redirecting users on login based on user role
+ */
+function my_login_redirect( $url, $request, $user ){
+    if( $user && is_object( $user ) && is_a( $user, 'WP_User' ) ) {
+        if( $user->has_cap( 'administrator' ) ) {
+            $url = admin_url();
+        } else {            
+            $url = get_permalink( woocommerce_get_page_id( 'shop' ) );
+        }
+    }
+    return $url;
+}
+add_filter('login_redirect', 'my_login_redirect', 10, 3 );
+
+//add_role( 'workshop_role', 'Workshop', array( 'read' => true, 'level_0' => true ) );

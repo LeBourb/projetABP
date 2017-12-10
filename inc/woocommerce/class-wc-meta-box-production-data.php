@@ -181,7 +181,7 @@ class WC_Meta_Box_Production_Data {
 				<p class="production_number"><?php
 
 					
-					if ( $ip_address = $production->get_manufacturer_ip_address() ) {
+					if ( $ip_address = $production->get_workshop_ip_address() ) {
 						/* translators: %s: IP address */
 						printf(
 							__( 'Customer IP: %s', 'woocommerce' ),

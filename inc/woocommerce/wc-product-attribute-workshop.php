@@ -8,19 +8,19 @@
 
 
 /**
- * Description of wc-product-attribute-manufacturer
+ * Description of wc-product-attribute-workshop
  *
  * @author smash
  */
 
-class Product_Attribute_Manufacturer {
+class Product_Attribute_Workshop {
 
   // Constructor
     function __construct() {
         
         
         add_filter("product_attributes_type_selector" , function( $array ){
-            //$array["advanced_attribute"] = __( 'Manufacturer', 'woocommerce' );
+            //$array["advanced_attribute"] = __( 'Workshop', 'woocommerce' );
             return $array ;
         });
         
@@ -54,9 +54,9 @@ class Product_Attribute_Manufacturer {
         
         
         $ajax_events = array(
-            'select_manufacturer'                                    => false,
-            'add_new_advanced_attribute'                                => false,
-            'save_selected_manufacturer'                                  => false
+            'select_workshop'                                    => false,
+            //'add_new_advanced_attribute'                                => false,
+            'save_selected_workshop'                                  => false
         );
         // rely on woocommerce attribute
         foreach ( $ajax_events as $ajax_event => $nopriv ) {
@@ -291,7 +291,7 @@ class Product_Attribute_Manufacturer {
     /**
     * Add an attribute row.
     */
-    function select_manufacturer() {
+    function select_workshop() {
            ob_start();
 
            //check_ajax_referer( 'add-advanced-attribute', 'security' );
@@ -299,14 +299,14 @@ class Product_Attribute_Manufacturer {
            if ( ! current_user_can( 'edit_products' ) ) {
                    wp_die( -1 );
            }
-           $manufacturer_id = $_POST['manufacturer_id'];
-           include( 'views/html-product-manufacturer-address.php' );
+           $workshop_id = $_POST['workshop_id'];
+           include( 'views/html-product-workshop-address.php' );
            wp_die();
     }
 
     /**
     * Add a new attribute via ajax function.
-    */
+    
     function add_new_advanced_attribute() {
            check_ajax_referer( 'add-advanced-attribute', 'security' );
 
@@ -334,7 +334,7 @@ class Product_Attribute_Manufacturer {
            }
            wp_die( -1 );
     }
-
+    */
     	/**
 	 * Prepare attributes for save.
 	 *
@@ -406,7 +406,7 @@ class Product_Attribute_Manufacturer {
     /**
     * Save attributes via ajax.
     */
-    function save_selected_manufacturer() {
+    function save_selected_workshop() {
            //check_ajax_referer( 'save-advanced-attributes', 'security' );
 
            if ( ! current_user_can( 'edit_products' ) ) {
@@ -415,9 +415,9 @@ class Product_Attribute_Manufacturer {
 
            global $post;
            $post = get_post( $_POST['post_id'] ); 
-           $manufacturer_id = $_POST['manufacturer_id'];
+           $workshop_id = $_POST['workshop_id'];
             //$product->set_prop( 'advanced_attributes', $attributes );
-           update_post_meta( $_POST['post_id'], 'product_manufacturer_id', $manufacturer_id );
+           update_post_meta( $_POST['post_id'], 'product_workshop_id', $workshop_id );
            
            //$product->save();
            //
@@ -431,17 +431,17 @@ class Product_Attribute_Manufacturer {
     * Add new tab.
     */
     function add_tab() {
-            echo '<li class="manufacturer_tab"><a href="#manufacturer_tab">' . __( 'Manufacturer', 'wcgmcf' ) . '</a></li>';
+            echo '<li class="workshop_tab"><a href="#workshop_tab">' . __( 'Workshop', 'wcgmcf' ) . '</a></li>';
     }
     /**
     * Tab content.
     */
     function tab_view() {
            $is_tabvisible = 1;
-           include('views/html-product-manufacturer.php');           
+           include('views/html-product-workshop.php');           
     }
     
 }
-new Product_Attribute_Manufacturer();
+new Product_Attribute_Workshop();
 
 ?>

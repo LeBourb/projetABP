@@ -231,7 +231,7 @@ class WC_Production extends WC_Data  {
             return '54';
         }
         
-        public function get_manufacturer_ip_address() {
+        public function get_workshop_ip_address() {
             return "545";
         }
 
