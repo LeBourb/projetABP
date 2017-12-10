@@ -89,17 +89,27 @@ if(1) {
 		<div class="collapse navbar-collapse">
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#intro" class="smoothScroll">Intro</a></li>
-				<li><a href="#overview" class="smoothScroll">Overview</a></li>
-				<li><a href="#speakers" class="smoothScroll">Speakers</a></li>
-				<li><a href="#program" class="smoothScroll">Programs</a></li>
-				<li><a href="#register" class="smoothScroll">Register</a></li>
-				<li><a href="#venue" class="smoothScroll">Venue</a></li>
-				<li><a href="#sponsors" class="smoothScroll">Sponsors</a></li>
-				<li><a href="#contact" class="smoothScroll">Contact</a></li>
+				
                                 <?php
                                 // if user connected => display orders ! 
-                                //if()
+                                //echo wc_get_page_id ( 'view_order' );
+                                if(is_user_logged_in()) {
+                                    echo '<li><a href="' . get_home_url() . '" >Home</a></li>'; 
+                                    echo '<li><a href="' . get_permalink( wc_get_page_id ( 'cart' )) . '" >Cart</a></li>'; 
+                                    echo '<li><a href="' . get_permalink( wc_get_page_id ( 'shop' )) . '" >Shop</a></li>';                                            
+                                    echo '<li><a href="' . get_permalink( wc_get_page_id ( 'myaccount' )) . 'orders/" >Your Orders</a></li>';                                            
+                                }else {                                    
+                                ?>
+                                    <li><a href="#intro" class="smoothScroll">Intro</a></li>
+                                    <li><a href="#overview" class="smoothScroll">Overview</a></li>
+                                    <li><a href="#speakers" class="smoothScroll">Speakers</a></li>
+                                    <li><a href="#program" class="smoothScroll">Programs</a></li>
+                                    <li><a href="#register" class="smoothScroll">Register</a></li>
+                                    <li><a href="#venue" class="smoothScroll">Venue</a></li>
+                                    <li><a href="#sponsors" class="smoothScroll">Sponsors</a></li>
+                                    <li><a href="#contact" class="smoothScroll">Contact</a></li>
+                                <?php
+                                }
                                 ?>
 			</ul>
 
