@@ -29,9 +29,11 @@ get_header(); ?>
 			 * @hooked storefront_on_sale_products      - 60
 			 * @hooked storefront_best_selling_products - 70
 			 */
-			do_action( 'homepage' ); ?>
+			//do_action( 'homepage' );
+                        storefront_homepage_content();
+                        ?>
 
 		<!--/main--><!-- #main -->
 	</div><!-- #primary -->
 <?php
-get_footer();
+//get_footer();

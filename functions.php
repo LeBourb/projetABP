@@ -487,8 +487,8 @@ function wc_production_data_store( $stores ) {
 add_filter( 'woocommerce_data_stores', 'wc_production_data_store' , 98);
 
 
-add_action( 'woocommerce_review_order_before_order_total', 'custom_cart_total' );
-add_action( 'woocommerce_before_cart_totals', 'custom_cart_total' );
+//add_action( 'woocommerce_review_order_before_order_total', 'custom_cart_total' );
+/*add_action( 'woocommerce_before_cart_totals', 'custom_cart_total' );
 function custom_cart_total() {
 
     if ( is_admin() && ! defined( 'DOING_AJAX' ) )
@@ -496,7 +496,7 @@ function custom_cart_total() {
 
     WC()->cart->total *= 0.30;
     //var_dump( WC()->cart->total);
-}
+}*/
 
 add_action( 'woocommerce_before_checkout_form', 'my_checkout_msg' );
 
