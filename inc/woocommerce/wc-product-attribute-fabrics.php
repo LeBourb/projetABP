@@ -8,19 +8,19 @@
 
 
 /**
- * Description of wc-product-attribute-supply
+ * Description of wc-product-attribute-fabrics
  *
  * @author smash
  */
 
-class Product_Attribute_Supply {
+class Product_Attribute_Fabrics {
 
   // Constructor
     function __construct() {
         
         
         add_filter("product_attributes_type_selector" , function( $array ){
-            //$array["product_supply"] = __( 'Supply', 'woocommerce' );
+            //$array["product_fabrics"] = __( 'Fabrics', 'woocommerce' );
             return $array ;
         });
         
@@ -33,17 +33,16 @@ class Product_Attribute_Supply {
      * Initialization hook that registers actions for all available product attribute taxonomies.
      */
     public function init() {
-        
         if (function_exists('wc_get_attribute_taxonomies')) {
-           
-            foreach (wc_get_attribute_taxonomies() as $pa) {                 
+            foreach (wc_get_attribute_taxonomies() as $pa) {
                 
-                register_taxonomy("pa_supply", $pa , array('hierarchical' => true));                    
-                add_action("pa_supply_add_form_fields", array($this, 'attribute_add_field'), 10);
-                add_action("pa_supply_edit_form_fields", array($this, 'attribute_edit_field'), 10);
-                add_action("created_pa_supply", array($this, 'save_field'), 10, 1);
-                add_action("edited_pa_supply", array($this, 'save_field'), 10, 1);
-
+                
+                    register_taxonomy("pa_fabric", $pa , array('hierarchical' => true));                    
+                    add_action("pa_fabric_add_form_fields", array($this, 'attribute_add_field'), 10);
+                    add_action("pa_fabric_edit_form_fields", array($this, 'attribute_edit_field'), 10);
+                    add_action("created_pa_fabric", array($this, 'save_field'), 10, 1);
+                    add_action("edited_pa_fabric", array($this, 'save_field'), 10, 1);
+                
             }
         }
         //add_action('woocommerce_after_add_attribute_fields', array($this, 'display_taxonomy_fields'), 10);
@@ -51,13 +50,13 @@ class Product_Attribute_Supply {
         add_action('woocommerce_attribute_added', array($this, 'taxonomy_save_field'), 10, 2);
         add_action('woocommerce_attribute_updated', array($this, 'taxonomy_save_field'), 10, 2);
         // Save meta.
-        //add_action( 'woocommerce_process_product_meta', array( &$this, 'save_tab_product_supplys' ) );
+        //add_action( 'woocommerce_process_product_meta', array( &$this, 'save_tab_product_fabricss' ) );
         
         
         $ajax_events = array(
-            'select_supply'                                    => false,
-            'add_product_supply'                                => false,
-            'save_product_supplies'                                  => false
+            'select_fabrics'                                    => false,
+            'add_product_fabrics'                                => false,
+            'save_product_fabrics'                                  => false
         );
         // rely on woocommerce attribute
         foreach ( $ajax_events as $ajax_event => $nopriv ) {
@@ -198,7 +197,6 @@ function media_selector_print_scripts() {
      * @param string $taxonomy The current product attribute taxonomy.
      */
     public function attribute_edit_field($term, $taxonomy = null){
-        
        $this->media_selector_settings_page_callback($term, $taxonomy);
        $this->media_selector_print_scripts();
        $this->price_settings_page_callback($term, $taxonomy = null);
@@ -246,13 +244,13 @@ function media_selector_print_scripts() {
         $supplier = $_POST['supplier_id'];
         update_post_meta( $id, 'price_term',$price);
         update_post_meta( $id, 'supplier_id',$supplier);
-         //$product->set_prop( 'product_supplys', $attributes );
+         //$product->set_prop( 'product_fabricss', $attributes );
         update_post_meta( $id, 'image_attachment_id', $image_id );
         //
     }
     
     function woo_advform_option_terms ($attribute_taxonomy) {
-        if($attribute_taxonomy->attribute_type == 'product_supply' ) {
+        if($attribute_taxonomy->attribute_name == 'pa_fabric' ) {
                 $this->woo_advform_admin_product_attribute($attribute_taxonomy);
                 return;
                               ?>
@@ -393,7 +391,7 @@ function media_selector_print_scripts() {
     /**
     * Add an attribute row.
     */
-    function select_supply() {
+    function select_fabrics() {
            ob_start();
 
            //check_ajax_referer( 'add-advanced-attribute', 'security' );
@@ -401,16 +399,16 @@ function media_selector_print_scripts() {
            if ( ! current_user_can( 'edit_products' ) ) {
                    wp_die( -1 );
            }
-           $supply_id = $_POST['selected_supply'];
-           $index = $_POST['i'];
-           include( 'views/html-product-supply-content.php' );
+           $fabric_id = $_POST['selected_fabric'];
+           $index = $_POST['i'];           
+           include( 'views/html-product-fabrics-content.php' );
            wp_die();
     }
 
     /**
     * Add a new attribute via ajax function.
     */
-    function add_new_product_supply() {
+    function add_new_product_fabrics() {
            //check_ajax_referer( 'add-advanced-attribute', 'security' );
 
            if ( current_user_can( 'manage_product_terms' ) ) {
@@ -443,7 +441,7 @@ function media_selector_print_scripts() {
     /**
     * Save attributes via ajax.
     */
-    function save_product_supplies() {
+    function save_product_fabrics() {
            //check_ajax_referer( 'save-advanced-attributes', 'security' );
 
            if ( ! current_user_can( 'edit_products' ) ) {
@@ -455,8 +453,8 @@ function media_selector_print_scripts() {
            $index = get_post( $_POST['i'] );            
            
             parse_str( $_POST['data'], $data );
-            //$product->set_prop( 'product_supplys', $attributes );
-           update_post_meta( $_POST['post_id'], 'product_supplies', $data );
+            //$product->set_prop( 'product_fabricss', $attributes );
+           update_post_meta( $_POST['post_id'], 'product_fabrics', $data );
            
            //$product->save();
            //
@@ -470,17 +468,17 @@ function media_selector_print_scripts() {
     * Add new tab.
     */
     function add_tab() {
-            echo '<li class="supply_tab"><a href="#supply_tab">' . __( 'Supplies', 'wcgmcf' ) . '</a></li>';
+            echo '<li class="fabrics_tab"><a href="#fabrics_tab">' . __( 'Fabrics', 'wcgmcf' ) . '</a></li>';
     }
     /**
     * Tab content.
     */
     function tab_view() {
            $is_tabvisible = 1;
-           include('views/html-product-supply.php');           
+           include('views/html-product-fabrics.php');           
     }
     
 }
-new Product_Attribute_Supply();
+new Product_Attribute_Fabrics();
 
 ?>

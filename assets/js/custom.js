@@ -169,3 +169,32 @@ $('form#signin-form #submit').on('click', function(e){
 $('a').smoothScroll({
     speed: 1000
 });
+var scrollPosition, scrollDirection;
+$( document ).scroll(function() {
+    scrollDirection = 'DOWN';
+
+    if (scrollPosition && scrollPosition > document.documentElement.scrollTop) {
+      scrollDirection = 'UP';
+    }
+    
+    scrollPosition = document.documentElement.scrollTop;
+    updateMenuBar();
+});
+
+
+  updateMenuBar = function (){
+    //scrollPosition, scrollDirection } = this.state;
+
+    if (scrollPosition === 0) {
+      $('.navbar').show();
+      return;
+    }
+    if (scrollDirection === 'DOWN' && scrollPosition < 400) {
+      $('.navbar').show();
+    } else if (scrollDirection === 'UP' && scrollPosition > 0) {
+      $('.navbar').show();
+    } else {
+      $('.navbar').hide();
+    }
+  }
+

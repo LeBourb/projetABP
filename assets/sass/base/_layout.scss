@@ -91,9 +91,10 @@
 		}
 	}
 
-	.col-full {
+	.col-full {                
 		@include clearfix;
 		@include container($container-width);
+                max-width: none;
 		padding: 0 ms(5);
 		box-sizing: content-box;
 	}
@@ -574,16 +575,16 @@
 
 @include susy-media (max-width $container-width) {
 	.col-full {
-		margin-left: ms(5);
-		margin-right: ms(5);
+		//margin-left: ms(5);
+		//margin-right: ms(5);
 		padding: 0;
 	}
 }
 
 @include susy-media (max-width $handheld) {
 	.col-full {
-		margin-left: ms(2);
-		margin-right: ms(2);
+		//margin-left: ms(2);
+		//margin-right: ms(2);
 		padding: 0;
 	}
 }

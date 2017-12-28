@@ -593,17 +593,17 @@ table {
 		}
 
 		.col-1 {
-			@include span( 6 of 12 );
+			//@include span( 6 of 12 );
 
 			ul.products {
 				li.product {
-					@include span( 3 of 6 );
+				//	@include span( 3 of 6 );
 				}
 			}
 		}
 
 		.col-2 {
-			@include span( last 6 of 12 );
+			//@include span( last 6 of 12 );
 			padding: ms(3);
 			background-color: rgba(#000,.025);
 		}

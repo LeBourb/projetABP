@@ -37,6 +37,7 @@ if(1) {
 <link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/owl.theme.css">
 <link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/owl.carousel.css">
 <link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/homepage.css">
+<link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/timeline.css">
 <!-- =========================
      SCRIPTS    
 ============================== -->
@@ -49,6 +50,8 @@ if(1) {
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/smoothscroll.js"></script>
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/wow.min.js"></script>
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/custom.js"></script>
+<script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/easy-pie-chart.js"></script>
+<script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/canvas.js"></script>
  
 
 <!-- Main css -->
