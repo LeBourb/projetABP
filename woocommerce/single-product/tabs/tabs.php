@@ -107,12 +107,14 @@ $(document).on('click','#modal-reservation .modal-close' ,function(){
 <div class="container-11-189" data-reactid="90">
     <div class="limitWidth-11-191" data-reactid="91">
         <div class="leftContent-11-193" data-reactid="92">
-            <div class="title-11-192" data-reactid="93">FF 91</div>
+            <div class="title-11-192" data-reactid="93"><?php 
+            global $product;
+            echo $product->get_title();?></div>
             <div class="linkContainer-11-195" data-reactid="94">
-                <a class="sectionLink-11-196" href="#user-experience" data-reactid="95">UX</a>
-                <a class="sectionLink-11-196" href="#interior" data-reactid="96">Interior</a>
-                <a class="sectionLink-11-196" href="#powertrain" data-reactid="97">Powertrain</a>
-                <a class="sectionLink-11-196" href="#exterior" data-reactid="98">Exterior</a>
+                <a class="sectionLink-11-196" href="#user-experience" data-reactid="95">Galery</a>
+                <a class="sectionLink-11-196" href="#interior" data-reactid="96">Details</a>
+                <a class="sectionLink-11-196" href="#powertrain" data-reactid="97">Fabrics</a>
+                <a class="sectionLink-11-196" href="#exterior" data-reactid="98">Workshop</a>
             </div>                  
         </div><!-- react-text: 99 --><!-- /react-text -->
         <div id="reservation" class="container-15-202" >

@@ -32,9 +32,12 @@ if ( post_password_required() ) {
 global $product;
 
 $attachment_ids = $product->get_gallery_image_ids();
-       $workshop_id = get_post_meta( $product->get_id(), 'product_workshop_id' , true);
-                                     $image = wp_get_attachment_url( $attachment_ids[1] );
+$workshop_id = get_post_meta( $product->get_id(), 'product_workshop_id' , true);
+$image = wp_get_attachment_url( $attachment_ids[1] );
 ?>
+<script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/viewer.js"></script>
+<link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/viewer.css">
+
 <style>
     .parallax-window {
         max-height: 30em;
@@ -113,8 +116,31 @@ $attachment_ids = $product->get_gallery_image_ids();
         WORKSHOP SECTION   
     ============================== 
     -->
+    <?php 
+        $post = get_post($workshop_id);
+        $wallpaper = get_post_meta( $workshop_id, 'second_featured_image',true);
+        $mainfeatureimage = get_post_meta( $workshop_id, 'third_featured_image', true);
+        
+    ?>
     <style>
         #sect-workshop {
+            background: url(<?php echo wp_get_attachment_image_src( $wallpaper, 'large' )[0]; ?>) 50% 0 repeat-y fixed;
+            -webkit-background-size: cover;
+            background-size: cover;
+            background-position: center center;
+            color: #ffffff;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        #product-intro {
             background: url(<?php echo $image; ?>) 50% 0 repeat-y fixed;
             -webkit-background-size: cover;
             background-size: cover;
@@ -135,11 +161,108 @@ $attachment_ids = $product->get_gallery_image_ids();
             bottom: 5em;
         }
     </style>
-        
+    <!-- =========================
+    INTRO SECTION   
+============================== -->
+<section id="product-intro" class="parallax-section">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-12 col-sm-12">
+				<h3 class="wow bounceIn" data-wow-delay="0.9s"><?php echo $product->get_title(); ?></h3>
+				<h1 class="wow fadeInUp" data-wow-delay="1.6s"><?php echo $product->get_data()['short_description']; ?></h1>
+				<a href="#overview" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">LEARN MORE</a>
+				<a id="reservation" href="#register" class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s">RESERVE NOW</a>
+			</div>
+
+
+		</div>
+	</div>
+</section>
+    <!-- =========================
+        IMAGE SECTION   
+    ============================== -->
+    <section id="gallery" class="parallax-section">
+            <div class="container">
+                    <div class="row">
+
+                            <div class="wow bounceIn col-md-12 col-sm-12">
+                                    <div class="section-title">
+                                            <h2>Galeries</h2>
+                                            <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet.</p>
+                                    </div>
+                            </div>
+                        <div id="am-container">
+                            <?php
+                                $attachment_ids = $product->get_gallery_image_ids();
+                                foreach ( $attachment_ids as $attachment_id ) {
+                                    $image_attachment_url = wp_get_attachment_url( $attachment_id );                                    
+                                    //$image_url = wp_get_attachment_image_src( $image_attachment_id );
+                                    echo '<div href="'. $image_attachment_url .'" class="wow fadeInUp col-md-3 col-sm-6 col-xs-6" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
+                                        <img src="' . $image_attachment_url . '" class="img-responsive" alt="sponsors">	
+                                            <div class="overlay" style="opacity: 0.9; display:none;"></div>
+				   
+                                    </div>';
+                                }
+                            ?>
+                            </div>
+                            
+
+                            <!--div class="wow fadeInUp col-md-3 col-sm-6 col-xs-6" data-wow-delay="0.6s">
+                                    <img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/sponsor-img2.jpg" class="img-responsive" alt="sponsors">	
+                            </div>
+
+                            <div class="wow fadeInUp col-md-3 col-sm-6 col-xs-6" data-wow-delay="0.9s">
+                                    <img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/sponsor-img3.jpg" class="img-responsive" alt="sponsors">	
+                            </div>
+
+                            <div class="wow fadeInUp col-md-3 col-sm-6 col-xs-6" data-wow-delay="1s">
+                                    <img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/sponsor-img4.jpg" class="img-responsive" alt="sponsors">	
+                            </div-->
+
+                    </div>
+            </div>
+    </section>
+    <!-- =========================
+        Details SECTION   
+    ============================== -->
+    <section id="overview" class="parallax-section">
+            <div class="container">
+                    <div class="row">
+
+                            <div class="wow bounceIn col-md-12 col-sm-12">
+                                <div class="section-title">
+                                    <h2>Details</h2>
+                                </div>
+                            </div>
+                            <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.6s">
+                                    
+                                    <?php
+                                    //<h3>New Event is a fully responsive one-page template for events, conferences or workshops.</h3>
+                                    //$postid = the_ID();
+                                    //get_the_title($workshop_id);
+                                    print_r($product->get_data()['description']);
+                                     //$product_details;;
+                                    ?>
+                                    
+                            </div>
+
+
+                    </div>
+            </div>
+    </section>
+    <!-- =========================
+        WORKSHOP SECTION   
+    ============================== -->
     <section id="sect-workshop" class="parallax-section">
             <div class="container">
                     <div class="row">
 
+                            <div class="wow bounceIn col-md-12 col-sm-12">
+                                <div class="section-title">
+                                    <h2>Workshop</h2>
+                                </div>
+                            </div>
                             <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.6s">
                                     
                                     <?php
@@ -150,6 +273,12 @@ $attachment_ids = $product->get_gallery_image_ids();
                                     $post = get_post($workshop_id);
                                     echo '<h3>' . $post->post_title . '</h3>';
                                     echo '<p>' . $post->post_content . '</p>';
+                                    $wallpaper = get_post_meta( $workshop_id, 'second_featured_image',true);
+                                    $mainfeatureimage = get_post_meta( $workshop_id, 'third_featured_image', true);
+                                    
+                                    $wallpaper_url = wp_get_attachment_image_src( $wallpaper , 'large');
+                                    $image_url = wp_get_attachment_image_src( $mainfeatureimage , 'large');
+                                    
                                     //print_r($post);
                                     //$workshop_id = get_post_meta( $product->get_id(), 'product_workshop_id' , true);
                                     //echo $workshop_id;
@@ -161,7 +290,7 @@ $attachment_ids = $product->get_gallery_image_ids();
                             </div>
 
                             <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.9s">
-                                    <img src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/overview-img.jpg" class="img-responsive" alt="Overview">
+                                    <img src="<?php echo $image_url[0]?>" class="img-responsive" alt="Overview">
                             </div>
 
                     </div>
@@ -609,5 +738,7 @@ $attachment_ids = $product->get_gallery_image_ids();
     <!-- Back top -->
     <a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
 </div>
-
+<script>
+var viewer = new Viewer(document.getElementById('am-container'), {toolbar:false, title:false});
+</script>   
 <?php do_action( 'woocommerce_after_single_product' ); ?>

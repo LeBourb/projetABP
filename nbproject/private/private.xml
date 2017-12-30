@@ -3,30 +3,58 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/css/style.css</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-product-attribute-supply.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/functions.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/refills/all.css.scss</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-prod-data-store.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-prod-functions.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/style.scss</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/views/html-product-supply-content.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/style.css</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/sass/base/_base.scss</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-homepage.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/storefront-functions.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-product-supplies-tab.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/views/html-product-workshop.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/class-wc-product-attribute-supply-form.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/views/html-product-supply.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/content-none.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/class-storefront-woocommerce.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/refills/_bourbon-nav.scss</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/content-single.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/style.css.map</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/style-rtl.css</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/content-homepage.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/sass/base/_layout.scss</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/refills/_refill.scss</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-product-workshop-tab.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/susy/susy/language/susy/_settings.scss</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/content-page.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/refills/refills/_modal.scss</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/easy-pie-chart.js</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/single-product/tabs/tabs.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/refills/all.css.scss</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/style.scss</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/custom.js</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/class-wc-product-attribute-fabrics-form.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-homepage.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-product-supplies-tab.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/class-storefront-woocommerce.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/images/grey-pink-dot.png</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/images/next.png</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/style-rtl.css</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/storefront-template-hooks.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/sass/base/_layout.scss</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-admin-production.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/css/style.css</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-product-fabrics-tab.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-prod-functions.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/bourbon/_bourbon.scss</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/sass/base/_base.scss</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/canvas.js</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/content-single.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/images/prev.png</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/bootstrap.min.js</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/style.css.map</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/header.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/content-homepage.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/content-page.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-product-attribute-fabrics.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/views/html-product-fabrics-content.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-fullwidth.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/images/loading.gif</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/images/close.png</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/storefront-functions.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/Supplier_Fabrics_List_Table.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/bourbon/addons/_size.scss</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/views/html-product-workshop-address.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/refills/_refill.scss</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/css/timeline.css</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/susy/susy/language/susy/_settings.scss</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/content-single-product.php</file>
         </group>
     </open-files>
 </project-private>
