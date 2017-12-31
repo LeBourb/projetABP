@@ -51,6 +51,7 @@ if ( storefront_is_woocommerce_activated() ) {
         require 'inc/woocommerce/class-wc-product-attribute-supply-form.php';
         require 'inc/woocommerce/class-wc-product-attribute-fabrics-form.php';
         require 'inc/woocommerce/wc-custom-product-supplies-tab.php';
+        require 'inc/woocommerce/wc-checkout_terms_conditions_popup.php';
         //require 'inc/woocommerce/wc-custom-product-workshop-tab.php';
         //require 'inc/woocommerce/wc-custom-product-fabrics-tab.php';
 }

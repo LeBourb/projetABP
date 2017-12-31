@@ -279,6 +279,27 @@ $image = wp_get_attachment_url( $attachment_ids[1] );
                                     $wallpaper_url = wp_get_attachment_image_src( $wallpaper , 'large');
                                     $image_url = wp_get_attachment_image_src( $mainfeatureimage , 'large');
                                     
+                                    $data = get_post_meta( $workshop_id, 'gmp_arr', true );
+                                    $title = get_the_title($workshop_id);
+                                    $address1 = $data['gmp_address1'];
+                                    $city = $data['gmp_city'];
+                                    $state = $data['gmp_state'];
+                                    $zip = $data['gmp_zip'];
+
+
+                                    $address = '';
+                                    $address .=  $title;
+                                    $address .= "<br>";
+                                    $address .=  $address1;
+                                    $address .= " ";
+                                    $address .=  $city;
+                                    $address .= "<br>";
+                                    $address .=  $state;
+                                    $address .= "<br>";
+                                    $address .=  $zip;
+                                    $address .= "<br>";
+                                    echo '<p>' . $address . '</p>';
+                                    
                                     //print_r($post);
                                     //$workshop_id = get_post_meta( $product->get_id(), 'product_workshop_id' , true);
                                     //echo $workshop_id;

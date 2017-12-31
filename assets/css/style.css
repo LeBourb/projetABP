@@ -94,6 +94,8 @@ footer {
 
 #intro .btn,
 #reservation .btn,
+#product-intro .btn,
+#checkoutpopupform .btn,
 #contact .btn {
     background: transparent;
     border: 2px solid #ffffff;
@@ -111,6 +113,8 @@ footer {
 
 #reservation .btn-danger,
 #intro .btn-danger,
+#product-intro  .btn-danger,
+#checkoutpopupform .btn-danger,
 #contact .btn-danger {
     background: #f2545f;
     border-color: transparent;
@@ -121,7 +125,9 @@ footer {
 }
 
 #reservation .btn-danger:hover,
-#intro .btn-danger:hover {
+#intro .btn-danger:hover ,
+#modal-footer .btn-danger:hover ,
+#product-intro .btn-danger:hover {
   background: transparent;
   border-color: #ffffff;
   color: #ffffff;
@@ -131,7 +137,8 @@ footer {
   background: #222;
 }
 
-#intro .btn-default:hover {
+#intro .btn-default:hover ,
+#product-intro .btn-danger:hover {
     background: #ffffff;
     color: #333333;
     border-color: transparent;
