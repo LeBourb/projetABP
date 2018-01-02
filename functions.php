@@ -681,3 +681,22 @@ function custom_postimage_meta_box_save($post_id){
         }
     }
 }
+
+add_action('woocommerce_view_order','display_bank_details_and_timeline_order');
+ 
+function display_bank_details_and_timeline_order($order_id)
+{
+ $order=new WC_Order( $order_id );
+  //if ( $order->payment_method !== 'bacs') return;
+  
+  if ( $order->get_payment_method() == 'bacs') {
+    //echo $order->payment_method_title;
+    $bacs = new WC_Gateway_BACS();
+    //print_r( $bacs->account_details);
+      $bacs->thankyou_page( $order_id);
+    }
+    echo '<section id="order-timeline">';
+    include 'woocommerce/wc-timeline-single-product.php'; 
+    echo '</section>';
+      
+}

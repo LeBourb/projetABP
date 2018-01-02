@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @hooked wc_print_notices - 10
  */
-do_action( 'woocommerce_before_single_product' );
+//do_action( 'woocommerce_before_single_product' );
 if ( post_password_required() ) {
 	echo get_the_password_form(); // WPCS: XSS ok.
 	return;
@@ -33,12 +33,16 @@ global $product;
 
 $attachment_ids = $product->get_gallery_image_ids();
 $workshop_id = get_post_meta( $product->get_id(), 'product_workshop_id' , true);
-$image = wp_get_attachment_url( $attachment_ids[1] );
+if(isset($attachment_ids[1]))
+    $image = wp_get_attachment_url( $attachment_ids[1] );
 ?>
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/viewer.js"></script>
 <link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/viewer.css">
 
 <style>
+    #page .col-full {
+        padding: 0;
+    }
     .parallax-window {
         max-height: 30em;
         overflow: hidden;
@@ -70,35 +74,7 @@ $image = wp_get_attachment_url( $attachment_ids[1] );
     }
 </style>
 
-<div id="product-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-	<?php
-		/**
-		 * Hook: woocommerce_before_single_product_summary.
-		 *
-		 * @hooked woocommerce_show_product_sale_flash - 10
-		 * @hooked woocommerce_show_product_images - 20
-		 */
-		//do_action( 'woocommerce_before_single_product_summary' );
-	?>
-
-	<div class="summary entry-summary">
-		<?php
-			/**
-			 * Hook: Woocommerce_single_product_summary.
-			 *
-			 * @hooked woocommerce_template_single_title - 5
-			 * @hooked woocommerce_template_single_rating - 10
-			 * @hooked woocommerce_template_single_price - 10
-			 * @hooked woocommerce_template_single_excerpt - 20
-			 * @hooked woocommerce_template_single_add_to_cart - 30
-			 * @hooked woocommerce_template_single_meta - 40
-			 * @hooked woocommerce_template_single_sharing - 50
-			 * @hooked WC_Structured_Data::generate_product_data() - 60
-			 */
-			//do_action( 'woocommerce_single_product_summary' );
-		?>
-	</div>
 
 	<?php
 		/**
@@ -108,7 +84,7 @@ $image = wp_get_attachment_url( $attachment_ids[1] );
 		 * @hooked woocommerce_upsell_display - 15
 		 * @hooked woocommerce_output_related_products - 20
 		 */
-		do_action( 'woocommerce_after_single_product_summary' );
+		//do_action( 'woocommerce_after_single_product_summary' );
 	?>
     
     <!--
@@ -117,7 +93,7 @@ $image = wp_get_attachment_url( $attachment_ids[1] );
     ============================== 
     -->
     <?php 
-        $post = get_post($workshop_id);
+        $workshop_post = get_post($workshop_id);
         $wallpaper = get_post_meta( $workshop_id, 'second_featured_image',true);
         $mainfeatureimage = get_post_meta( $workshop_id, 'third_featured_image', true);
         
@@ -141,7 +117,7 @@ $image = wp_get_attachment_url( $attachment_ids[1] );
             text-align: center;
         }
         #product-intro {
-            background: url(<?php echo $image; ?>) 50% 0 repeat-y fixed;
+            background: url(<?php echo $image ?  $image : ''; ?>) 50% 0 repeat-y fixed;
             -webkit-background-size: cover;
             background-size: cover;
             background-position: center center;
@@ -179,6 +155,40 @@ $image = wp_get_attachment_url( $attachment_ids[1] );
 		</div>
 	</div>
 </section>
+    
+    <div class="refills-components">
+<div id="modal-reservation" class="modal">
+    <input class="modal-state" id="modal-1" type="checkbox" />
+    <div class="modal-fade-screen">
+        <div class="modal-inner">
+        <div class="modal-close" for="modal-1"></div>
+        <?php do_action( 'woocommerce_single_product_summary' ); ?>
+    </div>
+      
+    </div>
+</div>
+    </div>
+<!-- =========================
+        NAV BAR
+    ============================== -->
+<div class="container-11-189" data-reactid="90">
+    <div class="limitWidth-11-191" data-reactid="91">
+        <div class="leftContent-11-193" data-reactid="92">
+            <div class="title-11-192" data-reactid="93"><?php 
+            global $product;
+            echo $product->get_title();?></div>
+            <div class="linkContainer-11-195" data-reactid="94">
+                <a class="sectionLink-11-196" href="#user-experience" data-reactid="95">Galery</a>
+                <a class="sectionLink-11-196" href="#interior" data-reactid="96">Details</a>
+                <a class="sectionLink-11-196" href="#powertrain" data-reactid="97">Fabrics</a>
+                <a class="sectionLink-11-196" href="#exterior" data-reactid="98">Workshop</a>
+            </div>                  
+        </div><!-- react-text: 99 --><!-- /react-text -->
+        <div id="reservation" class="container-15-202" >
+            <button class="btn btn-lg btn-danger">RESERVATION</button>
+        </div> 
+    </div>
+</div>
     <!-- =========================
         IMAGE SECTION   
     ============================== -->
@@ -270,9 +280,9 @@ $image = wp_get_attachment_url( $attachment_ids[1] );
                                     //$postid = the_ID();
                                     //get_the_title($workshop_id);
                               
-                                    $post = get_post($workshop_id);
-                                    echo '<h3>' . $post->post_title . '</h3>';
-                                    echo '<p>' . $post->post_content . '</p>';
+                                    $workshop_post = get_post($workshop_id);
+                                    echo '<h3>' . $workshop_post->post_title . '</h3>';
+                                    echo '<p>' . $workshop_post->post_content . '</p>';
                                     $wallpaper = get_post_meta( $workshop_id, 'second_featured_image',true);
                                     $mainfeatureimage = get_post_meta( $workshop_id, 'third_featured_image', true);
                                     
@@ -422,144 +432,6 @@ $image = wp_get_attachment_url( $attachment_ids[1] );
 <!-- =========================
     SPEAKERS SECTION   
 ============================== -->
-<style>
-    @keyframes dash {
-      to {
-        stroke-dashoffset: 0;
-      }
-    }
-    @keyframes fade-in {
-        from {
-            opacity: 0;
-        }  to {
-            opacity: 1;
-        }
-    }
-    @keyframes rot-opacity {      
-        0% {
-            transform: rotate3d(0,1,0,60deg);
-            opacity: 0;
-        }   
-        50% {
-            transform: rotate3d(0,1,0,160deg);
-            opacity: 0.4;
-        }
-        100% {
-            transform: rotate3d(0,1,0,0deg);
-            opacity: 1;
-        }
-    }
-    line {
-        animation: dash 5s linear forwards;    
-        stroke-dashoffset: 1000;
-        stroke-dasharray: 1000;        
-    }
-    #line-1 {
-        animation-delay: 3s;
-    }
-    #line-2 {
-        animation-delay: 4s;
-    }
-    #line-3 {
-        animation-delay: 5s;
-    }
-    #line-4 {
-        animation-delay: 6s;
-    }
-    #line-5 {
-        animation-delay: 7s;
-    }
-    #circle-1 {
-        animation-delay: 3s;
-    }
-    #circle-2 {
-        animation-delay: 4s;
-    }
-    #circle-3 {
-        animation-delay: 4s;
-    }
-    @keyframes circle-width {
-      to {
-        transform: scale(1);
-      }
-    }
-    
-    .circle {
-        background: #004165;
-        width: 10px;
-        height: 10px;
-        margin: auto;
-        border-radius: 100%;
-        overflow: hidden;
-        animation:grow 2s 1 forwards;    
-    }
-    .parent-circle {
-        height: 20px;
-        width: 20px;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        opacity: 0;
-        animation:fade-in 2s 1 forwards;  
-        
-    }
-    
-    .now {
-       animation:fade-in 2s linear forwards; 
-       animation-delay: 6s;
-       opacity:0;
-    }
-    
-    .eventBubble {
-        animation:rot-opacity 2s 1 forwards;
-        opacity: 0;
-    }
-    
-    #event1Bubble {        
-        animation-delay: 3s; 
-    }
-    #event2Bubble {        
-        animation-delay: 4s; 
-    }
-    #event3Bubble {        
-        animation-delay: 5s; 
-    }
-    #parent-circle-1 , 
-    #parent-circle-1 .circle {
-        animation-delay: 3s; 
-    }
-    #parent-circle-2 ,
-    #parent-circle-2 .circle {
-        animation-delay: 4s; 
-    }
-    #parent-circle-3 ,
-    #parent-circle-3 .circle {
-        animation-delay: 5s; 
-    }
-    
-    #dot-end {        
-        animation:fade-in 2s 1 forwards;
-        animation-delay: 7s;
-        opacity: 0;
-    }
-
-    @keyframes grow {
-        0% {
-            transform: scale( 0 );
-            opacity: 0;
-        }   
-        50% {
-            transform: scale( 0.7 );
-            opacity: 0.5;
-        }
-        100% {
-            transform: scale( 1 );
-            opacity: 1;
-        }
-    }
-     
-</style>
 <section id="timeline" class="parallax-section">
     <div class="container">
         <div class="row">
@@ -582,184 +454,110 @@ $image = wp_get_attachment_url( $attachment_ids[1] );
             </div>
         
         <div class="row">
-            <div class="Timeline item wow fadeInUp" data-wow-delay="0.6s">
-
-  <svg height="5" width="200">
-  <line id="line-1" x1="0" y1="0" x2="200" y2="0" style="stroke:#004165;stroke-width:5" />
-  
-  <!--animate 
-    xlink:href="#my-line-1"
-    attributeName="x2"
-    from="0"
-    to="200" 
-    dur="1s"
-    begin="1s"
-    fill="freeze"
-    id="myline1-anim"/-->    
-</svg>
-
-  <div class="event1">
-    
-    <div class="event1Bubble eventBubble" id="event1Bubble" style="">
-      <div class="eventTime">
-        <div class="DayDigit">02</div>
-        <div class="Day">
-           Wednesday
-          <div class="MonthYear">february 2016</div>
-        </div>
-      </div>
-      <div class="eventTitle">Profile Created</div>
-    </div>
-    <div class="parent-circle" id="parent-circle-1">
-    <div class="circle">
-
-    </div>
-    </div>
-    <!--svg height="20" width="20">
-       <circle id="my-circle-1" cx="10" cy="11" r="5" fill="#004165" />
-       <div class="circle">
-        </div>
-       <!--animate 
-    xlink:href="#my-circle-1"
-    attributeName="r"
-    from="0"
-    to="5" 
-    dur="1s"
-    begin="myline1-anim.begin + 1s"
-    fill="freeze" />
-     </svg-->
-    
-  </div>
-  
-  <svg height="5" width="300">
-  <line id="line-2" x1="0" y1="0" x2="300" y2="0" style="stroke:#004165;stroke-width:5" />
-</svg>
-
-  <div class="event2">
-    
-    <div class="event2Bubble eventBubble" id="event2Bubble">
-      <div class="eventTime">
-        <div class="DayDigit">17</div>
-        <div class="Day">
-           Thursday
-          <div class="MonthYear">April 2016</div>
-        </div>
-      </div>
-      <div class="eventTitle">Phone Interview</div>
-    </div>     <!--svg height="20" width="20">
-    <circle cx="10" cy="11" r="5" fill="#004165" />
-    </svg-->
-      <div class="parent-circle" id="parent-circle-2">
-    <div class="circle">
-
-    </div>
-    </div>
-  </div>
-  
-  <svg height="5" width="50">
-  <line id="line-3" x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
-</svg>
-
-  <div class="now">
-    NOW
-  </div>  
-    
-  
-  <svg height="5" width="150">
-  <line id="line-4" x1="0" y1="0" x2="150" y2="0" style="stroke:rgba(162, 164, 163, 0.37);stroke-width:5" />
-</svg>
-  <div class="event3 futureGray ">
-    <div class="event1Bubble eventBubble" id="event3Bubble">
-      <div class="eventTime">
-        <div class="DayDigit">05</div>
-        <div class="Day">
-           Tuesday
-          <div class="MonthYear">May 2016</div>
-        </div>
-      </div>
-      <div class="eventTitle">Anticipated Hire</div>
-    </div>
-      <!--svg height="20" width="20">
-    <circle cx="10" cy="11" r="5" fill="rgba(162, 164, 163, 0.37)" />
-    </svg-->
-      <div class="parent-circle" id="parent-circle-3">
-    <div class="circle">
-
-    </div>
-    </div>
-  </div>
-<svg height="5" width="50">
-<line id="line-5" x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" /> 
-</svg>
-<div id="dot-end">
-    <svg height="20" width="42" >
-    <line id="line-6" x1="1" y1="0" x2="1" y2="20" style="stroke:#004165;stroke-width:2" /> 
-    <circle cx="11" cy="10" r="3" fill="#004165" />  
-    <circle cx="21" cy="10" r="3" fill="#004165" />  
-    <circle cx="31" cy="10" r="3" fill="#004165" />    
-    <line id="line-7" x1="41" y1="0" x2="41" y2="20" style="stroke:#004165;stroke-width:2" /> 
-    </svg>  
-</div>
-</div>
-        </div>
-        <style>
-            #timeline {
-                background-image: linear-gradient(135deg, #eaa2a7, #d39296);
-            }
-.chart{
-  display: inline-block;
-  text-align: center;
-  width: 95px;
-  height: 95px;
-  margin: 0 10px;
-  vertical-align: top;
-  position: relative;
-    box-sizing: border-box;
-    padding-top: 22px;
-}
-  .chart span{
-    display: block;
-    font-size: 2em;
-    font-weight: normal;
-  }
-
-  .chart canvas{
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-  
-  .pie-time{
-      margin-left: 40%;
-  }
-
-  
-            </style>
-            <script>
-                
-        var options = {
-          scaleColor: false,
-          trackColor: 'rgba(255,255,255,0.3)',
-          barColor: '#E7F7F5',
-          lineWidth: 6,
-          lineCap: 'butt',
-          size: 95
-        };
-
-        window.addEventListener('DOMContentLoaded', function() {
-          var charts = [];
-          [].forEach.call(document.querySelectorAll('.chart'),  function(el) {
-            charts.push(new EasyPieChart(el, options));
-          });
-        });
-            </script>
+            <?php include 'wc-timeline-single-product.php';?> 
     </div>
 </section>
 
     <!-- Back top -->
     <a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
-</div>
+<!--/div-->
 <script>
 var viewer = new Viewer(document.getElementById('am-container'), {toolbar:false, title:false});
-</script>   
-<?php do_action( 'woocommerce_after_single_product' ); ?>
+</script>
+<script type='text/javascript'>
+    
+$(document).on('click', '#reservation', function(){ 
+  $('#modal-reservation').addClass('modal-open');
+});
+
+$(document).on('click','#modal-reservation .modal-close' ,function(){ 
+ $('#modal-reservation').removeClass('modal-open');
+});
+
+</script>
+    
+<style>
+    .col-full .woocommerce {
+        position: absolute;
+        right: 0;
+        z-index: 20000;
+    }
+    .container-11-189 {
+        width: 100%;
+        color: white;
+        bottom: 0;
+        z-index: 50;
+        position: fixed;
+        font-family: Roboto;
+        background-color: black;
+    }
+    .limitWidth-11-191 {
+        width: 100%;
+        margin: auto;
+        padding: 20px;
+        display: flex;
+        max-width: 1596px;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .leftContent-11-193 {
+        width: 75%;
+        display: flex;
+        align-items: center;
+    }
+    .title-11-192 {
+    width: 22.3%;
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1.2rem;
+    letter-spacing: .1rem;
+}
+.linkContainer-11-195 {
+    width: 77.7%;
+    flex-grow: 1;
+}
+.sectionLink-11-196 {
+    color: white;
+    font-size: 18px;
+    line-height: 1.75;
+    font-weight: 300;
+    letter-spacing: 0.4px;
+    text-decoration: none;
+}
+
+.sectionLink-11-196:after {
+    color: #808080;
+    content: "|";
+    font-size: 14px;
+    margin-left: 36px;
+    line-height: 30px;
+    margin-right: 36px;
+}
+
+#content .col-full {
+    padding : 0;
+}
+
+.modal.modal-open {
+  display: block;  
+ .modal-fade-screen {
+    
+    visibility: visible;
+    opacity: 1;
+    .modal-inner {
+        top: 5%;
+    }
+ }
+}
+div#reservation {
+    display: flex;
+}
+
+div#reservation button.btn {
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
+
+<?php //do_action( 'woocommerce_after_single_product' ); ?>
