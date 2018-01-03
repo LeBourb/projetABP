@@ -16,6 +16,32 @@ if ( ! function_exists( 'order_producion_meta_boxes' ) )
     }
 }
 
+add_action( 'woocommerce_admin_order_item_headers', 'add_order_item_status_header' );
+if ( ! function_exists( 'add_order_item_status_header' ) ) {
+    function add_order_item_status_header()
+    {
+        ?><th class="line_status" data-sort="float">Status</th>
+        <?php
+    }
+}
+
+add_action( 'woocommerce_admin_order_item_values', 'admin_order_item_production_status' , 40, 2  );
+if ( ! function_exists( 'admin_order_item_production_status' ) ) {
+    function admin_order_item_production_status($item,  $item_id ) 
+    {
+        ?><td class="item_status" width="1%">
+		<div class="view"> NO STATUS
+			<?php
+				
+			?>
+		</div>
+	</td>
+        <?php
+    }
+}
+
+
+
 // Adding Meta field in the meta container admin shop_order pages
 if ( ! function_exists( 'order_production_field_for_packaging' ) )
 {

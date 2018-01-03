@@ -700,3 +700,4 @@ function display_bank_details_and_timeline_order($order_id)
     echo '</section>';
       
 }
+
