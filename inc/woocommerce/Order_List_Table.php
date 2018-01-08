@@ -24,10 +24,34 @@ class Order_List_Table extends WP_List_Table {
             )
         );
     }
+    
+        /**
+ * Generates the table navigation above or bellow the table and removes the
+ * _wp_http_referrer and _wpnonce because it generates a error about URL too large
+ * 
+ * @param string $which 
+ * @return void
+ */
+public function display_tablenav( $which ) 
+{
+    ?>
+    <div class="tablenav <?php echo esc_attr( $which ); ?>">
+
+        <div class="alignleft actions">
+            <?php $this->bulk_actions(); ?>
+        </div>
+        <?php
+        $this->extra_tablenav( $which );
+        $this->pagination( $which );
+        ?>
+        <br class="clear" />
+    </div>
+    <?php
+}
 
     private function table_data() {
-        global $orders;
-        return $orders;
+        global $order_items;
+        return $order_items;
         /*foreach((array) get_terms(array('service'),array('hide_empty' => false)) as $service) {
             $this->allServices[] = array(
                 'id' => $service->term_id,
@@ -106,11 +130,13 @@ class Order_List_Table extends WP_List_Table {
         return '<input type="checkbox" />';
     }
 
-    public function column_order_status($order) {
+    public function column_order_status($order_item) {
+        $order = $order_item->get_order();
         return sprintf( '<mark class="%s tips" data-tip="%s">%s</mark>', esc_attr( sanitize_html_class( $order->get_status() ) ), esc_attr( wc_get_order_status_name( $order->get_status() ) ), esc_html( wc_get_order_status_name( $order->get_status() ) ) );
     }
 
-    public function column_order_title($order) {
+    public function column_order_title($order_item) {
+        $order = $order_item->get_order();
         $htùm = '';
         if ( $order->get_customer_id() ) {
                 $user     = get_user_by( 'id', $order->get_customer_id() );
@@ -142,7 +168,8 @@ class Order_List_Table extends WP_List_Table {
 
     }
 
-    public function column_billing_address($order) {
+    public function column_billing_address($order_item) {
+        $order = $order_item->get_order();
         $html = '';
         if ( $address = $order->get_formatted_billing_address() ) {
                 $html = esc_html( preg_replace( '#<br\s*/?>#i', ', ', $address ) );
@@ -156,7 +183,8 @@ class Order_List_Table extends WP_List_Table {
         return $html;
     }
 
-    public function column_shipping_address($order) {
+    public function column_shipping_address($order_item) {
+        $order = $order_item->get_order();
         $html = '';
         if ( $address = $order->get_formatted_shipping_address() ) {
                 $html = '<a target="_blank" href="' . esc_url( $order->get_shipping_address_map_url() ) . '">' . esc_html( preg_replace( '#<br\s*/?>#i', ', ', $address ) ) . '</a>';
@@ -170,7 +198,8 @@ class Order_List_Table extends WP_List_Table {
         return $html;
     }
 
-    public function column_customer_message($order) {
+    public function column_customer_message($order_item) {
+        $order = $order_item->get_order();
         $html = '';
         if ( $order->get_customer_note() ) {
                 $html = '<span class="note-on tips" data-tip="' . wc_sanitize_tooltip( $order->get_customer_note() ) . '">' . __( 'Yes', 'woocommerce' ) . '</span>';
@@ -180,7 +209,8 @@ class Order_List_Table extends WP_List_Table {
         return $html;
     }
     
-    public function column_order_notes($order) {
+    public function column_order_notes($order_item) {
+        $order = $order_item->get_order();
         $comment_count = get_comment_count($order->get_id());
         $comment_count = $comment_count['all'];
         $html = '';
@@ -212,7 +242,8 @@ class Order_List_Table extends WP_List_Table {
         return $html;
     }
     
-    public function column_order_date($order) {
+    public function column_order_date($order_item) {
+        $order = $order_item->get_order();
         return sprintf(
                 '<time datetime="%1$s" title="%2$s">%3$s</time>',
                 esc_attr( $order->get_date_created()->date( 'c' ) ),
@@ -221,7 +252,8 @@ class Order_List_Table extends WP_List_Table {
         );
     }
     
-    public function column_order_total($order) {
+    public function column_order_total($order_item) {
+        $order = $order_item->get_order();
         $html = $order->get_formatted_order_total();
         if ( $order->get_payment_method_title() ) {
                 $html .= '<small class="meta">' . __( 'Via', 'woocommerce' ) . ' ' . esc_html( $order->get_payment_method_title() ) . '</small>';
@@ -229,9 +261,9 @@ class Order_List_Table extends WP_List_Table {
         return $html;
     }
     
-    public function column_order_actions($order) {
+    public function column_order_actions($order_item) {
         $html = '';
-
+        $order = $order_item->get_order();
         $actions = array();
 
         if ( $order->has_status( array( 'pending', 'on-hold' ) ) ) {
@@ -265,19 +297,10 @@ class Order_List_Table extends WP_List_Table {
         
     }
     
-    public function column_order_items($order) {
-        $product_list = '';
-        $order_items = $order->get_items();
-        $prodct_name = array();
-        global $product_id;
-        foreach( $order_items as $item ) {
-            if ( $product_id == $item->get_product_id() ) {
-                $prodct_name[] = $item['name']."x".$item['qty'];
-            }
-            
-        }
-        $product_list = implode( ',', $prodct_name );
-        return $product_list;
+    public function column_order_items($order_item) {
+        $prodct_name = $order_item->get_name()."x".$order_item->get_quantity();
+        //$product_list = implode( ',', $prodct_name );
+        return $prodct_name;
     }
     
 

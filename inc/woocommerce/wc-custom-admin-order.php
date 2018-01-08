@@ -20,19 +20,31 @@ add_action( 'woocommerce_admin_order_item_headers', 'add_order_item_status_heade
 if ( ! function_exists( 'add_order_item_status_header' ) ) {
     function add_order_item_status_header()
     {
-        ?><th class="line_status" data-sort="float">Status</th>
+        ?><th class="line_status" data-sort="float">Production Status</th>
         <?php
     }
 }
 
 add_action( 'woocommerce_admin_order_item_values', 'admin_order_item_production_status' , 40, 2  );
 if ( ! function_exists( 'admin_order_item_production_status' ) ) {
-    function admin_order_item_production_status($item,  $item_id ) 
+    function admin_order_item_production_status($item,  $order_item ) 
     {
         ?><td class="item_status" width="1%">
-		<div class="view"> NO STATUS
+		<div class="view"> 
 			<?php
-				
+                               //print_r($order_item->get_meta_data());
+                        
+                                if(get_class  ( $order_item ) == 'WC_Order_Item_Product') {
+                               //$order_item->add_meta_data( 'status', 'NOT ASSOCIATED PRODUCT');
+                               $production_id = $order_item->get_meta('_production_id', true);
+                               if($production_id == '' ) {
+                                   echo "NO PRODUCTION";
+                               } else {
+                                   $production = get_post($production_id);                                   
+                                   echo '<a href="' . get_edit_post_link($production_id) .'">' . get_post_status( $production_id) . '</a>'; 
+                               }
+                                }
+                               //$production_ids = $proget_post_meta( $post->ID, '_production_id', false );
 			?>
 		</div>
 	</td>
@@ -40,22 +52,16 @@ if ( ! function_exists( 'admin_order_item_production_status' ) ) {
     }
 }
 
-
-
-// Adding Meta field in the meta container admin shop_order pages
-if ( ! function_exists( 'order_production_field_for_packaging' ) )
+add_action( 'woocommerce_after_order_itemmeta', 'admin_wc_after_order_itemmeta', 20, 3 );
+if ( ! function_exists( 'admin_wc_after_order_itemmeta' ) )
 {
-    function order_production_field_for_packaging()
-    {
-        global $post;
-
-        $meta_field_data = get_post_meta( $post->ID, '_production_id', true ) ? get_post_meta( $post->ID, '_production_id', true ) : '';
-        
+    function admin_wc_after_order_itemmeta( $item_id, $item, $_product ) {
+        global $wpdb;
         ?>
         <script type="text/javascript">
         jQuery(function(){
 
-            var create_production = function() {
+            var create_production = function(elem) {
                 
                 jQuery( '#mv_order_producion_field' ).block({
                     message: null,
@@ -64,10 +70,10 @@ if ( ! function_exists( 'order_production_field_for_packaging' ) )
                             opacity: 0.6
                     }
                 });
-
                 var data = {
                     action:    'woocommerce_create_production',
-                    post_id:   woocommerce_admin_meta_boxes.post_id
+                    post_id:   woocommerce_admin_meta_boxes.post_id,
+                    order_item_id : jQuery(elem.target).attr('order_item_id')
                 };
 
                 jQuery.post( woocommerce_admin_meta_boxes.ajax_url, data, function( response ) {
@@ -80,12 +86,30 @@ if ( ! function_exists( 'order_production_field_for_packaging' ) )
                 return false;
             }
 
-            jQuery( '#mv_order_producion_field' )
-                .on( 'click', '.create_production', create_production );
+            jQuery( '#woocommerce-order-items' )
+                .on( 'click', '.create_production_btn', create_production );
             
         });
         
         </script>
+        <a order_item_id="<?php echo $item_id; ?>" class="button button-small create_production_btn"><?php _e( 'Go to Production', 'woocommerce-deposits' ); ?></a>
+        
+        <?php
+    }
+}
+
+
+// Adding Meta field in the meta container admin shop_order pages
+if ( ! function_exists( 'order_production_field_for_packaging' ) )
+{
+    function order_production_field_for_packaging()
+    {
+        global $post;
+
+        $meta_field_data = get_post_meta( $post->ID, '_production_id', true ) ? get_post_meta( $post->ID, '_production_id', true ) : '';
+        
+        ?>
+        
         <?php
         
         include 'wc-admin-view-order-meta-production.php';
@@ -105,7 +129,7 @@ if ( ! function_exists( 'mv_save_wc_order_production_field' ) )
 {
 
     function mv_save_wc_order_production_field( $post_id ) {
-        return;
+        
         // We need to verify this with the proper authorization (security stuff).
 
         // Check if our nonce is set.
@@ -168,17 +192,20 @@ function wc_order_custom_create_production_item() {
             wp_die( -1 );
     }
 
-    if(!function_exists('wc_add_prod_items')) {
+    if(!function_exists('wc_add_prod_item')) {
         require_once 'wc-prod-item-functions.php';
     }
 
     
-    $production_ids = wc_add_prod_items( sanitize_text_field( $_POST['post_id'] ) );
+    //$production_ids = wc_add_prod_items( sanitize_text_field( $_POST['post_id'] ) );
+    $order_id = sanitize_text_field( $_POST['post_id'] ) ;
+    $order_item_id = sanitize_text_field( $_POST['order_item_id'] ) ;
+    $production_id = wc_add_prod_item( $order_id ,  $order_item_id );
        
-    foreach( $production_ids as $production_id ) {
+   /* foreach( $production_ids as $production_id ) {
         // This method uses `add_post_meta()` instead of `update_post_meta()`
         add_post_meta( $_POST['post_id'], '_production_id', $production_id );
-    }
+    }*/
     
     $post = get_post($_POST['post_id']);
     include 'wc-admin-view-order-meta-production.php';

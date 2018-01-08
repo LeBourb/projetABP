@@ -29,26 +29,53 @@ class Production_Product_Total_Table extends WP_List_Table {
             )
         );
     }
+    
+    /**
+ * Generates the table navigation above or bellow the table and removes the
+ * _wp_http_referrer and _wpnonce because it generates a error about URL too large
+ * 
+ * @param string $which 
+ * @return void
+ */
+public function display_tablenav( $which ) 
+{
+    ?>
+    <div class="tablenav <?php echo esc_attr( $which ); ?>">
+
+        <div class="alignleft actions">
+            <?php $this->bulk_actions(); ?>
+        </div>
+        <?php
+        $this->extra_tablenav( $which );
+        $this->pagination( $which );
+        ?>
+        <br class="clear" />
+    </div>
+    <?php
+}
 
     private function table_data() {
         global $production_id;
-        $orders = wc_get_orders_of_production($production_id);
+        if(!function_exists('wc_get_order_items_of_production'))
+            require_once 'wc-prod-functions.php';
+        $order_items = wc_get_order_items_of_production($production_id);
         $table_data = array();
-        foreach($orders as $order){
-            $items = wc_get_production_order_items($production_id, $order->get_id());
-            foreach($items as $item) {
-                $var_id = $item['variation_id'];
+        foreach($order_items as $order_item){
+            //$items = wc_get_production_order_items($production_id, $order->get_id());
+            //foreach($items as $item) {
+                $var_id = $order_item->get_variation_id();//['variation_id'];
+                $order = $order_item->get_order();
                 $total_variation = array();
                 if(array_key_exists ( $var_id , $table_data)){
                     $total_variation = $table_data[$var_id];                    
-                    $total_variation['qty'] += $item['qty'];
-                    $total_variation['name'] = $item['name'];
-                    $total_variation['total'] += $item->get_total();
+                    $total_variation['qty'] += $order_item->get_quantity();
+                    $total_variation['name'] = $order_item->get_name();
+                    $total_variation['total'] += $order_item->get_total();
                 }else {
-                    $total_variation = array ('name' => $item['name'], 'qty' => $item['qty'], 'total' => $item->get_total() , 'subtotal' => $order->get_item_subtotal($item,false, true));                    
+                    $total_variation = array ('name' => $order_item->get_name(), 'qty' => $order_item->get_quantity(), 'total' => $order_item->get_total() , 'subtotal' => $order->get_item_subtotal($order_item,false, true));                    
                 }                
                 $table_data[$var_id] = $total_variation;
-            }
+            //}
         }        
         return $table_data;
     }

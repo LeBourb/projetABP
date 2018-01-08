@@ -47,6 +47,8 @@ class WC_Report_Production_List extends WP_List_Table {
 	public function no_items() {
 		_e( 'No production found.', 'woocommerce' );
 	}
+        
+        
 
 	/**
 	 * Don't need this.

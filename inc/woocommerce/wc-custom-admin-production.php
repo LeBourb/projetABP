@@ -44,16 +44,26 @@ function wc_meta_box_production_product_image() {
     }                    
 }
 
-
+require_once 'class-wc-meta-box-production-actions.php';
 add_action( 'add_meta_boxes', 'production_meta_boxes' );
 if ( ! function_exists( 'production_meta_boxes' ) ) {
     function production_meta_boxes() {                
-        add_meta_box( 'woocommerce-production-meta', __( 'Meta', 'woocommerce' ), 'wc_meta_box_production_info',  "shop_production", 'normal', 'high' );
-        add_meta_box( 'woocommerce-production-orders', __( 'Orders', 'woocommerce' ), 'wc_meta_box_production_orders', "shop_production", 'normal', 'high' );        
-        add_meta_box( 'woocommerce-production-total-table', __( 'Total Production', 'woocommerce' ), 'wc_meta_box_production_total_table', "shop_production", 'normal', 'high' );        
+       add_meta_box( 'woocommerce-production-meta', __( 'Production meta', 'woocommerce' ), 'wc_meta_box_production_info',  "shop_production", 'normal', 'high' );
+        add_meta_box( 'woocommerce-production-orders', __( 'Production Orders', 'woocommerce' ), 'wc_meta_box_production_orders', "shop_production", 'normal', 'default' );        
+       add_meta_box( 'woocommerce-production-total-table', __( 'Total Production', 'woocommerce' ), 'wc_meta_box_production_total_table', "shop_production", 'normal', 'high' );        
         add_meta_box( 'woocommerce-production-product-image', __( 'Product Image', 'woocommerce' ), 'wc_meta_box_production_product_image', "shop_production", 'side', 'default' );        
+        add_meta_box( 'woocommerce-production-actions', sprintf( __( '%s actions', 'woocommerce' ), 'Production' ), 'WC_Meta_Box_Production_Actions::output', "shop_production", 'side', 'high' );
+        remove_meta_box( 'submitdiv', 'shop_production', 'side' );
     }
 }
+ if(!class_exists('WC_Meta_Box_Production_Data')) {
+        require_once 'class-wc-meta-box-production-data.php';
+    }
+add_action( 'save_post', 'WC_Meta_Box_Production_Actions::save' , 1, 2 );
+add_action( 'save_post', 'WC_Meta_Box_Production_Data::save' , 1, 2 );
+
+
+
 
 
 

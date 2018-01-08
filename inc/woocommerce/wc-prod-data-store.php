@@ -51,7 +51,7 @@ class WC_Prod_Data_Store extends WC_Data_Store_WP implements WC_Object_Data_Stor
 	public function create( &$prod ) {
 		$prod->set_version( WC_VERSION );
 		$prod->set_date_created( current_time( 'timestamp', true ) );
-		$prod->set_currency( $prod->get_currency() ? $prod->get_currency() : get_woocommerce_currency() );
+		//$prod->set_currency( $prod->get_currency() ? $prod->get_currency() : get_woocommerce_currency() );
 
 		$id = wp_insert_post( apply_filters( 'woocommerce_new_prod_data', array(
 			'post_date'     => gmdate( 'Y-m-d H:i:s', $prod->get_date_created( 'edit' )->getOffsetTimestamp() ),
@@ -83,11 +83,12 @@ class WC_Prod_Data_Store extends WC_Data_Store_WP implements WC_Object_Data_Stor
 	 * @throws Exception
 	 */
 	public function read( &$prod ) {
-		$prod->set_defaults();
+		//$prod->set_defaults();
 $post_object = get_post( $prod->get_id() ) ;
 		/*if ( ! $prod->get_id() || ! ( $post_object = get_post( $prod->get_id() ) ) || ! in_array( $post_object->post_type, wc_get_prod_types() ) ) {
 			throw new Exception( __( 'Invalid prod.', 'woocommerce' ) );
 		}*/
+
 
 		$prod->set_props( array(
 			'parent_id'     => $post_object->post_parent,
@@ -95,11 +96,14 @@ $post_object = get_post( $prod->get_id() ) ;
 			'date_modified' => 0 < $post_object->post_modified_gmt ? wc_string_to_timestamp( $post_object->post_modified_gmt ) : null,
 			'status'        => $post_object->post_status,
 		) );
-
+                //$prod->set_prop('status', $post_object->post_status);
+                
+  //              $prod->set_status( $post_object->post_status );
+//print('Production status:' . $prod->get_status() );//$prod->get_status());
 		$this->read_prod_data( $prod, $post_object );
 		$prod->read_meta_data();
 		$prod->set_object_read( true );
-
+                
 		/**
 		 * In older versions, discounts may have been stored differently.
 		 * Update them now so if the object is saved, the correct values are
@@ -116,7 +120,7 @@ $post_object = get_post( $prod->get_id() ) ;
 	 */
 	public function update( &$prod ) {
 		$prod->save_meta_data();
-		$prod->set_version( WC_VERSION );
+		//$prod->set_version( WC_VERSION );
 
 		$changes = $prod->get_changes();
 
@@ -125,8 +129,8 @@ $post_object = get_post( $prod->get_id() ) ;
 			$post_data = array(
 				'post_date'         => gmdate( 'Y-m-d H:i:s', $prod->get_date_created( 'edit' )->getOffsetTimestamp() ),
 				'post_date_gmt'     => gmdate( 'Y-m-d H:i:s', $prod->get_date_created( 'edit' )->getTimestamp() ),
-				'post_status'       => 'wc-' . ( $prod->get_status( 'edit' ) ? $prod->get_status( 'edit' ) : apply_filters( 'woocommerce_default_prod_status', 'pending' ) ),
-				'post_parent'       => $prod->get_parent_id(),
+				'post_status'       => '' . ( $prod->get_status( 'edit' ) ? $prod->get_status( 'edit' ) : apply_filters( 'woocommerce_default_prod_status', 'pending' ) ),
+				//'post_parent'       => $prod->get_parent_id(),
 				'post_excerpt'      => $this->get_post_excerpt( $prod ),
 				'post_modified'     => isset( $changes['date_modified'] ) ? gmdate( 'Y-m-d H:i:s', $prod->get_date_modified( 'edit' )->getOffsetTimestamp() ) : current_time( 'mysql' ),
 				'post_modified_gmt' => isset( $changes['date_modified'] ) ? gmdate( 'Y-m-d H:i:s', $prod->get_date_modified( 'edit' )->getTimestamp() ) : current_time( 'mysql', 1 ),
@@ -247,7 +251,7 @@ $post_object = get_post( $prod->get_id() ) ;
 	protected function update_post_meta( &$prod ) {
 		$updated_props     = array();
 		$meta_key_to_props = array(
-			'_prod_currency'     => 'currency',
+			/*'_prod_currency'     => 'currency',
 			'_cart_discount'      => 'discount_total',
 			'_cart_discount_tax'  => 'discount_tax',
 			'_prod_shipping'     => 'shipping_total',
@@ -255,7 +259,7 @@ $post_object = get_post( $prod->get_id() ) ;
 			'_prod_tax'          => 'cart_tax',
 			'_prod_total'        => 'total',
 			'_prod_version'      => 'version',
-			'_prices_include_tax' => 'prices_include_tax',
+			'_prices_include_tax' => 'prices_include_tax',*/
 		);
 
 		$props_to_update = $this->get_props_to_update( $prod, $meta_key_to_props );

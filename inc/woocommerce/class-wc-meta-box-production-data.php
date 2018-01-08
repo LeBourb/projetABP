@@ -203,10 +203,11 @@ class WC_Meta_Box_Production_Data {
 							<?php
 								$statuses = wc_get_production_statuses();
 								foreach ( $statuses as $status => $status_name ) {
-									echo '<option value="' . esc_attr( $status ) . '" ' . selected( $status, 'wc-' . $production->get_status( 'edit' ), false ) . '>' . esc_html( $status_name ) . '</option>';
+									echo '<option value="' . esc_attr( $status ) . '" ' . selected( $status, '' . $production->get_status( 'edit' ), false ) . '>' . esc_html( $status_name ) . '</option>';
 								}
 							?>
-						</select></p>
+						</select>
+                                        </p>
 
 						<?php do_action( 'woocommerce_admin_production_data_after_production_details', $production ); ?>
 					</div>					
@@ -223,18 +224,20 @@ class WC_Meta_Box_Production_Data {
 	 * @param int $production_id Production ID.
 	 */
 	public static function save( $production_id ) {
-		self::init_address_fields();
+		//self::init_address_fields();
 
 		// Ensure gateways are loaded in case they need to insert data into the emails.
-		WC()->payment_gateways();
-		WC()->shipping();
+		//WC()->payment_gateways();
+		//WC()->shipping();
 
 		// Get production object.
-		$production = wc_get_prod( $production_id );
-		$props = array();
+               
+		$production = new WC_Production( $production_id );
+                
+		//$props = array();
 
 		// Create production key.
-		if ( ! $production->get_production_key() ) {
+		/*if ( ! $production->get_production_key() ) {
 			$props['production_key'] = 'wc_' . apply_filters( 'woocommerce_generate_production_key', uniqid( 'production_' ) );
 		}
 
@@ -297,7 +300,7 @@ class WC_Meta_Box_Production_Data {
 		$props['date_created'] = $date;
 
 		// Save production data.
-		$production->set_props( $props );
+		$production->set_props( $props );*/
 		$production->set_status( wc_clean( $_POST['production_status'] ), '', true );
 		$production->save();
 	}

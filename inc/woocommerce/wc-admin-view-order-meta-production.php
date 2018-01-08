@@ -8,6 +8,8 @@
 
 
     echo '<div id="production-info-meta">';
+    $order = wc_get_order($post->ID);
+     //print_r($order->get_items());
     $production_ids = get_post_meta( $post->ID, '_production_id', false );
     if($production_ids != 0){
         

@@ -68,6 +68,58 @@ function wc_add_prod_items( $order_id ) {
 
 }
 
+function wc_add_prod_item( $order_id , $order_item_id ) {
+	$prod_id = absint( $order_id );
+        
+
+	if ( ! $prod_id ) {
+		return false;
+	}
+        
+        $order = wc_get_order($order_id);//<--check this line
+
+        $paymethod = $order->payment_method_title;
+        $orderstat = $order->get_status();
+        
+        
+        $item = $order->get_item($order_item_id);
+        $production_id = $item->get_meta('_production_id');
+        if($production_id == '') {            
+            $array_ids = array();
+
+            $product_name = $item['name'];
+            $product_id = $item['product_id'];
+            $product_variation_id = $item['variation_id'];
+            $defaults = array(
+                    'prod_item_name' => '',
+                    'prod_item_type' => 'line_item',
+            );
+            $product = wc_get_product( $product_id );
+             
+            $production_ids = get_post_ids_by_meta_key_and_value('_product_id', $product_id);
+            if($production_ids == null){
+                $production_id = wp_insert_post(array('post_title'=> $product->get_name().'_production', 'post_type'=>'shop_production', 'post_content'=>'demo text' , 'post_status' => 'wc-not-started'));
+                add_post_meta($production_id, '_product_id', $product_id, true);        
+            }elseif (is_array($production_ids)) {
+                foreach($production_ids as $productionid) {
+                    if(get_post_status($productionid) == 'draft') {
+                        $production_id = $productionid;
+                        break;
+                    }                    
+                }
+                if($production_id == null){
+                    $production_id = wp_insert_post(array('post_title'=> $product->get_name().'_production', 'post_type'=>'shop_production', 'post_content'=>'demo text'));
+                    add_post_meta($production_id, '_product_id', $product_id, true);        
+                }
+            }  
+            $item->add_meta_data( '_production_id', $production_id, true );
+            $item->save_meta_data();
+        }
+        
+        return $production_id;
+
+}
+
 /**
  * Update an item for an prod.
  *
@@ -232,15 +284,13 @@ function add_to_production_item($order_id) { //<--check this line
  * @used-by WC_Production::set_status
  * @return array
  */
-function wc_get_production_statuses() {
+function wc_get_production_statuses() {     
 	$production_statuses = array(
-		'wc-pending'    => _x( 'Pending payment', 'Production status', 'woocommerce' ),
-		'wc-processing' => _x( 'Processing', 'Production status', 'woocommerce' ),
-		'wc-on-hold'    => _x( 'On hold', 'Production status', 'woocommerce' ),
-		'wc-completed'  => _x( 'Completed', 'Production status', 'woocommerce' ),
-		'wc-cancelled'  => _x( 'Cancelled', 'Production status', 'woocommerce' ),
-		'wc-refunded'   => _x( 'Refunded', 'Production status', 'woocommerce' ),
-		'wc-failed'     => _x( 'Failed', 'Production status', 'woocommerce' ),
+		'wc-not-started'    => _x( 'Not Started', 'Production status', 'woocommerce' ),
+		'wc-supplies-ordered' => _x( 'Supplies Ordered', 'Production status', 'woocommerce' ),
+		'wc-supp-delivered'    => _x( 'Supplies Delivered', 'Production status', 'woocommerce' ),
+		'wc-in-production'  => _x( 'In Production', 'Production status', 'woocommerce' ),
+		'wc-prd-completed'  => _x( 'Production Completed', 'Production status', 'woocommerce' )		
 	);
 	return $production_statuses;
 }
@@ -249,3 +299,66 @@ function wc_get_production_product($production_id) {
     $product_id = get_post_meta($production_id, '_product_id', true);
     return wc_get_product($product_id);
 }
+
+
+
+/**
+* Register our custom post statuses, used for order status.
+*/
+function wc_register_production_status() {
+        //0. Not Started.
+//1. Supplies Ordered.
+//1. Supplies Delivered.
+//2. In Production.
+//3. Production Completed.
+//4. In Delivery.
+//5. Delivery Completed.
+        $production_statuses = array(
+                        'wc-not-started'    => array(
+                                'label'                     => _x( 'Not Started', 'Production status', 'woocommerce' ),
+                                'public'                    => false,
+                                'exclude_from_search'       => false,
+                                'show_in_admin_all_list'    => true,
+                                'show_in_admin_status_list' => true,
+                                'label_count'               => _n_noop( 'Not started <span class="count">(%s)</span>', 'Pending start <span class="count">(%s)</span>', 'woocommerce' ),
+                        ),
+                        'wc-supplies-ordered' => array(
+                                'label'                     => _x( 'Supplies Ordered', 'Production status', 'woocommerce' ),
+                                'public'                    => false,
+                                'exclude_from_search'       => false,
+                                'show_in_admin_all_list'    => true,
+                                'show_in_admin_status_list' => true,
+                                'label_count'               => _n_noop( 'Supplies ordered <span class="count">(%s)</span>', 'Supplies ordered <span class="count">(%s)</span>', 'woocommerce' ),
+                        ),
+                        'wc-supp-delivered'    => array(
+                                'label'                     => _x( 'Supplies Delivered', 'Production status', 'woocommerce' ),
+                                'public'                    => false,
+                                'exclude_from_search'       => false,
+                                'show_in_admin_all_list'    => true,
+                                'show_in_admin_status_list' => true,
+                                'label_count'               => _n_noop( 'Supplies Delivered <span class="count">(%s)</span>', 'Supplies Delivered <span class="count">(%s)</span>', 'woocommerce' ),
+                        ),
+                        'wc-in-production'  => array(
+                                'label'                     => _x( 'In Production', 'Production status', 'woocommerce' ),
+                                'public'                    => false,
+                                'exclude_from_search'       => false,
+                                'show_in_admin_all_list'    => true,
+                                'show_in_admin_status_list' => true,
+                                'label_count'               => _n_noop( 'Completed <span class="count">(%s)</span>', 'Completed <span class="count">(%s)</span>', 'woocommerce' ),
+                        ),
+                        'wc-prd-completed'  => array(
+                                'label'                     => _x( 'Production Completed', 'Production status', 'woocommerce' ),
+                                'public'                    => false,
+                                'exclude_from_search'       => false,
+                                'show_in_admin_all_list'    => true,
+                                'show_in_admin_status_list' => true,
+                                'label_count'               => _n_noop( 'Production Completed <span class="count">(%s)</span>', 'Production Completed <span class="count">(%s)</span>', 'woocommerce' ),
+                        )
+                );
+        
+
+        foreach ( $production_statuses as $production_status => $values ) {
+                register_post_status( $production_status, $values );
+        }
+}
+add_action( 'init', 'wc_register_production_status', 60, 2 );

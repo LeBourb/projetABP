@@ -79,7 +79,18 @@ class WC_Production extends WC_Data  {
 		} else {
 			$this->set_object_read( true );
 		}
-
+                $this->data = array(
+		'name'               => '',
+		'slug'               => '',
+		'date_created'       => null,
+		'date_modified'      => null,
+		'status'             => false,
+		'featured'           => false,
+		'catalog_visibility' => 'visible',
+		'description'        => '',
+                'product_id'        => null,
+                'order_ids'         => array(),
+	);
 		$this->data_store = WC_Data_Store::load( 'production' );
 		if ( $this->get_id() > 0 ) {
 			$this->data_store->read( $this );
@@ -158,7 +169,8 @@ class WC_Production extends WC_Data  {
 	 * @return string
 	 */
 	public function get_status( $context = 'view' ) {
-		return $this->get_prop( 'status', $context );
+          
+            return $this->get_prop( 'status', $context );
 	}
 
 	/**
@@ -375,7 +387,7 @@ class WC_Production extends WC_Data  {
 	 */
 	public function validate_props() {
 		// Before updating, ensure stock props are all aligned. Qty and backorders are not needed if not stock managed.
-		if ( ! $this->get_manage_stock() ) {
+		/*if ( ! $this->get_manage_stock() ) {
 			$this->set_stock_quantity( '' );
 			$this->set_backorders( 'no' );
 
@@ -386,7 +398,7 @@ class WC_Production extends WC_Data  {
 		// If the stock level is changing and we do now have enough, force in stock status.
 		} elseif ( $this->get_stock_quantity() > get_option( 'woocommerce_notify_no_stock_amount' ) && array_key_exists( 'stock_quantity', $this->get_changes() ) ) {
 			$this->set_stock_status( 'instock' );
-		}
+		}*/
 	}
 
 	/**
@@ -407,9 +419,9 @@ class WC_Production extends WC_Data  {
 			} else {
 				$this->data_store->create( $this );
 			}
-			if ( $this->get_parent_id() ) {
+			/*if ( $this->get_parent_id() ) {
 				wc_deferred_product_sync( $this->get_parent_id() );
-			}
+			}*/
 		}
 		return $this->get_id();
 	}

@@ -15,18 +15,17 @@ global $post;
 //$payment_gateway = wc_get_payment_gateway_by_order( $order );
 
 // Get line items
-/*
-$line_items          = $order->get_items( apply_filters( 'woocommerce_admin_order_item_types', 'line_item' ) );
-$discounts           = $order->get_items( 'discount' );
-$line_items_fee      = $order->get_items( 'fee' );
-$line_items_shipping = $order->get_items( 'shipping' );
-*/
+//$line_items          = $order->get_items( apply_filters( 'woocommerce_admin_order_item_types', 'line_item' ) );
+//$discounts           = $order->get_items( 'discount' );
+//$line_items_fee      = $order->get_items( 'fee' );
+//$line_items_shipping = $order->get_items( 'shipping' );
+
 if ( ! class_exists( 'Order_List_Table' ) ) {
     require_once( 'Order_List_Table.php' );
 }
 //global $post_type_object, $wpdb;
-global $orders, $product_id;
-$orders = wc_get_orders_of_production($post->ID);
+global $order_items, $product_id;
+$order_items = wc_get_order_items_of_production($post->ID);
 $product_id = get_post_meta($post->ID, '_product_id', true);
 
 $exampleListTable = new Order_List_Table();

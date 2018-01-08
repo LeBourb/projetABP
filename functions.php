@@ -52,6 +52,7 @@ if ( storefront_is_woocommerce_activated() ) {
         require 'inc/woocommerce/class-wc-product-attribute-fabrics-form.php';
         require 'inc/woocommerce/wc-custom-product-supplies-tab.php';
         require 'inc/woocommerce/wc-checkout_terms_conditions_popup.php';
+        
         //require 'inc/woocommerce/wc-custom-product-workshop-tab.php';
         //require 'inc/woocommerce/wc-custom-product-fabrics-tab.php';
 }
@@ -466,7 +467,7 @@ function prod_columns( $existing_columns ) {
 
 }
 
-add_action( 'init', 'create_prod_post_type' );
+/*add_action( 'init', 'create_prod_post_type' );
 function create_prod_post_type() {
   register_post_type( 'production',
     array(
@@ -477,7 +478,7 @@ function create_prod_post_type() {
       'public' => true
     )
   );
-}
+}*/
 
 
 /**
@@ -511,6 +512,35 @@ function my_checkout_msg() {
 }
 
 function create_post_type_production() {
+    
+    //global $wp_roles;
+    //$wp_roles->add_cap( 'administrator', "edit_shop_production" );
+    $role = get_role( 'administrator' );
+    
+    $role->add_cap( 'create_shop_productions' ); 
+    $role->add_cap( 'publish_shop_productions' ); 
+    $role->add_cap( 'edit_shop_productions' );     
+    $role->add_cap( 'edit_others_shop_productions' );     
+    $role->add_cap( 'delete_shop_productions' ); 
+    $role->add_cap( 'delete_others_shop_productions' ); 
+    $role->add_cap( 'read_private_shop_production' ); 
+    $role->add_cap( 'edit_shop_production' ); 
+    $role->add_cap( 'delete_shop_production' ); 
+    $role->add_cap( 'read_shop_production' ); 
+    
+    $role = get_role( 'shop_manager' );
+        
+    $role->add_cap( 'create_shop_productions' ); 
+    $role->add_cap( 'publish_shop_productions' ); 
+    $role->add_cap( 'edit_shop_productions' );     
+    $role->add_cap( 'edit_others_shop_productions' );     
+    $role->add_cap( 'delete_shop_productions' ); 
+    $role->add_cap( 'delete_others_shop_productions' ); 
+    $role->add_cap( 'read_private_shop_production' ); 
+    $role->add_cap( 'edit_shop_production' ); 
+    $role->add_cap( 'delete_shop_production' ); 
+    $role->add_cap( 'read_shop_production' ); 
+    
   register_post_type( 'shop_production',
     array(
       'labels' => array(
@@ -518,8 +548,23 @@ function create_post_type_production() {
         'singular_name' => __( 'Production' )
       ),
       'public' => true,
+    //'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail' ),
       'has_archive' => true,
-      'hierarchical' => true
+      'hierarchical' => true,
+        "capability_type" => "shop_production",
+        'capabilities' => array(
+           'create_posts' => 'create_shop_productions',
+            'publish_posts' => 'publish_shop_productions',
+            'edit_posts' => 'edit_shop_productions',
+            'edit_others_posts' => 'edit_others_shop_productions',
+            'delete_posts' => 'delete_shop_productions',
+            'delete_others_posts' => 'delete_others_shop_productions',
+            'read_private_posts' => 'read_private_shop_productions',
+            'edit_post' => 'edit_shop_production',
+            'delete_post' => 'delete_shop_production',
+            'read_post' => 'read_shop_production'
+        ),
+        "map_meta_cap" => true,
     )
   );
   register_post_type( 'shop_workshop',
@@ -546,7 +591,7 @@ function create_post_type_production() {
   );
 }
 add_action( 'init', 'create_post_type_production' );
-if (!function_exists('get_post_id_by_meta_key_and_value')) {
+if (!function_exists('get_post_ids_by_meta_key_and_value')) {
 	/**
 	 * Get post id from meta key and value
 	 * @param string $key
@@ -554,14 +599,19 @@ if (!function_exists('get_post_id_by_meta_key_and_value')) {
 	 * @return int|bool
 	 * @author David M&aring;rtensson <david.martensson@gmail.com>
 	 */
-	function get_post_id_by_meta_key_and_value($key, $value) {
+	function get_post_ids_by_meta_key_and_value($key, $value) {
 		global $wpdb;
+                $post_ids = array();
 		$meta = $wpdb->get_results("SELECT * FROM `".$wpdb->postmeta."` WHERE meta_key='".$wpdb->escape($key)."' AND meta_value='".$wpdb->escape($value)."'");
-		if (is_array($meta) && !empty($meta) && isset($meta[0])) {
-			$meta = $meta[0];
+		if (is_array($meta) && !empty($meta) && isset($meta[0])) {                        
+                        foreach($meta as $post_itm ) {
+                            array_push($post_ids, $post_itm->post_id);
+                        }
+                        return $post_ids;
 		}		
-		if (is_object($meta)) {
-			return $meta->post_id;
+		else if (is_object($meta)) {
+			array_push($post_ids, $meta->post_id) ;
+                        return $post_ids;
 		}
 		else {
 			return null;

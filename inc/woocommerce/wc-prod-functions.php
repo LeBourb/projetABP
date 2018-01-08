@@ -29,6 +29,18 @@ function wc_get_orders_of_production($production_id) {
     return $orders;
 }
 
+function wc_get_order_items_of_production($production_id) {
+    global $wpdb;
+    $meta = $wpdb->get_results("SELECT DISTINCT order_item_id FROM `wp_woocommerce_order_itemmeta` WHERE meta_key='".$wpdb->escape('_production_id')."' AND meta_value='". $production_id ."'");
+    $orders = array();
+    if (is_array($meta) && !empty($meta) && isset($meta[0])) {
+        foreach ($meta as $order_item) {            
+            $order_items[] = new WC_Order_Item_Product($order_item->order_item_id);
+        }        
+    }
+    return $order_items;
+}
+
 function wc_get_production_order_items($production_id, $order_id) {
     $order = wc_get_order($order_id);//<--check this line
     
@@ -127,13 +139,11 @@ function wc_get_prod( $the_prod = false ) {
  */
 function wc_get_prod_statuses() {
 	$prod_statuses = array(
-		'wc-pending'    => _x( 'Pending payment', 'Order status', 'woocommerce' ),
-		'wc-processing' => _x( 'Processing', 'Order status', 'woocommerce' ),
-		'wc-on-hold'    => _x( 'On hold', 'Order status', 'woocommerce' ),
-		'wc-completed'  => _x( 'Completed', 'Order status', 'woocommerce' ),
-		'wc-cancelled'  => _x( 'Cancelled', 'Order status', 'woocommerce' ),
-		'wc-refunded'   => _x( 'Refunded', 'Order status', 'woocommerce' ),
-		'wc-failed'     => _x( 'Failed', 'Order status', 'woocommerce' ),
+		'wc-not-started'    => _x( 'Not Started', 'Production status', 'woocommerce' ),
+		'wc-supplies-ordered' => _x( 'Supplies Ordered', 'Production status', 'woocommerce' ),
+		'wc-supp-delivered'    => _x( 'Supplies Delivered', 'Production status', 'woocommerce' ),
+		'wc-in-production'  => _x( 'In Production', 'Production status', 'woocommerce' ),
+		'wc-prd-completed'  => _x( 'Production Completed', 'Production status', 'woocommerce' )
 	);
 	return apply_filters( 'wc_prod_statuses', $prod_statuses );
 }
