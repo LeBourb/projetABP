@@ -54,6 +54,7 @@ $font-stack-georgia: none;
   @include size($size, $size);
 }
 @import 'refills/refills/modal';
+@import 'refills/refills/progress-bar-indication';
 
 
 // Susy

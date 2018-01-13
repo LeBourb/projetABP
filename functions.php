@@ -602,7 +602,8 @@ if (!function_exists('get_post_ids_by_meta_key_and_value')) {
 	function get_post_ids_by_meta_key_and_value($key, $value) {
 		global $wpdb;
                 $post_ids = array();
-		$meta = $wpdb->get_results("SELECT * FROM `".$wpdb->postmeta."` WHERE meta_key='".$wpdb->escape($key)."' AND meta_value='".$wpdb->escape($value)."'");
+                
+		$meta = $wpdb->get_results($wpdb->prepare("SELECT * FROM `$wpdb->postmeta` WHERE meta_key=%s AND meta_value=%d",array($key,intval($value))));                
 		if (is_array($meta) && !empty($meta) && isset($meta[0])) {                        
                         foreach($meta as $post_itm ) {
                             array_push($post_ids, $post_itm->post_id);

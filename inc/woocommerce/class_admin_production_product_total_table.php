@@ -64,8 +64,12 @@ public function display_tablenav( $which )
             //$items = wc_get_production_order_items($production_id, $order->get_id());
             //foreach($items as $item) {
                 $var_id = $order_item->get_variation_id();//['variation_id'];
+                $product_id = $order_item->get_product_id();//['variation_id'];
                 $order = $order_item->get_order();
+                $metas = $order_item->get_meta_data( );                 
+                
                 $total_variation = array();
+                
                 if(array_key_exists ( $var_id , $table_data)){
                     $total_variation = $table_data[$var_id];                    
                     $total_variation['qty'] += $order_item->get_quantity();

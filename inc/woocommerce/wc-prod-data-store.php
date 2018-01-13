@@ -50,12 +50,12 @@ class WC_Prod_Data_Store extends WC_Data_Store_WP implements WC_Object_Data_Stor
 	 */
 	public function create( &$prod ) {
 		$prod->set_version( WC_VERSION );
-		$prod->set_date_created( current_time( 'timestamp', true ) );
+		//$prod->set_date_created( current_time( 'timestamp', true ) );
 		//$prod->set_currency( $prod->get_currency() ? $prod->get_currency() : get_woocommerce_currency() );
 
 		$id = wp_insert_post( apply_filters( 'woocommerce_new_prod_data', array(
-			'post_date'     => gmdate( 'Y-m-d H:i:s', $prod->get_date_created( 'edit' )->getOffsetTimestamp() ),
-			'post_date_gmt' => gmdate( 'Y-m-d H:i:s', $prod->get_date_created( 'edit' )->getTimestamp() ),
+			//'post_date'     => gmdate( 'Y-m-d H:i:s', $prod->get_date_created( 'edit' )->getOffsetTimestamp() ),
+			//'post_date_gmt' => gmdate( 'Y-m-d H:i:s', $prod->get_date_created( 'edit' )->getTimestamp() ),
 			'post_type'     => $prod->get_type( 'edit' ),
 			'post_status'   => 'wc-' . ( $prod->get_status( 'edit' ) ? $prod->get_status( 'edit' ) : apply_filters( 'woocommerce_default_prod_status', 'pending' ) ),
 			'ping_status'   => 'closed',
@@ -92,7 +92,7 @@ $post_object = get_post( $prod->get_id() ) ;
 
 		$prod->set_props( array(
 			'parent_id'     => $post_object->post_parent,
-			'date_created'  => 0 < $post_object->post_date_gmt ? wc_string_to_timestamp( $post_object->post_date_gmt ) : null,
+			'production_date'  => 0 < $post_object->production_date_gmt ? wc_string_to_timestamp( $post_object->production_date_gmt ) : null,
 			'date_modified' => 0 < $post_object->post_modified_gmt ? wc_string_to_timestamp( $post_object->post_modified_gmt ) : null,
 			'status'        => $post_object->post_status,
 		) );
@@ -125,10 +125,10 @@ $post_object = get_post( $prod->get_id() ) ;
 		$changes = $prod->get_changes();
 
 		// Only update the post when the post data changes.
-		if ( array_intersect( array( 'date_created', 'date_modified', 'status', 'parent_id', 'post_excerpt' ), array_keys( $changes ) ) ) {
+		if ( array_intersect( array( 'production_date', 'date_modified', 'status', 'parent_id', 'post_excerpt' ), array_keys( $changes ) ) ) {
 			$post_data = array(
-				'post_date'         => gmdate( 'Y-m-d H:i:s', $prod->get_date_created( 'edit' )->getOffsetTimestamp() ),
-				'post_date_gmt'     => gmdate( 'Y-m-d H:i:s', $prod->get_date_created( 'edit' )->getTimestamp() ),
+				//'production_date'         => gmdate( 'Y-m-d H:i:s', $prod->get_production_date( 'edit' ) ? $prod->get_production_date( 'edit' )->getOffsetTimestamp() : '' ),
+				//'production_date_gmt'     => gmdate( 'Y-m-d H:i:s', $prod->get_production_date( 'edit' ) ? $prod->get_production_date( 'edit' )->getTimestamp() : '' ),
 				'post_status'       => '' . ( $prod->get_status( 'edit' ) ? $prod->get_status( 'edit' ) : apply_filters( 'woocommerce_default_prod_status', 'pending' ) ),
 				//'post_parent'       => $prod->get_parent_id(),
 				'post_excerpt'      => $this->get_post_excerpt( $prod ),

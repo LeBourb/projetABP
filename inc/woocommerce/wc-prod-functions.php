@@ -31,7 +31,7 @@ function wc_get_orders_of_production($production_id) {
 
 function wc_get_order_items_of_production($production_id) {
     global $wpdb;
-    $meta = $wpdb->get_results("SELECT DISTINCT order_item_id FROM `wp_woocommerce_order_itemmeta` WHERE meta_key='".$wpdb->escape('_production_id')."' AND meta_value='". $production_id ."'");
+    $meta = $wpdb->get_results($wpdb->prepare("SELECT DISTINCT order_item_id FROM `wp_woocommerce_order_itemmeta` WHERE meta_key=%s AND meta_value=%d",array('_production_id',intval($production_id))));
     $orders = array();
     if (is_array($meta) && !empty($meta) && isset($meta[0])) {
         foreach ($meta as $order_item) {            
@@ -39,6 +39,10 @@ function wc_get_order_items_of_production($production_id) {
         }        
     }
     return $order_items;
+}
+
+function wc_get_production_items_of_product($product_id) {
+    return get_post_ids_by_meta_key_and_value('_product_id', $product_id);    
 }
 
 function wc_get_production_order_items($production_id, $order_id) {

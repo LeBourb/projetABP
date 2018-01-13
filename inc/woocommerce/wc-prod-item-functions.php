@@ -102,13 +102,13 @@ function wc_add_prod_item( $order_id , $order_item_id ) {
                 add_post_meta($production_id, '_product_id', $product_id, true);        
             }elseif (is_array($production_ids)) {
                 foreach($production_ids as $productionid) {
-                    if(get_post_status($productionid) == 'draft') {
+                    if(get_post_status($productionid) == 'wc-not-started') {
                         $production_id = $productionid;
                         break;
                     }                    
                 }
                 if($production_id == null){
-                    $production_id = wp_insert_post(array('post_title'=> $product->get_name().'_production', 'post_type'=>'shop_production', 'post_content'=>'demo text'));
+                    $production_id = wp_insert_post(array('post_title'=> $product->get_name().'_production', 'post_type'=>'shop_production', 'post_content'=>'demo text' , 'post_status' => 'wc-not-started'));
                     add_post_meta($production_id, '_product_id', $product_id, true);        
                 }
             }  
@@ -119,6 +119,23 @@ function wc_add_prod_item( $order_id , $order_item_id ) {
         return $production_id;
 
 }
+
+function wc_get_prod_total_ordered_item( $production_id ) {
+        if(!function_exists('wc_get_order_items_of_production'))
+            require_once 'wc-prod-functions.php';
+        $qty = 0;
+        $order_items = wc_get_order_items_of_production($production_id);        
+        foreach($order_items as $order_item){
+            $qty += $order_item->get_quantity();            
+        } 
+        return $qty;
+}
+
+function wc_get_prod_min_order( $production_id ) {
+    $production = new WC_Production($production_id);    
+    return intval($production->get_production_minimum());
+}
+
 
 /**
  * Update an item for an prod.

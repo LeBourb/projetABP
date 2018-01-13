@@ -195,10 +195,13 @@ class WC_Meta_Box_Production_Data {
 						<h3><?php _e( 'General Details', 'woocommerce' ); ?></h3>
 
 						<p class="form-field form-field-wide"><label for="production_date"><?php _e( 'Production date:', 'woocommerce' ) ?></label>
-							<input type="text" class="date-picker" name="production_date" id="production_date" maxlength="10" value="<?php echo date_i18n( 'Y-m-d', strtotime( $post->post_date ) ); ?>" pattern="<?php echo esc_attr( apply_filters( 'woocommerce_date_input_html_pattern', '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])' ) ); ?>" />@&lrm;<input type="number" class="hour" placeholder="<?php esc_attr_e( 'h', 'woocommerce' ) ?>" name="production_date_hour" id="production_date_hour" min="0" max="23" step="1" value="<?php echo date_i18n( 'H', strtotime( $post->post_date ) ); ?>" pattern="([01]?[0-9]{1}|2[0-3]{1})" />:<input type="number" class="minute" placeholder="<?php esc_attr_e( 'm', 'woocommerce' ) ?>" name="production_date_minute" id="production_date_minute" min="0" max="59" step="1" value="<?php echo date_i18n( 'i', strtotime( $post->post_date ) ); ?>" pattern="[0-5]{1}[0-9]{1}" />&lrm;
+                                                    <input type="text" class="date-picker" name="production_date" id="production_date" maxlength="10" value="<?php echo date_i18n( 'Y-m-d', strtotime( $production->get_production_date() ) ); ?>" pattern="<?php echo esc_attr( apply_filters( 'woocommerce_date_input_html_pattern', '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])' ) ); ?>" />@&lrm;                                                        
 						</p>
 
-						
+						<p class="form-field form-field-wide"><label for="production_minimum"><?php _e( 'Minimum Order:', 'woocommerce' ) ?></label>
+                                                    <input type=number name="production_minimum" step=1 value="<?php echo intval( $production->get_production_minimum() ); ?>" /> 
+						</p>
+                                                
 						<select id="production_status" name="production_status" class="wc-enhanced-select">
 							<?php
 								$statuses = wc_get_production_statuses();
@@ -290,18 +293,33 @@ class WC_Meta_Box_Production_Data {
 		}
 
 		
-		// Update date.
-		if ( empty( $_POST['production_date'] ) ) {
-			$date = current_time( 'timestamp', true );
-		} else {
-			$date = gmdate( 'Y-m-d H:i:s', strtotime( $_POST['production_date'] . ' ' . (int) $_POST['production_date_hour'] . ':' . (int) $_POST['production_date_minute'] . ':00' ) );
-		}
-
-		$props['date_created'] = $date;
+		
 
 		// Save production data.
-		$production->set_props( $props );*/
-		$production->set_status( wc_clean( $_POST['production_status'] ), '', true );
+		*/
+                
+		// Update date.
+		if ( !empty( $_POST['production_date'] ) ) {
+			$date = gmdate( 'Y-m-d H:i:s', strtotime( $_POST['production_date'] . ' 00:00:00' ) );
+                        if(!$production->meta_exists( 'production_date' ) ) {
+                            $production->add_meta_data( 'production_date' , $date, true);
+                        }else {
+                            $production->update_meta_data( 'production_date', $date );
+                        }
+		}
+                
+                //Update production minium
+                if ( !empty( $_POST['production_minimum'] ) ) {
+                        $min = $_POST['production_minimum'];
+                        if(!$production->meta_exists( 'production_minimum' ) ) {
+                            $production->add_meta_data( 'production_minimum' , $min, true);
+                        }else {
+                            $production->update_meta_data( 'production_minimum', $min );
+                        }
+                }
+                if ( !empty( $_POST['production_status'] ) ) {
+                    $production->set_status( wc_clean( $_POST['production_status'] ), '', true );
+                }
 		$production->save();
 	}
 }

@@ -45,7 +45,8 @@ class WC_Production extends WC_Data  {
 	protected $data = array(
 		'name'               => '',
 		'slug'               => '',
-		'date_created'       => null,
+		'production_date'       => null,
+                'production_minimum' => 0,
 		'date_modified'      => null,
 		'status'             => false,
 		'featured'           => false,
@@ -82,7 +83,7 @@ class WC_Production extends WC_Data  {
                 $this->data = array(
 		'name'               => '',
 		'slug'               => '',
-		'date_created'       => null,
+		'production_date'       => null,
 		'date_modified'      => null,
 		'status'             => false,
 		'featured'           => false,
@@ -146,9 +147,21 @@ class WC_Production extends WC_Data  {
 	 * @param  string $context
 	 * @return WC_DateTime|NULL object if the date is set or null if there is no date.
 	 */
-	public function get_date_created( $context = 'view' ) {
-		return $this->get_prop( 'date_created', $context );
+	public function get_production_date( $context = 'view' ) {
+		return $this->get_meta( 'production_date', true, $context );
 	}
+        
+        	/**
+	 * Get production minium number of ordered item
+	 *
+	 * @since 3.0.0
+	 * @param  string $context
+	 * @return WC_DateTime|NULL object if the date is set or null if there is no date.
+	 */
+	public function get_production_minimum( $context = 'view' ) {
+		return $this->get_meta( 'production_minimum', true, $context );
+	}
+
 
 	/**
 	 * Get product modified date.
@@ -246,6 +259,8 @@ class WC_Production extends WC_Data  {
         public function get_workshop_ip_address() {
             return "545";
         }
+        
+        
 
 
 	/*
@@ -284,8 +299,8 @@ class WC_Production extends WC_Data  {
 	 * @since 3.0.0
 	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 */
-	public function set_date_created( $date = null ) {
-		$this->set_date_prop( 'date_created', $date );
+	public function set_production_date( $date = null ) {
+		$this->set_date_prop( 'production_date', $date );
 	}
 
 	/**
@@ -352,6 +367,8 @@ class WC_Production extends WC_Data  {
 	public function set_product_id( $short_description ) {
 		$this->set_prop( 'short_description', $short_description );
 	}
+        
+        	
 
 
 	/**
