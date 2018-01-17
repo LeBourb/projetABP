@@ -136,6 +136,27 @@ function wc_get_prod_min_order( $production_id ) {
     return intval($production->get_production_minimum());
 }
 
+function wc_get_time_ordering_closure($production_id) {
+ $production = new WC_Production($production_id);      
+ $date = new DateTime($production->get_production_date());
+ //default: 10 days before 
+ return $date->sub(new DateInterval('P10D')); 
+}
+
+function wc_get_production_end($production_id) {
+ $production = new WC_Production($production_id);      
+ return new DateTime($production->get_production_end());
+}
+
+function wc_get_production_date($production_id) {
+ $production = new WC_Production($production_id);      
+ return new DateTime($production->get_production_date());
+}
+
+function wc_get_production_status($production_id) {
+ $production = new WC_Production($production_id);      
+ return $production->get_status();
+}
 
 /**
  * Update an item for an prod.

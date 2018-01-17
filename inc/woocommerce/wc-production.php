@@ -152,6 +152,16 @@ class WC_Production extends WC_Data  {
 	}
         
         	/**
+	 * Get product created date.
+	 *
+	 * @since 3.0.0
+	 * @param  string $context
+	 * @return WC_DateTime|NULL object if the date is set or null if there is no date.
+	 */
+	public function get_production_end( $context = 'view' ) {
+		return $this->get_meta( 'production_end', true, $context );
+	}
+        	/**
 	 * Get production minium number of ordered item
 	 *
 	 * @since 3.0.0

@@ -93,6 +93,7 @@ $post_object = get_post( $prod->get_id() ) ;
 		$prod->set_props( array(
 			'parent_id'     => $post_object->post_parent,
 			'production_date'  => 0 < $post_object->production_date_gmt ? wc_string_to_timestamp( $post_object->production_date_gmt ) : null,
+                    	'production_end'  => 0 < $post_object->production_end_gmt ? wc_string_to_timestamp( $post_object->production_end_gmt ) : null,
 			'date_modified' => 0 < $post_object->post_modified_gmt ? wc_string_to_timestamp( $post_object->post_modified_gmt ) : null,
 			'status'        => $post_object->post_status,
 		) );

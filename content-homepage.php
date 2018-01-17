@@ -123,18 +123,25 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 			<!-- Testimonial Owl Carousel section
 			================================================== -->
 			<div id="owl-speakers" class="owl-carousel">
+                                <?php
+                                $args     = array( 'post_type' => 'product' );
+                                $products = get_posts( $args ); 
+                                foreach($products as $product_id) {
+                                   $product =  wc_get_product($product_id);
+                                    $image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->get_id() ), 'single-post-thumbnail' );
+                                    echo '<div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.9s">
+					<a href="' . get_permalink($product_id) . '"><div class="speakers-wrapper">
+                                            <img src="' . $image[0] . '" class="img-responsive" alt="speakers">
+                                            <div class="speakers-thumb">
+                                                <h3>' . $product->get_title() . '</h3>								
+                                            </div>
+					</div></a>
+                                    </div>';
+                                }
+				
+                                ?>
 
-				<div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.9s">
-					<div class="speakers-wrapper">
-						<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/speakers-img1.jpg" class="img-responsive" alt="speakers">
-							<div class="speakers-thumb">
-								<h3>Jenny Green</h3>
-								<h6>UI Designer</h6>
-							</div>
-					</div>
-				</div>
-
-				<div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.6s">
+				<!--div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.6s">
 					<div class="speakers-wrapper">
 						<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/speakers-img2.jpg" class="img-responsive" alt="speakers">
 							<div class="speakers-thumb">
@@ -172,7 +179,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 								<h6>Marketing Guru</h6>
 							</div>
 					</div>
-				</div>
+				</div-->
 				
 			</div>
 

@@ -144,15 +144,32 @@
     }
      
 </style>
+
 <h2>
         Timeline
     </h2>
 <div class="Timeline item wow fadeInUp" data-wow-delay="0.6s">
     
+  <?php
+  $production_status = wc_get_production_status($production_id);
+  if($production_status == 'wc-not-started' ) { ?>
+  <svg height="5" width="50">
+  <line id="line-1" x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+</svg>
+
+  <div class="now">
+    NOW
+  </div>  
     
+  
+  <svg height="5" width="100">
+  <line id="line-2" x1="0" y1="0" x2="150" y2="0" style="stroke:rgba(162, 164, 163, 0.37);stroke-width:5" />
+</svg>
+<?php }else { ?>  
   <svg height="5" width="200">
   <line id="line-1" x1="0" y1="0" x2="200" y2="0" style="stroke:#004165;stroke-width:5" />
-  
+  </svg>
+<?php }?>  
   <!--animate 
     xlink:href="#my-line-1"
     attributeName="x2"
@@ -162,19 +179,20 @@
     begin="1s"
     fill="freeze"
     id="myline1-anim"/-->    
-</svg>
+
 
   <div class="event1">
     
     <div class="event1Bubble eventBubble" id="event1Bubble" style="">
+        <?php $start_date = wc_get_time_ordering_closure($production_id) ?>
       <div class="eventTime">
-        <div class="DayDigit">02</div>
-        <div class="Day">
-           Wednesday
-          <div class="MonthYear">february 2016</div>
-        </div>
+        <div class="DayDigit" data-date="<?php echo $start_date->format('Y-m-d');?>"></div>
+        <ul style="margin: 0;width: auto;">
+        <li class="Month" data-date="<?php echo $start_date->format('Y-m-d');?>"></li>
+        <li class="Year" data-date="<?php echo $start_date->format('Y-m-d');?>"></li>
+        </ul>
       </div>
-      <div class="eventTitle">Profile Created</div>
+      <div class="eventTitle"><?php _e('Ordering completed','woocommerce');?></div>
     </div>
     <div class="parent-circle" id="parent-circle-1">
     <div class="circle">
@@ -197,21 +215,23 @@
     
   </div>
   
-  <svg height="5" width="300">
+ <svg height="5" width="100">
   <line id="line-2" x1="0" y1="0" x2="300" y2="0" style="stroke:#004165;stroke-width:5" />
 </svg>
+
 
   <div class="event2">
     
     <div class="event2Bubble eventBubble" id="event2Bubble">
+        <?php $start_prod = wc_get_production_date($production_id) ?>
       <div class="eventTime">
-        <div class="DayDigit">17</div>
-        <div class="Day">
-           Thursday
-          <div class="MonthYear">April 2016</div>
-        </div>
+        <div class="DayDigit" data-date="<?php echo $start_prod->format('Y-m-d');?>"></div>
+        <ul style="margin: 0;width: auto;">
+            <li class="Month" data-date="<?php echo $start_prod->format('Y-m-d');?>"></li>
+            <li class="Year" data-date="<?php echo $start_prod->format('Y-m-d');?>"></li>
+        </ul>
       </div>
-      <div class="eventTitle">Phone Interview</div>
+      <div class="eventTitle"><?php _e('Production start','woocommerce');?></div>
     </div>     <!--svg height="20" width="20">
     <circle cx="10" cy="11" r="5" fill="#004165" />
     </svg-->
@@ -222,6 +242,7 @@
     </div>
   </div>
   
+<?php if($production_status != 'wc-not-started' && $production_status != 'wc-prd-completed' ) { ?>
   <svg height="5" width="50">
   <line id="line-3" x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
 </svg>
@@ -231,19 +252,25 @@
   </div>  
     
   
-  <svg height="5" width="150">
+  <svg height="5" width="250">
   <line id="line-4" x1="0" y1="0" x2="150" y2="0" style="stroke:rgba(162, 164, 163, 0.37);stroke-width:5" />
 </svg>
+<?php }else { ?>
+ <svg height="5" width="350">
+  <line id="line-4" x1="0" y1="0" x2="150" y2="0" style="stroke:rgba(162, 164, 163, 0.37);stroke-width:5" />
+</svg>
+<?php } ?>
   <div class="event3 futureGray ">
+      <?php $end_prod = wc_get_production_end($production_id) ?>
     <div class="event1Bubble eventBubble" id="event3Bubble">
       <div class="eventTime">
-        <div class="DayDigit">05</div>
-        <div class="Day">
-           Tuesday
-          <div class="MonthYear">May 2016</div>
-        </div>
+        <div class="DayDigit" data-date="<?php echo $end_prod->format('Y-m-d');?>"></div>
+        <ul style="">
+            <li class="Month" data-date="<?php echo $end_prod->format('Y-m-d');?>"></li>
+            <li class="Year" data-date="<?php echo $end_prod->format('Y-m-d');?>"></li>
+        </ul>
       </div>
-      <div class="eventTitle">Anticipated Hire</div>
+      <div class="eventTitle"><?php _e('Production completed','woocommerce');?></div>
     </div>
       <!--svg height="20" width="20">
     <circle cx="10" cy="11" r="5" fill="rgba(162, 164, 163, 0.37)" />
@@ -266,9 +293,6 @@
     <line id="line-7" x1="41" y1="0" x2="41" y2="20" style="stroke:#004165;stroke-width:2" /> 
     </svg>  
 </div>
-  
-
-     -->
 </div>
    
         <style>
@@ -321,4 +345,25 @@
             charts.push(new EasyPieChart(el, options));
           });
         });
+    $('.DayDigit').each(function() {    
+        var date = new Date($(this).data('date')),
+       locale = navigator.language,          
+       day = date.toLocaleDateString(locale, { day: "2-digit" });         
+       $(this).text(day);
+    });
+    $('.Month').each(function() {    
+        var date = new Date($(this).data('date')),
+       locale = navigator.language,          
+       month = date.toLocaleDateString(locale, { month: "long" });         
+       $(this).text(month);
+    });
+    $('.Year').each(function() {
+       var date = new Date($(this).data('date')),
+       locale = navigator.language,          
+       year = date.toLocaleDateString(locale, { year: "numeric" });
+       
+       $(this).text(year);
+    });
+ 
+    
             </script>

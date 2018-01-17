@@ -159,10 +159,20 @@ if(isset($attachment_ids[1]))
     <div class="refills-components">
 <div id="modal-reservation" class="modal">
     <input class="modal-state" id="modal-1" type="checkbox" />
+    
     <div class="modal-fade-screen">
         <div class="modal-inner">
         <div class="modal-close" for="modal-1"></div>
-        <?php do_action( 'woocommerce_single_product_summary' ); ?>
+        <div class="product">
+            <div class="images">
+                <div class="woocommerce-product-gallery__image">
+                    <img class="wp-post-image"></img>
+                </div>
+            </div>
+            <?php do_action( 'woocommerce_single_product_summary' ); ?>
+        </div>
+        
+        
     </div>
       
     </div>
@@ -365,14 +375,15 @@ if(isset($attachment_ids[1]))
                                                 $image_attachment_id = get_post_meta( $fabric_id, 'image_attachment_id', true);
                                                 $image_url = wp_get_attachment_image_src( $image_attachment_id );
                                                 $price = get_post_meta( $fabric_id, 'price_term', true);
-                                                $supplier = get_post_meta( $fabric_id, 'supplier_id', true);
-                                                $supplier =get_the_title( $supplier );
+                                                $supplier_id = get_post_meta( $fabric_id, 'supplier_id', true);
+                                                $supplier =get_the_title( $supplier_id );
+                                                
                                             
                                             echo '<div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.9s">
                                                     <div class="speakers-wrapper">
                                                         <img src="'. $image_url[0] . '" class="img-responsive" alt="speakers">
                                                         <div class="speakers-thumb">
-                                                            <h3>' . $supplier . '</h3>
+                                                            <a href="' . get_permalink($supplier_id) . '"><h3>' . $supplier . '</h3></a>
                                                             <h6>Price: ' . $price .  '</h6>
                                                         </div>
                                                     </div>
@@ -430,8 +441,22 @@ if(isset($attachment_ids[1]))
 </section>
     
 <!-- =========================
-    SPEAKERS SECTION   
+    PRODUCTIon SECTION   
 ============================== -->
+<?php 
+        global $post;
+        $production_id = null;
+        foreach( get_post_ids_by_meta_key_and_value('_product_id', $post->ID) as $prod_id) {
+            if(get_post_status($prod_id) == 'wc-not-started') {
+                $production_id = $prod_id;
+                break;
+            }
+        }
+        if ($production_id != null) {
+            $date_final = wc_get_time_ordering_closure($production_id);
+            $date_diff = date_diff ( new DateTime() , $date_final );   
+            
+        ?>
 <section id="timeline" class="parallax-section">
     <div class="container">
         <div class="row">
@@ -445,8 +470,8 @@ if(isset($attachment_ids[1]))
 					<h2>Remaining Time before closure</h2>				
 				
            <ul class="pie-time">
-  <li class="chart" data-percent="75"><span>26</span>Jours</li>
-  <li class="chart" data-percent="15"><span>15</span>Heures</li>  
+  <li class="chart" data-percent="75"><span><?php echo $date_diff->d;?></span>Jours</li>
+  <li class="chart" data-percent="15"><span><?php echo $date_diff->h;?></span>Heures</li>  
 </ul>
                                         
                                         </div>
@@ -487,14 +512,7 @@ $("#bar1").ready(function() {
         </script>
      <div style="margin:40px auto; width:302px;">
 	
-        <?php 
-        global $post;
-        foreach( get_post_ids_by_meta_key_and_value('_product_id', $post->ID) as $prod_id) {
-            if(get_post_status($prod_id) == 'wc-not-started') {
-                $production_id = $prod_id;
-                break;
-            }
-        }
+        <?php
         $qty = wc_get_prod_total_ordered_item($production_id);
         $min_order = wc_get_prod_min_order($production_id);
         $max = $min_order + 10;
@@ -529,7 +547,8 @@ $("#bar1").ready(function() {
     </div>
      
 </section>
-
+        <?php }
+        ?>
     <!-- Back top -->
     <a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
 <!--/div-->
@@ -611,16 +630,18 @@ $(document).on('click','#modal-reservation .modal-close' ,function(){
 }
 
 .modal.modal-open {
-  display: block;  
- .modal-fade-screen {
-    
+  display: block;   
+}
+
+.modal.modal-open .modal-fade-screen {    
     visibility: visible;
     opacity: 1;
-    .modal-inner {
-        top: 5%;
-    }
- }
 }
+
+.modal.modal-open .modal-fade-screen .modal-inner {
+    top: 5%;
+}
+ 
 div#reservation {
     display: flex;
 }

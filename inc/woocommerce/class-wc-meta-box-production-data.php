@@ -195,7 +195,11 @@ class WC_Meta_Box_Production_Data {
 						<h3><?php _e( 'General Details', 'woocommerce' ); ?></h3>
 
 						<p class="form-field form-field-wide"><label for="production_date"><?php _e( 'Production date:', 'woocommerce' ) ?></label>
-                                                    <input type="text" class="date-picker" name="production_date" id="production_date" maxlength="10" value="<?php echo date_i18n( 'Y-m-d', strtotime( $production->get_production_date() ) ); ?>" pattern="<?php echo esc_attr( apply_filters( 'woocommerce_date_input_html_pattern', '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])' ) ); ?>" />@&lrm;                                                        
+                                                    <input type="text" class="date-picker" name="production_date" id="production_date" maxlength="10" value="<?php echo date_i18n( 'Y-m-d', strtotime( $production->get_production_date() ) ); ?>" pattern="<?php echo esc_attr( apply_filters( 'woocommerce_date_input_html_pattern', '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])' ) ); ?>" />                                                   
+						</p>
+                                                
+                                                <p class="form-field form-field-wide"><label for="production_end"><?php _e( 'Production end (estimation):', 'woocommerce' ) ?></label>
+                                                    <input type="date" class="date-picker" name="production_end" id="production_end" maxlength="10" value="<?php echo $production->get_production_end(); ?>" />
 						</p>
 
 						<p class="form-field form-field-wide"><label for="production_minimum"><?php _e( 'Minimum Order:', 'woocommerce' ) ?></label>
@@ -305,6 +309,15 @@ class WC_Meta_Box_Production_Data {
                             $production->add_meta_data( 'production_date' , $date, true);
                         }else {
                             $production->update_meta_data( 'production_date', $date );
+                        }
+		}
+                
+                if ( !empty( $_POST['production_end'] ) ) {
+			$date = gmdate( 'Y-m-d', strtotime( $_POST['production_end'] ) );
+                        if(!$production->meta_exists( 'production_end' ) ) {
+                            $production->add_meta_data( 'production_end' , $date, true);
+                        }else {
+                            $production->update_meta_data( 'production_end', $date );
                         }
 		}
                 
