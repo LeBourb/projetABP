@@ -25,7 +25,7 @@ if ( ! class_exists( 'Storefront' ) ) :
 		 */
 		public function __construct() {
 			add_action( 'after_setup_theme',          array( $this, 'setup' ) );
-			add_action( 'widgets_init',               array( $this, 'widgets_init' ) );
+			//add_action( 'widgets_init',               array( $this, 'widgets_init' ) );
 			add_action( 'wp_enqueue_scripts',         array( $this, 'scripts' ),       10 );
 			add_action( 'wp_enqueue_scripts',         array( $this, 'child_scripts' ), 30 ); // After WooCommerce.
 			add_filter( 'body_class',                 array( $this, 'body_classes' ) );
@@ -191,7 +191,7 @@ if ( ! class_exists( 'Storefront' ) ) :
 				$widget_tags = apply_filters( $filter_hook, $widget_tags );
 
 				if ( is_array( $widget_tags ) ) {
-					register_sidebar( $args + $widget_tags );
+					//register_sidebar( $args + $widget_tags );
 				}
 			}
 		}
@@ -298,9 +298,9 @@ if ( ! class_exists( 'Storefront' ) ) :
 			}
 
 			// If our main sidebar doesn't contain widgets, adjust the layout to be full-width.
-			if ( ! is_active_sidebar( 'sidebar-1' ) ) {
+			//if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 				$classes[] = 'storefront-full-width-content';
-			}
+			//}
 
 			// Add class when using homepage template + featured image
 			if ( is_page_template( 'template-homepage.php' ) && has_post_thumbnail() ) {

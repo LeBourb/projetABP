@@ -45,7 +45,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 			</div>
 					
 			<div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.9s">
-				<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/overview-img.jpg" class="img-responsive" alt="Overview">
+                            <img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/overview-img.jpg" class="img-responsive" alt="Overview">
 			</div>
 
 		</div>
@@ -215,7 +215,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 					<div role="tabpanel" class="tab-pane active" id="fday">
 						<!-- program speaker here -->
 						<div class="col-md-2 col-sm-2">
-							<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/program-img1.jpg" class="img-responsive" alt="program">
+							<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/program-img1.jpg" class="img-responsive" alt="program">
 						</div>
 						<div class="col-md-10 col-sm-10">
 							<h6>
@@ -232,7 +232,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 
 						<!-- program speaker here -->
 						<div class="col-md-2 col-sm-2">
-							<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/program-img2.jpg" class="img-responsive" alt="program">
+							<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/program-img2.jpg" class="img-responsive" alt="program">
 						</div>
 						<div class="col-md-10 col-sm-10">
 							<h6>
@@ -249,7 +249,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 
 						<!-- program speaker here -->
 						<div class="col-md-2 col-sm-2">
-							<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/program-img3.jpg" class="img-responsive" alt="program">
+							<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/program-img3.jpg" class="img-responsive" alt="program">
 						</div>
 						<div class="col-md-10 col-sm-10">
 							<h6>
@@ -265,7 +265,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 					<div role="tabpanel" class="tab-pane" id="sday">
 						<!-- program speaker here -->
 						<div class="col-md-2 col-sm-2">
-							<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/program-img4.jpg" class="img-responsive" alt="program">
+							<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/program-img4.jpg" class="img-responsive" alt="program">
 						</div>
 						<div class="col-md-10 col-sm-10">
 							<h6>
@@ -282,7 +282,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 
 						<!-- program speaker here -->
 						<div class="col-md-2 col-sm-2">
-							<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/program-img5.jpg" class="img-responsive" alt="program">
+							<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/program-img5.jpg" class="img-responsive" alt="program">
 						</div>
 						<div class="col-md-10 col-sm-10">
 							<h6>
@@ -299,7 +299,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 
 						<!-- program speaker here -->
 						<div class="col-md-2 col-sm-2">
-							<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/program-img6.jpg" class="img-responsive" alt="program">
+							<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/program-img6.jpg" class="img-responsive" alt="program">
 						</div>
 						<div class="col-md-10 col-sm-10">
 							<h6>
@@ -315,7 +315,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 					<div role="tabpanel" class="tab-pane" id="tday">
 						<!-- program speaker here -->
 						<div class="col-md-2 col-sm-2">
-							<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/program-img7.jpg" class="img-responsive" alt="program">
+							<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/program-img7.jpg" class="img-responsive" alt="program">
 						</div>
 						<div class="col-md-10 col-sm-10">
 							<h6>
@@ -332,7 +332,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 
 						<!-- program speaker here -->
 						<div class="col-md-2 col-sm-2">
-							<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/program-img8.jpg" class="img-responsive" alt="program">
+							<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/program-img8.jpg" class="img-responsive" alt="program">
 						</div>
 						<div class="col-md-10 col-sm-10">
 							<h6>
@@ -349,7 +349,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 
 						<!-- program speaker here -->
 						<div class="col-md-2 col-sm-2">
-							<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/program-img9.jpg" class="img-responsive" alt="program">
+							<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/program-img9.jpg" class="img-responsive" alt="program">
 						</div>
 						<div class="col-md-10 col-sm-10">
 							<h6>
@@ -521,19 +521,19 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 			</div>
 
 			<div class="wow fadeInUp col-md-3 col-sm-6 col-xs-6" data-wow-delay="0.3s">
-				<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/sponsor-img1.jpg" class="img-responsive" alt="sponsors">	
+				<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/sponsor-img1.jpg" class="img-responsive" alt="sponsors">	
 			</div>
 
 			<div class="wow fadeInUp col-md-3 col-sm-6 col-xs-6" data-wow-delay="0.6s">
-				<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/sponsor-img2.jpg" class="img-responsive" alt="sponsors">	
+				<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/sponsor-img2.jpg" class="img-responsive" alt="sponsors">	
 			</div>
 
 			<div class="wow fadeInUp col-md-3 col-sm-6 col-xs-6" data-wow-delay="0.9s">
-				<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/sponsor-img3.jpg" class="img-responsive" alt="sponsors">	
+				<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/sponsor-img3.jpg" class="img-responsive" alt="sponsors">	
 			</div>
 
 			<div class="wow fadeInUp col-md-3 col-sm-6 col-xs-6" data-wow-delay="1s">
-				<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/sponsor-img4.jpg" class="img-responsive" alt="sponsors">	
+				<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/sponsor-img4.jpg" class="img-responsive" alt="sponsors">	
 			</div>
 
 		</div>

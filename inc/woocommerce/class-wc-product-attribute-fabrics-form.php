@@ -53,6 +53,7 @@ class Product_Attribute_Fabrics_Form {
         //add_action( 'woocommerce_process_product_meta', array( &$this, 'save_tab_advanced_attributes' ) );
         
         
+        
         $ajax_events = array(
             'add_product_fabrics'                                    => false,
             'add_new_product_fabrics'                                => false,

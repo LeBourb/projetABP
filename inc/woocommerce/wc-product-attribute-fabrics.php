@@ -51,7 +51,9 @@ class Product_Attribute_Fabrics {
         add_action('woocommerce_attribute_updated', array($this, 'taxonomy_save_field'), 10, 2);
         // Save meta.
         //add_action( 'woocommerce_process_product_meta', array( &$this, 'save_tab_product_fabricss' ) );
-        
+        add_action( 'woocommerce_product_after_variable_attributes', array( $this, 'variation_deposit_panel'), 20, 3 );
+        add_action( 'woocommerce_save_product_variation', array( $this, 'save_product_variation_data' ), 30, 2 );
+        add_action( 'woocommerce_save_product_variation-subscription', array( $this, 'save_product_variation_data' ), 30, 2 );
         
         $ajax_events = array(
             'select_fabrics'                                    => false,
@@ -138,6 +140,36 @@ class Product_Attribute_Fabrics {
         
             <?php
     }
+    
+       
+    function variation_deposit_panel($loop, $variation_data, $variation) {       
+        global $post;
+        //print_r( $variation->ID);
+        //print_r(get_post_meta( $variation->ID, 'varation_fabrics' ));
+        
+        echo '<select multiple="multiple" data-placeholder="' . __( 'Select Fabrics', 'woocommerce' ) . '" class="multiselect attribute_values wc-enhanced-select" name="varation_fabrics[' . $loop . ']">';
+        $data = get_post_meta( $post->ID, 'product_fabrics', true );
+        $variation_fabrics = $variation_data['varation_fabrics'];
+        
+        if(is_array($data) && array_key_exists('product_fabric_id',$data)){
+            $product_fabric_ids = $data['product_fabric_id'];                                
+            if($product_fabric_ids) {
+                foreach ( $product_fabric_ids as $fabric_id ) {
+                        echo '<option value="' . esc_attr( $fabric_id ) . '" ' . selected( in_array( $fabric_id, $variation_fabrics ), true, false ) . '>' . esc_attr( get_term_by( 'id', $fabric_id, 'pa_fabric' )->name ) . '</option>';
+                }
+            }
+        }
+        echo '</select>';
+    }
+    
+    /**
+	 * Save data for variations
+	 * @param  int $post_id
+	 */
+	public function save_product_variation_data( $variation_id, $loop  ) {
+                $value = ! empty( $_POST[ 'varation_fabrics' ][ $loop ] ) ? $_POST[ 'varation_fabrics' ][ $loop ] : '';
+                update_post_meta( $variation_id, 'varation_fabrics', $value );
+	}
     
 
 function media_selector_print_scripts() {
