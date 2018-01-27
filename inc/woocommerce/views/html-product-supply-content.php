@@ -11,10 +11,10 @@
     $price = null;
     $supplier = null;
     if($supply_id) {
-        $image_attachment_id = get_post_meta( $supply_id, 'image_attachment_id', true);
+        $image_attachment_id = get_term_meta( $supply_id, 'image_attachment_id', true);
         $image_url = wp_get_attachment_image_src( $image_attachment_id );
-        $price = get_post_meta( $supply_id, 'price_term', true);
-        $supplier = get_post_meta( $supply_id, 'supplier_id', true);
+        $price = get_term_meta( $supply_id, 'price_term', true);
+        $supplier = get_term_meta( $supply_id, 'supplier_id', true);
         $supplier =get_the_title( $supplier );
     }
     //

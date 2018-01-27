@@ -15,6 +15,7 @@ class Product_Attribute_Fabrics_Form {
 
   // Constructor
     function __construct() {
+        return;
         add_action( 'admin_menu', array( $this, 'woo_advform_add_menu' ));
         register_activation_hook( __FILE__, array( $this, 'woo_advform_install' ) );
         register_deactivation_hook( __FILE__, array( $this, 'woo_advform_uninstall' ) );
@@ -33,6 +34,7 @@ class Product_Attribute_Fabrics_Form {
      * Initialization hook that registers actions for all available product attribute taxonomies.
      */
     public function init() {
+        return;
         if (function_exists('wc_get_attribute_taxonomies')) {
             foreach (wc_get_attribute_taxonomies() as $pa) {
                 

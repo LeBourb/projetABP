@@ -34,16 +34,29 @@ class Product_Attribute_Fabrics {
      */
     public function init() {
         if (function_exists('wc_get_attribute_taxonomies')) {
-            foreach (wc_get_attribute_taxonomies() as $pa) {
+            $array_tax = wc_get_attribute_taxonomies();
+            $is_in_array = false;
+            //register_taxonomy( 'pa_fabric' );
+            foreach($array_tax as $tax) {
+                if($tax->attribute_name == 'fabric') 
+                    $is_in_array = true;
+            }
+            if(!$is_in_array)
+                wc_create_attribute( array('name' => 'fabric' , 'slug' => 'pa_fabric' , 'type' => 'select' ) );
+            
+            //
+            //foreach ( as $pa) {
                 
                 
-                    register_taxonomy("pa_fabric", $pa , array('hierarchical' => true));                    
+                    register_taxonomy("pa_fabric", null , array('hierarchical' => true)); 
+                    
+              //      wc_create_attribute( array('name' => 'Fabric' , 'slug' => 'pa_fabric' , 'type' => 'select' ) );
                     add_action("pa_fabric_add_form_fields", array($this, 'attribute_add_field'), 10);
                     add_action("pa_fabric_edit_form_fields", array($this, 'attribute_edit_field'), 10);
                     add_action("created_pa_fabric", array($this, 'save_field'), 10, 1);
                     add_action("edited_pa_fabric", array($this, 'save_field'), 10, 1);
                 
-            }
+            //}
         }
         //add_action('woocommerce_after_add_attribute_fields', array($this, 'display_taxonomy_fields'), 10);
         //add_action('woocommerce_after_edit_attribute_fields', array($this, 'display_taxonomy_fields'), 10);
@@ -87,7 +100,7 @@ class Product_Attribute_Fabrics {
                 $image_attachment_id = null;
                 $image_url = null;
                 if($term) {
-                    $image_attachment_id = get_post_meta( $term->term_id, 'image_attachment_id', true);
+                    $image_attachment_id = get_term_meta( $term->term_id, 'image_attachment_id', true);
                     $image_url = wp_get_attachment_image_src( $image_attachment_id );
                 }
                 //
@@ -113,7 +126,7 @@ class Product_Attribute_Fabrics {
      function price_settings_page_callback($term, $taxonomy = null) {
          $price = null;
          if($term)
-             $price = get_post_meta( $term->term_id, 'price_term', true);
+             $price = get_term_meta( $term->term_id, 'price_term', true);
             ?>
         <tr class="form-field form-required term-name-wrap">
             <th scope="row"><label for="name">Price</label></th>
@@ -127,7 +140,7 @@ class Product_Attribute_Fabrics {
     function supplier_settings_page_callback($term, $taxonomy = null) {
          $supplier = null;
          if($term)
-             $supplier = get_post_meta( $term->term_id, 'supplier_id', true);
+             $supplier = get_term_meta( $term->term_id, 'supplier_id', true);
             ?>
         <tr class="form-field form-required term-name-wrap">
             <th scope="row"><label for="name">Supplier</label></th>
@@ -233,7 +246,7 @@ function media_selector_print_scripts() {
        $this->media_selector_print_scripts();
        $this->price_settings_page_callback($term, $taxonomy = null);
        $this->supplier_settings_page_callback($term, $taxonomy = null);
-       add_action( 'admin_footer', 'media_selector_print_scripts' );
+       //add_action( 'admin_footer', 'media_selector_print_scripts' );
     }
     
     
@@ -255,7 +268,7 @@ function media_selector_print_scripts() {
                $this->media_selector_print_scripts();
                $this->price_settings_page_callback($term, $taxonomy);
                $this->supplier_settings_page_callback($term, $taxonomy);
-       add_action( 'admin_footer', 'media_selector_print_scripts' );
+       //add_action( 'admin_footer', 'media_selector_print_scripts' );
     }
 
     
@@ -271,13 +284,16 @@ function media_selector_print_scripts() {
     
     function save_field ($id) {
                 
-        $image_id = $_POST['image_attachment_id'];
-        $price = $_POST['price_settings_page_callback'];
-        $supplier = $_POST['supplier_id'];
-        update_post_meta( $id, 'price_term',$price);
-        update_post_meta( $id, 'supplier_id',$supplier);
+        $image_id = ! empty($_POST['image_attachment_id']) ? $_POST['image_attachment_id'] : '';
+        $price = !empty ($_POST['price_settings_page_callback']) ? $_POST['price_settings_page_callback'] : '';
+        
+        update_term_meta( $id, 'price_term',$price);
+        
          //$product->set_prop( 'product_fabricss', $attributes );
-        update_post_meta( $id, 'image_attachment_id', $image_id );
+        update_term_meta( $id, 'image_attachment_id', $image_id );
+        
+        $supplier = !empty( $_POST['supplier_id'] ) ? $_POST['supplier_id'] : '';
+        update_term_meta( $id, 'supplier_id',$supplier);
         //
     }
     

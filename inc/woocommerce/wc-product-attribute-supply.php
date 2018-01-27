@@ -37,7 +37,7 @@ class Product_Attribute_Supply {
         if (function_exists('wc_get_attribute_taxonomies')) {
            
             foreach (wc_get_attribute_taxonomies() as $pa) {                 
-                
+                 wc_create_attribute( array('name' => 'fabric' , 'slug' => 'pa_fabric' , 'type' => 'select' ) );
                 register_taxonomy("pa_supply", $pa , array('hierarchical' => true));                    
                 add_action("pa_supply_add_form_fields", array($this, 'attribute_add_field'), 10);
                 add_action("pa_supply_edit_form_fields", array($this, 'attribute_edit_field'), 10);
@@ -86,7 +86,7 @@ class Product_Attribute_Supply {
                 $image_attachment_id = null;
                 $image_url = null;
                 if($term) {
-                    $image_attachment_id = get_post_meta( $term->term_id, 'image_attachment_id', true);
+                    $image_attachment_id = get_term_meta( $term->term_id, 'image_attachment_id', true);
                     $image_url = wp_get_attachment_image_src( $image_attachment_id );
                 }
                 //
@@ -112,7 +112,7 @@ class Product_Attribute_Supply {
      function price_settings_page_callback($term, $taxonomy = null) {
          $price = null;
          if($term)
-             $price = get_post_meta( $term->term_id, 'price_term', true);
+             $price = get_term_meta( $term->term_id, 'price_term', true);
             ?>
         <tr class="form-field form-required term-name-wrap">
             <th scope="row"><label for="name">Price</label></th>
@@ -126,7 +126,7 @@ class Product_Attribute_Supply {
     function supplier_settings_page_callback($term, $taxonomy = null) {
          $supplier = null;
          if($term)
-             $supplier = get_post_meta( $term->term_id, 'supplier_id', true);
+             $supplier = get_term_meta( $term->term_id, 'supplier_id', true);
             ?>
         <tr class="form-field form-required term-name-wrap">
             <th scope="row"><label for="name">Supplier</label></th>
@@ -244,10 +244,10 @@ function media_selector_print_scripts() {
         $image_id = $_POST['image_attachment_id'];
         $price = $_POST['price_settings_page_callback'];
         $supplier = $_POST['supplier_id'];
-        update_post_meta( $id, 'price_term',$price);
-        update_post_meta( $id, 'supplier_id',$supplier);
+        update_term_meta( $id, 'price_term',$price);
+        update_term_meta( $id, 'supplier_id',$supplier);
          //$product->set_prop( 'product_supplys', $attributes );
-        update_post_meta( $id, 'image_attachment_id', $image_id );
+        update_term_meta( $id, 'image_attachment_id', $image_id );
         //
     }
     

@@ -49,6 +49,43 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 			</div>
 
 		</div>
+            
+            <div class="container">
+  <h2>Carousel Example</h2>  
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="la.jpg" alt="Los Angeles" style="width:100%;">
+      </div>
+
+      <div class="item">
+        <img src="chicago.jpg" alt="Chicago" style="width:100%;">
+      </div>
+    
+      <div class="item">
+        <img src="ny.jpg" alt="New york" style="width:100%;">
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
 	</div>
 </section>
 
@@ -383,24 +420,58 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 			</div>
 
 			<div class="wow fadeInUp col-md-5 col-sm-5" data-wow-delay="1s">
+                            <div class="steps" id="steps">
+			<span class="step_nb"></span>
+			<p class="form_title">Please Fill The field Bellow</p>
 				<form id="register-form">
-                                        <input name="userid" type="text" class="form-control" id="userid" placeholder="User ID" required>
-					<input name="firstname" type="text" class="form-control" id="firstname" placeholder="First Name" required>
-					<input name="lastname" type="text" class="form-control" id="lastname" placeholder="Last Name" required>
-					<input name="phone" type="telephone" class="form-control" id="phone" placeholder="Phone Number" required>
-					<input name="email" type="email" class="form-control" id="email" placeholder="Email Address" required>
-                                        <input name="company" type="text" class="form-control" id="company" placeholder="Company Name" required>
-                                        <input name="url" type="text" class="form-control" id="url" placeholder="Web Site" >
-                                        <input name="address_1" type="text" class="form-control" id="address_1" placeholder="Address 1" required>
-                                        <input name="address_2" type="text" class="form-control" id="address_2" placeholder="Address 2">
-                                        <input name="city" type="text" class="form-control" id="city" placeholder="City" required>
-                                        <input name="postcode" type="text" class="form-control" id="postcode" placeholder="Postcode" required>
-					<div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
+                                    <ul>
+					<li class="current_step">
+						<input name="userid" type="text" class="form-control" id="userid" placeholder="Shop Name" required>
+					</li>
+                                        <li>
+						<input name="email" type="email" class="form-control" id="email" placeholder="Email Address" required>
+					</li>
+                                        <li>
+						<input name="password" type="password" class="form-control" id="password" placeholder="Password" required>
+					</li>
+                                        <li>
+						<input name="confirm_password" type="password" class="form-control" id="confirm_password" placeholder="Confirm Password" required>
+					</li>
+					<li>
+						<input name="firstname" type="text" class="form-control" id="firstname" placeholder="First Name" required>
+					</li>
+					<li>
+						<input name="lastname" type="text" class="form-control" id="lastname" placeholder="Last Name" required>
+					</li>
+					<li>
+						<input name="phone" type="telephone" class="form-control" id="phone" placeholder="Phone Number" required>
+					</li>
+                                        <li>
+						<input name="email" type="email" class="form-control" id="email" placeholder="Email Address" required>
+					</li>
+                                        <li>
+						<input name="url" type="text" class="form-control" id="url" placeholder="Web Site" >
+					</li>
+                                        <li>
+						<input name="address_1" type="text" class="form-control" id="address_1" placeholder="Address" required>
+					</li>
+                                        <li>
+						<input name="city" type="text" class="form-control" id="city" placeholder="City" required>
+					</li>
+                                        <li>
+						<input name="postcode" type="text" class="form-control" id="postcode" placeholder="Postcode" required>
+					</li>
+                                        <li>
+                                            <div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
                                             <!--name="submit"  class="form-control"-->
 						<input  id="submit" class="form-control" type="submit" value="REGISTER">
-					</div>
+                                            </div>
+                                        </li>
+                                    </ul>                                        
+					
                                                                                 
 				</form>
+                        </div>
 			</div>
 
 			<div class="col-md-1"></div>
@@ -484,6 +555,138 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 	</div>
 </section>
 
+
+<!-- =========================
+    ICONS SECTION   
+============================== -->
+<style>
+    .edgtf-full-section-inner {
+        display: flex;
+        padding: 20px;
+    }
+    .vc_col-sm-3 {
+        width : 30%;
+    }
+</style>
+<section id="icons" class="parallax-section">
+	<div class="icons">
+            
+	<div class="clearfix edgtf-full-section-inner">
+            <div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper">
+	<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeIn fadeIn wpb_start_animation animated">
+		<div class="wpb_wrapper">
+			<p><img class="aligncenter wp-image-1494 size-full" title="JAPAN-made" src="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-eu-made-alicante.png" alt="EU-made" width="283" height="283" srcset="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-eu-made-alicante.png 283w, http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-eu-made-alicante-100x100.png 100w" sizes="(max-width: 283px) 100vw, 283px"><br>
+<strong>JAPAN made</strong></p>
+<p>This garment is made in Barcelona. Here is where we live, and here is where we work hand by hand with all our manufacturers.</p>
+<p><em>We love Barcelona.</em></p>
+<p><strong>EU-made (Alicante)</strong></p>
+<p>This garment is made in the European city of Alicante, only 3 hours away from Barcelona. We visit our manufacturers there whenever it is necessary to control the production process.</p>
+<p><em>It is always a pleasure to travel to Alicante because it is always sunny!</em></p>
+
+		</div>
+	</div>
+</div></div></div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper">
+	<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeIn fadeIn wpb_start_animation animated">
+		<div class="wpb_wrapper">
+			<p><img class="aligncenter wp-image-1495 size-full" title="EU-materials" src="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-eu-materials.png" alt="EU-materials" width="283" height="283" srcset="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-eu-materials.png 283w, http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-eu-materials-100x100.png 100w" sizes="(max-width: 283px) 100vw, 283px"><br>
+<strong>EU-materials</strong></p>
+<p>The fabric used to make this garment is made in the EU. All the people involved in it’s production process are protected by the EU law.</p>
+<p><em>The hands that make this fabric are treated with the same respect as your hands.</em></p>
+
+		</div>
+	</div>
+</div></div></div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper">
+	<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeIn fadeIn wpb_start_animation animated">
+		<div class="wpb_wrapper">
+			<p><img class="aligncenter wp-image-1497 size-full" title="Recycled" src="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-recycled.png" alt="Recycled" width="283" height="283" srcset="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-recycled.png 283w, http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-recycled-100x100.png 100w" sizes="(max-width: 283px) 100vw, 283px"><br>
+<strong>Recycled</strong></p>
+<p>This garment is made with a yarn that comes from textile waste. Textile waste is sourced and turned into a recycled yarn that is finally weaved into a new fabric.</p>
+<p><em>Less waste is more landfill for all.</em></p>
+
+		</div>
+	</div>
+</div></div></div>
+            <div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper">
+	<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeIn fadeIn wpb_start_animation animated">
+		<div class="wpb_wrapper">
+			<p><img class="aligncenter wp-image-1496 size-full" title="Low Carbon Footprint" src="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-low-carbon-footprint.png" alt="Low Carbon Footprint" width="283" height="283" srcset="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-low-carbon-footprint.png 283w, http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-low-carbon-footprint-100x100.png 100w" sizes="(max-width: 283px) 100vw, 283px"><br>
+<strong>Low Carbon Footprint</strong></p>
+<p>The greenhouse gases released to produce this garment are very low due to the proximity of all the suppliers and manufacturers involved in it’s production process.</p>
+<p><em>The air we breathe is thankful for that.</em></p>
+
+		</div>
+	</div>
+</div></div></div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper">
+	<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeIn fadeIn wpb_start_animation animated">
+		<div class="wpb_wrapper">
+			<p><img class="aligncenter wp-image-1500 size-full" title="Vegan" src="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-vegan.png" alt="Vegan" width="283" height="283" srcset="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-vegan.png 283w, http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-vegan-100x100.png 100w" sizes="(max-width: 283px) 100vw, 283px"><br>
+<strong>Vegan</strong></p>
+<p>This garment is made with materials that do not come from animals.</p>
+<p><em>Cruelty-free garment.</em></p>
+
+		</div>
+	</div>
+</div></div></div><!--div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper">
+	<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeIn fadeIn wpb_start_animation animated">
+		<div class="wpb_wrapper">
+			<p><img class="aligncenter wp-image-1490 size-full" title="GOTS" src="http://cus.cat/wp-web/wp-content/uploads/2016/12/gots.png" alt="GOTS" width="283" height="283" srcset="http://cus.cat/wp-web/wp-content/uploads/2016/12/gots.png 283w, http://cus.cat/wp-web/wp-content/uploads/2016/12/gots-100x100.png 100w" sizes="(max-width: 283px) 100vw, 283px"><br>
+<strong>GOTS certified</strong></p>
+<p><span class="value-link"><a href="http://www.global-standard.org/" target="_blank">GOTS</a></span> (Global Organic Textile Standard), is the world’s leading certification for organic fabrics. It ensures environmental and social responsibility on textile and fabric production.</p>
+<p><em>Certified is always a bonus.</em></p>
+
+		</div>
+	</div>
+</div></div></div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper">
+	<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeIn fadeIn wpb_start_animation animated">
+		<div class="wpb_wrapper">
+			<p><img class="aligncenter wp-image-1491 size-full" title="Oeko-Tex®" src="http://cus.cat/wp-web/wp-content/uploads/2016/12/oeko-tex.png" alt="Oeko-Tex®" width="283" height="283" srcset="http://cus.cat/wp-web/wp-content/uploads/2016/12/oeko-tex.png 283w, http://cus.cat/wp-web/wp-content/uploads/2016/12/oeko-tex-100x100.png 100w" sizes="(max-width: 283px) 100vw, 283px"><br>
+<strong>Oeko-Tex® Standard</strong></p>
+<p>The dyes and inks used to digital print this fabric are <span class="value-link"><a href="http://www.oeko-tex.com/" target="_blank">Oeko-Tex®</a></span> certified. This means that they have non-toxic components.</p>
+<p><em>It’s a happy-skin garment.</em></p>
+
+		</div>
+	</div>
+</div></div></div-->
+        </div>
+            <div data-edgtf_header_style="edgtf-dark-header" class="vc_row wpb_row vc_row-fluid edgtf-section vc_custom_1484649695431 edgtf-content-aligment-left edgtf-grid-section" style=""><div class="clearfix edgtf-section-inner"><div class="edgtf-section-inner-margin clearfix"><div class="edgtf-row-animations-holder edgtf-element-from-fade" data-animation="edgtf-element-from-fade"><div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper"></div></div></div><div class="wpb_column vc_column_container vc_col-sm-6"><div class="vc_column-inner "><div class="wpb_wrapper">
+<div class="edgtf-section-title edgtf-section-align-center" style="font-size: 28px">
+	Fabrics and environment</div><div class="vc_empty_space" style="height: 20px"><span class="vc_empty_space_inner"></span></div>
+
+	<div class="wpb_text_column wpb_content_element ">
+		<div class="wpb_wrapper">
+			<p style="text-align: center;">We select all our fabrics according to high quality standards and from companies that demonstrate an ongoing commitment to reducing environmental impact. The clothing is dyed in Europe and is completely free of any toxic substances. We only use mills that ensure that wastewater is correctly treated before being returned to the environment.&nbsp;We only work with certified dyes such as <span class="value-link"><a href="http://www.global-standard.org/" target="_blank" rel="noopener noreferrer">GOTS</a>, <a href="http://www.oeko-tex.com/" target="_blank" rel="noopener noreferrer">Oeko-Tex®</a> and <a href="https://www.inditex.com/en/sustainability/product/health_quality_standards" target="_blank" rel="noopener noreferrer">Clear to Wear®</a></span>.</p>
+<p style="text-align: center;">Learn more about the fabrics we work with:</p>
+
+		</div>
+	</div>
+<div class="vc_empty_space" style="height: 40px"><span class="vc_empty_space_inner"></span></div>
+</div></div></div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper"></div></div></div></div></div></div></div></div>
+<div data-edgtf_header_style="edgtf-dark-header" class="vc_row wpb_row vc_row-fluid edgtf-section vc_custom_1484649687569 edgtf-content-aligment-left edgtf-grid-section" style=""><div class="clearfix edgtf-section-inner"><div class="edgtf-section-inner-margin clearfix"><div class="edgtf-row-animations-holder edgtf-element-from-fade" data-animation="edgtf-element-from-fade"><div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper"></div></div></div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper">
+	<div class="wpb_text_column wpb_content_element ">
+		<div class="wpb_wrapper">
+			<p style="text-align: center;"><strong>Organic cotton</strong><br>
+Organic cotton is grown without the use of chemical pesticides or fertilizers. The aim is to achieve a balance with nature and contribute to a more biologically diverse agriculture. We use organic cotton made in France, Portugal, the Czech Republic, Lithuania, Turkey and Pakistan. It is all <span class="value-link"><a href="http://www.global-standard.org/" target="_blank" rel="noopener noreferrer">GOTS certified</a></span>.</p>
+<p style="text-align: center;"><strong>Tencel®</strong><br>
+Lenzing <span class="value-link"><a href="http://www.lenzing-fibers.com/en/tencel/" target="_blank" rel="noopener noreferrer">Tencel®</a></span> fibre comes from the pulp of eucalyptus trees. The wood pulp is processed in a “closed loop system” in which 99% of the chemicals are recovered and recycled with minimum waste and low emissions. The <span class="value-link"><a href="http://www.lenzing-fibers.com/en/tencel/" target="_blank" rel="noopener noreferrer">Tencel®</a></span> we use is made in Spain and in Portugal.</p>
+
+		</div>
+	</div>
+</div></div></div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper">
+	<div class="wpb_text_column wpb_content_element ">
+		<div class="wpb_wrapper">
+			<p style="text-align: center;"><strong>Recycled Wool</strong><br>
+The manufacture of this fabric begins with the sourcing of pre-consumer waste yarn and fabrics from European countries. The waste is converted into fibre using a mechanical process. It is then spun into yarn and finally becomes a new recycled wool fabric. It is blended with 30% polyamide to gain resistance as it has a recycled origin. This fabric is made in Italy.</p>
+<p style="text-align: center;"><strong>Hemp</strong><br>
+Hemp is highly productive, easy and fast to cultivate. It does not need agrochemicals to grow and enriches the soil with its deep roots.&nbsp;The hemp we use is made in Italy.</p>
+<p style="text-align: center;"><strong>Organic wool</strong><br>
+This wool comes from sheep that have been raised on feed which is free from fertilizers or pesticides and has not been subject to mulling practices. The wool is <span class="value-link"><a href="http://www.global-standard.org/" target="_blank" rel="noopener noreferrer">GOTS certified</a></span> and made in Lithuania.</p>
+
+		</div>
+	</div>
+</div></div></div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper"></div></div></div></div></div></div></div></div>
+
+	</div>
+</section>
 
 <!-- =========================
     VENUE SECTION   
@@ -584,7 +787,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 <!-- =========================
     FOOTER SECTION   
 ============================== -->
-<footer>
+<!--footer>
 	<div class="container">
 		<div class="row">
 
@@ -605,7 +808,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 			
 		</div>
 	</div>
-</footer>
+</footer-->
 
 
 <!-- Back top -->

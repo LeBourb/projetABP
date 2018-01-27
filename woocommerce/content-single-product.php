@@ -157,6 +157,7 @@ if(isset($attachment_ids[1]))
 </section>
     
     <div class="refills-components">
+        <?php if(is_user_logged_in()) { ?>
 <div id="modal-reservation" class="modal">
     <input class="modal-state" id="modal-1" type="checkbox" />
     
@@ -171,12 +172,30 @@ if(isset($attachment_ids[1]))
             </div>
             <?php do_action( 'woocommerce_single_product_summary' ); ?>
         </div>
-        
-        
     </div>
       
     </div>
 </div>
+        <?php } else { 
+            // login panel
+            ?>
+        <div id="modal-login" class="modal">
+    <input class="modal-state" id="modal-1" type="checkbox" />
+    
+    <div class="modal-fade-screen">
+        <div class="modal-inner">
+        <div class="modal-close" for="modal-1"></div>
+       
+            <?php //woocommerce_login_form( ); 
+            $widget = new Theme_My_Login_Widget();
+            $widget->widget(array(),array());?>
+       
+    </div>
+      
+    </div>
+</div>
+            
+        <?php } ?>
     </div>
 <!-- =========================
         NAV BAR
@@ -559,10 +578,12 @@ var viewer = new Viewer(document.getElementById('am-container'), {toolbar:false,
     
 $(document).on('click', '#reservation', function(){ 
   $('#modal-reservation').addClass('modal-open');
+  $('#modal-login').addClass('modal-open');
 });
 
 $(document).on('click','#modal-reservation .modal-close' ,function(){ 
  $('#modal-reservation').removeClass('modal-open');
+ $('#modal-login').removeClass('modal-open');
 });
 
 </script>

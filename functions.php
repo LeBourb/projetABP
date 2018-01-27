@@ -253,6 +253,9 @@ function bbloomer_save_name_fields( $customer_id ) {
         update_user_meta( $customer_id, 'billing_postcode', sanitize_text_field( $_POST['billing_postcode'] ) );     
         update_user_meta( $customer_id, 'shipping_postcode', sanitize_text_field( $_POST['billing_postcode'] ) );     
     }
+    if( isset( $_POST['password'] ) ) {
+        wp_set_password( $_POST['password'],  $customer_id );
+    }
     update_user_meta( $customer_id, 'billing_country', 'JPY' );
     
     //update_user_status( $customer_id, 'spam', 1 );
@@ -505,11 +508,6 @@ function custom_cart_total() {
     //var_dump( WC()->cart->total);
 }*/
 
-add_action( 'woocommerce_before_checkout_form', 'my_checkout_msg' );
-
-function my_checkout_msg() {
-	echo '<p>To validate your order, you must pay 30% of the total price, Thank you!</p>';
-}
 
 function create_post_type_production() {
     
