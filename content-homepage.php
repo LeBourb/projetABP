@@ -14,7 +14,36 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 <!-- =========================
     INTRO SECTION   
 ============================== -->
+<style>
+    video { 
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        max-width: none;
+        width: auto;
+        height: auto;
+        z-index: -100;
+        transform: translateX(-50%) translateY(-50%);
+        background-size: cover;
+        transition: 1s opacity;        
+    }
+</style>
 <section id="intro" class="parallax-section">
+     <?php // echo wp_video_shortcode( array() );//
+    //echo wp_get_attachment_url(  );
+    // 
+           global $post;
+        $videos = get_attached_media( 'video', $post->ID );
+        $video = reset($videos);
+        //https://la-cascade.io/video-en-background/
+ ?>
+<video poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/polina.jpg" id="bgvid" playsinline autoplay muted loop >
+
+<source src="<?php echo wp_get_attachment_url( $video->ID );?>" type="video/mp4">
+</video>  <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
+
 	<div class="container">
 		<div class="row">
 
@@ -97,21 +126,29 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 	<div class="container">
 		<div class="row">
 
-			<div class="wow fadeInLeft col-md-4 col-sm-4" data-wow-delay="0.3s">
-				<i class="fa fa-group"></i>
+			<!--div class="wow fadeInLeft col-md-4 col-sm-4" data-wow-delay="0.3s">
+				<i class="fa fa-handshake-o"></i>
 				<h3>650 Participants</h3>
 				<p>Quisque ut libero sapien. Integer tellus nisl, efficitur sed dolor at, vehicula finibus massa. Sed tincidunt metus sed eleifend suscipit.</p>
-			</div>
+			</div-->
 
-			<div class="wow fadeInUp col-md-4 col-sm-4" data-wow-delay="0.6s">
-				<i class="fa fa-clock-o"></i>
-				<h3>24 Programs</h3>
-				<p>Quisque ut libero sapien. Integer tellus nisl, efficitur sed dolor at, vehicula finibus massa. Sed tincidunt metus sed eleifend suscipit.</p>
-			</div>
 
 			<div class="wow fadeInRight col-md-4 col-sm-4" data-wow-delay="0.9s">
-				<i class="fa fa-microphone"></i>
-				<h3>11 Speakers</h3>
+				<i class="fa fa-lock"></i>
+				<h3>Secure Payment</h3>
+				<p>Quisque ut libero sapien. Integer tellus nisl, efficitur sed dolor at, vehicula finibus massa. Sed tincidunt metus sed eleifend suscipit.</p>
+			</div>
+                    
+                        <div class="wow fadeInRight col-md-4 col-sm-4" data-wow-delay="0.9s">
+				<i class="fa fa-tasks"></i>
+				<h3>Deposit</h3>
+				<p>Quisque ut libero sapien. Integer tellus nisl, efficitur sed dolor at, vehicula finibus massa. Sed tincidunt metus sed eleifend suscipit.</p>
+			</div>   
+                    
+                    
+			<div class="wow fadeInUp col-md-4 col-sm-4" data-wow-delay="0.6s">
+				<i class="fa fa-clock-o"></i>
+				<h3>Follow Production</h3>
 				<p>Quisque ut libero sapien. Integer tellus nisl, efficitur sed dolor at, vehicula finibus massa. Sed tincidunt metus sed eleifend suscipit.</p>
 			</div>
 
@@ -560,22 +597,56 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
     ICONS SECTION   
 ============================== -->
 <style>
-    .edgtf-full-section-inner {
+    .collection-stamp {
         display: flex;
+        flex-wrap: wrap;
         padding: 20px;
     }
-    .vc_col-sm-3 {
-        width : 30%;
+    .stamp {
+        width : 20%;
     }
+    .wrapper-eco-fabrics {
+  display: grid;
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.wrapper-eco-fabrics .header {
+    grid-column: 1 / 4;
+    grid-row: 1;
+}
+.wrapper-eco-fabrics .one {
+  grid-column: 1;
+  grid-row: 2;
+}
+.wrapper-eco-fabrics .two { 
+  grid-column: 2;
+  grid-row: 2;
+}
+.wrapper-eco-fabrics .three {
+  grid-column: 1;
+  grid-row: 3 / 5;
+}
+.wrapper-eco-fabrics .four {
+  grid-column: 2;
+  grid-row: 3;
+}
+.wrapper-eco-fabrics .five {
+  grid-column: 2;
+  grid-row: 4;
+}
 </style>
 <section id="icons" class="parallax-section">
 	<div class="icons">
             
-	<div class="clearfix edgtf-full-section-inner">
-            <div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper">
-	<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeIn fadeIn wpb_start_animation animated">
-		<div class="wpb_wrapper">
-			<p><img class="aligncenter wp-image-1494 size-full" title="JAPAN-made" src="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-eu-made-alicante.png" alt="EU-made" width="283" height="283" srcset="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-eu-made-alicante.png 283w, http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-eu-made-alicante-100x100.png 100w" sizes="(max-width: 283px) 100vw, 283px"><br>
+	<div class="collection-stamp">
+            
+	<div class="stamp" >
+		<div >
+			<p><img class="aligncenter" title="JAPAN-made" src="<?php echo get_site_url();?>/wp-content/themes/atelierbourgeonspro/assets/images/label/stamp-saw-in-japan.png" alt="EU-made" width="283" height="283" sizes="(max-width: 283px) 100vw, 283px"><br>
 <strong>JAPAN made</strong></p>
 <p>This garment is made in Barcelona. Here is where we live, and here is where we work hand by hand with all our manufacturers.</p>
 <p><em>We love Barcelona.</em></p>
@@ -585,50 +656,77 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 
 		</div>
 	</div>
-</div></div></div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper">
-	<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeIn fadeIn wpb_start_animation animated">
-		<div class="wpb_wrapper">
-			<p><img class="aligncenter wp-image-1495 size-full" title="EU-materials" src="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-eu-materials.png" alt="EU-materials" width="283" height="283" srcset="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-eu-materials.png 283w, http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-eu-materials-100x100.png 100w" sizes="(max-width: 283px) 100vw, 283px"><br>
+
+	<div class="stamp">
+		<div>
+			<p><img class="aligncenter" title="EU-materials" src="<?php echo get_site_url();?>/wp-content/themes/atelierbourgeonspro/assets/images/label/stamp-fabric-made-in-japan.png" alt="EU-materials" width="283" height="283"  sizes="(max-width: 283px) 100vw, 283px"><br>
 <strong>EU-materials</strong></p>
 <p>The fabric used to make this garment is made in the EU. All the people involved in it’s production process are protected by the EU law.</p>
 <p><em>The hands that make this fabric are treated with the same respect as your hands.</em></p>
 
 		</div>
 	</div>
-</div></div></div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper">
-	<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeIn fadeIn wpb_start_animation animated">
-		<div class="wpb_wrapper">
-			<p><img class="aligncenter wp-image-1497 size-full" title="Recycled" src="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-recycled.png" alt="Recycled" width="283" height="283" srcset="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-recycled.png 283w, http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-recycled-100x100.png 100w" sizes="(max-width: 283px) 100vw, 283px"><br>
+
+	<div class="stamp">
+		<div>
+			<p><img class="aligncenter" title="Recycled" src="<?php echo get_site_url();?>/wp-content/themes/atelierbourgeonspro/assets/images/label/stamp-recycled.png" alt="Recycled" width="283" height="283" sizes="(max-width: 283px) 100vw, 283px"><br>
 <strong>Recycled</strong></p>
 <p>This garment is made with a yarn that comes from textile waste. Textile waste is sourced and turned into a recycled yarn that is finally weaved into a new fabric.</p>
 <p><em>Less waste is more landfill for all.</em></p>
 
 		</div>
 	</div>
-</div></div></div>
-            <div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper">
-	<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeIn fadeIn wpb_start_animation animated">
-		<div class="wpb_wrapper">
-			<p><img class="aligncenter wp-image-1496 size-full" title="Low Carbon Footprint" src="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-low-carbon-footprint.png" alt="Low Carbon Footprint" width="283" height="283" srcset="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-low-carbon-footprint.png 283w, http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-low-carbon-footprint-100x100.png 100w" sizes="(max-width: 283px) 100vw, 283px"><br>
+
+	<div class="stamp">
+		<div>
+			<p><img class="aligncenter" title="Low Carbon Footprint" src="<?php echo get_site_url();?>/wp-content/themes/atelierbourgeonspro/assets/images/label/stamp-low-carbon-footprint.png" alt="Low Carbon Footprint" width="283" height="283" sizes="(max-width: 283px) 100vw, 283px"><br>
 <strong>Low Carbon Footprint</strong></p>
 <p>The greenhouse gases released to produce this garment are very low due to the proximity of all the suppliers and manufacturers involved in it’s production process.</p>
 <p><em>The air we breathe is thankful for that.</em></p>
 
 		</div>
 	</div>
-</div></div></div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper">
-	<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeIn fadeIn wpb_start_animation animated">
-		<div class="wpb_wrapper">
-			<p><img class="aligncenter wp-image-1500 size-full" title="Vegan" src="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-vegan.png" alt="Vegan" width="283" height="283" srcset="http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-vegan.png 283w, http://cus.cat/wp-web/wp-content/uploads/2016/12/stamp-vegan-100x100.png 100w" sizes="(max-width: 283px) 100vw, 283px"><br>
+
+	<div class="stamp">
+		<div>
+			<p><img class="aligncenter" title="Vegan" src="<?php echo get_site_url();?>/wp-content/themes/atelierbourgeonspro/assets/images/label/stamp-vegan.png" sizes="(max-width: 283px) 100vw, 283px"><br>
 <strong>Vegan</strong></p>
 <p>This garment is made with materials that do not come from animals.</p>
 <p><em>Cruelty-free garment.</em></p>
 
 		</div>
 	</div>
-</div></div></div><!--div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper">
-	<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeIn fadeIn wpb_start_animation animated">
-		<div class="wpb_wrapper">
+
+	<div class="stamp">
+		<div>
+			<p><img class="aligncenter" title="Animal Friendly" src="<?php echo get_site_url();?>/wp-content/themes/atelierbourgeonspro/assets/images/label/stamp-cruelty-free.png" sizes="(max-width: 283px) 100vw, 283px"><br>
+<strong>Animal Friendy</strong></p>
+<p>This garment is made with materials that do not come from animals.</p>
+<p><em>Cruelty-free garment.</em></p>
+
+		</div>
+	</div>
+	<div class="stamp">
+		<div >
+			<p><img class="aligncenter" title="Animal Friendly" src="<?php echo get_site_url();?>/wp-content/themes/atelierbourgeonspro/assets/images/label/stamp-bio.png" sizes="(max-width: 283px) 100vw, 283px"><br>
+<strong>Animal Friendy</strong></p>
+<p>This garment is made with materials that do not come from animals.</p>
+<p><em>Cruelty-free garment.</em></p>
+
+		</div>
+	</div>
+	<div class="stamp">
+		<div >
+			<p><img class="aligncenter" title="Animal Friendly" src="<?php echo get_site_url();?>/wp-content/themes/atelierbourgeonspro/assets/images/label/stamp-fair-trade.png" sizes="(max-width: 283px) 100vw, 283px"><br>
+<strong>Animal Friendy</strong></p>
+<p>This garment is made with materials that do not come from animals.</p>
+<p><em>Cruelty-free garment.</em></p>
+
+		</div>
+	</div>
+            <!--div ><div ><div >
+	<div >
+		<div >
 			<p><img class="aligncenter wp-image-1490 size-full" title="GOTS" src="http://cus.cat/wp-web/wp-content/uploads/2016/12/gots.png" alt="GOTS" width="283" height="283" srcset="http://cus.cat/wp-web/wp-content/uploads/2016/12/gots.png 283w, http://cus.cat/wp-web/wp-content/uploads/2016/12/gots-100x100.png 100w" sizes="(max-width: 283px) 100vw, 283px"><br>
 <strong>GOTS certified</strong></p>
 <p><span class="value-link"><a href="http://www.global-standard.org/" target="_blank">GOTS</a></span> (Global Organic Textile Standard), is the world’s leading certification for organic fabrics. It ensures environmental and social responsibility on textile and fabric production.</p>
@@ -636,9 +734,9 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 
 		</div>
 	</div>
-</div></div></div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper">
-	<div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeIn fadeIn wpb_start_animation animated">
-		<div class="wpb_wrapper">
+</div></div></div><div ><div ><div >
+	<div >
+		<div >
 			<p><img class="aligncenter wp-image-1491 size-full" title="Oeko-Tex®" src="http://cus.cat/wp-web/wp-content/uploads/2016/12/oeko-tex.png" alt="Oeko-Tex®" width="283" height="283" srcset="http://cus.cat/wp-web/wp-content/uploads/2016/12/oeko-tex.png 283w, http://cus.cat/wp-web/wp-content/uploads/2016/12/oeko-tex-100x100.png 100w" sizes="(max-width: 283px) 100vw, 283px"><br>
 <strong>Oeko-Tex® Standard</strong></p>
 <p>The dyes and inks used to digital print this fabric are <span class="value-link"><a href="http://www.oeko-tex.com/" target="_blank">Oeko-Tex®</a></span> certified. This means that they have non-toxic components.</p>
@@ -648,42 +746,41 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 	</div>
 </div></div></div-->
         </div>
-            <div data-edgtf_header_style="edgtf-dark-header" class="vc_row wpb_row vc_row-fluid edgtf-section vc_custom_1484649695431 edgtf-content-aligment-left edgtf-grid-section" style=""><div class="clearfix edgtf-section-inner"><div class="edgtf-section-inner-margin clearfix"><div class="edgtf-row-animations-holder edgtf-element-from-fade" data-animation="edgtf-element-from-fade"><div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper"></div></div></div><div class="wpb_column vc_column_container vc_col-sm-6"><div class="vc_column-inner "><div class="wpb_wrapper">
-<div class="edgtf-section-title edgtf-section-align-center" style="font-size: 28px">
-	Fabrics and environment</div><div class="vc_empty_space" style="height: 20px"><span class="vc_empty_space_inner"></span></div>
+       <div class="wrapper-eco-fabrics" style="">     
+   <div class="header">                           
+<div style="font-size: 28px">
+	Fabrics and environment</div>
 
-	<div class="wpb_text_column wpb_content_element ">
-		<div class="wpb_wrapper">
+	<div>
+		<div>
 			<p style="text-align: center;">We select all our fabrics according to high quality standards and from companies that demonstrate an ongoing commitment to reducing environmental impact. The clothing is dyed in Europe and is completely free of any toxic substances. We only use mills that ensure that wastewater is correctly treated before being returned to the environment.&nbsp;We only work with certified dyes such as <span class="value-link"><a href="http://www.global-standard.org/" target="_blank" rel="noopener noreferrer">GOTS</a>, <a href="http://www.oeko-tex.com/" target="_blank" rel="noopener noreferrer">Oeko-Tex®</a> and <a href="https://www.inditex.com/en/sustainability/product/health_quality_standards" target="_blank" rel="noopener noreferrer">Clear to Wear®</a></span>.</p>
 <p style="text-align: center;">Learn more about the fabrics we work with:</p>
 
 		</div>
 	</div>
-<div class="vc_empty_space" style="height: 40px"><span class="vc_empty_space_inner"></span></div>
-</div></div></div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper"></div></div></div></div></div></div></div></div>
-<div data-edgtf_header_style="edgtf-dark-header" class="vc_row wpb_row vc_row-fluid edgtf-section vc_custom_1484649687569 edgtf-content-aligment-left edgtf-grid-section" style=""><div class="clearfix edgtf-section-inner"><div class="edgtf-section-inner-margin clearfix"><div class="edgtf-row-animations-holder edgtf-element-from-fade" data-animation="edgtf-element-from-fade"><div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper"></div></div></div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper">
-	<div class="wpb_text_column wpb_content_element ">
-		<div class="wpb_wrapper">
-			<p style="text-align: center;"><strong>Organic cotton</strong><br>
-Organic cotton is grown without the use of chemical pesticides or fertilizers. The aim is to achieve a balance with nature and contribute to a more biologically diverse agriculture. We use organic cotton made in France, Portugal, the Czech Republic, Lithuania, Turkey and Pakistan. It is all <span class="value-link"><a href="http://www.global-standard.org/" target="_blank" rel="noopener noreferrer">GOTS certified</a></span>.</p>
-<p style="text-align: center;"><strong>Tencel®</strong><br>
-Lenzing <span class="value-link"><a href="http://www.lenzing-fibers.com/en/tencel/" target="_blank" rel="noopener noreferrer">Tencel®</a></span> fibre comes from the pulp of eucalyptus trees. The wood pulp is processed in a “closed loop system” in which 99% of the chemicals are recovered and recycled with minimum waste and low emissions. The <span class="value-link"><a href="http://www.lenzing-fibers.com/en/tencel/" target="_blank" rel="noopener noreferrer">Tencel®</a></span> we use is made in Spain and in Portugal.</p>
+</div>
 
-		</div>
-	</div>
-</div></div></div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper">
-	<div class="wpb_text_column wpb_content_element ">
-		<div class="wpb_wrapper">
-			<p style="text-align: center;"><strong>Recycled Wool</strong><br>
+                    
+			<p class="one"><strong>Organic cotton</strong><br>
+Organic cotton is grown without the use of chemical pesticides or fertilizers. The aim is to achieve a balance with nature and contribute to a more biologically diverse agriculture. We use organic cotton made in France, Portugal, the Czech Republic, Lithuania, Turkey and Pakistan. It is all <span class="value-link"><a href="http://www.global-standard.org/" target="_blank" rel="noopener noreferrer">GOTS certified</a></span>.</p>
+                        
+<p  class="two" style="text-align: center;"><strong>Tencel®</strong><br>
+Lenzing <span><a>Tencel®</a></span> fibre comes from the pulp of eucalyptus trees. The wood pulp is processed in a “closed loop system” in which 99% of the chemicals are recovered and recycled with minimum waste and low emissions. The <span class="value-link"><a href="http://www.lenzing-fibers.com/en/tencel/" target="_blank" rel="noopener noreferrer">Tencel®</a></span> we use is made in Spain and in Portugal.</p>
+
+
+                    
+			<p class="three" style="text-align: center;"><strong>Recycled Wool</strong><br>
 The manufacture of this fabric begins with the sourcing of pre-consumer waste yarn and fabrics from European countries. The waste is converted into fibre using a mechanical process. It is then spun into yarn and finally becomes a new recycled wool fabric. It is blended with 30% polyamide to gain resistance as it has a recycled origin. This fabric is made in Italy.</p>
-<p style="text-align: center;"><strong>Hemp</strong><br>
+
+                        <p class="four" style="text-align: center;"><strong>Hemp</strong><br>
 Hemp is highly productive, easy and fast to cultivate. It does not need agrochemicals to grow and enriches the soil with its deep roots.&nbsp;The hemp we use is made in Italy.</p>
-<p style="text-align: center;"><strong>Organic wool</strong><br>
+                        
+<p class="five" style="text-align: center;"><strong>Organic wool</strong><br>
 This wool comes from sheep that have been raised on feed which is free from fertilizers or pesticides and has not been subject to mulling practices. The wool is <span class="value-link"><a href="http://www.global-standard.org/" target="_blank" rel="noopener noreferrer">GOTS certified</a></span> and made in Lithuania.</p>
 
-		</div>
 	</div>
-</div></div></div><div class="wpb_column vc_column_container vc_col-sm-3"><div class="vc_column-inner "><div class="wpb_wrapper"></div></div></div></div></div></div></div></div>
+    
+            
 
 	</div>
 </section>

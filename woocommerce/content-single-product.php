@@ -285,6 +285,18 @@ if(isset($attachment_ids[1]))
                                     ?>
                                     
                             </div>
+                            <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.6s">
+                                    
+                                    <?php
+                                    // DISPLAY STAMP
+                                    //<h3>New Event is a fully responsive one-page template for events, conferences or workshops.</h3>
+                                    //$postid = the_ID();
+                                    //get_the_title($workshop_id);
+                                    include 'wc-stamps-single-product.php';
+                                     //$product_details;;
+                                    ?>
+                                    
+                            </div>
 
 
                     </div>

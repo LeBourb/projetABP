@@ -32,6 +32,8 @@ require 'inc/storefront-functions.php';
 require 'inc/storefront-template-hooks.php';
 require 'inc/storefront-template-functions.php';
 
+require 'inc/customize/home-first-section.php';
+
 if ( class_exists( 'Jetpack' ) ) {
 	$storefront->jetpack = require 'inc/jetpack/class-storefront-jetpack.php';
 }
@@ -48,6 +50,7 @@ if ( storefront_is_woocommerce_activated() ) {
         require 'inc/woocommerce/wc-product-attribute-workshop.php';
         require 'inc/woocommerce/wc-product-attribute-supply.php';
         require 'inc/woocommerce/wc-product-attribute-fabrics.php';
+        require 'inc/woocommerce/wc-product-attribute-stamps.php';
         require 'inc/woocommerce/class-wc-product-attribute-supply-form.php';
         require 'inc/woocommerce/class-wc-product-attribute-fabrics-form.php';
         require 'inc/woocommerce/wc-custom-product-supplies-tab.php';
