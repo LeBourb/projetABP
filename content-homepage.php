@@ -29,6 +29,10 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
         background-size: cover;
         transition: 1s opacity;        
     }
+    
+    .fb_dialog.fb_dialog_advanced.fb_shrink_active {
+        left: 18pt!important;
+    }
 </style>
 <section id="intro" class="parallax-section">
      <?php // echo wp_video_shortcode( array() );//
@@ -461,50 +465,50 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 			<span class="step_nb"></span>
 			<p class="form_title">Please Fill The field Bellow</p>
 				<form id="register-form">
-                                    <ul>
-					<li class="current_step">
+                                    
+					
 						<input name="userid" type="text" class="form-control" id="userid" placeholder="Shop Name" required>
-					</li>
-                                        <li>
+					
+                                        
 						<input name="email" type="email" class="form-control" id="email" placeholder="Email Address" required>
-					</li>
-                                        <li>
+					
+                                        
 						<input name="password" type="password" class="form-control" id="password" placeholder="Password" required>
-					</li>
-                                        <li>
+					
+                                        
 						<input name="confirm_password" type="password" class="form-control" id="confirm_password" placeholder="Confirm Password" required>
-					</li>
-					<li>
+					
+					
 						<input name="firstname" type="text" class="form-control" id="firstname" placeholder="First Name" required>
-					</li>
-					<li>
+					
+					
 						<input name="lastname" type="text" class="form-control" id="lastname" placeholder="Last Name" required>
-					</li>
-					<li>
+					
+					
 						<input name="phone" type="telephone" class="form-control" id="phone" placeholder="Phone Number" required>
-					</li>
-                                        <li>
+					
+                                        
 						<input name="email" type="email" class="form-control" id="email" placeholder="Email Address" required>
-					</li>
-                                        <li>
+					
+                                        
 						<input name="url" type="text" class="form-control" id="url" placeholder="Web Site" >
-					</li>
-                                        <li>
+					
+                                        
 						<input name="address_1" type="text" class="form-control" id="address_1" placeholder="Address" required>
-					</li>
-                                        <li>
+					
+                                        
 						<input name="city" type="text" class="form-control" id="city" placeholder="City" required>
-					</li>
-                                        <li>
+					
+                                        
 						<input name="postcode" type="text" class="form-control" id="postcode" placeholder="Postcode" required>
-					</li>
-                                        <li>
+					
+                                        
                                             <div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
                                             <!--name="submit"  class="form-control"-->
 						<input  id="submit" class="form-control" type="submit" value="REGISTER">
                                             </div>
-                                        </li>
-                                    </ul>                                        
+                                        
+                                                                       
 					
                                                                                 
 				</form>
@@ -601,19 +605,23 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
         display: flex;
         flex-wrap: wrap;
         padding: 20px;
+        justify-content: center;
     }
     .stamp {
-        width : 20%;
+        width: 13em;
+        margin: 1em;
     }
     .wrapper-eco-fabrics {
   display: grid;
   grid-gap: 10px;
   grid-auto-rows: minmax(100px, auto);
   width: 40%;
+  min-width: 300px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 }
+
 .wrapper-eco-fabrics .header {
     grid-column: 1 / 4;
     grid-row: 1;

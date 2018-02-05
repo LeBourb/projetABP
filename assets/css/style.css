@@ -288,6 +288,9 @@ footer {
           align-items: center;
     height: 100vh;
     text-align: center;
+        overflow: hidden;
+    max-width: 100%;
+    position: relative;
 }
 
 #intro h3 {
@@ -626,8 +629,9 @@ footer {
 /* Back top */
 .go-top {
   background-color: #222;
-  bottom: 2em;
-  right: 2em;
+  bottom: 6em;
+  right: 18pt;
+  z-index: 100;
   color: #ffffff;
   font-size: 32px;
   display: none;

@@ -14,6 +14,7 @@
 
         <!-- Footer Section -->
         <style>
+  
             
 footer {
     padding: 100px 0;
@@ -46,18 +47,21 @@ footer .copyright p a {
 }
 
 footer .footer_links {
-    width: 717px;
-    float: right;
+    display: flex;
+    text-align: right;
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
 }
 
 footer .footer_links .columns {
-    width: 212px;
-    float: left;
+    width: 212px;    
     margin-right: 40px;
 }
 
 footer .footer_links .columns:last-child {
-    margin-right: 0;
+    /*margin-right: 0;*/
 }
 
 footer .footer_links .columns_title {
@@ -128,18 +132,21 @@ footer .address .phone {
     font-family: "raleway-bold",arial;
     font-weight: bold;
 }
+          
+            
+@media screen and (max-width:768px) {
+    footer .footer_links {
+        justify-content: flex-end;
+    } 
+    
+}
+
 
         </style>
 <footer class="clearfix">
     <div class="container">
         
-        <!-- Copyrights  -->
-        <div class="copyright animated wow fadeInUp">
-            <img src="img/footer_logo.png" alt="Heros." class="footer_logo">
-            <p>© 2014 copyright pixelhint - All rights reserved</p>
-            <p>More free templates @ <a href="http://pixelhint.com">Pixelhint.com</a></p>
-        </div>
-        
+       
         <div class="footer_links">
  
             <!-- Social Media Links  -->
@@ -147,13 +154,10 @@ footer .address .phone {
                 <h3 class="columns_title">Stay Tuned</h3>
                 <ul>
                     <li>
-                        <a class="facebook" href="#">Facebook</a>
+                        <a class="fa fa-facebook" href="#">Facebook</a>
                     </li>
                     <li>
-                        <a class="twitter" href="#">Twitter</a>
-                    </li>
-                    <li>
-                        <a class="google" href="#">Google Plus</a>
+                        <a class="fa fa-instagram" href="#">Instagram</a>
                     </li>
                 </ul>
             </div>
@@ -168,9 +172,6 @@ footer .address .phone {
                     <li>
                         <a href="#">Our Team</a>
                     </li>
-                    <li>
-                        <a href="#">Blog</a>
-                    </li>
                 </ul>
             </div>
  
@@ -178,11 +179,17 @@ footer .address .phone {
             <div class="address columns animated wow fadeInRight" data-wow-delay=".4s">
                 <h3 class="columns_title">Address</h3>
                 <p>1012 14th Street Northwest</p>
-                <p>Washington, DC 20005</p>
-                <p class="phone">(202) 737-1499</p>
+                <p>GIFU, JAPAN 20005</p>
+                <p class="email">pro.contact@atelierbourgeons.com</p>
             </div>
  
         </div>
+        
+         <!-- Copyrights  -->
+        <div class="copyright animated wow fadeInUp">            
+            <p>© 2018 copyright atelierbourgeons - All rights reserved</p>            
+        </div>
+        
  
     </div>
  
