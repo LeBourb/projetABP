@@ -450,6 +450,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 <!-- =========================
    REGISTER SECTION   
 ============================== -->
+
 <section id="register" class="parallax-section">
 	<div class="container">
 		<div class="row">
@@ -464,7 +465,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
                             <div class="steps" id="steps">
 			<span class="step_nb"></span>
 			<p class="form_title">Please Fill The field Bellow</p>
-				<form id="register-form">
+				<!--form id="register-form">
                                     
 					
 						<input name="userid" type="text" class="form-control" id="userid" placeholder="Shop Name" required>
@@ -488,9 +489,6 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 						<input name="phone" type="telephone" class="form-control" id="phone" placeholder="Phone Number" required>
 					
                                         
-						<input name="email" type="email" class="form-control" id="email" placeholder="Email Address" required>
-					
-                                        
 						<input name="url" type="text" class="form-control" id="url" placeholder="Web Site" >
 					
                                         
@@ -504,14 +502,24 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 					
                                         
                                             <div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
-                                            <!--name="submit"  class="form-control"-->
-						<input  id="submit" class="form-control" type="submit" value="REGISTER">
+                                            <!--name="submit"  class="form-control">
+						<input  id="register-form-submit" class="form-control" type="submit" value="REGISTER">
                                             </div>
-                                        
+                            
                                                                        
 					
                                                                                 
-				</form>
+				</form-->
+                                    <?php
+		
+		//nm_wpregistration_register_url
+		//print_r(get_option('nm_wpregistration_settings'));
+                $theme_my_login = Theme_My_Login::get_object();
+                $instance = $theme_my_login->get_active_instance();
+                echo $instance->display('register');
+                //echo get_option('nm_wpregistration_register_url');
+            //echo $nm_wpregistration->get_option('_register_url');
+                    ?>;
                         </div>
 			</div>
 
@@ -521,7 +529,24 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 	</div>
 </section>
 
-
+<script>
+    jQuery( document ).ready( function() {
+        $( document ).on( 'click', '#register-form-submit' , function(e) {
+            var register_url='<?php
+		
+		//nm_wpregistration_register_url
+		//print_r(get_option('nm_wpregistration_settings'));
+                $theme_my_login = Theme_My_Login::get_object();
+                $instance = $theme_my_login->get_active_instance();
+                echo $instance->get_action_url('register');
+                //echo get_option('nm_wpregistration_register_url');
+            //echo $nm_wpregistration->get_option('_register_url');
+                    ?>';
+                            
+            e.preventDefault();            
+        });
+    });
+</script>
 <!-- =========================
     FAQ SECTION   
 ============================== -->

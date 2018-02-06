@@ -437,6 +437,16 @@ function render_prod_columns( $column ) {
     }
 }
 add_filter( 'manage_prod_posts_columns', 'prod_columns' );
+
+
+function atelierbourgeons_tml_message( $message, $action ) {
+    //if($action == 'login')
+        $message = 'toto is here';
+    return $message;
+}
+add_filter( 'tml_action_template_message', 'atelierbourgeons_tml_message' , 23 ,10);
+
+
 /**
 * Define custom columns for prods.
 * @param  array $existing_columns

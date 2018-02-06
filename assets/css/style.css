@@ -13,6 +13,22 @@ body {
 		font-weight: 400;
 }
 
+/*---------------------------------------
+    Margin 
+-----------------------------------------*/
+.tml {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.entry-title {
+    text-align: center;
+}
+
+#content {
+    margin-top: 5em;
+}
+
 
 /*---------------------------------------
     Typorgraphy              
