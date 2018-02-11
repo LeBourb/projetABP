@@ -6,7 +6,6 @@
  *
  * @package storefront
  */
-
 ?>
 
 		</div><!-- .col-full -->
@@ -197,7 +196,8 @@ footer .address .phone {
 
 </div><!-- #page -->
 
-<?php wp_footer(); ?>
+<?php wp_footer(); 
+?>
 
 </body>
 </html>

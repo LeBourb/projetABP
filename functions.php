@@ -209,6 +209,10 @@ function bbloomer_validate_name_fields( $errors, $username, $email ) {
     if ( isset( $_POST['billing_postcode'] ) && empty( $_POST['billing_postcode'] ) ) {
         $errors->add( 'billing_postcode', __( '<strong>Error</strong>: Shop city postcode is required!.', 'woocommerce' ) );
     }
+    if( isset( $_POST['pass1'] ) && isset($_POST['pass2'] ) && $_POST['pass1'] != $_POST['pass2'] ) {
+        wp_set_password( $_POST['password'],  $customer_id );
+        $errors->add( 'passport', __( '<strong>Error</strong>: Password must be identic.', 'woocommerce' ) );
+    }
     return $errors;
 }
  
@@ -252,12 +256,12 @@ function bbloomer_save_name_fields( $customer_id ) {
         update_user_meta( $customer_id, 'billing_city', sanitize_text_field( $_POST['billing_city'] ) );     
         update_user_meta( $customer_id, 'shipping_city', sanitize_text_field( $_POST['billing_city'] ) );     
     }
+    if ( isset( $_POST['pass1'] ) ) {
+        wp_set_password( $_POST['pass1'],  $customer_id );
+    }
     if ( isset( $_POST['billing_postcode'] ) ) {
         update_user_meta( $customer_id, 'billing_postcode', sanitize_text_field( $_POST['billing_postcode'] ) );     
         update_user_meta( $customer_id, 'shipping_postcode', sanitize_text_field( $_POST['billing_postcode'] ) );     
-    }
-    if( isset( $_POST['password'] ) ) {
-        wp_set_password( $_POST['password'],  $customer_id );
     }
     update_user_meta( $customer_id, 'billing_country', 'JPY' );
     
@@ -445,6 +449,84 @@ function atelierbourgeons_tml_message( $message, $action ) {
     return $message;
 }
 add_filter( 'tml_action_template_message', 'atelierbourgeons_tml_message' , 23 ,10);
+
+
+function atelierbourgeons_new_user_approved( $message ) {
+    //if($action == 'login')
+    $message = atelierbourgeons_html_email_template_header('Congratulations, your account has been validated!');
+    $message .= '<tr>
+    <td align="center" height="100%" valign="top" width="100%" bgcolor="#F2F5F7" style="padding:0 15px 20px" class="m_4412137695263643084mobile-padding">
+      
+      <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse!important;max-width:600px">
+        <tbody><tr>
+          <td align="center" valign="top" style="font-family:Open Sans,Helvetica,Arial,sans-serif;padding:0 0 25px">
+            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse:collapse!important">
+              <tbody><tr>
+                <td align="center" bgcolor="#ffffff" style="border-radius:0 0 10px 10px;padding:25px">
+                ' . svg_valid_email() .'
+                  <table cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse:collapse!important">
+                    <tbody><tr>
+                      
+                    </tr>
+                    <tr>
+                      <td align="center" style="font-family:Open Sans,Helvetica,Arial,sans-serif">
+                        <h2 style="border:0;color:#1e2c3a;font:400 30px/40px apple-system,BlinkMacSystemFont,Arial,\'Segoe UI\',\'Helvetica Neue\',sans-serif;margin:0;padding:15px 0;vertical-align:baseline" align="center"> ' . __( 'Votre compte a été validé sur notre site', 'new-user-approve' ) . '</h2>
+                        <p style="border:0;color:#667685;font:400 16px/25px apple-system,BlinkMacSystemFont,Arial,\'Segoe UI\',\'Helvetica Neue\',sans-serif;margin:0px 0 10px;padding:0;vertical-align:baseline">
+                          ' .  __( 'You just registered to {sitename}', 'new-user-approve' ) . "\r\n\r\n" .
+	  "{username}\r\n\r\n{login_url}\r\n\r\n" . __( 'Vous pouvez mainteinant passer commande de nos produits', 'new-user-approve' ) . "\r\n\r\n" . '
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="center" style="padding:20px 0 15px">
+                        <table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse!important">
+                          <tbody><tr>
+                            <td align="center" style="border-radius:26px" bgcolor="#0570D4">
+                              <a href="'. get_site_url() .'" style="background: #613143;border: 1px solid #613143;border-radius: 14px;color:#ffffff;display:block;font-family:Open Sans,Helvetica,Arial,sans-serif;font-size:16px;padding:14px 26px;text-decoration:none" target="_blank" data-saferedirecturl="">Order products for your shop! →</a>
+                            </td>
+                          </tr>
+                        </tbody></table>
+                      </td>
+                    </tr>
+                  </tbody></table>
+                </td>
+              </tr>
+            </tbody></table>
+          </td>
+        </tr>';
+	
+    //$message .= __( 'To set or reset your password, visit the following address:', 'new-user-approve' ) . "\r\n\r\n";
+    //$message .= "{reset_password_url}";
+    $message .= atelierbourgeons_html_email_template_footer();
+    return $message;
+}
+add_filter( 'new_user_approve_approve_user_message_default', 'atelierbourgeons_new_user_approved' , 21 ,12);
+
+
+function atelierbourgeons_new_user_checking( $status, $user_id ) {
+    //if($action == 'login')
+    
+    
+    $user = new WP_User( $user_id );
+
+    wp_cache_delete( $user->ID, 'users' );
+    wp_cache_delete( $user->data->user_login, 'userlogins' );
+    
+    // send email to user telling of approval
+    $user_login = stripslashes( $user->data->user_login );
+    $user_email = stripslashes( $user->data->user_email );
+
+    $subject = 'Atelier bourgeons Pro Registration In-Review';
+    $admin_email = get_option( 'admin_email' );    
+    $from_name = get_option( 'blogname' );
+    $headers = array("From: \"{$from_name}\" <{$admin_email}>\n");
+    $message = mail_new_user_checking($user_login,$user_email);
+    wp_mail( $user_email, $subject, $message, $headers);
+    
+    return $status;
+}
+add_filter( 'new_user_approve_default_status', 'atelierbourgeons_new_user_checking' , 21 ,12);
+
 
 
 /**

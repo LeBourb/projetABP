@@ -19,6 +19,9 @@ body {
 .tml {
     margin-left: auto;
     margin-right: auto;
+    margin-top: 12em;
+    padding: 2em;
+    background-color: rgba(221, 221, 221, 0.8);
 }
 
 .entry-title {
@@ -26,9 +29,12 @@ body {
 }
 
 #content {
-    margin-top: 5em;
+    /*margin-top: 5em;*/
 }
 
+.col-full {
+    padding: 0;
+}
 
 /*---------------------------------------
     Typorgraphy              
