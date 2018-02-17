@@ -19,9 +19,18 @@ body {
 .tml {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 12em;
-    padding: 2em;
+    margin-top: 10%;
+    padding: 2%;
     background-color: rgba(221, 221, 221, 0.8);
+    max-height: 100%;
+    overflow-y: auto;    
+    max-width: 413px;
+}
+
+@media(min-width:768px) {
+    .tml {
+        max-height: 80%;
+    }
 }
 
 .entry-title {
@@ -92,7 +101,6 @@ a {
 }
 
 #detail, #video,
-#speakers, 
 #program,
 #sponsors, 
 #contact, footer {
@@ -138,7 +146,7 @@ footer {
 #product-intro  .btn-danger,
 #checkoutpopupform .btn-danger,
 #contact .btn-danger {
-    background: #f2545f;
+    background: #613143;
     border-color: transparent;
 }
 
@@ -246,9 +254,37 @@ footer {
     transition: all 0.4s ease-in-out;
 }
 
+.custom-navbar .nav li .subnavContainer {    
+    flex: 0 0 100%;
+    color: black;
+    width: 234px;
+    padding: 4px 4px;
+    z-index: 2;
+    display: flex;
+    position: absolute;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: white;
+}
+.custom-navbar .nav li .subnav:hover {
+    background-color: hsla(0, 0%, 0%, 0.03);
+}
+
+.custom-navbar .nav li .subnav {
+    margin: 0 14px 0 14px;
+    cursor: pointer;
+    display: block;
+    font-size: 15px;
+    font-weight: 300;
+    padding-top: 14px;
+    border-bottom: 1px solid #bbb;
+    padding-bottom: 14px;
+    text-decoration: none;
+}
+
 .custom-navbar .nav li a:hover {
     background: transparent;
-    color: #66ccff;
+    color: #e9dccd;
 }
 
 .custom-navbar .navbar-nav > li > a:hover,
@@ -258,7 +294,7 @@ footer {
 
 .custom-navbar .nav li.active > a {
     background-color: transparent;
-    color: #66ccff;
+    color: #e9dccd;
 }
 
 .custom-navbar .navbar-toggle {
@@ -282,10 +318,16 @@ footer {
         background: 0 0; 
     }
     .custom-navbar.top-nav-collapse {
-        background: #101010;
+        background: white;
         padding: 0;
     }
-
+    
+    .custom-navbar.top-nav-collapse .nav li a {
+        color : black;
+    }
+    .custom-navbar.top-nav-collapse .site-logo svg {
+        fill: black;
+    }
 }
 
 
@@ -359,7 +401,10 @@ footer {
    Speakers section              
 -----------------------------------------*/
 #speakers {
-    background: #f9f9f9;
+     width: 100%;
+    height: 61rem;
+    position: relative;
+    background: black;
 }
 
 #speakers h3 {
@@ -391,8 +436,93 @@ footer {
     padding-bottom: 22px;
 }
 
+#speakers .items-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 768px) {
+ #speakers .items-container {
+    height: 50%;
+
+    }   
+    #speakers .linkWrapper {
+        width:  50%;
+    }
+
+}
+
+#speakers .linkWrapper {
+    left: 0%;
+    width: 25%;
+    color: white;
+    top: 0;
+    height: 100%;
+    display: block;    
+    transition: all .25s ease;
+    text-decoration: none;
+}
+
+#speakers .linkWrapper:hover {
+    width: 40%;
+}
+
+#speakers .parallaxWrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+#speakers .parallax-content .wrapper .label {
+    font-size: 24px;
+    margin-top: 36px;
+    font-weight: 400;
+    letter-spacing: 0.025em;
+}
+    
+#speakers .parallax-background.backgroundContainer {
+    width:100%;
+    height:100%;
+}
+
+#speakers .parallax-background .parallax-realcontainer {
+    width:100%;
+    height:100%;
+}
 
 
+
+#speakers .parallaxWrapper .parallax-background-children{
+    transform: translate3d(-50%, -11.9363px, 0px);
+    position: absolute;
+    left: 50%;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+#speakers .parallax-content {
+    position: absolute;
+    top: 46%;
+    right: 0;
+    width: 100%;
+    height: 100%;    
+}
+
+@media (max-width: 768px) {
+ #speakers .items-container {
+    height: 50%;
+
+    }   
+    #speakers .linkWrapper {
+        width:  50%;
+    }
+
+}
 /*---------------------------------------
    Program section              
 -----------------------------------------*/
@@ -475,7 +605,7 @@ footer {
   height: 45px;
 }
 
-#register input[type="submit"] {
+input[type="submit"] {
   background: #f2545f;
   border-radius: 100px;
   border: none;
@@ -486,7 +616,7 @@ footer {
   transition: all 0.4s ease-in-out;
 }
 
-#register input[type="submit"]:hover {
+input[type="submit"]:hover {
   background: #ffffff;
   color: #222;
 }

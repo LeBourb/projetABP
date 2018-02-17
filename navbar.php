@@ -75,6 +75,9 @@
 <!-- Google Font -->
 <link href='https://fonts.googleapis.com/css?family=Poppins:400,500,600' rel='stylesheet' type='text/css'>
 
+
+
+
 </head>
 <body data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
 
@@ -130,39 +133,58 @@
                                 <?php
                                 // if user connected => display orders ! 
                                 //echo wc_get_page_id ( 'view_order' );
+                                
+                                echo '<li><a href="' . get_home_url() . '" >Home</a>'
+                                        . '<div class="subnavContainer" style="display:none;">
+                                            <a class="subnav" href="/us/ff-zero-1#user-experience">UX</a>' 
+                                            . 
+                                            '<a class="subnav" href="/us/ff-zero-1#interior">Interior</a>'
+                                            .
+                                            '<a class="subnav" href="/us/ff-zero-1#powertrain">Powertrain</a>' 
+                                            . '</div>'
+                                        . '</li>'; 
+                                //echo '<li><a href="' . get_permalink( wc_get_page_id ( 'shop' )) . '" >Shop</a></li>';                                            
+                                $query = new WC_Product_Query( array(
+                                    'limit' => 10,
+                                    'orderby' => 'date',
+                                    'order' => 'DESC',
+                                    'return' => 'ids',
+                                    'status' => 'publish',
+                                ) );                                    
+                                $product_ids = $query->get_products();
+                                foreach($product_ids as $product_id) {
+                                    $product = wc_get_product($product_id);
+                                    echo '<li><a href="' . get_permalink( $product_id ) . '" >' . $product->get_title() . '</a></li>';                                            
+                                }
+                                echo '<li><a class="separator">|</a></li>';
                                 if(is_user_logged_in()) {
-                                    echo '<li><a href="' . get_home_url() . '" >Home</a></li>'; 
                                     echo '<li><a href="' . get_permalink( wc_get_page_id ( 'cart' )) . '" >Cart</a></li>'; 
-                                    //echo '<li><a href="' . get_permalink( wc_get_page_id ( 'shop' )) . '" >Shop</a></li>';                                            
-                                    $query = new WC_Product_Query( array(
-                                        'limit' => 10,
-                                        'orderby' => 'date',
-                                        'order' => 'DESC',
-                                        'return' => 'ids',
-                                        'status' => 'publish',
-                                    ) );                                    
-                                    $product_ids = $query->get_products();
-                                    foreach($product_ids as $product_id) {
-                                        $product = wc_get_product($product_id);
-                                        echo '<li><a href="' . get_permalink( $product_id ) . '" >' . $product->get_title() . '</a></li>';                                            
-                                    }
                                     echo '<li><a href="' . get_permalink( wc_get_page_id ( 'myaccount' )) . 'orders/" >Your Orders</a></li>';                                            
-                                }else {                                    
-                                ?>
-                                    <li><a href="#intro" class="smoothScroll">Intro</a></li>
-                                    <li><a href="#overview" class="smoothScroll">Overview</a></li>
-                                    <li><a href="#speakers" class="smoothScroll">Speakers</a></li>
-                                    <li><a href="#program" class="smoothScroll">Programs</a></li>
-                                    <li><a href="#register" class="smoothScroll">Register</a></li>
-                                    <li><a href="#venue" class="smoothScroll">Venue</a></li>
-                                    <li><a href="#sponsors" class="smoothScroll">Sponsors</a></li>
-                                    <li><a href="#contact" class="smoothScroll">Contact</a></li>
-                                <?php
+                                }
+                                else {
+                                    echo '<li><a href="' . Theme_My_Login::get_page_link( 'login' ) . '" >Login</a></li>';                                
+                                    echo '<li><a href="' . Theme_My_Login::get_page_link( 'register' ) . '" >Register</a></li>';                                
                                 }
                                 ?>
+                            
+                                
+                                
+                                
 			</ul>
 
 		</div>
+                <script>
+    
+    $('.nav.navbar-nav li').mouseover(function() {
+        $(this).find('.subnavContainer').show();
+    })
+    $( ".subnavContainer" ).mouseleave(function() {
+        $(this).hide();
+    });
+    $( ".nav.navbar-nav li" ).mouseleave(function() {
+        $(this).find('.subnavContainer').hide();
+    });
+    </script>
 
 	</div>
 </div>

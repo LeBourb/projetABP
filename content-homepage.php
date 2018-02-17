@@ -188,7 +188,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
     SPEAKERS SECTION   
 ============================== -->
 <section id="speakers" class="parallax-section">
-	<div class="container">
+	<!--div class="container">
 		<div class="row">
 
 			<div class="col-md-12 col-sm-12 wow bounceIn">
@@ -199,25 +199,57 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 			</div>
 
 			<!-- Testimonial Owl Carousel section
-			================================================== -->
-			<div id="owl-speakers" class="owl-carousel">
+			==================================================>
+			<div id="owl-speakers" class="owl-carousel"-->
+                                  <div class="items-container">
                                 <?php
                                 $args     = array( 'post_type' => 'product' );
                                 $products = get_posts( $args ); 
                                 foreach($products as $product_id) {
-                                   $product =  wc_get_product($product_id);
+                                    $product =  wc_get_product($product_id);
                                     $image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->get_id() ), 'single-post-thumbnail' );
-                                    echo '<div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.9s">
+                                    /*echo '<div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.9s">
 					<a href="' . get_permalink($product_id) . '"><div class="speakers-wrapper">
                                             <img src="' . $image[0] . '" class="img-responsive" alt="speakers">
                                             <div class="speakers-thumb">
                                                 <h3>' . $product->get_title() . '</h3>								
                                             </div>
 					</div></a>
-                                    </div>';
-                                }
-				
+                                    </div>';*/
                                 ?>
+                            
+                      
+                                <a href="<?php echo get_permalink($product_id);?>" class="linkWrapper">
+                                    <div class="parallax parallaxWrapper" style="position: relative; overflow: hidden;">
+                                        <div class="parallax-background-children" style="transform: translate3d(-50%, 0px, 0px); position: absolute; left: 50%; transform-style: preserve-3d; backface-visibility: hidden;">
+                                            <div class="parallax-background backgroundContainer">
+                                                <div class="parallax-realcontainer" style="background:linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) ), url(<?php echo $image[0]?>) no-repeat center bottom / cover;">
+                                                    
+                                                </div>
+                                                    
+                                            </div>
+                                                
+                                        </div>
+                                        <div class="parallax-content" style="position:relative;">
+                                            <div class="innerContainer innerContainer">
+                                                <div class="wrapperRight wrapperRight">
+                                                    
+                                                </div>
+                                                <div class="wrapper">
+                                                    <div class="divider"></div>                                                        
+                                                </div>
+                                                <div class="wrapper">
+                                                    <div class="label"><?php echo $product->get_title(); ?></div>                                                        
+                                                </div>                                                    
+                                            </div>                                                
+                                        </div>                                            
+                                    </div>
+                                </a>
+                                <?php 
+                                }				
+                                ?>
+                                      </div>
+                                <!--a href="/us/ff-zero-1" class="linkWrapper-8-308 linkWrapper-8-287" data-reactid="385"><div class="react-parallax parallaxWrapper-8-310 parallaxWrapper-8-288" data-reactid="386" style="position: relative; overflow: hidden;"><div class="react-parallax-background-children" data-reactid="387" style="transform: translate3d(-50%, -11.9363px, 0px); position: absolute; left: 50%; transform-style: preserve-3d; backface-visibility: hidden;"><div class="react-parallax-background backgroundContainer-8-311 backgroundContainer-8-289" data-reactid="388"><div class="container-8-309 container-8-290" data-reactid="389"></div></div></div><div class="react-parallax-content" style="position:relative;" data-reactid="390"><div class="innerContainer-8-312 innerContainer-8-291" data-reactid="391"><div class="wrapperRight-8-314 wrapperRight-8-293" data-reactid="392"><img src="/assets/img/diagonal_se_black.png" role="presentation" class="diagonalLine-8-315 diagonalLine-8-294" data-reactid="393"></div><div class="wrapper-8-313 wrapper-8-292" data-reactid="394"><div class="divider-8-316 divider-8-295" data-reactid="395"></div></div><div class="wrapper-8-313 wrapper-8-292" data-reactid="396"><div class="label-8-317 label-8-296" data-reactid="397">FFZERO1</div></div></div></div></div></a><a href="/our-company" class="linkWrapper-8-319 linkWrapper-8-287" data-reactid="398"><div class="react-parallax parallaxWrapper-8-321 parallaxWrapper-8-288" data-reactid="399" style="position: relative; overflow: hidden;"><div class="react-parallax-background-children" data-reactid="400" style="transform: translate3d(-50%, -11.9363px, 0px); position: absolute; left: 50%; transform-style: preserve-3d; backface-visibility: hidden;"><div class="react-parallax-background backgroundContainer-8-322 backgroundContainer-8-289" data-reactid="401"><div class="container-8-320 container-8-290" data-reactid="402"></div></div></div><div class="react-parallax-content" style="position:relative;" data-reactid="403"><div class="innerContainer-8-323 innerContainer-8-291" data-reactid="404"><div class="wrapperRight-8-325 wrapperRight-8-293" data-reactid="405"><img src="/assets/img/diagonal_se_white.png" role="presentation" class="diagonalLine-8-326 diagonalLine-8-294" data-reactid="406"></div><div class="wrapper-8-324 wrapper-8-292" data-reactid="407"><div class="divider-8-327 divider-8-295" data-reactid="408"></div></div><div class="wrapper-8-324 wrapper-8-292" data-reactid="409"><div class="label-8-328 label-8-296" data-reactid="410">Our Company</div></div></div></div></div></a><a href="/futuresight" class="linkWrapper-8-330 linkWrapper-8-287" data-reactid="411"><div class="react-parallax parallaxWrapper-8-332 parallaxWrapper-8-288" data-reactid="412" style="position: relative; overflow: hidden;"><div class="react-parallax-background-children" data-reactid="413" style="transform: translate3d(-50%, -11.9363px, 0px); position: absolute; left: 50%; transform-style: preserve-3d; backface-visibility: hidden;"><div class="react-parallax-background backgroundContainer-8-333 backgroundContainer-8-289" data-reactid="414"><div class="container-8-331 container-8-290" data-reactid="415"></div></div></div><div class="react-parallax-content" style="position:relative;" data-reactid="416"><div class="innerContainer-8-334 innerContainer-8-291" data-reactid="417"><div class="wrapperRight-8-336 wrapperRight-8-293" data-reactid="418"><img src="/assets/img/diagonal_se_black.png" role="presentation" class="diagonalLine-8-337 diagonalLine-8-294" data-reactid="419"></div><div class="wrapper-8-335 wrapper-8-292" data-reactid="420"><div class="divider-8-338 divider-8-295" data-reactid="421"></div></div><div class="wrapper-8-335 wrapper-8-292" data-reactid="422"><div class="label-8-339 label-8-296" data-reactid="423">FutureSight</div></div></div></div></div></a></div-->
 
 				<!--div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.6s">
 					<div class="speakers-wrapper">
@@ -257,12 +289,12 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 								<h6>Marketing Guru</h6>
 							</div>
 					</div>
-				</div-->
+				</div>
 				
 			</div>
 
 		</div>
-	</div>
+	</div-->
 </section>
 
 
@@ -519,7 +551,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
                 echo $instance->display('register');
                 //echo get_option('nm_wpregistration_register_url');
             //echo $nm_wpregistration->get_option('_register_url');
-                    ?>;
+                    ?>
                         </div>
 			</div>
 
@@ -872,74 +904,6 @@ This wool comes from sheep that have been raised on feed which is free from fert
 		</div>
 	</div>
 </section>
-
-
-<!-- =========================
-    CONTACT SECTION   
-============================== -->
-<section id="contact" class="parallax-section">
-	<div class="container">
-		<div class="row">
-
-			<div class="wow fadeInUp col-md-offset-1 col-md-5 col-sm-6" data-wow-delay="0.6s">
-				<div class="contact_des">
-					<h3>New Event</h3>
-					<p>Proin sodales convallis urna eu condimentum. Morbi tincidunt augue eros, vitae pretium mi condimentum eget. Suspendisse eu turpis sed elit pretium congue.</p>
-					<p>Mauris at tincidunt felis, vitae aliquam magna. Sed aliquam fringilla vestibulum. Praesent ullamcorper mauris fermentum turpis scelerisque rutrum eget eget turpis.</p>
-					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet. Dolore magna aliquam erat volutpat. Lorem ipsum dolor.</p>
-					<a href="#" class="btn btn-danger">DOWNLOAD NOW</a>
-				</div>
-			</div>
-
-			<div class="wow fadeInUp col-md-5 col-sm-6" data-wow-delay="0.9s">
-				<div class="contact_detail">
-					<div class="section-title">
-						<h2>Keep in touch</h2>
-					</div>
-                                    <?php wp_login_form(  ); ?> 
-					<form id="signin-form">
-						<!--input name="name" type="password" class="form-control" id="name" placeholder="Name"-->
-					  	<input name="userid" type="text" class="form-control" id="userid" placeholder="Email or UserID">
-                                                <input name="password" type="password" class="form-control" id="password" placeholder="Password">
-					  	<!--textarea name="message" rows="5" class="form-control" id="message" placeholder="Message"></textarea-->
-						<div class="col-md-6 col-sm-10">
-							<input name="submit" type="submit" class="form-control" id="submit" value="SEND">
-						</div>
-					</form>
-				</div>
-			</div>
-
-		</div>
-	</div>
-</section>
-
-
-<!-- =========================
-    FOOTER SECTION   
-============================== -->
-<!--footer>
-	<div class="container">
-		<div class="row">
-
-			<div class="col-md-12 col-sm-12">
-				<p class="wow fadeInUp" data-wow-delay="0.6s">Copyright &copy; 2016 Your Company 
-                    
-                    | Design: <a rel="nofollow" href="http://www.templatemo.com/page/1" target="_parent">Templatemo</a></p>
-
-				<ul class="social-icon">
-					<li><a href="#" class="fa fa-facebook wow fadeInUp" data-wow-delay="1s"></a></li>
-					<li><a href="#" class="fa fa-twitter wow fadeInUp" data-wow-delay="1.3s"></a></li>
-					<li><a href="#" class="fa fa-dribbble wow fadeInUp" data-wow-delay="1.6s"></a></li>
-					<li><a href="#" class="fa fa-behance wow fadeInUp" data-wow-delay="1.9s"></a></li>
-					<li><a href="#" class="fa fa-google-plus wow fadeInUp" data-wow-delay="2s"></a></li>
-				</ul>
-
-			</div>
-			
-		</div>
-	</div>
-</footer-->
-
 
 <!-- Back top -->
 <a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>

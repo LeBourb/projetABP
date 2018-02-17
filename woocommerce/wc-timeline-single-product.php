@@ -5,6 +5,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+if(!isset($production_id)) {
+    _e('This order is not included in any production','atelierbourgeons');
+    return;
+}
+    
 ?>
 <style>
     @keyframes dash {

@@ -94,7 +94,7 @@ function my_translate() {
     //ob_get_clean();
    //echo $your_content;
 }
-add_action( 'register_form', 'my_translate', 40);
+//add_action( 'register_form', 'my_translate', 40);
 
 function v_getUrl() {
   $url  = isset( $_SERVER['HTTPS'] ) && 'on' === $_SERVER['HTTPS'] ? 'https' : 'http';
@@ -127,26 +127,28 @@ function v_forcelogin() {
 ///////////////////////////////
 // 1. ADD FIELDS
  
-add_action( 'woocommerce_register_form_start', 'bbloomer_add_name_woo_account_registration' );
+//add_action( 'woocommerce_register_form_start', 'bbloomer_add_name_woo_account_registration' );
+add_action( 'register_form', 'bbloomer_add_name_woo_account_registration' );
+
  
-function bbloomer_add_name_woo_account_registration() {
+function bbloomer_add_name_woo_account_registration() {    
     ?>
  
     <p class="form-row form-row-first">
     <label for="reg_billing_first_name"><?php _e( 'First name', 'woocommerce' ); ?> <span class="required">*</span></label>
-    <input type="text" class="input-text" name="billing_first_name" id="reg_billing_first_name" value="<?php if ( ! empty( $_POST['billing_first_name'] ) ) esc_attr_e( $_POST['billing_first_name'] ); ?>" />
+    <input type="text" class="input-text" name="billing_first_name" id="reg_billing_first_name" value="<?php if ( ! empty( $_POST['billing_first_name'] ) ) esc_attr_e( $_POST['billing_first_name'] ); ?>" required/>
     </p>
  
     <p class="form-row form-row-last">
     <label for="reg_billing_last_name"><?php _e( 'Last name', 'woocommerce' ); ?> <span class="required">*</span></label>
-    <input type="text" class="input-text" name="billing_last_name" id="reg_billing_last_name" value="<?php if ( ! empty( $_POST['billing_last_name'] ) ) esc_attr_e( $_POST['billing_last_name'] ); ?>" />
+    <input type="text" class="input-text" name="billing_last_name" id="reg_billing_last_name" value="<?php if ( ! empty( $_POST['billing_last_name'] ) ) esc_attr_e( $_POST['billing_last_name'] ); ?>" required/>
     </p>
  
     <div class="clear"></div>
  
     <p class="form-row form-row-wide">
     <label for="reg_billing_company"><?php _e( 'Shop Name', 'woocommerce' ); ?> <span class="required">*</span></label>
-    <input type="text" class="input-text" name="billing_company" id="reg_billing_company" value="<?php if ( ! empty( $_POST['billing_company'] ) ) esc_attr_e( $_POST['billing_company'] ); ?>" />
+    <input type="text" class="input-text" name="billing_company" id="reg_billing_company" value="<?php if ( ! empty( $_POST['billing_company'] ) ) esc_attr_e( $_POST['billing_company'] ); ?>" required/>
     </p>
     
     <p class="form-row form-row-wide">
@@ -156,23 +158,23 @@ function bbloomer_add_name_woo_account_registration() {
     
     <p class="form-row form-row-wide">
     <label for="reg_billing_address_1"><?php _e( 'Shop Address 1', 'woocommerce' ); ?> <span class="required">*</span></label>
-    <input type="text" class="input-text" name="billing_address_1" id="reg_billing_address_1" value="<?php if ( ! empty( $_POST['billing_address_1'] ) ) esc_attr_e( $_POST['billing_address_1'] ); ?>" />
+    <input type="text" class="input-text" name="billing_address_1" id="reg_billing_address_1" value="<?php if ( ! empty( $_POST['billing_address_1'] ) ) esc_attr_e( $_POST['billing_address_1'] ); ?>" required/>
     </p>
     
     <p class="form-row form-row-wide">
     <label for="reg_billing_address_1"><?php _e( 'Shop Address 2', 'woocommerce' ); ?></label>
-    <input type="text" class="input-text" name="billing_address_2" id="reg_billing_address_2" value="<?php if ( ! empty( $_POST['billing_address_2'] ) ) esc_attr_e( $_POST['billing_address_2'] ); ?>" />
+    <input type="text" class="input-text" name="billing_address_2" id="reg_billing_address_2" value="<?php if ( ! empty( $_POST['billing_address_2'] ) ) esc_attr_e( $_POST['billing_address_2'] ); ?>" required/>
     </p>
     
     <p class="form-row form-row-wide">
     <label for="reg_billing_city"><?php _e( 'Shop City', 'woocommerce' ); ?> <span class="required">*</span></label>
-    <input type="text" class="input-text" name="billing_city" id="reg_billing_address_2" value="<?php if ( ! empty( $_POST['billing_city'] ) ) esc_attr_e( $_POST['billing_city'] ); ?>" />
+    <input type="text" class="input-text" name="billing_city" id="reg_billing_address_2" value="<?php if ( ! empty( $_POST['billing_city'] ) ) esc_attr_e( $_POST['billing_city'] ); ?>" required/>
     </p>
     
     
     <p class="form-row form-row-wide">
     <label for="reg_billing_postcode"><?php _e( 'Shop ZIP Code', 'woocommerce' ); ?> <span class="required">*</span></label>
-    <input type="text" class="input-text" name="billing_postcode" id="reg_billing_postcode" value="<?php if ( ! empty( $_POST['billing_postcode'] ) ) esc_attr_e( $_POST['billing_postcode'] ); ?>" />
+    <input type="text" class="input-text" name="billing_postcode" id="reg_billing_postcode" value="<?php if ( ! empty( $_POST['billing_postcode'] ) ) esc_attr_e( $_POST['billing_postcode'] ); ?>" required/>
     </p>
     
     
@@ -186,11 +188,16 @@ function bbloomer_add_name_woo_account_registration() {
 ///////////////////////////////
 // 2. VALIDATE FIELDS
  
-add_filter( 'woocommerce_registration_errors', 'bbloomer_validate_name_fields', 10, 3 );
-add_filter( 'registration_errors', 'bbloomer_validate_name_fields',40, 3 );
+//add_filter( 'woocommerce_registration_errors', 'bbloomer_validate_name_fields', 10, 3 );
+add_filter( 'registration_errors', 'bbloomer_validate_name_fields',90, 3 );
  
-function bbloomer_validate_name_fields( $errors, $username, $email ) {
-    global $_POST;
+function bbloomer_validate_name_fields( $errors = '' ) {
+    //global $_POST;
+
+    // Make sure $errors is a WP_Error object
+    if ( empty( $errors ) )
+            $errors = new WP_Error(); 
+    
     if ( isset( $_POST['billing_first_name'] ) && empty( $_POST['billing_first_name'] ) ) {
         $errors->add( 'billing_first_name_error', __( '<strong>Error</strong>: First name is required!', 'woocommerce' ) );
     }
@@ -219,7 +226,7 @@ function bbloomer_validate_name_fields( $errors, $username, $email ) {
 ///////////////////////////////
 // 3. SAVE FIELDS
  
-add_action( 'woocommerce_created_customer', 'bbloomer_save_name_fields' );
+//add_action( 'woocommerce_created_customer', 'bbloomer_save_name_fields' );
 add_action('user_register', 'bbloomer_save_name_fields', 60, 1);
  
 function bbloomer_save_name_fields( $customer_id ) {

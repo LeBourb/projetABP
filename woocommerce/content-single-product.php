@@ -35,6 +35,7 @@ $attachment_ids = $product->get_gallery_image_ids();
 $workshop_id = get_post_meta( $product->get_id(), 'product_workshop_id' , true);
 if(isset($attachment_ids[1]))
     $image = wp_get_attachment_url( $attachment_ids[1] );
+$product_image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->get_id() ), 'single-post-thumbnail' );
 ?>
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/viewer.js"></script>
 <link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/viewer.css">
@@ -117,7 +118,7 @@ if(isset($attachment_ids[1]))
             text-align: center;
         }
         #product-intro {
-            background: url(<?php echo $image ?  $image : ''; ?>) 50% 0 repeat-y fixed;
+            background: url(<?php echo $product_image[0] ?  $product_image[0] : ''; ?>) 50% 0 repeat-y fixed;
             -webkit-background-size: cover;
             background-size: cover;
             background-position: center center;
@@ -148,7 +149,11 @@ if(isset($attachment_ids[1]))
 				<h3 class="wow bounceIn" data-wow-delay="0.9s"><?php echo $product->get_title(); ?></h3>
 				<h1 class="wow fadeInUp" data-wow-delay="1.6s"><?php echo $product->get_data()['short_description']; ?></h1>
 				<a href="#overview" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">LEARN MORE</a>
-				<a id="reservation" href="#register" class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s">RESERVE NOW</a>
+                                <?php if(is_user_logged_in()) { ?>
+                                    <a id="reservation" class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s">RESERVE NOW</a>
+                                <?php } else  { ?>
+                                    <a id="reservation" href="<?php echo Theme_My_Login::get_page_link( 'login' ); ?>" class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s">RESERVE NOW</a>
+                                <?php }?>        
 			</div>
 
 
@@ -213,8 +218,8 @@ if(isset($attachment_ids[1]))
                 <a class="sectionLink-11-196" href="#exterior" data-reactid="98">Workshop</a>
             </div>                  
         </div><!-- react-text: 99 --><!-- /react-text -->
-        <div id="reservation" class="container-15-202" >
-            <button class="btn btn-lg btn-danger">RESERVATION</button>
+        <div id="reservation" class="container-15-202" >            
+            <a class="btn btn-lg btn-danger" href="<?php if(!is_user_logged_in()) { echo Theme_My_Login::get_page_link( 'login' ); } ?>">RESERVATION</a>            
         </div> 
     </div>
 </div>
@@ -587,16 +592,16 @@ $("#bar1").ready(function() {
 var viewer = new Viewer(document.getElementById('am-container'), {toolbar:false, title:false});
 </script>
 <script type='text/javascript'>
-    
-$(document).on('click', '#reservation', function(){ 
-  $('#modal-reservation').addClass('modal-open');
-  $('#modal-login').addClass('modal-open');
+<?php if(is_user_logged_in()) { ?>            
+$(document).on('click', '#reservation', function(){     
+    $('#modal-reservation').addClass('modal-open');    
 });
 
 $(document).on('click','#modal-reservation .modal-close' ,function(){ 
- $('#modal-reservation').removeClass('modal-open');
- $('#modal-login').removeClass('modal-open');
+ $('#modal-reservation').removeClass('modal-open'); 
 });
+<?php } ?>
+
 
 </script>
     
@@ -714,7 +719,7 @@ div#reservation {
     display: flex;
 }
 
-div#reservation button.btn {
+div#reservation .btn {
     margin-top: 0;
     margin-left: auto;
     margin-right: auto;
