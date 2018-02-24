@@ -12,7 +12,7 @@ if ( ! function_exists( 'order_producion_meta_boxes' ) )
 {
     function order_producion_meta_boxes()
     {
-        add_meta_box( 'mv_order_producion_field', __('Production','woocommerce'), 'order_production_field_for_packaging', 'shop_order', 'side', 'core' );
+        //add_meta_box( 'mv_order_producion_field', __('Production','woocommerce'), 'order_production_field_for_packaging', 'shop_order', 'side', 'core' );
     }
 }
 
@@ -41,7 +41,7 @@ if ( ! function_exists( 'admin_order_item_production_status' ) ) {
                                    echo "NO PRODUCTION";
                                } else {
                                    $production = get_post($production_id);                                   
-                                   echo '<a href="' . get_edit_post_link($production_id) .'">' . get_post_status( $production_id) . '</a>'; 
+                                   echo '<a href="' . get_edit_post_link($production_id) .'"><mark>' . get_post_status( $production_id) . '</mark></a>'; 
                                }
                                 }
                                //$production_ids = $proget_post_meta( $post->ID, '_production_id', false );
@@ -57,13 +57,16 @@ if ( ! function_exists( 'admin_wc_after_order_itemmeta' ) )
 {
     function admin_wc_after_order_itemmeta( $item_id, $item, $_product ) {
         global $wpdb;
+        $production_id = wc_get_not_stated_production_item ($_product->get_id());
+        if($production_id != '')
+            return;
         ?>
         <script type="text/javascript">
         jQuery(function(){
 
-            var create_production = function(elem) {
+            var go_to_production = function(elem) {
                 
-                jQuery( '#mv_order_producion_field' ).block({
+                jQuery( '#woocommerce-order-items' ).block({
                     message: null,
                     overlayCSS: {
                             background: '#fff',
@@ -71,7 +74,7 @@ if ( ! function_exists( 'admin_wc_after_order_itemmeta' ) )
                     }
                 });
                 var data = {
-                    action:    'woocommerce_create_production',
+                    action:    'woocommerce_go_to_production',
                     post_id:   woocommerce_admin_meta_boxes.post_id,
                     order_item_id : jQuery(elem.target).attr('order_item_id')
                 };
@@ -79,20 +82,20 @@ if ( ! function_exists( 'admin_wc_after_order_itemmeta' ) )
                 jQuery.post( woocommerce_admin_meta_boxes.ajax_url, data, function( response ) {
                     //jQuery( '#mv_order_producion_field input[name="production_id"]' ).prepend( response );
                     //jQuery( '#mv_order_producion_field input[name="production_id"]' ).attr('value',response);
-                    jQuery( "#mv_order_producion_field #production-info-meta" ).replaceWith( response );
-                    jQuery( '#mv_order_producion_field' ).unblock();
+                    jQuery( "#woocommerce-order-items .woocommerce_order_items_wrapper.wc-order-items-editable" ).replaceWith( response );
+                    jQuery( '#woocommerce-order-items' ).unblock();
                 });
 
                 return false;
             }
 
             jQuery( '#woocommerce-order-items' )
-                .on( 'click', '.create_production_btn', create_production );
+                .on( 'click', '.go_to_production_btn', go_to_production );
             
         });
         
         </script>
-        <a order_item_id="<?php echo $item_id; ?>" class="button button-small create_production_btn"><?php _e( 'Go to Production', 'woocommerce-deposits' ); ?></a>
+        <a order_item_id="<?php echo $item_id; ?>" class="button button-small go_to_production_btn"><?php _e( 'Go to Production', 'woocommerce-deposits' ); ?></a>
         
         <?php
     }
@@ -177,13 +180,13 @@ function order_production_field_display_admin_order_meta($order){
     }
 }
 
-add_action( 'wp_ajax_woocommerce_create_production', 'wc_order_custom_create_production_item' );
+add_action( 'wp_ajax_woocommerce_go_to_production', 'wc_order_custom_create_production_item' );
 
         
 /**
 * Add an attribute row.
 */
-function wc_order_custom_create_production_item() {
+function wc_order_custom_associate_with_production_item() {
     ob_start();
 
     //check_ajax_referer( 'add-advanced-attribute', 'security' );
@@ -200,16 +203,15 @@ function wc_order_custom_create_production_item() {
     //$production_ids = wc_add_prod_items( sanitize_text_field( $_POST['post_id'] ) );
     $order_id = sanitize_text_field( $_POST['post_id'] ) ;
     $order_item_id = sanitize_text_field( $_POST['order_item_id'] ) ;
-    $production_id = wc_add_prod_item( $order_id ,  $order_item_id );
+    $production_id = wc_associate_order_item_to_prod_item( $order_id ,  $order_item_id );
        
+    WC_Meta_Box_Order_Items::output();
    /* foreach( $production_ids as $production_id ) {
         // This method uses `add_post_meta()` instead of `update_post_meta()`
         add_post_meta( $_POST['post_id'], '_production_id', $production_id );
     }*/
     
-    $post = get_post($_POST['post_id']);
-    include 'wc-admin-view-order-meta-production.php';
-       
+      
        
     //echo 'hello: ' . $production_id;
 

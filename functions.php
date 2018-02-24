@@ -51,8 +51,11 @@ if ( storefront_is_woocommerce_activated() ) {
         require 'inc/woocommerce/wc-product-attribute-supply.php';
         require 'inc/woocommerce/wc-product-attribute-fabrics.php';
         require 'inc/woocommerce/wc-product-attribute-stamps.php';
+        require 'inc/woocommerce/wc-product-attribute-productions.php';
         require 'inc/woocommerce/class-wc-product-attribute-supply-form.php';
-        require 'inc/woocommerce/class-wc-product-attribute-fabrics-form.php';
+        require 'inc/woocommerce/class-wc-product-attribute-fabrics-form.php';        
+        require 'inc/woocommerce/wc-prod-admin-variable-pre-sale.php';
+        require 'inc/woocommerce/wc-custom-product-price.php';
         require 'inc/woocommerce/wc-custom-product-supplies-tab.php';
         require 'inc/woocommerce/wc-checkout_terms_conditions_popup.php';
         
@@ -672,6 +675,14 @@ function create_post_type_production() {
       'labels' => array(
         'name' => __( 'Workshops' ),
         'singular_name' => __( 'Workshop' )
+      ),
+      'supports' => array (
+          'title',
+        'editor', 
+        'excerpt', 
+        'thumbnail', 
+        'custom-fields', 
+        'revisions' 
       ),
       'public' => true,
       'has_archive' => true,

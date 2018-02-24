@@ -219,7 +219,7 @@ $product_image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->g
             </div>                  
         </div><!-- react-text: 99 --><!-- /react-text -->
         <div id="reservation" class="container-15-202" >            
-            <a class="btn btn-lg btn-danger" href="<?php if(!is_user_logged_in()) { echo Theme_My_Login::get_page_link( 'login' ); } ?>">RESERVATION</a>            
+            <a class="btn btn-lg btn-danger" <?php if(!is_user_logged_in()) { echo 'href="'. Theme_My_Login::get_page_link( 'login' ) .'"'; } ?>>RESERVATION</a>            
         </div> 
     </div>
 </div>
@@ -375,9 +375,9 @@ $product_image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->g
     </section>
     
     <!-- =========================
-    SPEAKERS SECTION   
+    PRODUCTS SECTION   
 ============================== -->
-<section id="speakers" class="parallax-section">
+<section id="products" class="parallax-section">
 	<div class="container">
 		<div class="row">
 
@@ -390,7 +390,7 @@ $product_image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->g
 
 			<!-- Testimonial Owl Carousel section
 			================================================== -->
-			<div id="owl-speakers" class="owl-carousel">
+			<div id="owl-products" class="owl-carousel">
                             
                             <?php                                 
                                 $data = get_post_meta( $product->get_id(), 'product_fabrics', true );
@@ -416,9 +416,9 @@ $product_image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->g
                                                 
                                             
                                             echo '<div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.9s">
-                                                    <div class="speakers-wrapper">
-                                                        <img src="'. $image_url[0] . '" class="img-responsive" alt="speakers">
-                                                        <div class="speakers-thumb">
+                                                    <div class="products-wrapper">
+                                                        <img src="'. $image_url[0] . '" class="img-responsive" alt="products">
+                                                        <div class="products-thumb">
                                                             <a href="' . get_permalink($supplier_id) . '"><h3>' . $supplier . '</h3></a>
                                                             <h6>Price: ' . $price .  '</h6>
                                                         </div>
@@ -429,47 +429,7 @@ $product_image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->g
                                 }
                             ?>
 
-				<!--
-				<div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.6s">
-					<div class="speakers-wrapper">
-						<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/speakers-img2.jpg" class="img-responsive" alt="speakers">
-							<div class="speakers-thumb">
-								<h3>David Yoon</h3>
-								<h6>Creative Director</h6>
-							</div>
-					</div>
-				</div>
-
-				<div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.9s">
-					<div class="speakers-wrapper">
-						<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/speakers-img3.jpg" class="img-responsive" alt="speakers">
-							<div class="speakers-thumb">
-								<h3>Je Mary Lee</h3>
-								<h6>Web Specialist</h6>
-							</div>
-					</div>
-				</div>
-
-				<div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.6s">
-					<div class="speakers-wrapper">
-						<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/speakers-img4.jpg" class="img-responsive" alt="speakers">
-							<div class="speakers-thumb">
-								<h3>Johnathan Doe</h3>
-								<h6>Frontend Dev</h6>
-							</div>
-					</div>
-				</div>
-
-				<div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.6s">
-					<div class="speakers-wrapper">
-						<img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/speakers-img5.jpg" class="img-responsive" alt="speakers">
-							<div class="speakers-thumb">
-								<h3>Elite Hamilton</h3>
-								<h6>Marketing Guru</h6>
-							</div>
-					</div>
-				</div>
-				-->
+				
 			</div>
 
 		</div>
@@ -482,10 +442,13 @@ $product_image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->g
 <?php 
         global $post;
         $production_id = null;
-        foreach( get_post_ids_by_meta_key_and_value('_product_id', $post->ID) as $prod_id) {
-            if(get_post_status($prod_id) == 'wc-not-started') {
-                $production_id = $prod_id;
-                break;
+        $prod_ids = get_post_ids_by_meta_key_and_value('_product_id', $post->ID);
+        if(is_array($prod_ids)) {
+            foreach( $prod_ids as $prod_id) {
+                if(get_post_status($prod_id) == 'wc-not-started') {
+                    $production_id = $prod_id;
+                    break;
+                }
             }
         }
         if ($production_id != null) {

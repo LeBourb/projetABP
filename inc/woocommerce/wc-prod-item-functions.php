@@ -68,56 +68,73 @@ function wc_add_prod_items( $order_id ) {
 
 }
 
-function wc_add_prod_item( $order_id , $order_item_id ) {
-	$prod_id = absint( $order_id );
-        
+function wc_associate_order_item_to_prod_item( $order_id , $order_item_id ) {
+    $order = wc_get_order($order_id);//<--check this line
 
-	if ( ! $prod_id ) {
-		return false;
-	}
-        
-        $order = wc_get_order($order_id);//<--check this line
+    $paymethod = $order->payment_method_title;
+    $orderstat = $order->get_status();
 
-        $paymethod = $order->payment_method_title;
-        $orderstat = $order->get_status();
-        
-        
-        $item = $order->get_item($order_item_id);
-        $production_id = $item->get_meta('_production_id');
-        if($production_id == '') {            
-            $array_ids = array();
 
-            $product_name = $item['name'];
-            $product_id = $item['product_id'];
-            $product_variation_id = $item['variation_id'];
-            $defaults = array(
-                    'prod_item_name' => '',
-                    'prod_item_type' => 'line_item',
-            );
-            $product = wc_get_product( $product_id );
-             
-            $production_ids = get_post_ids_by_meta_key_and_value('_product_id', $product_id);
-            if($production_ids == null){
-                $production_id = wp_insert_post(array('post_title'=> $product->get_name().'_production', 'post_type'=>'shop_production', 'post_content'=>'demo text' , 'post_status' => 'wc-not-started'));
-                add_post_meta($production_id, '_product_id', $product_id, true);        
-            }elseif (is_array($production_ids)) {
-                foreach($production_ids as $productionid) {
-                    if(get_post_status($productionid) == 'wc-not-started') {
-                        $production_id = $productionid;
-                        break;
-                    }                    
-                }
-                if($production_id == null){
-                    $production_id = wp_insert_post(array('post_title'=> $product->get_name().'_production', 'post_type'=>'shop_production', 'post_content'=>'demo text' , 'post_status' => 'wc-not-started'));
-                    add_post_meta($production_id, '_product_id', $product_id, true);        
-                }
-            }  
-            $item->add_meta_data( '_production_id', $production_id, true );
-            $item->save_meta_data();
+    $item = $order->get_item($order_item_id);
+    $production_id = $item->get_meta('_production_id');
+    if($production_id == '') {            
+        $array_ids = array();
+
+        $product_name = $item['name'];
+        $product_id = $item['product_id'];
+        $product_variation_id = $item['variation_id'];
+        $defaults = array(
+                'prod_item_name' => '',
+                'prod_item_type' => 'line_item',
+        );
+        $product = wc_get_product( $product_id );
+
+        $production_ids = get_post_ids_by_meta_key_and_value('_product_id', $product_id);
+        foreach($production_ids as $production_id) {
+            if (get_post_status($production_id) == 'wc-not-started' ) {
+                $new_production_id = $production_id;
+                break;
+            }
         }
-        
-        return $production_id;
+        if( $new_production_id == null ) {
+            return -1;
+        }
+        $item->add_meta_data( '_production_id', $new_production_id, true );
+        $item->save_meta_data();
+    }
 
+    return $new_production_id;
+
+}
+
+
+
+function wc_add_prod_item( $product_id ) {
+    $production_id = wc_get_not_stated_production_item ($product_id);
+    $product = wc_get_product($product_id);
+    $numb = wc_get_count_production_items($product_id);
+    if($production_id == '') {
+        $production_id = wp_insert_post(array('post_title'=> $product->get_name().'_production_' . ++$numb, 'post_type'=>'shop_production', 'post_content'=>'demo text' , 'post_status' => 'wc-not-started'));
+        add_post_meta($production_id, '_product_id', $product_id, true);        
+    }
+    return $production_id; 
+}
+
+function wc_get_not_stated_production_item ($product_id) {
+    $production_ids = get_post_ids_by_meta_key_and_value('_product_id', $product_id);
+    if(!is_array($production_ids))
+        return '';
+    foreach($production_ids as $production_id) {
+        if (get_post_status($production_id) == 'wc-not-started' ) {
+            return $production_id;            
+        }
+    }
+    return '';
+}
+
+function wc_get_count_production_items( $product_id ) {
+    $production_ids = get_post_ids_by_meta_key_and_value('_product_id', $product_id);
+    return count($production_ids);
 }
 
 function wc_get_prod_total_ordered_item( $production_id ) {

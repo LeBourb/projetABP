@@ -36,6 +36,7 @@
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/custom.js"></script>
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/easy-pie-chart.js"></script>
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/canvas.js"></script>
+<script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/sly.js"></script>
  
 <!-- Multi Steps Form 
 <link rel="stylesheet" type="text/css" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/reset.css"/>
@@ -136,11 +137,13 @@
                                 
                                 echo '<li><a href="' . get_home_url() . '" >Home</a>'
                                         . '<div class="subnavContainer" style="display:none;">
-                                            <a class="subnav" href="/us/ff-zero-1#user-experience">UX</a>' 
+                                            <a class="subnav" href="#overview">Overview</a>' 
                                             . 
-                                            '<a class="subnav" href="/us/ff-zero-1#interior">Interior</a>'
+                                            '<a class="subnav" href="#products">Our Products</a>'                                            
+                                            . 
+                                            '<a class="subnav" href="#partner">Our Partners</a>'
                                             .
-                                            '<a class="subnav" href="/us/ff-zero-1#powertrain">Powertrain</a>' 
+                                            '<a class="subnav" href="#materials">Materials</a>' 
                                             . '</div>'
                                         . '</li>'; 
                                 //echo '<li><a href="' . get_permalink( wc_get_page_id ( 'shop' )) . '" >Shop</a></li>';                                            

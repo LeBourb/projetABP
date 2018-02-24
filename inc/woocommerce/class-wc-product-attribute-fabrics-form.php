@@ -11,7 +11,7 @@
 */
 return;
 
-class Product_Attribute_Fabrics_Form {
+class Product_Attribute_Productions_Form {
 
   // Constructor
     function __construct() {
@@ -57,9 +57,9 @@ class Product_Attribute_Fabrics_Form {
         
         
         $ajax_events = array(
-            'add_product_fabrics'                                    => false,
-            'add_new_product_fabrics'                                => false,
-            'save_product_fabrics'                                  => false
+            'add_product_productions'                                    => false,
+            'add_new_product_productions'                                => false,
+            'save_product_productions'                                  => false
         );
         // rely on woocommerce attribute
         foreach ( $ajax_events as $ajax_event => $nopriv ) {
@@ -342,7 +342,7 @@ class Product_Attribute_Fabrics_Form {
     /**
     * Add an attribute row.
     */
-    function add_product_fabrics() {
+    function add_product_productions() {
            ob_start();
 
            //check_ajax_referer( 'add-advanced-attribute', 'security' );
@@ -534,6 +534,6 @@ class Product_Attribute_Fabrics_Form {
     }
     
 }
-new Product_Attribute_Fabrics_Form();
+new Product_Attribute_Productions_Form();
 
 ?>

@@ -13,6 +13,22 @@
  */
 
 get_header(); ?>
+            <div class="featherlight" style="display: none">
+                        <div class="content-nav"></div>
+                        <div class="featherlight-content">
+                            
+                            <button class="featherlight-close-icon featherlight-close" aria-label="Close" tabindex="-1">✕</button>
+                            <div id="shipping-modal" class="featherlight-inner">
+                                <div id="shipping-modal-content">
+                                    <div class="content-area">
+                                        
+                                    </div>                                  
+                                </div>
+                              </div>
+                            
+                        </div>
+                    </div>
+
 
 	<div id="primary" class="content-area">
 		<!--main id="main" class="site-main" role="main"-->
