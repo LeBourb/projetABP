@@ -137,6 +137,15 @@ $product_image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->g
         .go-top {
             bottom: 5em;
         }
+        
+        .product-description {
+            min-width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        div.modal-product-details.product .images {
+            margin-top: 20px;
+        }
     </style>
     <!-- =========================
     INTRO SECTION   
@@ -150,7 +159,7 @@ $product_image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->g
 				<h1 class="wow fadeInUp" data-wow-delay="1.6s"><?php echo $product->get_data()['short_description']; ?></h1>
 				<a href="#overview" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">LEARN MORE</a>
                                 <?php if(is_user_logged_in()) { ?>
-                                    <a id="reservation" class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s">RESERVE NOW</a>
+                                    <a id="reservation" class="btn btn-lg btn-danger smoothScroll wow fadeInUp btn-reservation" data-wow-delay="2.3s">RESERVE NOW</a>
                                 <?php } else  { ?>
                                     <a id="reservation" href="<?php echo Theme_My_Login::get_page_link( 'login' ); ?>" class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s">RESERVE NOW</a>
                                 <?php }?>        
@@ -169,13 +178,15 @@ $product_image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->g
     <div class="modal-fade-screen">
         <div class="modal-inner">
         <div class="modal-close" for="modal-1"></div>
-        <div class="product">
+        <div class="modal-product-details product">
             <div class="images">
                 <div class="woocommerce-product-gallery__image">
                     <img class="wp-post-image"></img>
                 </div>
             </div>
-            <?php do_action( 'woocommerce_single_product_summary' ); ?>
+            <div class="product-description">
+                <?php do_action( 'woocommerce_single_product_summary' ); ?>
+            </div>
         </div>
     </div>
       
@@ -219,7 +230,7 @@ $product_image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->g
             </div>                  
         </div><!-- react-text: 99 --><!-- /react-text -->
         <div id="reservation" class="container-15-202" >            
-            <a class="btn btn-lg btn-danger" <?php if(!is_user_logged_in()) { echo 'href="'. Theme_My_Login::get_page_link( 'login' ) .'"'; } ?>>RESERVATION</a>            
+            <a class="btn btn-lg btn-danger btn-reservation" <?php if(!is_user_logged_in()) { echo 'href="'. Theme_My_Login::get_page_link( 'login' ) .'"'; } ?>>RESERVE NOW</a>            
         </div> 
     </div>
 </div>
@@ -393,34 +404,66 @@ $product_image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->g
 			<div id="owl-products" class="owl-carousel">
                             
                             <?php                                 
-                                $data = get_post_meta( $product->get_id(), 'product_fabrics', true );
+                                $data = get_post_meta( $product->get_id(), 'product_fabrics', true );                                
                                 if(is_array($data) && array_key_exists('product_fabric_id',$data)){
-                                    $product_fabric_ids = $data['product_fabric_id'];    
-                                    $index        = -1;
-                                    $quantities = $data['product_fabric_quantity'];  
+                                    $product_fabric_ids = $data['product_fabric_id'] ;    
+                                    $index        = -1;                                    
                                     if($product_fabric_ids) {
                                         foreach ( $product_fabric_ids as $fabric_id ) {
                                             $index++;
-                                            $quantity = $quantities[$index];                                    
                                             $image_attachment_id = null;
                                             $image_url = null;
                                             $price = null;
                                             $supplier = null;
 
 
-                                                $image_attachment_id = get_post_meta( $fabric_id, 'image_attachment_id', true);
-                                                $image_url = wp_get_attachment_image_src( $image_attachment_id );
-                                                $price = get_post_meta( $fabric_id, 'price_term', true);
-                                                $supplier_id = get_post_meta( $fabric_id, 'supplier_id', true);
-                                                $supplier =get_the_title( $supplier_id );
+                                            $image_attachment_id = get_post_meta( $fabric_id, 'image_attachment_id', true);
+                                            $image_url = wp_get_attachment_image_src( $image_attachment_id );
+                                            $price = get_post_meta( $fabric_id, 'price_term', true);
+                                            $supplier_id = get_post_meta( $fabric_id, 'supplier_id', true);
+                                            $fabric = get_term_by('id', $fabric_id, 'pa_fabric');
                                                 
                                             
                                             echo '<div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.9s">
                                                     <div class="products-wrapper">
                                                         <img src="'. $image_url[0] . '" class="img-responsive" alt="products">
                                                         <div class="products-thumb">
-                                                            <a href="' . get_permalink($supplier_id) . '"><h3>' . $supplier . '</h3></a>
-                                                            <h6>Price: ' . $price .  '</h6>
+                                                            <h3>' . $fabric->name . '</h3></a>  
+                                                                <h4>' . $fabric->description . '</h4>
+                                                                <p>Supplier: <a href="' . get_permalink($supplier_id) . '">' . get_the_title($supplier_id) . '</a></p>
+                                                        </div>
+                                                    </div>
+                                                    </div>';
+                                        }
+                                    }
+                                }
+                                $data += get_post_meta( $product->get_id(), 'product_supplies', true );
+                                if(is_array($data) && array_key_exists('product_supply_id',$data)){
+                                    $product_supply_ids = $data['product_supply_id'] ;    
+                                    $index        = -1;                                    
+                                    if($product_supply_ids) {
+                                        foreach ( $product_supply_ids as $supply_id ) {
+                                            $index++;
+                                            $image_attachment_id = null;
+                                            $image_url = null;
+                                            $price = null;
+                                            $supplier = null;
+
+
+                                            $image_attachment_id = get_post_meta( $supply_id, 'image_attachment_id', true);
+                                            $image_url = wp_get_attachment_image_src( $image_attachment_id );
+                                            $price = get_post_meta( $supply_id, 'price_term', true);
+                                            $supplier_id = get_post_meta( $supply_id, 'supplier_id', true);
+                                            $supply = get_term_by('id', $supply_id, 'pa_supply');
+                                                
+                                            
+                                            echo '<div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.9s">
+                                                    <div class="products-wrapper">
+                                                        <img src="'. $image_url[0] . '" class="img-responsive" alt="products">
+                                                        <div class="products-thumb">
+                                                            <h3>' . $supply->name . '</h3></a>  
+                                                                <h4>' . $supply->description . '</h4>
+                                                                <p>Supplier: <a href="' . get_permalink($supplier_id) . '">' . get_the_title($supplier_id) . '</a></p>
                                                         </div>
                                                     </div>
                                                     </div>';
@@ -436,118 +479,7 @@ $product_image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->g
 	</div>
 </section>
     
-<!-- =========================
-    PRODUCTIon SECTION   
-============================== -->
-<?php 
-        global $post;
-        $production_id = null;
-        $prod_ids = get_post_ids_by_meta_key_and_value('_product_id', $post->ID);
-        if(is_array($prod_ids)) {
-            foreach( $prod_ids as $prod_id) {
-                if(get_post_status($prod_id) == 'wc-not-started') {
-                    $production_id = $prod_id;
-                    break;
-                }
-            }
-        }
-        if ($production_id != null) {
-            $date_final = wc_get_time_ordering_closure($production_id);
-            $date_diff = date_diff ( new DateTime() , $date_final );   
-            
-        ?>
-<section id="timeline" class="parallax-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 wow bounceIn">
-				<div class="section-title">
-					<h2>Time Planning</h2>
-					<p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet.</p>
-				</div>
-                
-				<div class="section-title">
-					<h2>Remaining Time before closure</h2>				
-				
-           <ul class="pie-time">
-  <li class="chart" data-percent="75"><span><?php echo $date_diff->d;?></span>Jours</li>
-  <li class="chart" data-percent="15"><span><?php echo $date_diff->h;?></span>Heures</li>  
-</ul>
-                                        
-                                        </div>
-                
-                <div class="section-title">
-                          <!-- PRODUCTION MINIMUM ORDER BAR -->
-     <style>
-         .bar{
-            position:absolute;
-            height:25px;
-            width:300px;
-            border:solid #999 1px;
-            background-color:#ccc;
-        }
-         </style>
-        <script>
-$("#bar1").ready(function() {
-    $('.count').each(function () {
-      $(this).prop('Counter',0).animate({
-          Counter: $(this).text()                
-      }, {
-          duration: 4000,
-          easing: 'swing',
-          step: function (now) {
-           $(this).text(Math.ceil(now));
-          }
-      });
-    });
-    $('.meter').each(function () {
-      $(this).prop('width',0).animate({                
-          width: $(this).data("width") + "%",
-      }, {
-          duration: 4000,
-          easing: 'swing'                
-      });
-    });
-});
-        </script>
-     <div style="margin:40px auto; width:302px;">
-	
-        <?php
-        $qty = wc_get_prod_total_ordered_item($production_id);
-        $min_order = wc_get_prod_min_order($production_id);
-        $max = $min_order + 10;
-        if ($qty > $min_order ) {
-            $max = $qty + 10;
-        }
-        //echo '<div style="text-align:center;"><h4>Current Order: ' . $qty . ' </h4></div>';
-        echo '<div style="text-align:center;"><h4>Minimum Order: ' . $min_order . '</h4></div>';
-        echo '</div>';
-        echo '<div id="bar1" class="progress-bar-indication" style="position:relative; height:3em;">
-             <span class="ind" style="width: 2px;margin-left:' . ($min_order/$max)*100 . '%; position: absolute;height: 120%;vertical-align: middle;z-index: 1000;background-color: blue;">    
-  </span>
-  <span class="meter" style="position:absolute; width:0" data-width="'. ($qty/$max)*100 . '">    
-  </span>
-<span class="count" style="width:100%; position:absolute; font-size:2em" data-width="'. ($qty/$max)*100 . '">
-    ' . ($qty) . '
-  </span>  
-</div>';
-         
-        ?>
-         
-	
-	<!--<span id="barInputLabel"></span>-->
 
-                </div>
-			</div>
-		
-            </div>
-        
-        <div class="row">
-            <?php include 'wc-timeline-single-product.php';?> 
-    </div>
-     
-</section>
-        <?php }
-        ?>
     <!-- Back top -->
     <a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
 <!--/div-->
@@ -578,10 +510,10 @@ $(document).on('click','#modal-reservation .modal-close' ,function(){
     .container-11-189 {
             width: 100%;
             color: white;
-
             z-index: 50;            
             font-family: Roboto;
             background-color: black;
+            display: none;
     }
     
     .container {
@@ -606,10 +538,21 @@ $(document).on('click','#modal-reservation .modal-close' ,function(){
         line-height: 30px;
 
     }
+    
+    .modal-product-details {
+        display:flex;
+        flex-wrap: wrap;
+    }
+    
+    .modal-product-details .images {
+        flex-grow: 1;
+    }
+    
     @media screen and (min-width: 1024px) {
         .container-11-189 {            
             position: fixed;
             bottom: 0;
+            display:block;
         }
         .limitWidth-11-191 {
             display: flex;
@@ -672,10 +615,16 @@ $(document).on('click','#modal-reservation .modal-close' ,function(){
 .modal.modal-open .modal-fade-screen {    
     visibility: visible;
     opacity: 1;
+    padding: 0em;
 }
 
 .modal.modal-open .modal-fade-screen .modal-inner {
-    top: 5%;
+    width: 90%;
+    max-height: 100%;
+}
+
+.modal-close {
+    z-index: 100;
 }
  
 div#reservation {

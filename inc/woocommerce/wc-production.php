@@ -139,6 +139,39 @@ class WC_Production extends WC_Data  {
 	public function get_slug( $context = 'view' ) {
 		return $this->get_prop( 'slug', $context );
 	}
+        
+        /**
+	 * Get production funding end date.
+	 *
+	 * @since 3.0.0
+	 * @param  string $context
+	 * @return WC_DateTime|NULL object if the date is set or null if there is no date.
+	 */
+	public function get_funding_end( $context = 'view' ) {
+		return $this->get_meta( 'funding_end', true, $context );
+	}
+        
+        /**
+	 * Get estimated shipping start date.
+	 *
+	 * @since 3.0.0
+	 * @param  string $context
+	 * @return WC_DateTime|NULL object if the date is set or null if there is no date.
+	 */
+	public function get_estimated_shipping_start( $context = 'view' ) {
+		return $this->get_meta( 'estimated_shipping_start', true, $context );
+	}
+        
+        /**
+	 * Get estimated shipping end date.
+	 *
+	 * @since 3.0.0
+	 * @param  string $context
+	 * @return WC_DateTime|NULL object if the date is set or null if there is no date.
+	 */
+	public function get_estimated_shipping_end( $context = 'view' ) {
+		return $this->get_meta( 'estimated_shipping_end', true, $context );
+	}
 
 	/**
 	 * Get product created date.
@@ -171,8 +204,8 @@ class WC_Production extends WC_Data  {
 	public function get_production_minimum( $context = 'view' ) {
 		return $this->get_meta( 'production_minimum', true, $context );
 	}
-
-
+        
+        
 	/**
 	 * Get product modified date.
 	 *

@@ -37,7 +37,7 @@ if ( empty( $prices['price'] ) ) {
         $variations = $that->get_available_variations( );
         $pre_sale_price = wc_price(get_post_meta($variations[0]['variation_id'],'pre_sale_price',true));
         $priv_sale_price = wc_price(get_post_meta($variations[0]['variation_id'],'priv_sale_price',true));
-        $regular_price = $variations[0]['display_regular_price'];        
+        $regular_price = wc_price($variations[0]['display_regular_price']);        
     }else {
         $pre_sale_price = wc_price(get_post_meta($that->get_id(),'pre_sale_price',true));
         $priv_sale_price = wc_price(get_post_meta($that->get_id(),'priv_sale_price',true));
@@ -47,11 +47,11 @@ if ( empty( $prices['price'] ) ) {
 
     
     return '<b id="price-field" class="price crowdfunding" itemprop="offers" itemscope="" itemtype="//schema.org/Offer">'
-    . '<span class="pre-sale">' . $priv_sale_price . '<small>Pro-Sale</small></span>'
-            . '<span class="pre-sale"><del>' . $pre_sale_price . '</del><small>Pre-Sale</small></span>'
+    . '<span class="priv-sale">' . $priv_sale_price . '<small>Priv-Sale</small></span>'            
             . '<span class="regular"><del>' . $regular_price .'</del> <small>Regular</small></span> '
             . '</b>';
     //wc_price($that->get_regular_price())
+    //. '<span class="pre-sale"><del>' . $pre_sale_price . '</del><small>Pre-Sale</small></span>'
 }
 
 

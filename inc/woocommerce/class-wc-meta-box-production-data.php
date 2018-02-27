@@ -201,6 +201,18 @@ class WC_Meta_Box_Production_Data {
                                                 <p class="form-field form-field-wide"><label for="production_end"><?php _e( 'Production end (estimation):', 'woocommerce' ) ?></label>
                                                     <input type="date" class="date-picker" name="production_end" id="production_end" maxlength="10" value="<?php echo $production->get_production_end(); ?>" />
 						</p>
+                                                
+                                                <p class="form-field form-field-wide"><label for="funding_end"><?php _e( 'Funding end:', 'woocommerce' ) ?></label>
+                                                    <input type="datetime-local" class="date-picker" name="funding_end" id="funding_end" maxlength="10" value="<?php echo $production->get_funding_end(); ?>" />
+						</p>
+                                                
+                                                <p class="form-field form-field-wide"><label for="estimated_shipping_start"><?php _e( 'Estimated shipping start:', 'woocommerce' ) ?></label>
+                                                    <input type="date" class="date-picker" name="estimated_shipping_start" id="estimated_shipping_start" maxlength="10" value="<?php echo $production->get_estimated_shipping_start(); ?>" />
+						</p>
+                                                
+                                                <p class="form-field form-field-wide"><label for="estimated_shipping_end"><?php _e( 'Estimated shipping end:', 'woocommerce' ) ?></label>
+                                                    <input type="date" class="date-picker" name="estimated_shipping_end" id="estimated_shipping_end" maxlength="10" value="<?php echo $production->get_estimated_shipping_end(); ?>" />
+						</p>
 
 						<p class="form-field form-field-wide"><label for="production_minimum"><?php _e( 'Minimum Order:', 'woocommerce' ) ?></label>
                                                     <input type=number name="production_minimum" step=1 value="<?php echo intval( $production->get_production_minimum() ); ?>" /> 
@@ -320,6 +332,34 @@ class WC_Meta_Box_Production_Data {
                             $production->update_meta_data( 'production_end', $date );
                         }
 		}
+                
+                if ( !empty( $_POST['funding_end'] ) ) {
+			$date =  $_POST['funding_end'];
+                        if(!$production->meta_exists( 'funding_end' ) ) {
+                            $production->add_meta_data( 'funding_end' , $date, true);
+                        }else {
+                            $production->update_meta_data( 'funding_end', $date );
+                        }
+		}
+                
+                if ( !empty( $_POST['estimated_shipping_start'] ) ) {
+			$date =  $_POST['estimated_shipping_start'];
+                        if(!$production->meta_exists( 'estimated_shipping_start' ) ) {
+                            $production->add_meta_data( 'estimated_shipping_start' , $date, true);
+                        }else {
+                            $production->update_meta_data( 'estimated_shipping_start', $date );
+                        }
+		}
+                
+                if ( !empty( $_POST['estimated_shipping_end'] ) ) {
+			$date =  $_POST['estimated_shipping_end'];
+                        if(!$production->meta_exists( 'estimated_shipping_end' ) ) {
+                            $production->add_meta_data( 'estimated_shipping_end' , $date, true);
+                        }else {
+                            $production->update_meta_data( 'estimated_shipping_end', $date );
+                        }
+		}
+                
                 
                 //Update production minium
                 if ( !empty( $_POST['production_minimum'] ) ) {

@@ -46,6 +46,7 @@ if ( storefront_is_woocommerce_activated() ) {
         require 'inc/woocommerce/wc-custom-admin-order.php';
         require 'inc/woocommerce/wc-custom-admin-production.php';
         require 'inc/woocommerce/wc-custom-admin-workshop.php';
+        require 'inc/woocommerce/wc-custom-add-to-cart.php';        
         require 'inc/woocommerce/wc-custom-admin-supplier.php';
         require 'inc/woocommerce/wc-product-attribute-workshop.php';
         require 'inc/woocommerce/wc-product-attribute-supply.php';
