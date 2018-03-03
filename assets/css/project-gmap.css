@@ -1,0 +1,103 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 3 mars 2018, 00:19:58
+    Author     : smash
+*/
+
+h1 {
+  text-transform: uppercase;
+}
+
+#map {
+  width: 100%;
+  min-height: 560px;
+  margin: 1em 0;
+}
+
+#points {
+  display: none;
+}
+
+.gmap-box {
+  color: #000;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.gmap-box strong {
+  display: block;
+  text-transform: uppercase;
+  padding: 0 0 5px 0;
+  font-size: 13px;
+}
+
+.gmap-box img {
+  float: right;
+  margin: 0  0 0 10px;
+  overflow: hidden;
+  padding: 0;
+}
+
+.gmap-box p {
+  clear: both;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.gmap-box a {
+  text-decoration: underline;
+}
+
+.gmap-box h2 {
+  font-size: 11px;
+}
+
+.legend-title {
+  color: #000;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: block;
+  font-size: 14px;
+  padding: 8px 0;
+}
+
+.legend-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 10px 0 0 0;
+}
+
+.legend-list li {
+  color: #000;
+  padding: 0 0 5px 0;
+}
+
+.legend-list img {
+  margin: 0 5px 0 0;
+}
+
+.content {
+  color: #000;
+  line-height: 1.6;
+}
+
+.media {
+  overflow: hidden;
+  zoom: 1;
+}
+
+#project-page-content {
+  margin-left: 0;
+}
+
+#project-page-content img {
+  display: block;
+  margin-bottom: 20px;
+  height: auto;
+  width: 100%;
+}

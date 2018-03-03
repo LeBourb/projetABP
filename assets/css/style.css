@@ -398,6 +398,11 @@ footer {
 /*---------------------------------------
    Products section              
 -----------------------------------------*/
+
+#products.products-image-homepage {
+    height: 500px;
+}
+
 #products {
     width: 100%;
     height: auto;

@@ -151,7 +151,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 <!-- =========================
     PRODUCTS SECTION   
 ============================== -->
-<section id="products" class="parallax-section">
+<section id="products" class="parallax-section products-image-homepage">
 	
     <div class="items-container">
   <?php
@@ -286,6 +286,9 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 </script>
 
 
+
+
+
 <section id="materials" class="parallax-section">
     <div class="container">
 		<div class="row">
@@ -347,6 +350,15 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
         $('.featherlight').hide();
     });
 </script>
+
+<!-- =========================
+   Map of resellers
+============================== -->
+
+<section id="reseller-map" class="parallax-section">
+    <?php include 'reseller-map.php'; ?>
+</section>
+
 <!-- =========================
    REGISTER SECTION   
 ============================== -->

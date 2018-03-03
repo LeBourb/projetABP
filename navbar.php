@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/owl.carousel.css">
 <link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/homepage.css">
 <link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/timeline.css">
+<link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/project-gmap.css">
 <!-- =========================
      SCRIPTS    
 ============================== -->
@@ -37,7 +38,12 @@
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/easy-pie-chart.js"></script>
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/canvas.js"></script>
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/sly.js"></script>
- 
+<script type='text/javascript' src='//maps.google.com/maps/api/js?ver=4.7.3'></script>
+<script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/project-gmap-infobox.js"></script>
+<script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/project-gmap.js"></script>
+
+ <!-- / Google Analytics by MonsterInsights -->
+
 <!-- Multi Steps Form 
 <link rel="stylesheet" type="text/css" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/multi_steps_form.css"/>	

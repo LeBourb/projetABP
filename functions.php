@@ -464,6 +464,14 @@ add_filter( 'tml_action_template_message', 'atelierbourgeons_tml_message' , 23 ,
 
 function atelierbourgeons_new_user_approved( $message ) {
     //if($action == 'login')
+    /*$pages = get_pages(array(
+        'meta_key' => '_wp_page_template',
+        'meta_value' => 'template-test-email.php'
+    )); 
+    echo "page id emails ! ";
+    foreach($pages as $page){
+        echo $page->ID.'<br />'; 
+    }*/
     $message = atelierbourgeons_html_email_template_header('Congratulations, your account has been validated!');
     $message .= '<tr>
     <td align="center" height="100%" valign="top" width="100%" bgcolor="#F2F5F7" style="padding:0 15px 20px" class="m_4412137695263643084mobile-padding">
@@ -695,6 +703,25 @@ function create_post_type_production() {
       'labels' => array(
         'name' => __( 'Suppliers' ),
         'singular_name' => __( 'Supplier' )
+      ),
+      'public' => true,
+      'has_archive' => true,
+      'hierarchical' => true
+    )
+  );
+  register_post_type( 'shop_reseller',
+    array(
+      'labels' => array(
+        'name' => __( 'Resellers' ),
+        'singular_name' => __( 'Reseller' )
+      ),
+      'supports' => array (
+          'title',
+        'editor', 
+        'excerpt', 
+        'thumbnail', 
+        'custom-fields', 
+        'revisions' 
       ),
       'public' => true,
       'has_archive' => true,
