@@ -437,7 +437,7 @@ $product_image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->g
                                         }
                                     }
                                 }
-                                $data += get_post_meta( $product->get_id(), 'product_supplies', true );
+                                $data = get_post_meta( $product->get_id(), 'product_supplies', true );
                                 if(is_array($data) && array_key_exists('product_supply_id',$data)){
                                     $product_supply_ids = $data['product_supply_id'] ;    
                                     $index        = -1;                                    

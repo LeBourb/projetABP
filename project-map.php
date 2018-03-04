@@ -7,10 +7,10 @@
  */
 
 ?>
-<div class="container">
-		<h1>Carte du projet</h1>
-
-		<ul id="points">
+<script>
+    window.site_url="<?php echo get_site_url(); ?>";
+</script>
+		<ul id="project-map-def" class="map-def" >
 							<li data-type="design" data-lat="-29.682193" data-lng="-51.0582627">
 					<strong>Etat Rio Grande Do Sul &#8211; Campo Bom</strong>
 											<h2>Développement produit</h2>
@@ -241,11 +241,11 @@
 				</li>
 						</ul>
 
-		<div class="clearfix">
-			<div class="span10" style="margin-left:0;">
-				<div id="map"></div>
+		<div class="google-map-experience">
+			<div class="map-container" style="margin-left:0;">
+				<div id="project-map"  class="map"></div>
 			</div><!-- .span10 -->
-			<div class="span2">
+			<div class="legend-container">
 				<strong class="legend-title">Légende</strong>
 				<ul class="legend-list">
                                     <li><img src="<?php echo get_site_url(); ?>/wp-content/themes/atelierbourgeonspro/assets/images/icon/icon-design-small.png" /> Design</li>
@@ -255,5 +255,6 @@
 									</ul>
 			</div><!-- .span2 -->
 		</div><!-- .clearfix -->
-	</div>
+                
+	
 

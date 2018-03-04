@@ -6,7 +6,7 @@
 
 
 jQuery(function() {
-	function atelierBMap() {
+	function atelierBMap(inputMapElem, inputMapDefElem) {
 		var defaultPos = new google.maps.LatLng(0, 0);
 		var atelierBstyles = [{
 			featureType: 'water',
@@ -95,9 +95,9 @@ jQuery(function() {
 		}];
                 var myLatlng = null;
                 var zoom = 2;
-                if(jQuery('#points').data('lat') != null && jQuery('#points').data('lng') && jQuery('#points').data('zoom')) {
-                    myLatlng = new google.maps.LatLng(jQuery('#points').data('lat'), jQuery('#points').data('lng'));
-                    zoom = jQuery('#points').data('zoom');
+                if($(inputMapDefElem).data('lat') != null && $(inputMapDefElem).data('lng') && $(inputMapDefElem).data('zoom')) {
+                    myLatlng = new google.maps.LatLng($(inputMapDefElem).data('lat'), $(inputMapDefElem).data('lng'));
+                    zoom = $(inputMapDefElem).data('zoom');
                 }
 		var myMapOptions = {
 			zoom: zoom,
@@ -112,10 +112,10 @@ jQuery(function() {
 			panControl: false,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
-		var theMap = new google.maps.Map(document.getElementById("map"), myMapOptions);                
+		var theMap = new google.maps.Map(inputMapElem, myMapOptions);                
   
                 
-		jQuery('#points li').each(function(idx, elt) {
+		$(inputMapDefElem).find('li').each(function(idx, elt) {
 
 			var boxText = document.createElement("div");
 			boxText.style.cssText = "border: 1px solid #eeeeee; background: #ffffff; padding: 20px;";
@@ -154,7 +154,5 @@ jQuery(function() {
 
 	}
 
-	jQuery(document).ready(function() {
-		atelierBMap();
-	});
+	window.atelierBMap = atelierBMap;
 });

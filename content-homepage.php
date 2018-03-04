@@ -318,6 +318,15 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
                         </button>
                     
                 </li>
+                <li>
+                    <button class="btn btn-project-map" target="ProjectMap">  
+                        <div>Project Map</div>
+                        <div class="background content" style="display:none;">
+                                        <?php include('project-map.php'); ?>
+                                    </div>
+                        </button>
+                    
+                </li>
             </ul>
 			</div>
 
@@ -335,6 +344,9 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
                 $('.featherlight .content-area').append($(this).find('.content').clone());
                 $('.featherlight .content-area .content').show();   
                 $('.featherlight').attr('target',$(this).attr('target'));
+                if($(this).hasClass('btn-project-map')) {
+                    atelierBMap($('.featherlight .content-area').find('#project-map')[0],$('.featherlight .content-area').find('#project-map-def')[0]);
+                }
             });
         }
             
@@ -344,6 +356,12 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
         $(this).addClass('active');
         $('.featherlight .content-area .content').show();     
         $('.featherlight').attr('target',$(this).attr('target'));
+        
+        
+        if($(this).hasClass('btn-project-map')) {
+            atelierBMap($('.featherlight .content-area').find('#project-map')[0],$('.featherlight .content-area').find('#project-map-def')[0]);
+        }
+                
     });
     
     $('.featherlight-close-icon.featherlight-close').on('click', function(){
@@ -355,7 +373,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
    Map of resellers
 ============================== -->
 
-<section id="reseller-map" class="parallax-section">
+<section id="reseller-map-section" class="parallax-section">
     <?php include 'reseller-map.php'; ?>
 </section>
 
@@ -566,7 +584,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
                 }                
                 ?>
         </div>
-       <div class="wrapper-eco-fabrics" style="">     
+       <!--div class="wrapper-eco-fabrics" style="">     
    <div class="header">                           
 <div style="font-size: 28px">
 	Fabrics and environment</div>
@@ -596,7 +614,7 @@ Hemp is highly productive, easy and fast to cultivate. It does not need agrochem
 <p class="five" style="text-align: center;"><strong>Organic wool</strong><br>
 This wool comes from sheep that have been raised on feed which is free from fertilizers or pesticides and has not been subject to mulling practices. The wool is <span class="value-link"><a href="http://www.global-standard.org/" target="_blank" rel="noopener noreferrer">GOTS certified</a></span> and made in Lithuania.</p>
 
-	</div>
+	</div-->
     
             
 

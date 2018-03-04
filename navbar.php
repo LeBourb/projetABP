@@ -38,7 +38,11 @@
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/easy-pie-chart.js"></script>
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/canvas.js"></script>
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/sly.js"></script>
-<script type='text/javascript' src='//maps.google.com/maps/api/js?ver=4.7.3'></script>
+<script type='text/javascript' src='//maps.google.com/maps/api/js?ver=4.7.3<?php 
+            if (file_exists(get_template_directory() . "/gmap-key.txt" )) {
+                echo '&key=' . file_get_contents(get_template_directory() . "/gmap-key.txt") ;
+            }?>'></script>
+}
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/project-gmap-infobox.js"></script>
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/project-gmap.js"></script>
 

@@ -13,7 +13,7 @@
 
 		<h1>Carte des revendeurs</h1>
 
-		<ul id="points" data-lat="35.652832" data-lng="139.839478" data-zoom="6">
+		<ul id="reseller-map-def" class="map-def" data-lat="35.652832" data-lng="139.839478" data-zoom="6">
                    <?php  $args = array( 'post_type' => 'shop_reseller' );
         $resellers = get_posts( $args ); 
             foreach($resellers as $reseller) {                              
@@ -51,15 +51,19 @@
                             <?php }   ?>
                 </ul>
 
-		<div class="clearfix">
-			<div class="span10" style="margin-left:0;">
-				<div id="map"></div>
+		<div class="google-map-experience">
+			<div class="map-container" style="margin-left:0;">
+				<div id="reseller-map" class="map"></div>
 			</div><!-- .span10 -->
-			<div class="span2">
+			<div class="legend-container">
 				<strong class="legend-title">Légende</strong>
 				<ul class="legend-list">
                                     <li><img src="<?php echo get_site_url(); ?>/wp-content/themes/atelierbourgeonspro/assets/images/icon/icon-design-small.png" /> Physical Shops</li>
                                 </ul>
 			</div><!-- .span2 -->
 		</div><!-- .clearfix -->
-
+        <script>
+        jQuery(document).ready(function() {
+            atelierBMap(document.getElementById('reseller-map'),document.getElementById('reseller-map-def'));
+	});
+        </script>

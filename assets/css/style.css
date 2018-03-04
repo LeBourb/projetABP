@@ -847,12 +847,34 @@ footer {
     background: #333;    
 }
 
+.featherlight .background.content {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.featherlight .content-nav {
+    position: absolute;
+    z-index: 1;
+    width:100%;       
+}
+
 .featherlight[target="Wool"] {
     background: url(../images/testhomepage/contact-bg.jpg) 50% 0 repeat-y fixed;
 }
 
 .featherlight[target="Silk"] {
     background: url(../images/testhomepage/intro-bg.jpg) 50% 0 repeat-y fixed;
+}
+
+
+.featherlight .featherlight-close-icon {
+    position: absolute;
+    z-index: 1;
+    right: 1em;
+    top: 1em;
 }
 
 .featherlight .featherlight-content {
@@ -877,6 +899,7 @@ footer {
     background: #fff;
     cursor: auto;
     white-space: normal;
+    top: 10em;
 }
 
 .featherlight .chevron::before {
