@@ -31,12 +31,17 @@ function wc_get_orders_of_production($production_id) {
 
 function wc_get_order_items_of_production($production_id) {
     global $wpdb;
-    $meta = $wpdb->get_results($wpdb->prepare("SELECT DISTINCT order_item_id FROM `wp_woocommerce_order_itemmeta` WHERE meta_key=%s AND meta_value=%d",array('_production_id',intval($production_id))));
     $orders = array();
-    if (is_array($meta) && !empty($meta) && isset($meta[0])) {
-        foreach ($meta as $order_item) {            
-            $order_items[] = new WC_Order_Item_Product($order_item->order_item_id);
-        }        
+    $order_items = array();
+    try {
+        $meta = $wpdb->get_results($wpdb->prepare("SELECT DISTINCT order_item_id FROM `{$wpdb->prefix}woocommerce_order_itemmeta` WHERE meta_key=%s AND meta_value=%d",array('_production_id',intval($production_id))));
+        if (is_array($meta) && !empty($meta) && isset($meta[0])) {
+            foreach ($meta as $order_item) {            
+                $order_items[] = new WC_Order_Item_Product($order_item->order_item_id);
+            }        
+        }
+    }catch(Exception $err){
+        
     }
     return $order_items;
 }

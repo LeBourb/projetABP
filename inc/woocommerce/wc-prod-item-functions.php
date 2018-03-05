@@ -141,10 +141,12 @@ function wc_get_prod_total_ordered_item( $production_id ) {
         if(!function_exists('wc_get_order_items_of_production'))
             require_once 'wc-prod-functions.php';
         $qty = 0;
-        $order_items = wc_get_order_items_of_production($production_id);        
-        foreach($order_items as $order_item){
-            $qty += $order_item->get_quantity();            
-        } 
+        $order_items = wc_get_order_items_of_production($production_id);    
+        if(isset($order_tems) && is_array($order_tems)) {
+            foreach($order_items as $order_item){
+                $qty += $order_item->get_quantity();            
+            } 
+        }
         return $qty;
 }
 

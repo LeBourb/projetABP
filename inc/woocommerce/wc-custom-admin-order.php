@@ -57,6 +57,13 @@ if ( ! function_exists( 'admin_wc_after_order_itemmeta' ) )
 {
     function admin_wc_after_order_itemmeta( $item_id, $item, $_product ) {
         global $wpdb;
+        if(is_a($item,'WC_Order_Item_Shipping')) {
+            //$_product = $item->get_product_id();
+            return;
+        }
+            
+        
+        
         $production_id = wc_get_not_stated_production_item ($_product->get_id());
         if($production_id != '')
             return;
