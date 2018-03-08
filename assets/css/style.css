@@ -19,7 +19,7 @@ body {
 .tml {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10%;
+    margin-top: 4%;
     padding: 2%;
     background-color: rgba(221, 221, 221, 0.8);
     max-height: 100%;
@@ -124,6 +124,7 @@ footer {
 
 #intro .btn,
 #reservation .btn,
+#register-box  .btn,
 #product-intro .btn,
 #checkoutpopupform .btn,
 #contact .btn {
@@ -142,6 +143,7 @@ footer {
 }
 
 #reservation .btn-danger,
+#register-box .btn-danger,
 #intro .btn-danger,
 #product-intro  .btn-danger,
 #checkoutpopupform .btn-danger,
@@ -155,6 +157,7 @@ footer {
 }
 
 #reservation .btn-danger:hover,
+#register-box .btn-danger:hover,
 #intro .btn-danger:hover ,
 #modal-footer .btn-danger:hover ,
 #product-intro .btn-danger:hover {

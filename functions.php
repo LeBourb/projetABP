@@ -193,15 +193,18 @@ function bbloomer_add_name_woo_account_registration() {
 // 2. VALIDATE FIELDS
  
 //add_filter( 'woocommerce_registration_errors', 'bbloomer_validate_name_fields', 10, 3 );
-add_filter( 'registration_errors', 'bbloomer_validate_name_fields',90, 3 );
+add_filter( 'registration_errors', 'bbloomer_validate_name_fields' );
  
-function bbloomer_validate_name_fields( $errors = '' ) {
+function bbloomer_validate_name_fields(  $errors  ) {
     //global $_POST;
 
     // Make sure $errors is a WP_Error object
-    if ( empty( $errors ) )
-            $errors = new WP_Error(); 
+    //if ( empty( $errors ) )
+      //      $errors = new WP_Error(); 
     
+    if ( isset( $_POST['account-type'] ) && empty( $_POST['account-type'] ) ) {
+        $errors->add( 'account_type_error', __( '<strong>Error</strong>: Account type is required!', 'woocommerce' ) );
+    }
     if ( isset( $_POST['billing_first_name'] ) && empty( $_POST['billing_first_name'] ) ) {
         $errors->add( 'billing_first_name_error', __( '<strong>Error</strong>: First name is required!', 'woocommerce' ) );
     }
@@ -220,8 +223,7 @@ function bbloomer_validate_name_fields( $errors = '' ) {
     if ( isset( $_POST['billing_postcode'] ) && empty( $_POST['billing_postcode'] ) ) {
         $errors->add( 'billing_postcode', __( '<strong>Error</strong>: Shop city postcode is required!.', 'woocommerce' ) );
     }
-    if( isset( $_POST['pass1'] ) && isset($_POST['pass2'] ) && $_POST['pass1'] != $_POST['pass2'] ) {
-        wp_set_password( $_POST['password'],  $customer_id );
+    if( isset( $_POST['pass1'] ) && isset($_POST['pass2'] ) && $_POST['pass1'] != $_POST['pass2'] ) {        
         $errors->add( 'passport', __( '<strong>Error</strong>: Password must be identic.', 'woocommerce' ) );
     }
     return $errors;
@@ -231,7 +233,8 @@ function bbloomer_validate_name_fields( $errors = '' ) {
 // 3. SAVE FIELDS
  
 //add_action( 'woocommerce_created_customer', 'bbloomer_save_name_fields' );
-add_action('user_register', 'bbloomer_save_name_fields', 60, 1);
+//add_action('user_register', 'bbloomer_save_name_fields', 60, 1);
+add_action('register_new_user', 'bbloomer_save_name_fields', 160, 1);
  
 function bbloomer_save_name_fields( $customer_id ) {
     if ( isset( $_POST['billing_first_name'] ) ) {
@@ -274,6 +277,19 @@ function bbloomer_save_name_fields( $customer_id ) {
         update_user_meta( $customer_id, 'billing_postcode', sanitize_text_field( $_POST['billing_postcode'] ) );     
         update_user_meta( $customer_id, 'shipping_postcode', sanitize_text_field( $_POST['billing_postcode'] ) );     
     }
+    if ( isset( $_POST['account-type'] ) ) {        
+
+        // Make sure user isn't already "Pending"
+        if ( $_POST['account-type'] == 'professional'  ) {
+            $user = new WP_User( $customer_id );
+            // Set user to "Pending" role
+            $user->remove_role( 'customer' );
+            $user->add_role( 'customer-pro' );
+        }
+        
+   
+    }
+    
     update_user_meta( $customer_id, 'billing_country', 'JPY' );
     
     //update_user_status( $customer_id, 'spam', 1 );
@@ -779,7 +795,7 @@ function my_login_redirect( $url, $request, $user ){
 }
 add_filter('login_redirect', 'my_login_redirect', 10, 3 );
 
-//add_role( 'workshop_role', 'Workshop', array( 'read' => true, 'level_0' => true ) );
+add_role( 'customer-pro', 'Professional Customer', array( 'read' => true, 'level_0' => true ) );
 //init the meta box
 add_action( 'after_setup_theme', 'custom_postimage_setup' );
 function custom_postimage_setup(){
