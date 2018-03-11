@@ -1155,3 +1155,61 @@ if ( ! function_exists( 'mail_new_user_checking' ) ) {
     ) );
     }
 }
+
+
+if ( ! function_exists( 'mail_new_user_confirm_email' ) ) {
+    function mail_new_user_confirm_email($user_login, $user_email) {
+    $message = atelierbourgeons_html_email_template_header('Thanks for registering!');
+ 
+    
+    $message .= '<tr>
+    <td align="center" height="100%" valign="top" width="100%" bgcolor="#F2F5F7" style="padding:0 15px 20px" class="m_4412137695263643084mobile-padding">
+      
+      <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse!important;max-width:600px">
+        <tbody><tr>
+          <td align="center" valign="top" style="font-family:Open Sans,Helvetica,Arial,sans-serif;padding:0 0 25px">
+            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse:collapse!important">
+              <tbody><tr>
+                <td align="center" bgcolor="#ffffff" style="border-radius:0 0 10px 10px;padding:25px">
+                ' . svg_spinner_email() .'
+                  <table cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse:collapse!important">
+                    <tbody><tr>
+                      
+                    </tr>
+                    <tr>
+                      <td align="center" style="font-family:Open Sans,Helvetica,Arial,sans-serif">
+                        <h2 style="border:0;color:#1e2c3a;font:400 30px/40px apple-system,BlinkMacSystemFont,Arial,\'Segoe UI\',\'Helvetica Neue\',sans-serif;margin:0;padding:15px 0;vertical-align:baseline" align="center"> ' . __( 'Welcome, thank you for registering to atelierbourgeons pro You have been approved to access {sitename}', 'new-user-approve' ) . '</h2>
+                        <p style="border:0;color:#667685;font:400 16px/25px apple-system,BlinkMacSystemFont,Arial,\'Segoe UI\',\'Helvetica Neue\',sans-serif;margin:0px 0 10px;padding:0;vertical-align:baseline">
+                          ' .  __( 'We are currently reviewing your  {sitename}', 'new-user-approve' ) . "\r\n\r\n" .
+	  "{username}\r\n\r\n{login_url}\r\n\r\n" . __( 'We are currently reviewing your', 'new-user-approve' ) . "\r\n\r\n" . '
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="center" style="padding:20px 0 15px">
+                        <table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse!important">
+                          <tbody><tr>
+                            <td align="center" style="border-radius:26px" bgcolor="#0570D4">
+                              <a href="'. get_site_url() .'" style="background: #613143;border: 1px solid #613143;border-radius: 14px;color:#ffffff;display:block;font-family:Open Sans,Helvetica,Arial,sans-serif;font-size:16px;padding:14px 26px;text-decoration:none" target="_blank" data-saferedirecturl="">Visit us</a>
+                            </td>
+                          </tr>
+                        </tbody></table>
+                      </td>
+                    </tr>
+                  </tbody></table>
+                </td>
+              </tr>
+            </tbody></table>
+          </td>
+        </tr>';
+
+    
+    // send the mail
+    $message .= atelierbourgeons_html_email_template_footer();
+    return nua_do_email_tags( $message, array(
+        'context' => 'approve_user',        
+        'user_login' => $user_login,
+        'user_email' => $user_email,
+    ) );
+    }
+}

@@ -551,11 +551,19 @@ function atelierbourgeons_new_user_checking( $status, $user_id ) {
     $user_login = stripslashes( $user->data->user_login );
     $user_email = stripslashes( $user->data->user_email );
 
-    $subject = 'Atelier bourgeons Pro Registration In-Review';
     $admin_email = get_option( 'admin_email' );    
     $from_name = get_option( 'blogname' );
     $headers = array("From: \"{$from_name}\" <{$admin_email}>\n");
-    $message = mail_new_user_checking($user_login,$user_email);
+    
+    $message = null;
+    if ($status == "approved") {
+        $subject = 'Atelier bourgeons Pro Registration In-Review';    
+        $message = mail_new_user_confirm_email($user_login,$user_email);
+    }else {
+        $subject = 'Atelier bourgeons Pro Registration Confirm email';
+        $message = mail_new_user_checking($user_login,$user_email);
+    }
+    
     wp_mail( $user_email, $subject, $message, $headers);
     
     return $status;
