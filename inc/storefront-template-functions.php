@@ -1099,11 +1099,35 @@ if ( ! function_exists( 'svg_valid_email' ) ) {
     }
 }
 
-if ( ! function_exists( 'mail_new_user_checking' ) ) {
-    function mail_new_user_checking($user_login, $user_email) {
+
+if ( ! function_exists( 'mail_new_user_confirm_email' ) ) {
+    function mail_new_user_confirm_email($user) {
     $message = atelierbourgeons_html_email_template_header('Thanks for registering!');
- 
     
+    global $wpdb, $current_site;
+    
+    $user_login = stripslashes( $user->user_login );
+    $user_email = stripslashes( $user->user_email );
+
+    // Generate an activation key
+    //$key = wp_generate_password( 20, false );
+    $code = sha1( $user->ID . time() );    
+
+    /*$wpdb->update( 
+        $wpdb->users, //table name                 
+            array( 'user_activation_key' => $code ), // string    ),                               
+            array('ID' => $user->ID)    
+        );*/
+    $wpdb->update( $wpdb->users, array( 'user_activation_key' => $code ), array( 'ID' => $user->ID ) );
+
+    // Set the activation key for the user
+    //$wpdb->update( $wpdb->users, array( 'user_activation_key' => $key ), array( 'user_login' => $user->user_login ) );
+
+   
+    // The blogname option is escaped with esc_html on the way into the database in sanitize_option
+    // we want to reverse this for the plain text arena of emails.
+    $blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+    $activation_url = add_query_arg( array( 'action' => 'confirm-email', 'key' => $code, 'user' => $user->ID), wp_login_url() );
     $message .= '<tr>
     <td align="center" height="100%" valign="top" width="100%" bgcolor="#F2F5F7" style="padding:0 15px 20px" class="m_4412137695263643084mobile-padding">
       
@@ -1122,9 +1146,10 @@ if ( ! function_exists( 'mail_new_user_checking' ) ) {
                       <td align="center" style="font-family:Open Sans,Helvetica,Arial,sans-serif">
                         <h2 style="border:0;color:#1e2c3a;font:400 30px/40px apple-system,BlinkMacSystemFont,Arial,\'Segoe UI\',\'Helvetica Neue\',sans-serif;margin:0;padding:15px 0;vertical-align:baseline" align="center"> ' . __( 'Welcome, thank you for registering to atelierbourgeons pro You have been approved to access {sitename}', 'new-user-approve' ) . '</h2>
                         <p style="border:0;color:#667685;font:400 16px/25px apple-system,BlinkMacSystemFont,Arial,\'Segoe UI\',\'Helvetica Neue\',sans-serif;margin:0px 0 10px;padding:0;vertical-align:baseline">
-                          ' .  __( 'We are currently reviewing your  {sitename}', 'new-user-approve' ) . "\r\n\r\n" .
-	  "{username}\r\n\r\n{login_url}\r\n\r\n" . __( 'We are currently reviewing your', 'new-user-approve' ) . "\r\n\r\n" . '
-                        </p>
+                          ' .  __( 'Welcome on ', 'new-user-approve' ) . "\r\n\r\n" .
+                  __( 'If you\'re over 13 years of age please click on the link below to validate your email address and complete a short registration process:', 'new-user-approve') 
+             . '<a href="' . $activation_url . '">' . $activation_url . '</a>' 
+             . '</p>
                       </td>
                     </tr>
                     <tr>
@@ -1157,10 +1182,13 @@ if ( ! function_exists( 'mail_new_user_checking' ) ) {
 }
 
 
-if ( ! function_exists( 'mail_new_user_confirm_email' ) ) {
-    function mail_new_user_confirm_email($user_login, $user_email) {
-    $message = atelierbourgeons_html_email_template_header('Thanks for registering!');
- 
+
+if ( ! function_exists( 'mail_new_user_checking' ) ) {
+    function mail_new_user_checking($user) {
+    $message = atelierbourgeons_html_email_template_header('Thanks for registering, please confirm your email!');
+    
+    $user_login = stripslashes( $user->user_login );
+    $user_email = stripslashes( $user->user_email );
     
     $message .= '<tr>
     <td align="center" height="100%" valign="top" width="100%" bgcolor="#F2F5F7" style="padding:0 15px 20px" class="m_4412137695263643084mobile-padding">
@@ -1180,7 +1208,7 @@ if ( ! function_exists( 'mail_new_user_confirm_email' ) ) {
                       <td align="center" style="font-family:Open Sans,Helvetica,Arial,sans-serif">
                         <h2 style="border:0;color:#1e2c3a;font:400 30px/40px apple-system,BlinkMacSystemFont,Arial,\'Segoe UI\',\'Helvetica Neue\',sans-serif;margin:0;padding:15px 0;vertical-align:baseline" align="center"> ' . __( 'Welcome, thank you for registering to atelierbourgeons pro You have been approved to access {sitename}', 'new-user-approve' ) . '</h2>
                         <p style="border:0;color:#667685;font:400 16px/25px apple-system,BlinkMacSystemFont,Arial,\'Segoe UI\',\'Helvetica Neue\',sans-serif;margin:0px 0 10px;padding:0;vertical-align:baseline">
-                          ' .  __( 'We are currently reviewing your  {sitename}', 'new-user-approve' ) . "\r\n\r\n" .
+                          ' .  __( 'PLease confirm your email by clicking  {sitename}', 'new-user-approve' ) . "\r\n\r\n" .
 	  "{username}\r\n\r\n{login_url}\r\n\r\n" . __( 'We are currently reviewing your', 'new-user-approve' ) . "\r\n\r\n" . '
                         </p>
                       </td>
@@ -1207,7 +1235,7 @@ if ( ! function_exists( 'mail_new_user_confirm_email' ) ) {
     // send the mail
     $message .= atelierbourgeons_html_email_template_footer();
     return nua_do_email_tags( $message, array(
-        'context' => 'approve_user',        
+        'context' => 'confirm-email',        
         'user_login' => $user_login,
         'user_email' => $user_email,
     ) );

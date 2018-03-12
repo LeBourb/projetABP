@@ -18,7 +18,8 @@
  * @package storefront
  */
 echo atelierbourgeons_new_user_approved( '' );
-echo mail_new_user_checking( 'tomtom', 'tomtom@gmail.com' );
+$user = new WP_User( '67' );
+echo mail_new_user_checking( $user );
 echo mail_new_user_confirm_email( 'tomtom', 'tomtom@gmail.com' );
 
 ?>

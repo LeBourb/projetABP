@@ -472,8 +472,20 @@ add_filter( 'manage_prod_posts_columns', 'prod_columns' );
 
 function atelierbourgeons_tml_message( $message, $action ) {
     //if($action == 'login')
-        $message = 'toto is here';
-    return $message;
+    
+    if ( isset($_GET['action']) && $_GET['action'] == 'confirm-email' && isset($_GET['key']) && isset($_GET['user']) ) {
+        $message .= 'toto is here';
+        global $wpdb;  
+        $row = $wpdb->get_row( $wpdb->prepare( "SELECT ID, user_activation_key FROM $wpdb->users WHERE ID = %s", $_GET['user'] ) );        
+        $message .= $row->user_activation_key;
+        //$message .= $_GET['key'];
+        if(hash_equals( $row->user_activation_key, $_GET['key'])) {
+            $message .= 'account approved';
+            update_user_meta( $_GET['user'], 'pw_user_status', 'approved'  );
+            //pw_new_user_approve()->update_user_status( $_GET['user'] , 'approved' );
+        }
+    }
+   return $message;
 }
 add_filter( 'tml_action_template_message', 'atelierbourgeons_tml_message' , 23 ,10);
 
@@ -553,17 +565,33 @@ function atelierbourgeons_new_user_checking( $status, $user_id ) {
 
     $admin_email = get_option( 'admin_email' );    
     $from_name = get_option( 'blogname' );
-    $headers = array("From: \"{$from_name}\" <{$admin_email}>\n");
+    $headers = array("From: \"{$from_name}\" <{$admin_email}>");
+    // multi part email
+    //$headers[] = '';
+    //$headers[] = '';
     
     $message = null;
-    if ($status == "approved") {
+    if ($status == "confirm-email") {
         $subject = 'Atelier bourgeons Pro Registration In-Review';    
-        $message = mail_new_user_confirm_email($user_login,$user_email);
+        $message = mail_new_user_confirm_email($user);
     }else {
         $subject = 'Atelier bourgeons Pro Registration Confirm email';
-        $message = mail_new_user_checking($user_login,$user_email);
+        $message = mail_new_user_checking($user);
     }
     
+    $message = '
+         MIME-Version: 1.0; \r\n Content-Type: multipart/alternative; \r\n
+         boundary=\"----=_NextPart_DC7E1BB5_1105_4DB3_BAE3_2A6208EB099D\" \r\n
+         ------=_NextPart_DC7E1BB5_1105_4DB3_BAE3_2A6208EB099D \r\n
+Content-type: text/plain; charset=iso-8859-1  \r\n
+Content-Transfer-Encoding: quoted-printable \r\n
+
+Sample Text Content  \r\n
+------=_NextPart_DC7E1BB5_1105_4DB3_BAE3_2A6208EB099D \r\n
+
+ ' . $message . '   '
+            . '------=_NextPart_DC7E1BB5_1105_4DB3_BAE3_2A6208EB099D--';
+        
     wp_mail( $user_email, $subject, $message, $headers);
     
     return $status;
