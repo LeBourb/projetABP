@@ -474,13 +474,13 @@ function atelierbourgeons_tml_message( $message, $action ) {
     //if($action == 'login')
     
     if ( isset($_GET['action']) && $_GET['action'] == 'confirm-email' && isset($_GET['key']) && isset($_GET['user']) ) {
-        $message .= 'toto is here';
+        
         global $wpdb;  
         $row = $wpdb->get_row( $wpdb->prepare( "SELECT ID, user_activation_key FROM $wpdb->users WHERE ID = %s", $_GET['user'] ) );        
-        $message .= $row->user_activation_key;
+        
         //$message .= $_GET['key'];
         if(hash_equals( $row->user_activation_key, $_GET['key'])) {
-            $message .= 'account approved';
+            $message .= 'Congratulations, your emails has been approved, you can now login';
             update_user_meta( $_GET['user'], 'pw_user_status', 'approved'  );
             //pw_new_user_approve()->update_user_status( $_GET['user'] , 'approved' );
         }
