@@ -203,6 +203,13 @@
                                     echo '<li><a href="' . get_permalink( $product_id ) . '" >' . $product->get_title() . '</a></li>';                                            
                                 }
                                 echo '<li><a class="separator">|</a></li>';
+                                $pages = get_pages(array(
+                                    'meta_key' => '_wp_page_template',
+                                    'meta_value' => 'template-help.php'
+                                )); 
+                                if(is_array($pages) && count($pages)) {                                    
+                                    echo '<li><a href="' . get_permalink( $pages[0] ) . '" >' . 'Help' . '</a></li>';
+                                }
                                 if(is_user_logged_in()) {
                                     echo '<li><a href="' . get_permalink( wc_get_page_id ( 'cart' )) . '" >Cart</a></li>'; 
                                     echo '<li><a href="' . get_permalink( wc_get_page_id ( 'myaccount' )) . 'orders/" >Your Orders</a></li>';                                            
@@ -211,6 +218,7 @@
                                     echo '<li><a href="' . Theme_My_Login::get_page_link( 'login' ) . '" >Login</a></li>';                                
                                     echo '<li><a href="' . Theme_My_Login::get_page_link( 'register' ) . '" >Register</a></li>';                                
                                 }
+                                echo '<li><a href="' . get_permalink( wc_get_page_id ( 'cart' )) . '" >Cart</a></li>'; 
                                 ?>
                             
                                 

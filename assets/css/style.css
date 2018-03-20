@@ -1153,7 +1153,9 @@ footer {
 -----------------------------------------*/
 @media (max-width: 980px) {
 
-  p {font-size: 13px;}
+  p {
+      font-size: 13px;
+  }
 
   .custom-navbar .navbar-brand {
     font-size: 2rem;
@@ -1173,6 +1175,10 @@ footer {
   #contact .contact_detail {
   background: #ffffff;
   padding: 10rem 3rem 10rem 5rem;
+}
+
+.custom-navbar .nav li a.separator {
+    display: none;
 }
 
 }

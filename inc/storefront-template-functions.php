@@ -1144,10 +1144,10 @@ if ( ! function_exists( 'mail_new_user_confirm_email' ) ) {
                     </tr>
                     <tr>
                       <td align="center" style="font-family:Open Sans,Helvetica,Arial,sans-serif">
-                        <h2 style="border:0;color:#1e2c3a;font:400 30px/40px apple-system,BlinkMacSystemFont,Arial,\'Segoe UI\',\'Helvetica Neue\',sans-serif;margin:0;padding:15px 0;vertical-align:baseline" align="center"> ' . __( 'Welcome, thank you for registering to atelierbourgeons pro You have been approved to access {sitename}', 'new-user-approve' ) . '</h2>
+                        <h2 style="border:0;color:#1e2c3a;font:400 30px/40px apple-system,BlinkMacSystemFont,Arial,\'Segoe UI\',\'Helvetica Neue\',sans-serif;margin:0;padding:15px 0;vertical-align:baseline" align="center"> ' . __( 'Welcome, thank you for registering to atelierbourgeons. You must confirm your email address!', 'new-user-approve' ) . '</h2>
                         <p style="border:0;color:#667685;font:400 16px/25px apple-system,BlinkMacSystemFont,Arial,\'Segoe UI\',\'Helvetica Neue\',sans-serif;margin:0px 0 10px;padding:0;vertical-align:baseline">
                           ' .  __( 'Welcome on ', 'new-user-approve' ) . "\r\n\r\n" .
-                  __( 'If you\'re over 13 years of age please click on the link below to validate your email address and complete a short registration process:', 'new-user-approve') 
+                  __( 'Please click on the link below to validate your email address and login:', 'new-user-approve') 
              . '<a href="' . $activation_url . '">' . $activation_url . '</a>' 
              . '</p>
                       </td>
@@ -1185,7 +1185,7 @@ if ( ! function_exists( 'mail_new_user_confirm_email' ) ) {
 
 if ( ! function_exists( 'mail_new_user_checking' ) ) {
     function mail_new_user_checking($user) {
-    $message = atelierbourgeons_html_email_template_header('Thanks for registering, please confirm your email!');
+    $message = atelierbourgeons_html_email_template_header('Thanks for registering, we will review your account!');
     
     $user_login = stripslashes( $user->user_login );
     $user_email = stripslashes( $user->user_email );
@@ -1206,22 +1206,14 @@ if ( ! function_exists( 'mail_new_user_checking' ) ) {
                     </tr>
                     <tr>
                       <td align="center" style="font-family:Open Sans,Helvetica,Arial,sans-serif">
-                        <h2 style="border:0;color:#1e2c3a;font:400 30px/40px apple-system,BlinkMacSystemFont,Arial,\'Segoe UI\',\'Helvetica Neue\',sans-serif;margin:0;padding:15px 0;vertical-align:baseline" align="center"> ' . __( 'Welcome, thank you for registering to atelierbourgeons pro You have been approved to access {sitename}', 'new-user-approve' ) . '</h2>
+                        <h2 style="border:0;color:#1e2c3a;font:400 30px/40px apple-system,BlinkMacSystemFont,Arial,\'Segoe UI\',\'Helvetica Neue\',sans-serif;margin:0;padding:15px 0;vertical-align:baseline" align="center"> ' . __( 'Welcome, thank you for registering to atelierbourgeons. We will be reviewing your account', 'new-user-approve' ) . '</h2>
                         <p style="border:0;color:#667685;font:400 16px/25px apple-system,BlinkMacSystemFont,Arial,\'Segoe UI\',\'Helvetica Neue\',sans-serif;margin:0px 0 10px;padding:0;vertical-align:baseline">
-                          ' .  __( 'PLease confirm your email by clicking  {sitename}', 'new-user-approve' ) . "\r\n\r\n" .
-	  "{username}\r\n\r\n{login_url}\r\n\r\n" . __( 'We are currently reviewing your', 'new-user-approve' ) . "\r\n\r\n" . '
-                        </p>
+                          ' .  __( 'You will receive an email once your account approved', 'new-user-approve' ) . "\r\n\r\n" .	  
+                        '</p>
                       </td>
                     </tr>
                     <tr>
                       <td align="center" style="padding:20px 0 15px">
-                        <table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse!important">
-                          <tbody><tr>
-                            <td align="center" style="border-radius:26px" bgcolor="#0570D4">
-                              <a href="'. get_site_url() .'" style="background: #613143;border: 1px solid #613143;border-radius: 14px;color:#ffffff;display:block;font-family:Open Sans,Helvetica,Arial,sans-serif;font-size:16px;padding:14px 26px;text-decoration:none" target="_blank" data-saferedirecturl="">Visit us</a>
-                            </td>
-                          </tr>
-                        </tbody></table>
                       </td>
                     </tr>
                   </tbody></table>

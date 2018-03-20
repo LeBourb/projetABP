@@ -78,38 +78,38 @@ get_header();
     <div class="custom-blocks clearfix" id="custom-blocks">
       
       <div class="custom-block">
-        <a class="custom-block__link" href="/hc/en-us/categories/115000824407-Products">
+        <a class="custom-block__link" href="<?php  ?>">
           <h4 class="custom-block__title">Products</h4>
         </a>
       </div>
       
       <div class="custom-block">
-        <a class="custom-block__link" href="/hc/en-us/categories/115000824347-Payment">
+        <a class="custom-block__link" href="<?php?>">
           <h4 class="custom-block__title">Payment</h4>
         </a>
       </div>
       
       <div class="custom-block">
-        <a class="custom-block__link" href="/hc/en-us/categories/115000828468-The-Workshop">
-          <h4 class="custom-block__title">The Workshop</h4>
-        </a>
-      </div>
-      
-      <div class="custom-block">
-        <a class="custom-block__link" href="/hc/en-us/categories/115000828528-Order-Status">
+        <a class="custom-block__link" href="<?php?>">
           <h4 class="custom-block__title">Order Status</h4>
         </a>
       </div>
       
       <div class="custom-block">
-        <a class="custom-block__link" href="/hc/en-us/categories/115000828508-Returns-Exchanges">
+        <a class="custom-block__link" href="<?php?>">
           <h4 class="custom-block__title">Returns &amp; Exchanges</h4>
         </a>
       </div>
-      
+        
       <div class="custom-block">
-        <a class="custom-block__link" href="/hc/en-us/categories/115000828448-My-Account">
-          <h4 class="custom-block__title">My Account</h4>
+        <a class="custom-block__link" href="<?php?>">
+          <h4 class="custom-block__title">Deposit</h4>
+        </a>
+      </div>
+        
+      <div class="custom-block">
+        <a class="custom-block__link" href="<?php?>">
+          <h4 class="custom-block__title">Account Types</h4>
         </a>
       </div>
       

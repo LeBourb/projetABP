@@ -490,7 +490,7 @@ function atelierbourgeons_tml_message( $message, $action ) {
 add_filter( 'tml_action_template_message', 'atelierbourgeons_tml_message' , 23 ,10);
 
 
-function atelierbourgeons_new_user_approved( $message ) {
+function atelierbourgeons_new_user_approved( $user ) {
     //if($action == 'login')
     /*$pages = get_pages(array(
         'meta_key' => '_wp_page_template',
