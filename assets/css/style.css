@@ -208,7 +208,41 @@ footer {
 -----------------------------------------*/
 .custom-navbar {
     margin-bottom: 0;
-    background-color: #101010;
+    /*background-color: #101010;*/
+    background-color: white;
+    opacity: 0.6;
+    color: black;
+    height: 7em;
+}
+
+.custom-navbar.navbar-fixed-top:hover .site-logo svg {
+    fill: black;
+}
+
+.custom-navbar.navbar-fixed-top:hover {
+    padding-top:0;
+    height: 5em;
+    background-color: white;
+    opacity: 0.6;
+}
+
+.custom-navbar .container {
+    width: 100%;
+}
+
+.custom-navbar.top-nav-collapse {
+    height: 5em;
+}
+
+.custom-navbar .container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.custom-navbar.navbar-fixed-top:hover .nav li a {
+    color: black;
 }
 
 .custom-navbar .navbar-brand {
@@ -226,6 +260,7 @@ footer {
     text-transform: uppercase;
     line-height: 40px;
     transition: all 0.4s ease-in-out;
+    
 }
 
 .custom-navbar .nav li .subnavContainer {    

@@ -78,45 +78,108 @@ get_header();
     <div class="custom-blocks clearfix" id="custom-blocks">
       
       <div class="custom-block">
-        <a class="custom-block__link" href="<?php  ?>">
+        <a class="custom-block__link" id="help-product">
           <h4 class="custom-block__title">Products</h4>
         </a>
       </div>
       
       <div class="custom-block">
-        <a class="custom-block__link" href="<?php?>">
+        <a class="custom-block__link" id="help-payment">
           <h4 class="custom-block__title">Payment</h4>
         </a>
       </div>
       
       <div class="custom-block">
-        <a class="custom-block__link" href="<?php?>">
+        <a class="custom-block__link" id="help-order-status">
           <h4 class="custom-block__title">Order Status</h4>
         </a>
       </div>
       
       <div class="custom-block">
-        <a class="custom-block__link" href="<?php?>">
+        <a class="custom-block__link" id="help-returns-exchanges">
           <h4 class="custom-block__title">Returns &amp; Exchanges</h4>
         </a>
       </div>
         
       <div class="custom-block">
-        <a class="custom-block__link" href="<?php?>">
+        <a class="custom-block__link" id="help-deposit">
           <h4 class="custom-block__title">Deposit</h4>
         </a>
       </div>
         
       <div class="custom-block">
-        <a class="custom-block__link" href="<?php?>">
+        <a class="custom-block__link" id="help-account-types">
           <h4 class="custom-block__title">Account Types</h4>
         </a>
       </div>
       
     </div>
-  </div>
+    </div>
+    <div id="modal-reservation" class="modal">
+        <div class="modal-fade-screen">
+            <div class="modal-inner">
+            <div class="modal-close" for="modal-1"></div>
 
-  </div>
+                <div class="win-content" id="win-help-product" display="none">
+                  <h4>Product</h4>  
+                  <p>Haec igitur lex in amicitia sanciatur, ut neque rogemus res turpes nec faciamus rogati. Turpis enim excusatio est et minime accipienda cum in ceteris peccatis, tum si quis contra rem publicam se amici causa fecisse fateatur. Etenim eo loco, Fanni et Scaevola, locati sumus ut nos longe prospicere oporteat futuros casus rei publicae. Deflexit iam aliquantum de spatio curriculoque consuetudo maiorum.</p>  
+                </div>    
+                <div class="win-content" id="win-help-payment"  display="none">
+                    <h4>Payment</h4>  
+                    <p>Haec igitur lex in amicitia sanciatur, ut neque rogemus res turpes nec faciamus rogati. Turpis enim excusatio est et minime accipienda cum in ceteris peccatis, tum si quis contra rem publicam se amici causa fecisse fateatur. Etenim eo loco, Fanni et Scaevola, locati sumus ut nos longe prospicere oporteat futuros casus rei publicae. Deflexit iam aliquantum de spatio curriculoque consuetudo maiorum.</p>  
+                </div>
+                <div class="win-content" id="win-help-order-status" display="none">
+                    <h4>Order Status</h4>  
+                    <p>Haec igitur lex in amicitia sanciatur, ut neque rogemus res turpes nec faciamus rogati. Turpis enim excusatio est et minime accipienda cum in ceteris peccatis, tum si quis contra rem publicam se amici causa fecisse fateatur. Etenim eo loco, Fanni et Scaevola, locati sumus ut nos longe prospicere oporteat futuros casus rei publicae. Deflexit iam aliquantum de spatio curriculoque consuetudo maiorum.</p>  
+                </div>
+                <div class="win-content" id="win-help-deposit"  display="none">
+                    <h4>Deposit</h4>  
+                    <p>Haec igitur lex in amicitia sanciatur, ut neque rogemus res turpes nec faciamus rogati. Turpis enim excusatio est et minime accipienda cum in ceteris peccatis, tum si quis contra rem publicam se amici causa fecisse fateatur. Etenim eo loco, Fanni et Scaevola, locati sumus ut nos longe prospicere oporteat futuros casus rei publicae. Deflexit iam aliquantum de spatio curriculoque consuetudo maiorum.</p>  
+                </div>
+                <div class="win-content" id="win-help-returns-exchanges"  display="none">
+                    <h4>Account Types</h4>  
+                    <p>Haec igitur lex in amicitia sanciatur, ut neque rogemus res turpes nec faciamus rogati. Turpis enim excusatio est et minime accipienda cum in ceteris peccatis, tum si quis contra rem publicam se amici causa fecisse fateatur. Etenim eo loco, Fanni et Scaevola, locati sumus ut nos longe prospicere oporteat futuros casus rei publicae. Deflexit iam aliquantum de spatio curriculoque consuetudo maiorum.</p>  
+                </div>
+                <div class="win-content" id="win-help-account-types"  display="none">
+                    <h4>Account Types</h4>  
+                    <p>Haec igitur lex in amicitia sanciatur, ut neque rogemus res turpes nec faciamus rogati. Turpis enim excusatio est et minime accipienda cum in ceteris peccatis, tum si quis contra rem publicam se amici causa fecisse fateatur. Etenim eo loco, Fanni et Scaevola, locati sumus ut nos longe prospicere oporteat futuros casus rei publicae. Deflexit iam aliquantum de spatio curriculoque consuetudo maiorum.</p>  
+                </div>
+            </div>        
+        </div>
+    </div>
+</div>
+<script>
+    $( document ).ready(function() {
+        $('.custom-block__link').click(function(){
+            $('.modal').addClass('modal-open');
+            $('.modal .win-content').hide();
+            $('#win-' + $(this).attr('id')).show();
+        });
+        $(document).on('click','#modal-reservation .modal-close' ,function(){ 
+            $('.modal').removeClass('modal-open'); 
+        });
+    });
+    </script>
+    <style>
+    .modal.modal-open {
+        display: block;   
+    }
 
+    .modal.modal-open .modal-fade-screen {    
+        visibility: visible;
+        opacity: 1;
+        padding: 0em;
+    }
+
+    .modal.modal-open .modal-fade-screen .modal-inner {
+        width: 90%;
+        max-height: 100%;
+    }
+
+    .modal-close {
+        z-index: 100;
+    }
+ 
+    </style>
 <?php
 get_footer();

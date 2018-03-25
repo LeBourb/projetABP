@@ -56,29 +56,28 @@
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/multi_steps_form.js"></script>
 	-->
         <style>
-            .site-logo svg {width: 100%;
-    height: 100%;
-    display: inline;
-    fill: white;
-             }
-             .site-logo {
+            .site-logo svg {
+                width: 100%;
+                height: 100%;
+                display: inline;
+                fill: #dedede;                
+            }
+            .site-logo {
                 cursor: pointer;
-    width: 7em;
-    height: 3em;
-    margin-top: 4px;
-    margin-left: 10px;
-
-             }
+                width: 7em;
+                height: 3em;
+                margin-top: 4px;
+                margin-left: 10px;
+            }
             @media (min-width: 768px) {
                 .site-logo {
-                        width: 8em;
-    height: 4em;
-    margin-top: 6px;
-    margin-left: 7px;
+                    width: 8em;
+                    height: 4em;
+                    margin-top: 6px;
+                    margin-left: 7px;
                 }
             }
-             
-            </style>
+        </style>
 <!-- Main css -->
 <link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/style.css">
 
@@ -180,13 +179,13 @@
                                 
                                 echo '<li><a href="' . get_home_url() . '" >Home</a>'
                                         . '<div class="subnavContainer" style="display:none;">
-                                            <a class="subnav" href="#overview">Overview</a>' 
+                                            <a class="subnav" href="' . get_home_url() . '/#overview">Overview</a>' 
                                             . 
-                                            '<a class="subnav" href="#products">Our Products</a>'                                            
+                                            '<a class="subnav" href="' . get_home_url() . '/#products">Our Products</a>'                                            
                                             . 
-                                            '<a class="subnav" href="#partner">Our Partners</a>'
+                                            '<a class="subnav" href="' . get_home_url() . '/#partner">Our Partners</a>'
                                             .
-                                            '<a class="subnav" href="#materials">Materials</a>' 
+                                            '<a class="subnav" href="' . get_home_url() . '/#materials">Materials</a>' 
                                             . '</div>'
                                         . '</li>'; 
                                 //echo '<li><a href="' . get_permalink( wc_get_page_id ( 'shop' )) . '" >Shop</a></li>';                                            
@@ -197,11 +196,15 @@
                                     'return' => 'ids',
                                     'status' => 'publish',
                                 ) );                                    
-                                $product_ids = $query->get_products();
+                                echo '<li><a>Products</a>';
+                                $product_ids = $query->get_products();    
+                                echo '<div class="subnavContainer" style="display:none;">';
                                 foreach($product_ids as $product_id) {
                                     $product = wc_get_product($product_id);
-                                    echo '<li><a href="' . get_permalink( $product_id ) . '" >' . $product->get_title() . '</a></li>';                                            
+                                    echo '<a class="subnav" href="' . get_permalink( $product_id ) . '" >' . $product->get_title() . '</a>';                                      
                                 }
+                                echo '</div>';
+                                echo '</li>';
                                 echo '<li><a class="separator">|</a></li>';
                                 $pages = get_pages(array(
                                     'meta_key' => '_wp_page_template',
