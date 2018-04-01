@@ -33,6 +33,25 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
     .fb_dialog.fb_dialog_advanced.fb_shrink_active {
         left: 18pt!important;
     }
+    
+    .concept-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        grid-auto-rows: minmax(100px, auto);
+    }
+    .concept-grid .one {
+        grid-column: 2;
+        grid-row: 1 / 3;
+    }
+    .concept-grid .two { 
+        grid-column: 1;
+        grid-row: 1 / 2;
+    }
+    .concept-grid .three {
+        grid-column: 1;
+        grid-row: 2 / 3;
+    }
 </style>
 <section id="intro" class="parallax-section">
      <?php // echo wp_video_shortcode( array() );//
@@ -71,13 +90,58 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 	<div class="container">
 		<div class="row">
 
-			<div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.6s">
-				<h3><?php echo get_post_meta( $post->ID , 'Project Details Title', true ); ?></h3>
-				<p><?php echo get_post_meta( $post->ID , 'Project Details Description', true ); ?></p>
+			<div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.6s" style="text-align: center;">                            
+                            <p>－外身も中身も、かっこよく。－
+                                <br>
+                                ……………………………………………………… 
+                                <br>
+                                DESIGN & CREATED in FRANCE
+                                <br>
+                                パリ郊外のアトリエで創る、
+                                <br>
+                                さりげなくエッジの効いたデザイン
+                                <br>
+                                × 
+                                <br>
+                                JAPANESE TEXTILE CRAFTED by ARTISANS
+                                <br>
+                                日本の匠達が織りなす技
+                                <br>
+                                ×  
+                                <br>
+                                ECOLOGICAL & ETHICAL MATERIALS ・ PROCESSING
+                                <br>
+                                地球と生き物に配慮した素材と加工
+                                <br>
+                                …………………………………………………………
+                                <br>
+                                こだわりのデザインと着心地は外せない。    
+                                <br>
+                                でも、その背景だって大切だ。
+                                <br>
+                                全てのモノは、限りある資源を使い、
+                                <br>
+                                誰かの仕事でできている。
+                                <br>
+                                atelier Bourgeons アトリエブルジョンは、
+                                <br>
+                                外身（デザイン）と中身（ものづくりの背景）、
+                                <br>
+                                両方からのお洒落を提案するレディースブランドです。
+                                <br>
+                        </p>
 			</div>
 					
-			<div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.9s">
-                            <img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/overview-img.jpg" class="img-responsive" alt="Overview">
+			<div class="wow fadeInUp col-md-6 col-sm-6 concept-grid" data-wow-delay="0.9s">
+                            <div class="one" style="width: 87%;">
+                                <img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/homepage/amb_1.jpg" class="img-responsive" alt="Overview">
+                            </div>
+                            <div class="two">
+                                <img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/homepage/amb_3.jpg" class="img-responsive" alt="Overview">
+                            </div>
+                            <div class="three">
+                                <img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/homepage/amb_2.jpg" class="img-responsive" alt="Overview">
+                            </div>
 			</div>
 
 		</div>
@@ -91,8 +155,8 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
     DETAIL SECTION   
 ============================== -->
 <section id="detail" class="parallax-section">
-	<div class="container">
-		<div class="row">
+	<div class="container" style="width:100%;">
+		<div class="row" style="display:flex;flex-wrap:wrap;justify-content: center;">
 
 			<!--div class="wow fadeInLeft col-md-4 col-sm-4" data-wow-delay="0.3s">
 				<i class="fa fa-handshake-o"></i>
@@ -100,23 +164,40 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 				<p>Quisque ut libero sapien. Integer tellus nisl, efficitur sed dolor at, vehicula finibus massa. Sed tincidunt metus sed eleifend suscipit.</p>
 			</div-->
 
-
+                        <?php
+                            $pages = get_pages(array(
+                                'meta_key' => '_wp_page_template',
+                                'meta_value' => 'template-help.php'
+                            ));    
+                            $help_url = get_permalink($pages[0]->ID);
+                        ?>
 			<div class="wow fadeInRight col-md-4 col-sm-4" data-wow-delay="0.9s">
-				<i class="fa fa-lock"></i>
-				<h3><?php echo get_post_meta( $post->ID , 'Detail Secure Payment Title', true ); ?></h3>
-				<p><?php echo get_post_meta( $post->ID , 'Detail Secure Payment Description', true ); ?></p>
+				<i class="fa fa-lock"></i>                                
+                                <h5>安全&快適なネットショッピング</h5>
+                                <h4>PLIVACY PROTECTION & PAIEMENT SECULITY</h4>
+                                <p>当店は「SSL」というセキュリティー技術を採用しているため、注文時に入力される全ての個人情報は暗号化され、安全に送信されます。また当店利用のオンライン決済サービスStripeは、 カード業界の国際安全基準「Payment Card Industry Data Security Standard」 で最も安全なLevel 1を取得。 安心してお買い物をお楽しみください。</p>
+                                <a href="<?php echo $help_url; ?>/#security" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs animated" data-wow-delay="2.3s" style="visibility: visible; animation-delay: 2.3s; animation-name: fadeInUp; font-size: 0.8em;">プライバシーポリシー</a>
 			</div>
                     
                         <div class="wow fadeInRight col-md-4 col-sm-4" data-wow-delay="0.9s">
 				<i class="fa fa-tasks"></i>
-				<h3><?php echo get_post_meta( $post->ID , 'Detail Deposit Title', true ); ?></h3>
-				<p><?php echo get_post_meta( $post->ID , 'Detail Deposit Description', true ); ?></p>
+                                <h5>最初に全額払わなくてもOK！状況に応じて選べるお支払い方法</h5>
+				<h4>FLEXIBILITY OF PAYMENT</h4>
+				<p>商品をご予約いただく際に、「全額前払い」「分割２回払い」のいずれかをご指定いただけます。お支払い方法は「クレジットカード払い」または「銀行振込」からお選びいただけるほか、分割２回払いをご希望の場合は初回に「クレジットカード払い」、残額の支払いを「銀行振込」など、その都度お支払い方法が変更可能です。</p>
+                                <a href="<?php echo $help_url;?>/#payment" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs animated" data-wow-delay="2.3s" style="visibility: visible; animation-delay: 2.3s; animation-name: fadeInUp; font-size: 0.8em;">ご利用ガイド</a>
+			</div>   
+                        
+                        <div class="wow fadeInRight col-md-4 col-sm-4" data-wow-delay="0.9s">				
+                                <i class="fa fa-piggy-bank"></i>
+                                <h5>予約注文限定の特別価格で、通常よりも30%おトクに。</h5>
+				<h4>ADVANTAGE OF PRE-ORDER</h4>
+				<p>予めご注文をいただき、必要な枚数だけ無駄なく生産すれば、コストの削減に繋がります。浮いたコストの分だけ価格を下げ、予約注文だけの「特別価格」で商品を提供できのです。</p>
 			</div>   
                     
                     
 			<div class="wow fadeInUp col-md-4 col-sm-4" data-wow-delay="0.6s">
-				<i class="fa fa-clock-o"></i>
-				<h3><?php echo get_post_meta( $post->ID , 'Detail Follow Production Title', true ); ?></h3>
+				<i class="fa fa-clock"></i>
+				<h4><?php echo get_post_meta( $post->ID , 'Detail Follow Production Title', true ); ?></h4>
 				<p><?php echo get_post_meta( $post->ID , 'Detail Follow Production Description', true ); ?></p>
 			</div>
 

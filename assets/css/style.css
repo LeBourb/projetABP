@@ -215,15 +215,16 @@ footer {
     height: 7em;
 }
 
-.custom-navbar.navbar-fixed-top:hover .site-logo svg {
+.custom-navbar.navbar-fixed-top.active .site-logo svg {
     fill: black;
 }
 
-.custom-navbar.navbar-fixed-top:hover {
-    padding-top:0;
-    height: 5em;
+.custom-navbar.navbar-fixed-top.active {
+    height: 5em;    
+}
+
+.custom-navbar.navbar-fixed-top.active {
     background-color: white;
-    opacity: 0.6;
 }
 
 .custom-navbar .container {
@@ -241,7 +242,7 @@ footer {
     margin-left: 0;
 }
 
-.custom-navbar.navbar-fixed-top:hover .nav li a {
+.custom-navbar.navbar-fixed-top.active .nav li a {
     color: black;
 }
 
@@ -320,10 +321,23 @@ footer {
 
 @media(min-width:768px) {
     .custom-navbar {
-        padding: 20px 0;
+        padding-top: 20px;
         border-bottom: 0;
         background: 0 0; 
     }
+    
+    .custom-navbar.active {
+        padding-top: 0;
+    }
+    
+    .custom-navbar > .container {
+        margin-top: 20px;
+    }
+    
+    .custom-navbar > .container {
+        margin-top: 0;
+    }
+    
     .custom-navbar.top-nav-collapse {
         background: white;
         padding: 0;
@@ -367,17 +381,6 @@ footer {
 #intro h3 {
   letter-spacing: 2px;
 }
-
-
-/*---------------------------------------
-   Overview  section              
------------------------------------------*/
-#overview img {
-  position: relative;
-  padding-bottom: 32px;
-}
-
-
 
 /*---------------------------------------
     Detail section              

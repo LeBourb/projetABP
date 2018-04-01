@@ -17,6 +17,7 @@
 
 <link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/animate.css">
+<link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/fa-solid.min.css">
 <link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/font-awesome.min.css">
 <link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/owl.theme.css">
 <link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/owl.carousel.css">
@@ -76,6 +77,15 @@
                     margin-top: 6px;
                     margin-left: 7px;
                 }
+            }
+            
+            #product-menu {
+                counter-reset: prd_number;
+            }
+            
+            #product-menu .nb-product:before{                
+                content: counter(prd_number); 
+                counter-increment: prd_number;
             }
         </style>
 <!-- Main css -->
@@ -177,17 +187,20 @@
                                 // if user connected => display orders ! 
                                 //echo wc_get_page_id ( 'view_order' );
                                 
-                                echo '<li><a href="' . get_home_url() . '" >Home</a>'
+                                echo '<li id="product-nav"><a href="' . get_home_url() . '" >Home</a>'
                                         . '<div class="subnavContainer" style="display:none;">
-                                            <a class="subnav" href="' . get_home_url() . '/#overview">Overview</a>' 
+                                            <a class="subnav" href="' . get_home_url() . '/#concept">CONCEPT｜コンセプト</a>' 
                                             . 
-                                            '<a class="subnav" href="' . get_home_url() . '/#products">Our Products</a>'                                            
+                                            '<a class="subnav" href="' . get_home_url() . '/#material">MATERIAL｜素材</a>'                                            
                                             . 
-                                            '<a class="subnav" href="' . get_home_url() . '/#partner">Our Partners</a>'
+                                            '<a class="subnav" href="' . get_home_url() . '/#fabric">FABRIC｜生地</a>'
                                             .
-                                            '<a class="subnav" href="' . get_home_url() . '/#materials">Materials</a>' 
+                                            '<a class="subnav" href="' . get_home_url() . '/#sawing">SAWING｜縫製</a>' 
+                                            .
+                                            '<a class="subnav" href="' . get_home_url() . '/#atelier">ATELIER｜アトリエ</a>' 
                                             . '</div>'
-                                        . '</li>'; 
+                                        . '</li>';                
+
                                 //echo '<li><a href="' . get_permalink( wc_get_page_id ( 'shop' )) . '" >Shop</a></li>';                                            
                                 $query = new WC_Product_Query( array(
                                     'limit' => 10,
@@ -198,10 +211,10 @@
                                 ) );                                    
                                 echo '<li><a>Products</a>';
                                 $product_ids = $query->get_products();    
-                                echo '<div class="subnavContainer" style="display:none;">';
+                                echo '<div id="product-menu" class="subnavContainer" style="display:none;">';
                                 foreach($product_ids as $product_id) {
                                     $product = wc_get_product($product_id);
-                                    echo '<a class="subnav" href="' . get_permalink( $product_id ) . '" >' . $product->get_title() . '</a>';                                      
+                                    echo '<a class="subnav product" href="' . get_permalink( $product_id ) . '" >No. ' . '<div style="display:inline-block;" class="nb-product"></div> | ' . $product->get_title() . '</a>';                                      
                                 }
                                 echo '</div>';
                                 echo '</li>';
@@ -232,9 +245,31 @@
 		</div>
                 <script>
     
-    $('.nav.navbar-nav li').mouseover(function() {
+    $('.navbar.custom-navbar').mouseenter(function() {
+        that = $(this);
+        $(this).stop().animate({
+            'padding-top':'0' ,
+            opacity:'0.6',
+            backgroundColor: 'white'
+        }, 'slow', function() {
+            that.addClass('active');
+        });
+    });
+    $('.navbar.custom-navbar').mouseleave(function() {
+        that = $(this);
+        that.removeClass('active');
+        setTimeout(function(){
+            that.stop().animate({
+                'padding-top':'20px',
+                backgroundColor: 'black'
+            },'slow');
+        });
+    });
+  
+    $('.navbar.navbar-nav li').mouseenter(function() {
         $(this).find('.subnavContainer').show();
-    })
+        
+    });
     $( ".subnavContainer" ).mouseleave(function() {
         $(this).hide();
     });
