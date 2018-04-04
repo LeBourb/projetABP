@@ -247,13 +247,13 @@ $product_image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->g
                                             <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet.</p>
                                     </div>
                             </div>
-                        <div id="am-container">
+                        <div id="am-container" class="grid-items">
                             <?php
                                 $attachment_ids = $product->get_gallery_image_ids();
                                 foreach ( $attachment_ids as $attachment_id ) {
                                     $image_attachment_url = wp_get_attachment_url( $attachment_id );                                    
                                     //$image_url = wp_get_attachment_image_src( $image_attachment_id );
-                                    echo '<div href="'. $image_attachment_url .'" class="wow fadeInUp col-md-3 col-sm-6 col-xs-6" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
+                                    echo '<div href="'. $image_attachment_url .'" class="grid-item wow fadeInUp col-md-3 col-sm-6 col-xs-6" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
                                         <img src="' . $image_attachment_url . '" class="img-responsive" alt="sponsors">	
                                             <div class="overlay" style="opacity: 0.9; display:none;"></div>
 				   
@@ -485,6 +485,33 @@ $product_image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->g
 <!--/div-->
 <script>
 var viewer = new Viewer(document.getElementById('am-container'), {toolbar:false, title:false});
+// leave preview if click outside box: 
+var RectContains = function (Ax,w,Ay,h,x, y) {
+    console.log('Ax: ' + Ax);
+    console.log('w: ' + w);
+    console.log('Ay: ' + Ay);
+    console.log('h: ' + h);
+    console.log('x: ' + x);
+    console.log('y: ' + y);
+    return Ax <= x && x <= Ax + w &&
+        Ay <= y && y <= Ay + h;    
+}
+$('#am-container').on('shown',function(){
+    console.log('shown!');
+    $('.viewer-container .viewer-canvas').click(function(evt) {
+        console.log(evt);
+        Ay = $('.viewer-container .viewer-canvas img')[0].offsetTop;
+        h = $('.viewer-container .viewer-canvas img')[0].offsetHeight;        
+        Ax= $('.viewer-container .viewer-canvas img')[0].offsetLeft;
+        w = $('.viewer-container .viewer-canvas img')[0].offsetWidth;
+        x = evt.clientX;
+        y = evt.clientY;
+        if(!RectContains(Ax,w,Ay,h,x,y)){
+            viewer.hide();
+        }
+    })
+});
+
 </script>
 <script type='text/javascript'>
 <?php if(is_user_logged_in()) { ?>            

@@ -32,6 +32,7 @@ get_header();
         padding-right: 0 !important;
         display: inline-block;
         margin-right: 60px;
+        cursor: pointer;
     }
       
     .custom-blocks {
@@ -78,37 +79,37 @@ get_header();
     <div class="custom-blocks clearfix" id="custom-blocks">
       
       <div class="custom-block">
-        <a class="custom-block__link" id="help-product">
+        <a class="custom-block__link" id="help-product"  href="#product">
           <h4 class="custom-block__title">Products</h4>
         </a>
       </div>
       
       <div class="custom-block">
-        <a class="custom-block__link" id="help-payment">
+        <a class="custom-block__link" id="help-payment" href="#payment">
           <h4 class="custom-block__title">Payment</h4>
         </a>
       </div>
       
       <div class="custom-block">
-        <a class="custom-block__link" id="help-order-status">
+        <a class="custom-block__link" id="help-order-status" href="#order-status">
           <h4 class="custom-block__title">Order Status</h4>
         </a>
       </div>
       
       <div class="custom-block">
-        <a class="custom-block__link" id="help-returns-exchanges">
+        <a class="custom-block__link" id="help-returns-exchanges"  href="#returns-exchanges">
           <h4 class="custom-block__title">Returns &amp; Exchanges</h4>
         </a>
       </div>
         
       <div class="custom-block">
-        <a class="custom-block__link" id="help-deposit">
+        <a class="custom-block__link" id="help-deposit"  href="#deposit">
           <h4 class="custom-block__title">Deposit</h4>
         </a>
       </div>
         
       <div class="custom-block">
-        <a class="custom-block__link" id="help-account-types">
+        <a class="custom-block__link" id="help-account-types" href="#account-types">
           <h4 class="custom-block__title">Account Types</h4>
         </a>
       </div>
@@ -124,7 +125,7 @@ get_header();
                   <h4>Product</h4>  
                   <p>Haec igitur lex in amicitia sanciatur, ut neque rogemus res turpes nec faciamus rogati. Turpis enim excusatio est et minime accipienda cum in ceteris peccatis, tum si quis contra rem publicam se amici causa fecisse fateatur. Etenim eo loco, Fanni et Scaevola, locati sumus ut nos longe prospicere oporteat futuros casus rei publicae. Deflexit iam aliquantum de spatio curriculoque consuetudo maiorum.</p>  
                 </div>    
-                <div class="win-content" id="win-help-payment"  display="none">
+                <div class="win-content" id="win-help-payment"  display="none" >
                     <h4>Payment</h4>  
                     <p>Haec igitur lex in amicitia sanciatur, ut neque rogemus res turpes nec faciamus rogati. Turpis enim excusatio est et minime accipienda cum in ceteris peccatis, tum si quis contra rem publicam se amici causa fecisse fateatur. Etenim eo loco, Fanni et Scaevola, locati sumus ut nos longe prospicere oporteat futuros casus rei publicae. Deflexit iam aliquantum de spatio curriculoque consuetudo maiorum.</p>  
                 </div>
@@ -137,7 +138,7 @@ get_header();
                     <p>Haec igitur lex in amicitia sanciatur, ut neque rogemus res turpes nec faciamus rogati. Turpis enim excusatio est et minime accipienda cum in ceteris peccatis, tum si quis contra rem publicam se amici causa fecisse fateatur. Etenim eo loco, Fanni et Scaevola, locati sumus ut nos longe prospicere oporteat futuros casus rei publicae. Deflexit iam aliquantum de spatio curriculoque consuetudo maiorum.</p>  
                 </div>
                 <div class="win-content" id="win-help-returns-exchanges"  display="none">
-                    <h4>Account Types</h4>  
+                    <h4>Returns &amp; Exchanges</h4>  
                     <p>Haec igitur lex in amicitia sanciatur, ut neque rogemus res turpes nec faciamus rogati. Turpis enim excusatio est et minime accipienda cum in ceteris peccatis, tum si quis contra rem publicam se amici causa fecisse fateatur. Etenim eo loco, Fanni et Scaevola, locati sumus ut nos longe prospicere oporteat futuros casus rei publicae. Deflexit iam aliquantum de spatio curriculoque consuetudo maiorum.</p>  
                 </div>
                 <div class="win-content" id="win-help-account-types"  display="none">
@@ -158,6 +159,11 @@ get_header();
         $(document).on('click','#modal-reservation .modal-close' ,function(){ 
             $('.modal').removeClass('modal-open'); 
         });
+        if(location.hash != "" ) {
+            $('.modal').addClass('modal-open');
+            $('.modal .win-content').hide();
+            $('#win-help-' + location.hash.replace('#','')).show();
+        }
     });
     </script>
     <style>

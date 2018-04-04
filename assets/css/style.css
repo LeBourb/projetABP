@@ -208,9 +208,7 @@ footer {
 -----------------------------------------*/
 .custom-navbar {
     margin-bottom: 0;
-    /*background-color: #101010;*/
-    background-color: white;
-    opacity: 0.6;
+    /*background-color: #101010;*/    
     color: black;
     height: 7em;
 }
@@ -270,12 +268,17 @@ footer {
     color: black;
     padding: 4px 4px;
     z-index: 2;
-    display: flex;
+    display: none;
     position: absolute;
     flex-wrap: wrap;
     flex-direction: column;
     background-color: white;
 }
+
+.custom-navbar.active  .nav li  .subnavContainer.active {
+    display: flex;
+}
+
 .custom-navbar .nav li .subnav:hover {
     background-color: hsla(0, 0%, 0%, 0.03);
 }
@@ -312,18 +315,19 @@ footer {
 
 .custom-navbar .navbar-toggle {
     background-color: transparent;
+    right: 12px;
 }
 
 .custom-navbar .navbar-toggle .icon-bar {
-    background: #ffffff;
+    background: black;
     border-color: transparent;
 }
 
 @media(min-width:768px) {
     .custom-navbar {
         padding-top: 20px;
-        border-bottom: 0;
-        background: 0 0; 
+        border-bottom: 0;               
+        opacity: 0.6;
     }
     
     .custom-navbar.active {
@@ -386,7 +390,7 @@ footer {
     Detail section              
 -----------------------------------------*/
 #detail {
-    background: #222;
+    background: #eeebeb;
     color: #ffffff;
 }
 
@@ -536,6 +540,9 @@ footer {
         width:  50%;
     }
 
+    .navbar.navbar-fixed-top .container {
+        background-color: white;        
+    }
 }
 /*---------------------------------------
    Program section              

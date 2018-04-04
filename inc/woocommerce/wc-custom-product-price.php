@@ -48,15 +48,15 @@ if ( empty( $prices['price'] ) ) {
     $role = ( array ) $user->roles;
     if(in_array( 'customer-pro', $role )) {
         return '<b id="price-field" class="price crowdfunding" itemprop="offers" itemscope="" itemtype="//schema.org/Offer">'
-            . '<span class="priv-sale">' . $priv_sale_price . '<small>Priv-Sale</small></span>'            
-            . '<span class="pre-sale"><del>' . $pre_sale_price . '</del><small>Pre-Sale</small></span>'
-            . '<span class="regular"><del>' . $regular_price .'</del> <small>Regular</small></span> '
+            . '<span class="priv-sale"><small>Priv-Sale: </small>' . $priv_sale_price . '</span>'            
+            . '<span class="pre-sale" style="font-size:0.7em;margin-left:1em;"><small>Pre-Sale: </small><del>' . $pre_sale_price . '</del></span>'
+            . '<span class="regular" style="font-size:0.7em;margin-left:1em;"><small>Regular: </small><del>' . $regular_price .'</del></span>'
             . '</b>';
     }
     
     return '<b id="price-field" class="price crowdfunding" itemprop="offers" itemscope="" itemtype="//schema.org/Offer">'
-            . '<span class="pre-sale">' . $pre_sale_price . '<small>Pre-Sale</small></span>'            
-            . '<span class="regular"><del>' . $regular_price .'</del> <small>Regular</small></span> '
+            . '<span class="pre-sale"><small>Pre-Sale: </small>' . $pre_sale_price . '</span>'            
+            . '<span class="regular" style="font-size:0.7em;margin-left:1em;"><small>Regular: </small><del>' . $regular_price .'</del></span> '
             . '</b>';
     //wc_price($that->get_regular_price())
     //. '<span class="pre-sale"><del>' . $pre_sale_price . '</del><small>Pre-Sale</small></span>'

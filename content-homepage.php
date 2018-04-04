@@ -62,7 +62,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
         $video = reset($videos);
         //https://la-cascade.io/video-en-background/
  ?>
-<video poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/polina.jpg" id="bgvid" playsinline autoplay muted loop >
+<video id="bgvid" playsinline autoplay muted loop >
 
 <source src="<?php echo wp_get_attachment_url( $video->ID );?>" type="video/mp4">
 </video>  <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
@@ -88,7 +88,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 ============================== -->
 <section id="overview" class="parallax-section">
 	<div class="container">
-		<div class="row">
+		<div class="row" style="display: flex; align-items: center;">
 
 			<div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.6s" style="text-align: center;">                            
                             <p>－外身も中身も、かっこよく。－
@@ -115,7 +115,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
                                 <br>
                                 …………………………………………………………
                                 <br>
-                                こだわりのデザインと着心地は外せない。    
+                                こだわりのデザインと着心地は外せない。
                                 <br>
                                 でも、その背景だって大切だ。
                                 <br>
@@ -132,15 +132,17 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
                         </p>
 			</div>
 					
-			<div class="wow fadeInUp col-md-6 col-sm-6 concept-grid" data-wow-delay="0.9s">
-                            <div class="one" style="width: 87%;">
-                                <img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/homepage/amb_1.jpg" class="img-responsive" alt="Overview">
-                            </div>
-                            <div class="two">
-                                <img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/homepage/amb_3.jpg" class="img-responsive" alt="Overview">
-                            </div>
-                            <div class="three">
-                                <img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/homepage/amb_2.jpg" class="img-responsive" alt="Overview">
+			<div class="wow fadeInUp col-md-6 col-sm-6 " data-wow-delay="0.9s">
+                            <div class="concept-grid">
+                                <div class="one" style="width: 87%;">
+                                    <img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/homepage/amb_1.jpg" class="img-responsive" alt="Overview">
+                                </div>
+                                <div class="two">
+                                    <img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/homepage/amb_3.jpg" class="img-responsive" alt="Overview">
+                                </div>
+                                <div class="three">
+                                    <img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/homepage/amb_2.jpg" class="img-responsive" alt="Overview">
+                                </div>
                             </div>
 			</div>
 
@@ -171,7 +173,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
                             ));    
                             $help_url = get_permalink($pages[0]->ID);
                         ?>
-			<div class="wow fadeInRight col-md-4 col-sm-4" data-wow-delay="0.9s">
+			<div class="wow fadeInRight col-xs-6 col-sm-3" data-wow-delay="0.9s">
 				<i class="fa fa-lock"></i>                                
                                 <h5>安全&快適なネットショッピング</h5>
                                 <h4>PLIVACY PROTECTION & PAIEMENT SECULITY</h4>
@@ -179,7 +181,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
                                 <a href="<?php echo $help_url; ?>/#security" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs animated" data-wow-delay="2.3s" style="visibility: visible; animation-delay: 2.3s; animation-name: fadeInUp; font-size: 0.8em;">プライバシーポリシー</a>
 			</div>
                     
-                        <div class="wow fadeInRight col-md-4 col-sm-4" data-wow-delay="0.9s">
+                        <div class="wow fadeInRight col-xs-6 col-sm-3" data-wow-delay="0.9s">
 				<i class="fa fa-tasks"></i>
                                 <h5>最初に全額払わなくてもOK！状況に応じて選べるお支払い方法</h5>
 				<h4>FLEXIBILITY OF PAYMENT</h4>
@@ -187,15 +189,15 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
                                 <a href="<?php echo $help_url;?>/#payment" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs animated" data-wow-delay="2.3s" style="visibility: visible; animation-delay: 2.3s; animation-name: fadeInUp; font-size: 0.8em;">ご利用ガイド</a>
 			</div>   
                         
-                        <div class="wow fadeInRight col-md-4 col-sm-4" data-wow-delay="0.9s">				
-                                <i class="fa fa-piggy-bank"></i>
+                        <div class="wow fadeInRight col-xs-6 col-sm-3" data-wow-delay="0.9s">				
+                                <i class="fa fa-piggy-bank" style="transform:rotateY(180deg);"></i>
                                 <h5>予約注文限定の特別価格で、通常よりも30%おトクに。</h5>
 				<h4>ADVANTAGE OF PRE-ORDER</h4>
 				<p>予めご注文をいただき、必要な枚数だけ無駄なく生産すれば、コストの削減に繋がります。浮いたコストの分だけ価格を下げ、予約注文だけの「特別価格」で商品を提供できのです。</p>
 			</div>   
                     
                     
-			<div class="wow fadeInUp col-md-4 col-sm-4" data-wow-delay="0.6s">
+			<div class="wow fadeInRight col-xs-6 col-sm-3" data-wow-delay="0.6s">
 				<i class="fa fa-clock"></i>
 				<h4><?php echo get_post_meta( $post->ID , 'Detail Follow Production Title', true ); ?></h4>
 				<p><?php echo get_post_meta( $post->ID , 'Detail Follow Production Description', true ); ?></p>
@@ -722,40 +724,6 @@ This wool comes from sheep that have been raised on feed which is free from fert
 	</div>
 </section>
 
-
-<!-- =========================
-    SPONSORS SECTION   
-============================== -->
-<section id="sponsors" class="parallax-section">
-	<div class="container">
-		<div class="row">
-
-			<div class="wow bounceIn col-md-12 col-sm-12">
-				<div class="section-title">
-					<h2>Our Sponsors</h2>
-					<p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet.</p>
-				</div>
-			</div>
-
-			<div class="wow fadeInUp col-md-3 col-sm-6 col-xs-6" data-wow-delay="0.3s">
-				<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/sponsor-img1.jpg" class="img-responsive" alt="sponsors">	
-			</div>
-
-			<div class="wow fadeInUp col-md-3 col-sm-6 col-xs-6" data-wow-delay="0.6s">
-				<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/sponsor-img2.jpg" class="img-responsive" alt="sponsors">	
-			</div>
-
-			<div class="wow fadeInUp col-md-3 col-sm-6 col-xs-6" data-wow-delay="0.9s">
-				<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/sponsor-img3.jpg" class="img-responsive" alt="sponsors">	
-			</div>
-
-			<div class="wow fadeInUp col-md-3 col-sm-6 col-xs-6" data-wow-delay="1s">
-				<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/sponsor-img4.jpg" class="img-responsive" alt="sponsors">	
-			</div>
-
-		</div>
-	</div>
-</section>
 
 <!-- Back top -->
 <a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>

@@ -107,7 +107,7 @@
 
 	<!--div class="sk-rotating-plane"></div-->
         <div class="overlay-loader show" id="loader" style="position: fixed; top: 0px; right: 0px; bottom: 0px; left: 0px; width: 100%; background-color: rgb(255, 255, 255);">
-        <svg viewBox="60 -100 100 400" enable-background="new 0 0 500 300" width="500px" version="1.1" id="Logo_Top" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" height="612px" xml:space="preserve" style="position: absolute; width: 50%; z-index: 2000; height: 50%; top: 25%; left: 25%;">
+        <svg viewBox="60 -100 100 400" enable-background="new 0 0 500 300" width="500px" version="1.1" id="Logo_Top" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" height="612px" xml:space="preserve" style="position: absolute; width: 50%; z-index: 2000; height: 50%; top: 15%; left: 25%;">
             <g>
                 <path stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M161.928,111.956c-4.484,3.959-9.58,7.938-15.336,11.918   C152.573,119.942,157.647,115.962,161.928,111.956z"></path>
                 <path stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M145.075,126.78c-2.43,1.77-7.25-0.516-11.109-2.906   C137.473,126.188,142.904,129.135,145.075,126.78z"></path>
@@ -118,7 +118,7 @@
         </svg>
 
     
-        <svg version="1.1" id="Logo_Bottom" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="792px" height="612px" viewBox="0 0 792 612" enable-background="new 0 0 792 612" xml:space="preserve" style="position: absolute; width: 50%; z-index: 2000; height: 50%; top: 70%; left: 28%;">
+        <svg version="1.1" id="Logo_Bottom" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 650 612" style="position: absolute; width: 50%; z-index: 2000; height: 50%; top: 58%; left: 25%;">
              <path xmlns="http://www.w3.org/2000/svg" d="M51.784,91.232c-0.36,0.476-0.93,0.822-1.211,1.421c-2.574,5.473-24.436,6.668-27.839,0.563    c-0.393-0.701-1.188,0.996-1.68,1.564c-0.498,0.563-1.103,0.991-1.815,1.274c-0.182,0.287-0.564,0.59-1.146,0.922    s-6.174,4.451-8.812,0.926c-0.646-0.868-0.806-2.036-0.806-3.264c0-16.711,15.693-14.813,16.146-13.768    c0.171,0.096,0.44,0.141,0.799,0.141c0.633,0,1.214-0.234,1.748-0.709c0.54-0.477,1.031-0.711,1.479-0.711    c0.452,0,0.86,0.383,1.216,1.139c-0.268,0.756-0.626,1.396-1.078,1.914c-0.446,0.519-0.67,1.301-0.67,2.34    c0,0.757,5.772,15.197,21.518,6.035c0.761-0.444,1.521-0.83,2.152-1.492c0.363,0,0.537,0.144,0.537,0.425    C52.322,90.329,52.148,90.758,51.784,91.232z M17.351,82.433c-0.356,0-5.575,9.443-2.554,12.631    c0.062,0.064,0.188,0.007,0.268,0.068c2.665,2.076,5.881-6.406,6.058-6.736C22.388,85.993,17.805,82.433,17.351,82.433z"></path>
              <path xmlns="http://www.w3.org/2000/svg" d="M105.102,82.577c-0.399,0.188-0.688,0.516-0.868,0.996c-1.524,0.942-3.029,1.911-4.51,2.903    c-1.48,0.998-3.024,1.875-4.644,2.629c-0.354,0-0.711,0.281-1.068,0.849c-0.633,0.192-1.191,0.475-1.683,0.854    c-0.496,0.375-1.012,0.705-1.55,0.992c-1.968,1.135-3.988,2.244-6.051,3.332c-2.064,1.09-4.146,2.088-6.252,2.984    c-2.109,0.897-4.284,1.631-6.525,2.196c-2.238,0.57-4.484,0.854-6.724,0.854c-4.345,0-10.146-2.068-12.907-5.965    c-0.19-0.273-2.167-7.162-2.023-11.351c0.018-0.567-0.144-5.875,0.68-6.248c-0.232,0.107-2.696-0.221-2.696-0.987    c0-1.132,1.588-1.908,2.825-2.275c0.901-0.262,0.673-3.734,0.673-4.109c0-0.475-0.234-4.438,1.479-5.819    c0.2-0.164,0.384-0.287,0.605-0.287c0.229,0,0.431-0.047,0.609-0.142c0.177-0.094,0.353-0.211,0.528-0.352    c0.183-0.145,0.408-0.213,0.679-0.213c0.451,0,2.639,1.943,1.884,3.973c-0.269,0.726-1.075,5.349-1.075,6.104v0.992    c1.968,0.192,3.878,0.252,5.714,0.424c4.279,0.414,14.082,0.248,17.418-0.424l5.786-0.853c0.355,0,0.534,0.142,0.534,0.424    c0,0.281-0.358,0.57-1.077,0.853c-7.477,2.975-24.971,2.834-26.628,2.834h-1.883c-0.176,0.385-0.227,1.184-0.469,2.35    c-0.646,3.084,0.883,8.381,1.004,9.152c0.507,3.19,4.194,6.668,6.125,7.236c1.922,0.567,3.923,0.942,5.981,0.854    c6.721-0.295,13.807-3.551,16.679-4.971c2.869-1.42,5.623-2.937,8.272-4.541c2.641-1.609,5.042-3.123,7.192-4.543    c0.534,0,1.012-0.236,1.41-0.709c0.403-0.476,0.919-0.707,1.551-0.707h0.401c0.18-0.381,0.355-0.572,0.532-0.572    c0.186,0.094,0.316,0.141,0.408,0.141c0.091,0.101,0.226,0.142,0.405,0.142C105.754,82.058,105.51,82.386,105.102,82.577z"></path>
              <path xmlns="http://www.w3.org/2000/svg" d="M120.634,93.217c-2.239,0.949-4.482,2.063-6.729,3.336c-2.235,1.279-4.582,1.939-6.988,2.346    c-3.581,0.603-11.864-0.116-15.2-2.627c-2.016-1.516-1.524-6.221-1.615-6.317c0.309-1.457,1.602-5.904,2.964-7.806    c0.968-1.348,4.673-5.813,9.282-5.813c0.067,0,0.143,0,0.217,0.002c0.635,0.021,1.205,0.139,1.73,0.35    c0.579,0.234,2.084,3.617,2.084,4.187c0,0.664-0.401,1.44-1.213,2.338c-0.802,0.904-1.747,1.775-2.818,2.627    c-1.075,0.855-2.159,1.613-3.229,2.271c-1.081,0.663-1.883,1.045-2.426,1.139c-0.177,0.186-0.265,0.424-0.265,0.705    c0,0.854,2.325,3.836,3.229,4.399c0.888,0.564,1.784,1.127,2.751,1.42c5.715,1.707,14.509-1.971,15.265-2.696    c0.812-0.771,4.142-3.181,5.789-2.695C124.259,90.616,121.079,92.652,120.634,93.217z M99.918,80.446    c-0.711,0.381-1.345,1.043-1.883,1.987c-0.534,0.945-0.802,3.404-0.802,3.404s2.663-2.029,3.153-2.406    C100.887,83.05,100.099,80.544,99.918,80.446z"></path>
@@ -187,17 +187,17 @@
                                 // if user connected => display orders ! 
                                 //echo wc_get_page_id ( 'view_order' );
                                 
-                                echo '<li id="product-nav"><a href="' . get_home_url() . '" >Home</a>'
-                                        . '<div class="subnavContainer" style="display:none;">
-                                            <a class="subnav" href="' . get_home_url() . '/#concept">CONCEPT｜コンセプト</a>' 
+                                echo '<li id="product-nav"><a href="' . (!is_front_page() ? get_home_url() : '') . '" >Home</a>'
+                                        . '<div class="subnavContainer" style="">
+                                            <a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '') . '#concept">CONCEPT｜コンセプト</a>' 
                                             . 
-                                            '<a class="subnav" href="' . get_home_url() . '/#material">MATERIAL｜素材</a>'                                            
+                                            '<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '') . '#material">MATERIAL｜素材</a>'                                            
                                             . 
-                                            '<a class="subnav" href="' . get_home_url() . '/#fabric">FABRIC｜生地</a>'
+                                            '<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '' ). '#fabric">FABRIC｜生地</a>'
                                             .
-                                            '<a class="subnav" href="' . get_home_url() . '/#sawing">SAWING｜縫製</a>' 
+                                            '<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '' ). '#sawing">SAWING｜縫製</a>' 
                                             .
-                                            '<a class="subnav" href="' . get_home_url() . '/#atelier">ATELIER｜アトリエ</a>' 
+                                            '<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '' ). '#atelier">ATELIER｜アトリエ</a>' 
                                             . '</div>'
                                         . '</li>';                
 
@@ -211,7 +211,7 @@
                                 ) );                                    
                                 echo '<li><a>Products</a>';
                                 $product_ids = $query->get_products();    
-                                echo '<div id="product-menu" class="subnavContainer" style="display:none;">';
+                                echo '<div id="product-menu" class="subnavContainer" style="">';
                                 foreach($product_ids as $product_id) {
                                     $product = wc_get_product($product_id);
                                     echo '<a class="subnav product" href="' . get_permalink( $product_id ) . '" >No. ' . '<div style="display:inline-block;" class="nb-product"></div> | ' . $product->get_title() . '</a>';                                      
@@ -233,8 +233,7 @@
                                 else {
                                     echo '<li><a href="' . Theme_My_Login::get_page_link( 'login' ) . '" >Login</a></li>';                                
                                     echo '<li><a href="' . Theme_My_Login::get_page_link( 'register' ) . '" >Register</a></li>';                                
-                                }
-                                echo '<li><a href="' . get_permalink( wc_get_page_id ( 'cart' )) . '" >Cart</a></li>'; 
+                                }                                
                                 ?>
                             
                                 
@@ -246,6 +245,8 @@
                 <script>
     
     $('.navbar.custom-navbar').mouseenter(function() {
+        if(screen.width < 768 ) 
+            return;
         that = $(this);
         $(this).stop().animate({
             'padding-top':'0' ,
@@ -256,6 +257,8 @@
         });
     });
     $('.navbar.custom-navbar').mouseleave(function() {
+        if(screen.width < 768 ) 
+            return;
         that = $(this);
         that.removeClass('active');
         setTimeout(function(){
@@ -266,15 +269,16 @@
         });
     });
   
-    $('.navbar.navbar-nav li').mouseenter(function() {
-        $(this).find('.subnavContainer').show();
+    $('.nav.navbar-nav li').mouseenter(function() {
+        $(this).find('.subnavContainer').addClass('active');
         
     });
     $( ".subnavContainer" ).mouseleave(function() {
-        $(this).hide();
+        //$(this).hide();
+        $(this).removeClass('active');
     });
     $( ".nav.navbar-nav li" ).mouseleave(function() {
-        $(this).find('.subnavContainer').hide();
+        $(this).find('.subnavContainer').removeClass('active');
     });
     </script>
 

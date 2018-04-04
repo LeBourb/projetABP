@@ -29,12 +29,13 @@ add_action( 'woocommerce_before_add_to_cart_form', 'wc_before_add_to_cart_fundin
 function wc_before_add_to_cart_funding() {
     global $post;
     $production_id = wc_get_not_stated_production_item($post->ID);
+    $min_order = wc_get_prod_min_order($production_id);
     if($production_id == '') {
         echo '<span>NO PRODUCTION PLANNED !</span>';
-    }else {
+    }else if ($min_order > 0) {
         $production = wc_get_prod($production_id);
         $qty = wc_get_prod_total_ordered_item($production_id);
-        $min_order = wc_get_prod_min_order($production_id);
+        
         $percent = intval($qty/$min_order*100);
      ?> <style>
         .goalProgress {
