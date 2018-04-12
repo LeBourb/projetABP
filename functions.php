@@ -59,7 +59,7 @@ if ( storefront_is_woocommerce_activated() ) {
         require 'inc/woocommerce/wc-custom-product-price.php';
         require 'inc/woocommerce/wc-custom-product-supplies-tab.php';
         require 'inc/woocommerce/wc-checkout_terms_conditions_popup.php';
-        
+        require 'inc/admin/class-wc-meta-box-product-awesome-description.php';
         //require 'inc/woocommerce/wc-custom-product-workshop-tab.php';
         //require 'inc/woocommerce/wc-custom-product-fabrics-tab.php';
 }
@@ -329,6 +329,47 @@ function my_custom_submenu_page_callback() {
 }
 
 add_action( 'manage_prod_posts_custom_column', 'render_prod_columns' );
+
+
+
+
+function add_attachment_field_position_x( $form_fields, $post ) {
+    $form_fields['focus_position_x'] = array(
+        'label' => 'Focus Position X (%)',
+        'input' => 'text',
+        'value' => get_post_meta( $post->ID, 'focus_position_x', true ),
+        'helps' => '% of image on x axis'
+    );
+    return $form_fields;
+}
+add_filter( 'attachment_fields_to_edit', 'add_attachment_field_position_x', 10, 2 );
+
+function add_attachment_field_position_y( $form_fields, $post ) {
+    $form_fields['focus_position_y'] = array(
+        'label' => 'Focus Position Y (%)',
+        'input' => 'text',
+        'value' => get_post_meta( $post->ID, 'focus_position_y', true ),
+        'helps' => '% of image on y axis'
+    );
+    return $form_fields;
+}
+add_filter( 'attachment_fields_to_edit', 'add_attachment_field_position_y', 11, 2 );
+
+function add_attachment_field_position_x_save( $post, $attachment ) {
+    if( isset( $attachment['focus_position_x'] ) )
+    update_post_meta( $post['ID'], 'focus_position_x', $attachment['focus_position_x'] );
+
+    return $post;
+}
+add_filter( 'attachment_fields_to_save', 'add_attachment_field_position_x_save', 10, 2 );
+
+function add_attachment_field_position_y_save( $post, $attachment ) {
+    if( isset( $attachment['focus_position_y'] ) )
+    update_post_meta( $post['ID'], 'focus_position_y', $attachment['focus_position_y'] );
+
+    return $post;
+}
+add_filter( 'attachment_fields_to_save', 'add_attachment_field_position_y_save', 11, 3 );
 
 /**
 * Output custom columns for prods.
@@ -846,8 +887,14 @@ function custom_postimage_meta_box(){
     foreach($post_types as $pt){
         add_meta_box('custom_postimage_meta_box',__( 'More Featured Images', 'yourdomain'),'custom_postimage_meta_box_func',$pt,'side','low');
     }
+   add_meta_box( 'awesomefacets', __( 'Add facets', 'woocommerce' ), 'WC_Meta_Box_Product_Awesome_Description::output', 'product');
 }
 
+add_action( 'save_post', 'WC_Meta_Box_Product_Awesome_Description::save' );
+add_action( 'wp_ajax_woocommerce_add_awesome_description', 'WC_Meta_Box_Product_Awesome_Description::add' );
+add_action( 'wp_ajax_woocommerce_remove_awesome_description', 'WC_Meta_Box_Product_Awesome_Description::remove' );
+add_action( 'wp_ajax_woocommerce_save_awesome_description', 'WC_Meta_Box_Product_Awesome_Description::save' );
+    
 function custom_postimage_meta_box_func($post){
 
     //an array with all the images (ba meta key). The same array has to be in custom_postimage_meta_box_save($post_id) as well.

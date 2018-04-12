@@ -41,8 +41,7 @@ if ( empty( $prices['price'] ) ) {
     }else {
         $pre_sale_price = wc_price(get_post_meta($that->get_id(),'pre_sale_price',true));
         $priv_sale_price = wc_price(get_post_meta($that->get_id(),'priv_sale_price',true));
-        $regular_price = wc_price($that->get_regular_price());
-        
+        $regular_price = wc_price($that->get_regular_price());        
     }
     $user = wp_get_current_user(); 
     $role = ( array ) $user->roles;

@@ -18,9 +18,13 @@ function wc_before_add_to_cart_shipping_estimate() {
     }else {
         $production = wc_get_prod($production_id);
         $start = $production->get_estimated_shipping_start();
+        $start = strtotime($start); 
+        $start = date("y/m/d",$start);
         $end = $production->get_estimated_shipping_end();
+        $end = strtotime($end);
+        $end = date("m/d",$end);
         echo '<div class="estimated-ship-date">
-            <p>Estimated Shipping: <span>' . $start  . '–' . $end . '</span></p></div>';
+            【お届け予定: ' . $start  . '〜' . $end . '】</div>';
     }
 }
 
@@ -71,12 +75,6 @@ function wc_before_add_to_cart_funding() {
             margin: 0.75em 0.5em 0;
             padding: 0;
         }        
-        .price.crowdfunding small {
-            display: block;
-            margin-top: 1.3em;
-            font-size: 1.2rem;
-            line-height: 1em;
-        }
         #price-field {
             line-height: 0.6em;
             margin: 0.7em auto -0.1em;
@@ -138,7 +136,19 @@ function wc_before_add_to_cart_funding() {
             })
             
         </script>
+        <div style="background-color:#e8e8e8;margin:1em;padding:1em;">
+            こちらは予約商品のため、<red style="color:red;">注文確定後のキャンセル、返品、交換はできません。</red>
+            <br>
+            <ul>
+            <li>実際の商品は、外見に目立つ変化がない範囲で仕様や寸法が若干異なる場合がございます。</li>
+            <li>生産の都合上、お届け時期が予定より前後する場合がございます。</li>
+            <li>ご注文後、商品のお届け時期は「MY ORDER」ページより随時ご確認いただけます。</li>
+            </ul>
+            <red style="color:red;">【お買い物前にご一読ください】ご利用ガイド</red>
+        </div>
             <?php
+    } else {
+        echo '<span>NO MINIMUM ORDER SET !</span>';
     }
 }
 
