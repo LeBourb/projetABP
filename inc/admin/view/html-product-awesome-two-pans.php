@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+echo '<div>Two Pans</div>';
 $settings = array(
     'textarea_name' => $awesome_key,
         'quicktags'     => array( 'buttons' => 'em,strong,link' ),

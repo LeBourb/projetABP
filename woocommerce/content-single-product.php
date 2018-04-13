@@ -418,10 +418,16 @@ $product_image = wp_get_attachment_image_src($main_image , 'single-post-thumbnai
         $text_left = isset($item['text_left']) ? $item['text_left'] : '';
         $text_right = isset($item['text_right']) ? $item['text_right'] : '';
         if (isset($item['template_type']) && $item['template_type'] == "two-pans") {
-               include('single-product/view/two-pans.php');
-        } else {
-            //include('html-product-awesome-description-elem.php');
-            include('single-product/view/parallax-right.php');
+            include('single-product/view/two-pans.php');
+        } else if (isset($item['template_type']) && $item['template_type'] == "parallax-left")  {
+            $parallex_left = true;
+            include('single-product/view/parallax.php');
+        } else if (isset($item['template_type']) && $item['template_type'] == "parallax-right")  {
+            $parallex_left = false;
+            include('single-product/view/parallax.php');
+        } else  {
+            $parallex_left = false;
+            include('single-product/view/parallax.php');
         }
         
     }

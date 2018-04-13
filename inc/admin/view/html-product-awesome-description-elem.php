@@ -5,7 +5,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+if($parallex_left) {
+    echo '<div>PARALLAX LEFT</div>';
+} else {
+    echo '<div>PARALLAX RIGHT</div>';
+}
 $settings = array(
     'textarea_name' => $awesome_key,
         'quicktags'     => array( 'buttons' => 'em,strong,link' ),

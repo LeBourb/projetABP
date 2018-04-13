@@ -24,13 +24,13 @@
             height: 100vh;
             text-align: center;
         }
-    </style>
-        <section id="awesome_<?php echo $key;?>" class="parallax-section">
-            <div class="container">
-            	<div class="row">
-                    <div class="col-md-4 col-md-offset-7">            
-                        <?php echo $item['text'];?>
-                    </div>
-                </div>
+</style>
+<section id="awesome_<?php echo $key;?>" class="parallax-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 <?php if($parallex_left) echo "col-md-offset-3"; else echo "col-md-offset-7"; ?>">            
+                <?php echo $item['text'];?>
             </div>
-        </section>
+        </div>
+    </div>
+</section>

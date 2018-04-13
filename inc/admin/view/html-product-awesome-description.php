@@ -51,10 +51,16 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 $title = isset($item['title']) ? $item['title'] : '';
                                 $text_left = isset($item['text_left']) ? $item['text_left'] : '';
                                 $text_right = isset($item['text_right']) ? $item['text_right'] : '';
-                                if ($item['template_type'] == "two-pans") {
-                                       include('html-product-awesome-two-pans.php');
-                                } else {
-                                    
+                                if (isset($item['template_type']) && $item['template_type'] == "two-pans") {
+                                    include('html-product-awesome-two-pans.php');
+                                } else if (isset($item['template_type']) && $item['template_type'] == "parallax-left") {      
+                                    $parallex_left = true;
+                                    include('html-product-awesome-description-elem.php');
+                                } else if (isset($item['template_type']) && $item['template_type'] == "parallax-right") {                                    
+                                    $parallex_left = false;
+                                    include('html-product-awesome-description-elem.php');
+                                } else {                                    
+                                    $parallex_left = false;
                                     include('html-product-awesome-description-elem.php');
                                 }
                             }
