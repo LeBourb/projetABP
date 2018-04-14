@@ -157,6 +157,7 @@ $product_image = wp_get_attachment_image_src($main_image , 'single-post-thumbnai
         }
         
         .product-description {
+            width: 50%;
             min-width: 350px;
             margin-left: auto;
             margin-right: auto;
@@ -164,6 +165,39 @@ $product_image = wp_get_attachment_image_src($main_image , 'single-post-thumbnai
         div.modal-product-details.product .images {
             margin-top: 20px;
         }
+        
+        div.modal-product-details.product .woocommerce-product-gallery__image {
+            width:100%;
+        }
+        
+        .modal .modal-header .modal-close {
+            position: relative;              
+            top:0;
+            right:0;
+        }
+        
+        .modal .modal-header .fa.fa-arrow-alt-circle-left {            
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        
+        .modal .modal-header {
+            text-align:center;
+            display: flex;
+        }
+        
+        .modal .modal-header #modal-title {
+            flex-grow: 1;
+            width: 100%;
+        }
+        
+        @media screen and (min-width: 1024px) {
+            div.modal-product-details.product .woocommerce-product-gallery__image {
+                width:50%;
+                padding: 2em;
+            }
+        }
+        
     </style>
     <!-- =========================
     INTRO SECTION   
@@ -196,10 +230,16 @@ $product_image = wp_get_attachment_image_src($main_image , 'single-post-thumbnai
     
     <div class="modal-fade-screen">
         <div class="modal-inner">
-        <div class="modal-close" for="modal-1"></div>
+            
+        <div class="modal-header">        
+            <div class="fa fa-arrow-alt-circle-left" id="btn-modal-back" style="display:none;"></div>
+            <h5 id="modal-title">
+                </h5>
+            <div class="modal-close" for="modal-1"></div>            
+        </div>
         <div class="modal-product-details product">
-            <div class="images" style="display:flex;">
-                <div class="woocommerce-product-gallery__image" style="width:50%; padding: 2em;">
+            <div class="images" style="display:flex;flex-wrap: wrap;width: 100%;">
+                <div class="woocommerce-product-gallery__image" style="">
                     <!--img class="wp-post-image"></img-->
                     
                          <div id="product-carousel" class="fadeOut owl-carousel owl-theme">

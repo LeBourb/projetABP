@@ -8,10 +8,12 @@
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/css/project-gmap.css</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/functions.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-prod-data-store.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/class-wc-meta-box-product-size-details.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/views/html-product-supply-content.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/class-wc-meta-box-production-data.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/style.css</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/footer.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/class-wc-meta-box-product-awesome-description.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-test-email.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/views/html-product-workshop.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/class-wc-product-attribute-supply-form.php</file>
@@ -32,9 +34,12 @@
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/project-gmap.min.js</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/views/html-product-productions.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-homepage.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/single-product/view/parallax.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-product-supplies-tab.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-prod-item-functions.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/custom.min.js</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/view/html-product-size-details.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/single-product/view/two-pans.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/class_admin_production_product_total_table.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/storefront-template-functions.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-admin-workshop.php</file>
@@ -48,6 +53,7 @@
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/reseller-map.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-add-to-cart.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-admin-order.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/view/html-product-awesome-description-elem.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-product-attribute-productions.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/header.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-termsandconditions.php</file>
@@ -56,7 +62,9 @@
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/content-homepage.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-admin-view-order-meta-production.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-product-attribute-fabrics.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/view/html-product-awesome-description.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/comments.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/view/html-product-awesome-two-pans.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/owl.carousel.min.js</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/project-map.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-reseller-map.php</file>
