@@ -61,6 +61,7 @@ if ( storefront_is_woocommerce_activated() ) {
         require 'inc/woocommerce/wc-checkout_terms_conditions_popup.php';
         require 'inc/admin/class-wc-meta-box-product-awesome-description.php';
         require 'inc/admin/class-wc-meta-box-product-size-details.php';
+        require 'inc/admin/class-wc-meta-box-product-size-guide.php';
         //require 'inc/woocommerce/wc-custom-product-workshop-tab.php';
         //require 'inc/woocommerce/wc-custom-product-fabrics-tab.php';
 }
@@ -890,6 +891,7 @@ function custom_postimage_meta_box(){
     }
     add_meta_box( 'awesomefacets', __( 'Add facets', 'woocommerce' ), 'WC_Meta_Box_Product_Awesome_Description::output', 'product');
     add_meta_box( 'productsizedetails', __( 'Size&Details', 'woocommerce' ), 'WC_Meta_Box_Product_Size_Details::output', 'product');
+    add_meta_box( 'productsizeguide', __( 'Sizing Guide', 'woocommerce' ), 'WC_Meta_Box_Product_Size_Guide::output', 'product');
 }
 
 //add_action( 'save_post', 'WC_Meta_Box_Product_Awesome_Description::save' );
@@ -897,6 +899,7 @@ add_action( 'wp_ajax_woocommerce_add_awesome_description', 'WC_Meta_Box_Product_
 add_action( 'wp_ajax_woocommerce_remove_awesome_description', 'WC_Meta_Box_Product_Awesome_Description::remove' );
 add_action( 'wp_ajax_woocommerce_save_awesome_description', 'WC_Meta_Box_Product_Awesome_Description::save' );
 add_action( 'save_post', 'WC_Meta_Box_Product_Size_Details::save' );
+add_action( 'save_post', 'WC_Meta_Box_Product_Size_Guide::save' );
     
 function custom_postimage_meta_box_func($post){
 

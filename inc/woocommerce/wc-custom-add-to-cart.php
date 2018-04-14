@@ -32,11 +32,21 @@ add_action( 'woocommerce_before_add_to_cart_form', 'wc_before_add_to_cart_size_d
  
 function wc_before_add_to_cart_size_details() {
    global $post;
+   $text = get_post_meta(  $post->ID, 'wc_size_details', true);
+   if( !$text || $text == "" ) 
+       return;
+   
+   $text_guide = get_post_meta(  $post->ID, 'wc_size_guide', true);
+   
    ?>
-    <br><a id="btn_size_details" class="icon-sizing" data-featherlight="#size-guide-modal" style="cursor:pointer;"><span>Size and Details</span></a>
+    <br><a id="btn_size_details" class="icon-sizing" data-featherlight="#size-details-modal" style="cursor:pointer;"><span>Size and Details</span></a>
    
    <div id="wc_size_details" style="display:none;    margin-left: auto;
-    margin-right: auto;"> <?php echo get_post_meta(  $post->ID, 'wc_size_details', true); ?> </div>
+    margin-right: auto;"> 
+       <?php  if($text_guide && $text_guide != "") {?><div>See our : <a id="btn_second_size_guide" class="icon-sizing" data-featherlight="#size-guide-modal" style="cursor:pointer;"><span>Size and Details</span></a></div> 
+       <?php }?>
+       <div><?php echo $text; ?></div> 
+   </div>
    
    <script>
        $('#btn_size_details').click(function() {
@@ -47,13 +57,44 @@ function wc_before_add_to_cart_size_details() {
        });
        
        $('.modal-header .fa.fa-arrow-alt-circle-left').click(function() {
-           $(this).hide();
-           $('.modal-product-details.product #wc_size_details').hide();
-           $('.modal-product-details.product .images').show();
-           $('.modal-header #modal-title').text("");
+            if(window.second_sizing_guide) {                
+                $('.modal-product-details.product #wc_size_details').show();
+                $('.modal-product-details.product #wc_size_guide').hide();
+                $('.modal-header #modal-title').text("Size and Details");
+                window.second_sizing_guide = false;
+            } else {
+                $(this).hide();
+                $('.modal-product-details.product #wc_size_details').hide();
+                $('.modal-product-details.product .images').show();
+                $('.modal-header #modal-title').text("");
+            }
        });
        
+       $('#btn_second_size_guide').click(function() {
+            $('.modal-product-details.product').append($('#wc_size_guide').show());
+            $('.modal-product-details.product #wc_size_details').hide();            
+            $('.modal-header #modal-title').text("Sizing Guide");
+            window.second_sizing_guide = true;
+       });
    </script>
+   
+   <?php
+   
+}
+
+
+add_action( 'woocommerce_before_add_to_cart_form', 'wc_before_add_to_cart_size_guide', 21 );
+ 
+function wc_before_add_to_cart_size_guide() {
+   global $post;
+   $text = get_post_meta(  $post->ID, 'wc_size_guide', true);
+   if( !$text || $text == "" ) 
+       return;
+   ?>
+    <!--a id="btn_size_guide" class="icon-sizing" data-featherlight="#size-guide-modal" style="cursor:pointer;"><span>Sizing Guide</span></a-->
+   
+   <div id="wc_size_guide" style="display:none;    margin-left: auto;
+    margin-right: auto;"> <?php echo $text; ?> </div>
    
    <?php
    
