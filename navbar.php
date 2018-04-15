@@ -8,7 +8,7 @@
 
 
     ?>
-<title>New Event - Responsive HTML Template</title>
+<title></title>
 <meta name="description" content="">
 <meta name="author" content="">
 <meta charset="UTF-8">
@@ -24,6 +24,10 @@
 <link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/homepage.css">
 <link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/timeline.css">
 <link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/project-gmap.css">
+<!-- Main css -->
+<link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/style.css">
+<!-- Google Font -->
+<link href='https://fonts.googleapis.com/css?family=Poppins:400,500,600' rel='stylesheet' type='text/css'>
 <!-- =========================
      SCRIPTS    
 ============================== -->
@@ -46,16 +50,6 @@
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/project-gmap-infobox.js"></script>
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/project-gmap.js"></script>
 
- <!-- / Google Analytics by MonsterInsights -->
-
-<!-- Multi Steps Form 
-<link rel="stylesheet" type="text/css" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/multi_steps_form.css"/>	
-
-<script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/velocity.js"></script>
-<script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/snap_svg.js"></script>
-<script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/multi_steps_form.js"></script>
-	-->
         <style>
             .site-logo svg {
                 width: 100%;
@@ -88,14 +82,6 @@
                 counter-increment: prd_number;
             }
         </style>
-<!-- Main css -->
-<link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/style.css">
-
-<!-- Google Font -->
-<link href='https://fonts.googleapis.com/css?family=Poppins:400,500,600' rel='stylesheet' type='text/css'>
-
-
-
 
 </head>
 <body data-spy="scroll" data-offset="50" data-target=".navbar-collapse">

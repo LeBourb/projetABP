@@ -9,27 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<span class="expand-close">
 			<a href="#" class="expand_all"><?php _e( 'Expand', 'woocommerce' ); ?></a> / <a href="#" class="close_all"><?php _e( 'Close', 'woocommerce' ); ?></a>
 		</span>
-		<select name="awesome_template_type" class="awesome_template_type">
-			<?php
-				/*global $wc_product_attributes;
-                                print_r($post);
-                                $data = get_post_meta( $post->ID, 'wc_awesome_descriptions', true );
-                                $attribute_names = $data['awesome_description_names'];                
-				// Array of defined attribute taxonomies
-				$attribute_taxonomies = wc_get_attribute_taxonomies();
-
-				if ( ! empty( $attribute_taxonomies ) ) {
-					foreach ( $attribute_taxonomies as $tax ) {
-                                            // check if attribute is already selected
-                                            $attribute_taxonomy_name = wc_attribute_taxonomy_name( $tax->attribute_name );
-                                            $label = $tax->attribute_label ? $tax->attribute_label : $tax->attribute_name;
-                                            if($tax->attribute_type == 'awesome_description' && !in_array ( $attribute_taxonomy_name , $attribute_names) ) {                                                
-                                                echo '<option value="' . esc_attr( $attribute_taxonomy_name ) . '">' . esc_html( $label ) . '</option>';
-                                            }
-					}
-				}*/
-                                
-			?>
+		<select name="awesome_template_type" class="awesome_template_type">			
                     <option value="parallax-left">Parallax Left</option>
                     <option value="parallax-right">Parallax Right</option>
                     <option value="two-pans">Two Pans</option>
@@ -49,19 +29,14 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 $media_1 = isset($item['media_1']) ? $item['media_1'] : '';
                                 $media_2 = isset($item['media_2']) ? $item['media_2'] : '';
                                 $title = isset($item['title']) ? $item['title'] : '';
+                                $text_pos = isset($item['text_pos']) ? $item['text_pos'] : '';
                                 $text_left = isset($item['text_left']) ? $item['text_left'] : '';
                                 $text_right = isset($item['text_right']) ? $item['text_right'] : '';
+                                $text_color = isset($item['text_color']) ? $item['text_color'] : '';                                
                                 if (isset($item['template_type']) && $item['template_type'] == "two-pans") {
                                     include('html-product-awesome-two-pans.php');
-                                } else if (isset($item['template_type']) && $item['template_type'] == "parallax-left") {      
-                                    $parallex_left = true;
-                                    include('html-product-awesome-description-elem.php');
-                                } else if (isset($item['template_type']) && $item['template_type'] == "parallax-right") {                                    
-                                    $parallex_left = false;
-                                    include('html-product-awesome-description-elem.php');
-                                } else {                                    
-                                    $parallex_left = false;
-                                    include('html-product-awesome-description-elem.php');
+                                } else {                                          
+                                    include('html-product-awesome-parallax.php');
                                 }
                             }
                         }

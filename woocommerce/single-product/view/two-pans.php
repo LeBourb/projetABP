@@ -7,25 +7,27 @@
  */
 ?>
 <style>
-        #special-section {
+        <?php echo '.awesome_' .  $key; ?> {
             display: block;
             height: 100vh;
             position: relative;
         }   
-        #special-section .container {
+        <?php echo '.awesome_' .  $key; ?> .container {
             width: 100%;
             height: 100%;   
         }
         
-        #special-section .shape-container {
+        <?php echo '.awesome_' .  $key; ?> .shape-container {
             height: 100%;
             position: relative;
         }
         @media (max-width: 768px) {
-            height: 60%;
+            <?php echo '.awesome_' .  $key; ?> .shape-container {
+                height: 60%;
+            }
         }
         
-        #special-section .shape-trapezoid {
+        <?php echo '.awesome_' .  $key; ?> .shape-trapezoid {
             height: 100%;
             width: 60%;
             position: absolute;
@@ -34,7 +36,7 @@
             /* transform: rotate(360deg); 
             background-image: url('<?php echo wp_get_attachment_image_src($media_1, 'full')[0]; ?>');*/
         }
-        #special-section .shape-trapezoid-inv {
+        <?php echo '.awesome_' .  $key; ?> .shape-trapezoid-inv {
             /*background-color: blue;*/
             height: 100%;
             width: 60%;
@@ -44,7 +46,7 @@
             /*background-image: url('');*/
         }
         
-        #special-section .parallax-realcontainer {
+        <?php echo '.awesome_' .  $key; ?> .parallax-realcontainer {
             position: absolute;
             top: 0;
             right: 0;
@@ -52,11 +54,11 @@
             bottom: 0;
         }
         
-        #special-section .innerContainer {
+        <?php echo '.awesome_' .  $key; ?> .innerContainer {
             position: relative;
         }
         
-        #special-section .innerContainer .label {
+        <?php echo '.awesome_' .  $key; ?> .innerContainer .label {
             margin-top: 36%;
             font-weight: 400;
             letter-spacing: 0.025em;
@@ -65,7 +67,7 @@
         }
         
     </style>
-    <section id="special-section" class="">
+    <section id="<?php echo strtolower(str_replace(' ', '', $title));?>" class="<?php echo 'awesome_' .  $key; ?>">
         <div class="container">
             <div class="col-md-12 col-sm-12 wow bounceIn" style="float: none;">
 				<div class="section-title">

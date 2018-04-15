@@ -5,11 +5,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-if($parallex_left) {
-    echo '<div>PARALLAX LEFT</div>';
-} else {
-    echo '<div>PARALLAX RIGHT</div>';
-}
+
+echo '<div>PARALLAX</div>';
+echo '<div class="options_group hide_if_external hide_if_grouped">
+        <p class="form-field _purchase_note_field ">
+        <label for="_purchase_note">Title</label>
+        <span class="woocommerce-help-tip"></span>
+            <textarea class="short" style="" name="title_' . $awesome_key . '" id="_purchase_note" placeholder="" rows="2" cols="20">'.htmlspecialchars_decode( $title).'</textarea>
+        </p>
+    </div>';
+?> <div class="options_group hide_if_external hide_if_grouped">
+      <label for="_purchase_note">Text Color</label>  
+    <select name="text_color_<?php echo $awesome_key;?>" class="awesome_text_type">			
+                    <option value="black" <?php echo ($text_color == "black" || $text_color == "") ? 'selected="selected"' : '' ?>>Black</option>
+                    <option value="white" <?php echo ($text_color == "white") ? 'selected="selected"' : '' ?>>White</option>
+		</select>
+      
+                </div>
+<div class="options_group hide_if_external hide_if_grouped">
+      <label for="_purchase_note">Text Position</label>  
+<select name="text_pos_<?php echo $awesome_key;?>" class="awesome_text_type">			
+                    <option value="left" <?php echo ($text_pos == "left" || $text_pos == "") ? 'selected="selected"' : '' ?>>Left</option>
+                    <option value="right" <?php echo ($text_pos == "right") ? 'selected="selected"' : '' ?>>Right</option>
+		</select>
+      </div>
+<?php
 $settings = array(
     'textarea_name' => $awesome_key,
         'quicktags'     => array( 'buttons' => 'em,strong,link' ),
@@ -59,6 +79,9 @@ echo '</div>';
                     action:   'woocommerce_save_awesome_description',                    
                     id:        id,
                     post_id     : woocommerce_admin_meta_boxes.post_id,
+                    title:  $('[name=title_<?php echo $awesome_key;?>]').val(),
+                    text_color:  $('[name=text_color_<?php echo $awesome_key;?>]').val(),
+                    text_pos:  $('[name=text_pos_<?php echo $awesome_key;?>]').val(),
                     text:  tinymce.get("text_5ac3f8f89d250").getContent(),
                     media_id: $( '#media_' + id ).val(),
                     security: woocommerce_admin_meta_boxes.add_attribute_nonce

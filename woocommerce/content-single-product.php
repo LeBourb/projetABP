@@ -308,11 +308,20 @@ $product_image = wp_get_attachment_image_src($main_image , 'single-post-thumbnai
             <div class="title-11-192" data-reactid="93"><?php 
             global $product;
             echo str_replace("|","<br>",$product->get_title());?></div>
-            <div class="linkContainer-11-195" data-reactid="94">
-                <a class="sectionLink-11-196" href="#user-experience" data-reactid="95">Galery</a>
-                <a class="sectionLink-11-196" href="#interior" data-reactid="96">Details</a>
-                <a class="sectionLink-11-196" href="#powertrain" data-reactid="97">Fabrics</a>
-                <a class="sectionLink-11-196" href="#exterior" data-reactid="98">Workshop</a>
+            <div class="linkContainer-11-195">
+                <a class="sectionLink-11-196" href="#galery">Galery</a>
+                <?php
+                    $data = get_post_meta( $post->ID, 'wc_awesome_descriptions', true );
+                    if(is_array($data)){
+                        foreach ($data as $key => $item) { 
+                            $title = isset($item['title']) ? $item['title'] : '';
+                            if($title && $title != "") {
+                                $smp_title = strtolower(str_replace(' ', '', $title));                            
+                                echo '<a class="sectionLink-11-196" href="#' . $smp_title . '" >' . $title . '</a>';
+                            }
+                        }
+                    }
+                ?>
             </div>                  
         </div><!-- react-text: 99 --><!-- /react-text -->
         <div id="reservation" class="container-15-202" >            
@@ -447,29 +456,25 @@ $product_image = wp_get_attachment_image_src($main_image , 'single-post-thumbnai
     ============================== -->
     <?php
     $data = get_post_meta( $post->ID, 'wc_awesome_descriptions', true );
-    foreach ($data as $key => $item) { 
-        //select template ?
-        
-        $awesome_value = isset($item['text']) ? $item['text'] : '';
-        $meta_key = isset($item['media_id']) ? $item['media_id'] : '';
-        $media_1 = isset($item['media_1']) ? $item['media_1'] : '';
-        $media_2 = isset($item['media_2']) ? $item['media_2'] : '';
-        $title = isset($item['title']) ? $item['title'] : '';
-        $text_left = isset($item['text_left']) ? $item['text_left'] : '';
-        $text_right = isset($item['text_right']) ? $item['text_right'] : '';
-        if (isset($item['template_type']) && $item['template_type'] == "two-pans") {
-            include('single-product/view/two-pans.php');
-        } else if (isset($item['template_type']) && $item['template_type'] == "parallax-left")  {
-            $parallex_left = true;
-            include('single-product/view/parallax.php');
-        } else if (isset($item['template_type']) && $item['template_type'] == "parallax-right")  {
-            $parallex_left = false;
-            include('single-product/view/parallax.php');
-        } else  {
-            $parallex_left = false;
-            include('single-product/view/parallax.php');
+    if(is_array($data)) {
+        foreach ($data as $key => $item) { 
+            //select template ?
+
+            $awesome_value = isset($item['text']) ? $item['text'] : '';
+            $meta_key = isset($item['media_id']) ? $item['media_id'] : '';
+            $media_1 = isset($item['media_1']) ? $item['media_1'] : '';
+            $media_2 = isset($item['media_2']) ? $item['media_2'] : '';
+            $title = isset($item['title']) ? $item['title'] : '';
+            $text_pos = isset($item['text_pos']) ? $item['text_pos'] : '';
+            $text_color = isset($item['text_color']) ? $item['text_color'] : '';
+            $text_left = isset($item['text_left']) ? $item['text_left'] : '';
+            $text_right = isset($item['text_right']) ? $item['text_right'] : '';
+            if (isset($item['template_type']) && $item['template_type'] == "two-pans") {
+                include('single-product/view/two-pans.php');
+            } else  {          
+                include('single-product/view/parallax.php');
+            }        
         }
-        
     }
     ?>
     

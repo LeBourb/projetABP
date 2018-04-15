@@ -147,8 +147,10 @@ class WC_Meta_Box_Product_Awesome_Description {
             $text_left = isset($_POST['text_left']) ? $_POST['text_left'] : '';
             $text_right = isset($_POST['text_right']) ? $_POST['text_right'] : '';
             $template_type = isset($_POST['template_type']) ? $_POST['template_type'] : '';
+            $text_color = isset($_POST['text_color']) ? $_POST['text_color'] : '';            
+            $text_pos = isset($_POST['text_pos']) ? $_POST['text_pos'] : '';            
             $data = get_post_meta( $post_id, 'wc_awesome_descriptions' , true);       
-            $data[$id] = array_merge($data[$id] , array( 'template_type' => $template_type,'text' => $text , 'media_id' => $media_id , 'media_1' => $media_1 , 'media_2' => $media_2 , 'title' => $title, 'text_left' => $text_left , 'text_right' => $text_right ) );
+            $data[$id] = array_merge($data[$id] , array( 'template_type' => $template_type,'text' => $text , 'media_id' => $media_id , 'media_1' => $media_1 , 'media_2' => $media_2 , 'title' => $title, 'text_left' => $text_left , 'text_right' => $text_right , 'text_color' => $text_color , 'text_pos' => $text_pos ) );
             update_post_meta(  $post_id, 'wc_awesome_descriptions' ,  $data );  
             
             self::output( get_post($post_id) ); 
