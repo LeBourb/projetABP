@@ -82,7 +82,7 @@ echo '</div>';
                     title:  $('[name=title_<?php echo $awesome_key;?>]').val(),
                     text_color:  $('[name=text_color_<?php echo $awesome_key;?>]').val(),
                     text_pos:  $('[name=text_pos_<?php echo $awesome_key;?>]').val(),
-                    text:  tinymce.get("text_5ac3f8f89d250").getContent(),
+                    text:  tinymce.get("text_<?php echo $awesome_key;?>").getContent(),
                     media_id: $( '#media_' + id ).val(),
                     security: woocommerce_admin_meta_boxes.add_attribute_nonce
             };

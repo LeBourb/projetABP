@@ -36,7 +36,7 @@ $workshop_id = get_post_meta( $product->get_id(), 'product_workshop_id' , true);
 if(isset($attachment_ids[1]))
     $image = wp_get_attachment_url( $attachment_ids[1] );
     $main_image = get_post_thumbnail_id( $product->get_id() );
-$product_image = wp_get_attachment_image_src($main_image , 'single-post-thumbnail' );
+$product_image = wp_get_attachment_image_src($main_image , 'large' );
 ?>
 <script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/viewer.js"></script>
 <link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/viewer.css">
@@ -246,7 +246,7 @@ $product_image = wp_get_attachment_image_src($main_image , 'single-post-thumbnai
                              <?php 
                                 $attachment_ids = $product->get_gallery_image_ids();
                                 foreach($attachment_ids as $attachment_id) {
-                                    $image_attachment_url = wp_get_attachment_url( $attachment_id ); 
+                                    $image_attachment_url = wp_get_attachment_url( $attachment_id , 'large');                                     
                                     echo '<div class="item">
                                             <img src='. $image_attachment_url . ' />
                                         </div>';
@@ -351,11 +351,11 @@ $product_image = wp_get_attachment_image_src($main_image , 'single-post-thumbnai
                                     $width = 0;
                                     $height = 0;
                                     if(count($attachment_ids)) {
-                                        $attachment_id = array_shift($attachment_ids);                                    
-                                        $image_attachment_url = wp_get_attachment_url( $attachment_id ); 
-                                        $image_meta = wp_get_attachment_image_src($attachment_id,'full');
+                                        $attachment_id = array_shift($attachment_ids);                                                                            
+                                        $image_meta = wp_get_attachment_image_src($attachment_id,'large');
                                         $width = $image_meta[1];
                                         $height = $image_meta[2];
+                                        $image_attachment_url = $image_meta[0];
                                     } 
                                     
                                     if( ( $width > $height || count($buffer_cell) ) && $lg_used_col <= 6 && $md_used_col <= 4 && $sm_used_col <= 0)  {                                        
@@ -390,7 +390,6 @@ $product_image = wp_get_attachment_image_src($main_image , 'single-post-thumbnai
                                     }
                                     //$image_url = wp_get_attachment_image_src( $image_attachment_id );
                                     else if ($width <= $height){
-                                        
                                         echo '<div href="'. $image_attachment_url .'" class="wow fadeInUp col-lg-3 col-md-4 col-sm-6 col-xs-6" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
                                         <img src="' . $image_attachment_url . '" class="img-responsive" alt="sponsors">	
                                             <div class="overlay" style="opacity: 0.9; display:none;"></div>				   
@@ -618,7 +617,7 @@ $product_image = wp_get_attachment_image_src($main_image , 'single-post-thumbnai
 
 
                                             $image_attachment_id = get_post_meta( $fabric_id, 'image_attachment_id', true);
-                                            $image_url = wp_get_attachment_image_src( $image_attachment_id );
+                                            $image_url = wp_get_attachment_image_src( $image_attachment_id, 'large' );
                                             $price = get_post_meta( $fabric_id, 'price_term', true);
                                             $supplier_id = get_post_meta( $fabric_id, 'supplier_id', true);
                                             $fabric = get_term_by('id', $fabric_id, 'pa_fabric');
@@ -651,7 +650,7 @@ $product_image = wp_get_attachment_image_src($main_image , 'single-post-thumbnai
 
 
                                             $image_attachment_id = get_post_meta( $supply_id, 'image_attachment_id', true);
-                                            $image_url = wp_get_attachment_image_src( $image_attachment_id );
+                                            $image_url = wp_get_attachment_image_src( $image_attachment_id , 'large');
                                             $price = get_post_meta( $supply_id, 'price_term', true);
                                             $supplier_id = get_post_meta( $supply_id, 'supplier_id', true);
                                             $supply = get_term_by('id', $supply_id, 'pa_supply');

@@ -297,6 +297,39 @@ function bbloomer_save_name_fields( $customer_id ) {
     //update_user_status( $customer_id, 'spam', 1 );
 }
 
+add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );    
+
+    
+function theme_enqueue_styles() {    
+    wp_enqueue_style( 'bootstrap-style', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), 'v1.2' );
+    wp_enqueue_style( 'animate-style', get_template_directory_uri() . '/assets/css/animate.css', array(), 'v1.2' );
+    wp_enqueue_style( 'fa-solid-style', get_template_directory_uri() . '/assets/css/fa-solid.min.css' , array(), 'v1.3');
+    wp_enqueue_style( 'font-awesome-style', get_template_directory_uri() . '/assets/css/font-awesome.min.css' , array(), 'v1.2');
+    wp_enqueue_style( 'owl-theme-style', get_template_directory_uri() . '/assets/css/owl.theme.min.css' , array(), 'v1.2');
+    wp_enqueue_style( 'owl-carousel-style', get_template_directory_uri() . '/assets/css/owl.carousel.min.css' , array(), 'v.1.2');
+    wp_enqueue_style( 'homepage-style', get_template_directory_uri() . '/assets/css/homepage.css' , array(), filemtime( getcwd() .  '/wp-content/themes/atelierbourgeonspro//assets/css/homepage.css' ));
+    wp_enqueue_style( 'timeline-style', get_template_directory_uri() . '/assets/css/timeline.min.css' , array(), 'v1.2');
+    wp_enqueue_style( 'project-gmap-style', get_template_directory_uri() . '/assets/css/project-gmap.min.css' , array(), 'v1.2');
+    wp_enqueue_style( 'main-style', get_template_directory_uri() . '/assets/css/style.min.css' , array(), filemtime( getcwd() .  '/wp-content/themes/atelierbourgeonspro//assets/css/style.min.css' ));
+            
+    wp_enqueue_script( 'jquery-script', get_template_directory_uri() . '/assets/js/jquery.min.js', array(), 'v1.2' );
+    wp_enqueue_script( 'jquery-form-script', get_template_directory_uri() . '/assets/js/jquery.form.min.js', array(), 'v1.2' );
+    wp_enqueue_script( 'jquery-validate-script', get_template_directory_uri() . '/assets/js/jquery.validate.min.js', array(), 'v1.2' );
+    wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array(), 'v1.2' );
+    wp_enqueue_script( 'jquery-parallax-script', get_template_directory_uri() . '/assets/js/jquery.parallax.min.js', array(), 'v1.2' );
+    wp_enqueue_script( 'owl-carousel-script', get_template_directory_uri() . '/assets/js/owl.carousel.min.js', array(), 'v1.2' );
+    wp_enqueue_script( 'smoothscroll-script', get_template_directory_uri() . '/assets/js/smoothscroll.min.js', array(), 'v1.2' );
+    wp_enqueue_script( 'wow-script', get_template_directory_uri() . '/assets/js/wow.min.js', array(), 'v1.2' );
+    wp_enqueue_script( 'custom-script', get_template_directory_uri() . '/assets/js/custom.min.js', array(), 'v1.2' );
+    wp_enqueue_script( 'easy-pie-chart-script', get_template_directory_uri() . '/assets/js/easy-pie-chart.min.js', array(), 'v1.2' );
+    wp_enqueue_script( 'canvas-script', get_template_directory_uri() . '/assets/js/canvas.min.js', array(), 'v1.2' );
+    wp_enqueue_script( 'sly-script', get_template_directory_uri() . '/assets/js/sly.min.js', array(), 'v1.2' );
+    //wp_enqueue_script( 'project-gmap-infobox-script', get_template_directory_uri() . '/assets/js/project-gmap-infobox.min.js', array(), 'v1.2' );
+    //wp_enqueue_script( 'project-gmap-script', get_template_directory_uri() . '/assets/js/project-gmap.min.js', array(), 'v1.2' );
+    
+}
+
+
 add_action('admin_menu', 'register_my_custom_submenu_page');
 
 
@@ -543,7 +576,7 @@ function atelierbourgeons_new_user_approved( $user ) {
     foreach($pages as $page){
         echo $page->ID.'<br />'; 
     }*/
-    $message = atelierbourgeons_html_email_template_header('Congratulations, your account has been validated!');
+    $message = atelierbourgeons_html_email_template_header('ビジネス会員登録の認証が完了しました！');
     $message .= '<tr>
     <td align="center" height="100%" valign="top" width="100%" bgcolor="#F2F5F7" style="padding:0 15px 20px" class="m_4412137695263643084mobile-padding">
       
@@ -560,10 +593,10 @@ function atelierbourgeons_new_user_approved( $user ) {
                     </tr>
                     <tr>
                       <td align="center" style="font-family:Open Sans,Helvetica,Arial,sans-serif">
-                        <h2 style="border:0;color:#1e2c3a;font:400 30px/40px apple-system,BlinkMacSystemFont,Arial,\'Segoe UI\',\'Helvetica Neue\',sans-serif;margin:0;padding:15px 0;vertical-align:baseline" align="center"> ' . __( 'Votre compte a été validé sur notre site', 'new-user-approve' ) . '</h2>
-                        <p style="border:0;color:#667685;font:400 16px/25px apple-system,BlinkMacSystemFont,Arial,\'Segoe UI\',\'Helvetica Neue\',sans-serif;margin:0px 0 10px;padding:0;vertical-align:baseline">
-                          ' .  __( 'You just registered to {sitename}', 'new-user-approve' ) . "\r\n\r\n" .
-	  "{username}\r\n\r\n{login_url}\r\n\r\n" . __( 'Vous pouvez mainteinant passer commande de nos produits', 'new-user-approve' ) . "\r\n\r\n" . '
+                        <h2></h2>
+                        <p>
+                            この度は、atelier Bourgeons （アトリエブルジョン）の会員登録をご申請いただき、誠にありがとうございます。
+                            ビジネス会員の登録認証が完了しましたので、お知らせいたします。下記のアカウントにてログイン後、ビジネス会員価格で商品をご注文いただけます。
                         </p>
                       </td>
                     </tr>
@@ -572,15 +605,20 @@ function atelierbourgeons_new_user_approved( $user ) {
                         <table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse!important">
                           <tbody><tr>
                             <td align="center" style="border-radius:26px" bgcolor="#0570D4">
-                              <a href="'. get_site_url() .'" style="background: #613143;border: 1px solid #613143;border-radius: 14px;color:#ffffff;display:block;font-family:Open Sans,Helvetica,Arial,sans-serif;font-size:16px;padding:14px 26px;text-decoration:none" target="_blank" data-saferedirecturl="">Order products for your shop! →</a>
+                              <a href="'. get_site_url() .'" style="background: #613143;border: 1px solid #613143;border-radius: 14px;color:#ffffff;display:block;font-family:Open Sans,Helvetica,Arial,sans-serif;font-size:16px;padding:14px 26px;text-decoration:none" target="_blank" data-saferedirecturl="">ビジネス会員価格でバイイングを始める→</a>
                             </td>
                           </tr>
                         </tbody></table>
                       </td>
-                    </tr>
+                    </tr>                    
                   </tbody></table>
                 </td>
               </tr>
+            <tr>
+            <td align="center" style="padding:20px 0 15px">
+            ※本メールに関してお心当たりがない場合、または何かご不明点がございましたら、恐れ入りますがその旨をご記入のうえ<a href="mailto:contact@atelierbourgeons.com">contact@atelierbourgeons.com</a>までお問い合わせください。
+            </td>
+            </tr>
             </tbody></table>
           </td>
         </tr>';

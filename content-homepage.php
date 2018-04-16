@@ -254,233 +254,21 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 
 
 <!-- =========================
-    PRODUCTS SECTION   
+    PRODUCTS SECTION       
 ============================== -->
-<section id="products" class="parallax-section products-image-homepage">
-	
-    <div class="items-container">
-  <?php
-  $args     = array( 'post_type' => 'product' );
-  $products = get_posts( $args ); 
-  foreach($products as $product_id) {
-      $product =  wc_get_product($product_id);
-      $image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->get_id() ), 'single-post-thumbnail' );
-
-  ?>
-
-
-  <a href="<?php echo get_permalink($product_id);?>" class="linkWrapper">
-      <div class="parallax parallaxWrapper" style="position: relative; overflow: hidden;">
-          <div class="parallax-background-children" style="transform: translate3d(-50%, 0px, 0px); position: absolute; left: 50%; transform-style: preserve-3d; backface-visibility: hidden;">
-              <div class="parallax-background backgroundContainer">
-                  <div class="parallax-realcontainer" style="background:linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) ), url(<?php echo $image[0]?>) no-repeat center bottom / cover;">
-
-                  </div>
-
-              </div>
-
-          </div>
-          <div class="parallax-content" style="position:relative;">
-              <div class="innerContainer innerContainer">
-                  <div class="wrapperRight wrapperRight">
-
-                  </div>
-                  <div class="wrapper">
-                      <div class="divider"></div>                                                        
-                  </div>
-                  <div class="wrapper">
-                      <div class="label"><?php echo str_replace("|","<br>",$product->get_title()); ?></div>                                                        
-                  </div>                                                    
-              </div>                                                
-          </div>                                            
-      </div>
-  </a>
-  <?php 
-  }				
-  ?>
-    </div>
-                              
-</section>
-
-
+<?php include('product-section.php') ?>
 <!-- =========================
     WORKSHOP SECTION   
+//include('workshop-section.php') 
 ============================== -->
-<section id="workshop" class="parallax-section">
-   <div class="wow bounceIn" style="visibility: visible; animation-name: bounceIn;">
-				<div class="section-title" style="text-align: center;">
-					<h2><?php echo get_post_meta( $post->ID, 'Workshop Title', true); ?></h2>
-					<p><?php echo get_post_meta( $post->ID, 'Workshop Sub Title', true);?></p>				</div>
-			</div>
-    <div class="scrollbar">
-        <div class="handle"><div class="mousearea"></div></div>
-</div>
-    <div id="frame" class="frame">
-    <ul id="workshop-items" class="slidee" data-wow-delay="1.7s">
-    <?php 
-        $args = array( 'post_type' => 'shop_workshop' );
-        $workshops = get_posts( $args ); 
-        foreach($workshops as $workshop) {              
-            $image_meta_val=get_post_meta( $workshop->ID, 'second_featured_image', true);            
-            $image = wp_get_attachment_image_src( $image_meta_val, 'large');
-            
-    ?>
-    <li class="my-2 mx-auto p-relative bg-white shadow-1 blue-hover" style="width: 360px; overflow: hidden; border-radius: 1px; position: relative;">
-        <img src="<?php echo $image[0]; ?>" alt="Man with backpack"    
-            class="d-block w-full"
-            style="max-height: 175px;
-    min-width: 100%;
-    width: auto;
-    max-width: none;
-">
-        <div class="px-2 py-2">
-          <p class="mb-0 small font-weight-medium text-uppercase mb-1 text-muted lts-2px">
-            <?php echo get_post_meta( $workshop->ID, 'workshop_function', true); ?>
-          </p>
-
-          <h1 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
-            <?php echo get_the_title($workshop); ?>
-          </h1>
-
-          <p class="mb-1">
-            <?php echo get_the_excerpt($workshop);  ?>            
-          </p>
-
-        </div>
-
-        <a href="<?php echo get_permalink($workshop); ?>" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link" style="position:absolute;bottom:0;margin-bottom:0;">
-          <?php _e('Read More','atelierbourgeons'); ?>
-        </a>
-    </li>
-    <?php 
-        }        
-    ?>  </ul>
-        </div>
-    <ul class="pages"></ul>
-    
-</section>
-<script>
-    var $frame  = $('#workshop #frame');
-		var $slidee = $frame.children('ul').eq(0);
-		var $wrap   = $frame.parent();
-
-		// Call Sly on frame
-		$frame.sly({
-			horizontal: 1,
-			itemNav: 'basic',
-			smart: 1,
-			activateOn: 'click',
-			mouseDragging: 1,
-			touchDragging: 1,
-			releaseSwing: 1,
-			startAt: 3,
-			scrollBar: $wrap.find('.scrollbar'),
-			scrollBy: 1,
-			pagesBar: $wrap.find('.pages'),
-			activatePageOn: 'click',
-			speed: 300,
-			elasticBounds: 1,			
-			dragHandle: 1,
-			dynamicHandle: 1,
-			clickBar: 1,
-
-		});
-
-		
-    //$('#workshop #frame').sly(options);
-</script>
-
-
-
-
-
-<section id="materials" class="parallax-section">
-    <div class="container">
-		<div class="row">
-
-			<div class="wow fadeInLeft col-md-offset-1 col-md-5 col-sm-8" data-wow-delay="0.9s">
-				<ul class="list-materials">
-                <li>
-                    <button class="btn" target="Wool">
-                        <div>Wool</div>
-                        <div class="content" style="display:none;">
-                                        <h3>Free Domestic Shipping</h3>
-                                        <p>All domestic U.S. orders for in-stock items are shipped free of charge.</p>
-                                        <p>Please allow two business days to fulfill and issue you a a tracking number (unless there is a red delayed date posted in the product description). Once you receive your tracking number, you should expect&nbsp;your package within 2–4 business days.</p>
-                                        <p>Please note that while we&nbsp;will issue you a tracking number once we have sent out your package, you may not be able to track your package immediately. You must wait until your package is scanned in by the Postal Service for tracking to activate.</p>
-                                        <p>Orders placed for Workshop items require a shipping fee of $6. These orders will ship during the&nbsp;estimated shipping period noted on the product page.</p>
-                                    </div>
-                        </button>
-                    
-                </li>
-                  <li>
-                    <button class="btn" target="Silk">
-                        <div>Silk</div>
-                        <div class="content" style="display:none;">
-                                        <h3>Returns</h3>
-                                        <p>To start the process, click the button in your Shipping or Delivery confirmation email. You can return an item for a full refund or store credit within 60 days of having received it. More on that here. There are some exceptions, though.Free Domestic Shipping</p>
-                                    </div>
-                        </button>
-                    
-                </li>
-                <li>
-                    <button class="btn btn-project-map" target="ProjectMap">  
-                        <div>Project Map</div>
-                        <div class="background content" style="display:none;">
-                                        <?php include('project-map.php'); ?>
-                                    </div>
-                        </button>
-                    
-                </li>
-            </ul>
-			</div>
-
-		</div>
-	</div>
-</section>
-<script>
-    $('#materials .btn').on('click', function(){                
-        if($('.featherlight .content-nav').find('ul.list-materials').length == 0) {
-            $('.featherlight .content-nav').append($(this).parents('#materials ul.list-materials').clone());
-            $('.featherlight .btn ').on('click', function(){                
-                $('.featherlight .btn ').removeClass('active');
-                $(this).addClass('active');
-                $('.featherlight .content-area').empty();
-                $('.featherlight .content-area').append($(this).find('.content').clone());
-                $('.featherlight .content-area .content').show();   
-                $('.featherlight').attr('target',$(this).attr('target'));
-                if($(this).hasClass('btn-project-map')) {
-                    atelierBMap($('.featherlight .content-area').find('#project-map')[0],$('.featherlight .content-area').find('#project-map-def')[0]);
-                }
-            });
-        }
-            
-        $('.featherlight .content-area').append($(this).find('.content').clone());
-        $('.featherlight').show();
-        $('.featherlight .btn ').removeClass('active');
-        $(this).addClass('active');
-        $('.featherlight .content-area .content').show();     
-        $('.featherlight').attr('target',$(this).attr('target'));
-        
-        
-        if($(this).hasClass('btn-project-map')) {
-            atelierBMap($('.featherlight .content-area').find('#project-map')[0],$('.featherlight .content-area').find('#project-map-def')[0]);
-        }
-                
-    });
-    
-    $('.featherlight-close-icon.featherlight-close').on('click', function(){
-        $('.featherlight').hide();
-    });
-</script>
-
+<!-- =========================
+    MATERIALS SECTION   
+//include('materials-section.php') 
+============================== --> 
 <!-- =========================
    Map of resellers
-============================== -->
-
-<section id="reseller-map-section" class="parallax-section">
-    <?php include 'reseller-map.php'; ?>
-</section>
+//include 'reseller-map.php';
+============================== --> 
 
 <!-- =========================
    REGISTER SECTION   
@@ -689,40 +477,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
                 }                
                 ?>
         </div>
-       <!--div class="wrapper-eco-fabrics" style="">     
-   <div class="header">                           
-<div style="font-size: 28px">
-	Fabrics and environment</div>
-	<div><div>
-			<p style="text-align: center;">We select all our fabrics according to high quality standards and from companies that demonstrate an ongoing commitment to reducing environmental impact. The clothing is dyed in Europe and is completely free of any toxic substances. We only use mills that ensure that wastewater is correctly treated before being returned to the environment.&nbsp;We only work with certified dyes such as <span class="value-link"><a href="http://www.global-standard.org/" target="_blank" rel="noopener noreferrer">GOTS</a>, <a href="http://www.oeko-tex.com/" target="_blank" rel="noopener noreferrer">Oeko-Tex®</a> and <a href="https://www.inditex.com/en/sustainability/product/health_quality_standards" target="_blank" rel="noopener noreferrer">Clear to Wear®</a></span>.</p>
-<p style="text-align: center;">Learn more about the fabrics we work with:</p>
-
-		</div>
-	</div>
-</div>
-
-                    
-			<p class="one"><strong>Organic cotton</strong><br>
-Organic cotton is grown without the use of chemical pesticides or fertilizers. The aim is to achieve a balance with nature and contribute to a more biologically diverse agriculture. We use organic cotton made in France, Portugal, the Czech Republic, Lithuania, Turkey and Pakistan. It is all <span class="value-link"><a href="http://www.global-standard.org/" target="_blank" rel="noopener noreferrer">GOTS certified</a></span>.</p>
-                        
-<p  class="two" style="text-align: center;"><strong>Tencel®</strong><br>
-Lenzing <span><a>Tencel®</a></span> fibre comes from the pulp of eucalyptus trees. The wood pulp is processed in a “closed loop system” in which 99% of the chemicals are recovered and recycled with minimum waste and low emissions. The <span class="value-link"><a href="http://www.lenzing-fibers.com/en/tencel/" target="_blank" rel="noopener noreferrer">Tencel®</a></span> we use is made in Spain and in Portugal.</p>
-
-
-                    
-			<p class="three" style="text-align: center;"><strong>Recycled Wool</strong><br>
-The manufacture of this fabric begins with the sourcing of pre-consumer waste yarn and fabrics from European countries. The waste is converted into fibre using a mechanical process. It is then spun into yarn and finally becomes a new recycled wool fabric. It is blended with 30% polyamide to gain resistance as it has a recycled origin. This fabric is made in Italy.</p>
-
-                        <p class="four" style="text-align: center;"><strong>Hemp</strong><br>
-Hemp is highly productive, easy and fast to cultivate. It does not need agrochemicals to grow and enriches the soil with its deep roots.&nbsp;The hemp we use is made in Italy.</p>
-                        
-<p class="five" style="text-align: center;"><strong>Organic wool</strong><br>
-This wool comes from sheep that have been raised on feed which is free from fertilizers or pesticides and has not been subject to mulling practices. The wool is <span class="value-link"><a href="http://www.global-standard.org/" target="_blank" rel="noopener noreferrer">GOTS certified</a></span> and made in Lithuania.</p>
-
-	</div-->
-    
-            
-
+ 
 	</div>
 </section>
 

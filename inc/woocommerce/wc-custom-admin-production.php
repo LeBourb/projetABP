@@ -38,7 +38,7 @@ function wc_meta_box_production_product_image() {
     $product = wc_get_production_product($post->ID);
     if ( has_post_thumbnail( $product->get_id() ) ) {
         $attachment_ids[0] = get_post_thumbnail_id( $product->get_id() );
-        $attachment = wp_get_attachment_image_src($attachment_ids[0], 'full' ); ?>    
+        $attachment = wp_get_attachment_image_src($attachment_ids[0] ); ?>    
         <img src="<?php echo $attachment[0] ; ?>" class="card-image"  />
     <?php    
     }                    

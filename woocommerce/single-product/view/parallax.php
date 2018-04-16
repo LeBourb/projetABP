@@ -9,7 +9,7 @@
 ?>
 <style>
         .awesome_<?php echo $key;?> {
-            background: url(<?php echo wp_get_attachment_image_src( $item['media_id'], 'full')[0]; ?>) 50% 0 repeat-y fixed;
+            background: url(<?php echo wp_get_attachment_image_src( $item['media_id'], 'large')[0]; ?>) 50% 0 repeat-y fixed;
             -webkit-background-size: cover;
             background-size: cover;
             color: #ffffff;

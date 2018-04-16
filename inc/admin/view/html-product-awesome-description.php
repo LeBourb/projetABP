@@ -10,8 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<a href="#" class="expand_all"><?php _e( 'Expand', 'woocommerce' ); ?></a> / <a href="#" class="close_all"><?php _e( 'Close', 'woocommerce' ); ?></a>
 		</span>
 		<select name="awesome_template_type" class="awesome_template_type">			
-                    <option value="parallax-left">Parallax Left</option>
-                    <option value="parallax-right">Parallax Right</option>
+                    <option value="parallax">Parallax</option>
                     <option value="two-pans">Two Pans</option>
 		</select>
 		<button type="button" class="button add_awesome_description"><?php _e( 'Add', 'woocommerce' ); ?></button>
