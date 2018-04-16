@@ -36,10 +36,9 @@ $workshop_id = get_post_meta( $product->get_id(), 'product_workshop_id' , true);
 if(isset($attachment_ids[1]))
     $image = wp_get_attachment_url( $attachment_ids[1] );
     $main_image = get_post_thumbnail_id( $product->get_id() );
-$product_image = wp_get_attachment_image_src($main_image , 'large' );
+$product_image = wp_get_attachment_image_src($main_image , 'full' );
 ?>
-<script src="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/js/viewer.js"></script>
-<link rel="stylesheet" href="<?php echo get_site_url ()?>/wp-content/themes/atelierbourgeonspro/assets/css/viewer.css">
+
 
 <style>
     #page .col-full {
@@ -246,9 +245,10 @@ $product_image = wp_get_attachment_image_src($main_image , 'large' );
                              <?php 
                                 $attachment_ids = $product->get_gallery_image_ids();
                                 foreach($attachment_ids as $attachment_id) {
-                                    $image_attachment_url = wp_get_attachment_url( $attachment_id , 'large');                                     
+                                    
+                                    $image_attachment = wp_get_attachment_image_src( $attachment_id , 'large');                                     
                                     echo '<div class="item">
-                                            <img src='. $image_attachment_url . ' />
+                                            <img src='. $image_attachment[0] . ' />
                                         </div>';
                                 }                                    
                              ?>
