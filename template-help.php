@@ -14,6 +14,26 @@
 
 get_header();
 ?>
+
+
+<div style="width: 80%;margin-left: auto;margin-right: auto;">
+    <header class="entry-header">
+        <h1 class="entry-title">
+            <?php 
+                echo get_the_title($post);    
+            ?>
+        </h1>		
+    </header>
+    <div class="entry-content">
+        <?php 
+            echo $post->post_content;    
+        ?>
+    </div>    
+</div>
+
+<?php 
+get_footer();
+return;?>
 <style>
     .custom-block:nth-child(3n+1) {
         clear: left;

@@ -568,6 +568,53 @@ function atelierbourgeons_tml_message( $message, $action ) {
 add_filter( 'tml_action_template_message', 'atelierbourgeons_tml_message' , 23 ,10);
 
 
+
+add_filter( 'woocommerce_payment_gateways_settings', 'atelierbourgeons_pro_terms_conditions' , 23 ,10);
+/*$settings = apply_filters( 'woocommerce_payment_gateways_settings', array(
+
+				array(
+					'title' => __( 'Checkout process', 'woocommerce' ),
+					'type'  => 'title',
+					'id'    => 'checkout_process_options',
+				));
+*/
+function atelierbourgeons_pro_terms_conditions( $array ) {
+    $array[] = array(
+            'title'    => __( 'Terms and conditions Pro', 'woocommerce' ),
+            'desc'     => __( 'If you define a "Terms" page the customer will be asked if they accept them when checking out.', 'woocommerce' ),
+            'id'       => 'woocommerce_terms_pro_page_id',
+            'default'  => '',
+            'class'    => 'wc-enhanced-select-nostd',
+            'css'      => 'min-width:300px;',
+            'type'     => 'single_select_page',
+            'args'     => array( 'exclude' => wc_get_page_id( 'checkout' ) ),
+            'desc_tip' => true,
+            'autoload' => false,
+    );
+    return $array;    
+}
+
+
+add_action( 'woocommerce_update_options' , 'atelierbourgeons_update_pro_terms_conditions' );
+function atelierbourgeons_update_pro_terms_conditions() {
+    update_option('woocommerce_terms_pro_page_id', $_POST['woocommerce_terms_pro_page_id'] );
+}
+
+add_filter( 'woocommerce_get_terms_page_id', 'atelierbourgeons_get_terms_page_id' , 40 , 1);
+function atelierbourgeons_get_terms_page_id( $page_id ) {
+    $user = wp_get_current_user(); 
+    $role = ( array ) $user->roles;
+    
+    if(in_array( 'customer-pro', $role )) {   
+        $pro_post_id = get_option('woocommerce_terms_pro_page_id');
+        
+        return get_post($pro_post_id)->ID;
+        //return get_option('woocommerce_terms_pro_page_id');
+        //return $page_id;
+    }
+    return $page_id;
+}
+
 function atelierbourgeons_new_user_approved( $user ) {
     //if($action == 'login')
     /*$pages = get_pages(array(

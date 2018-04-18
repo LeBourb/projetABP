@@ -118,11 +118,11 @@ footer .sm ul li .google:before {
     vertical-align: middle;
 }
 
-footer .address p {
+footer .address p ,
+footer .address a {
     color: #8c8b8b;
     font-family: "raleway-regular",arial;
     font-size: 14px;
-    margin-bottom: 30px;
     letter-spacing: .5px;
 }
 
@@ -162,7 +162,7 @@ footer .address .phone {
             </div>
  
             <!-- About Links  -->
-            <div class="about columns animated wow fadeInRight" data-wow-delay=".3s">
+            <!--div class="about columns animated wow fadeInRight" data-wow-delay=".3s">
                 <h3 class="columns_title">About</h3>
                 <ul>
                     <li>
@@ -172,14 +172,18 @@ footer .address .phone {
                         <a href="#">Our Team</a>
                     </li>
                 </ul>
-            </div>
+            </div-->
  
             <!-- Address  -->
-            <div class="address columns animated wow fadeInRight" data-wow-delay=".4s">
-                <h3 class="columns_title">Address</h3>
-                <p>1012 14th Street Northwest</p>
-                <p>GIFU, JAPAN 20005</p>
-                <p class="email">pro.contact@atelierbourgeons.com</p>
+            <div class="address columns animated wow fadeInRight" data-wow-delay=".4s">                
+                <p>日本事務所:</p>
+                <p>〒500-8435</p>
+                <p>岐阜県岐阜市宮北町5-3</p>
+                <br>
+                <p>アトリエ:</p>
+                <p>24 rue traversière</p>
+                <p>92100 Boulogne-Billancourt FRANCE</p>
+                <a class="email" href="mailto:contact@atelierbourgeons.com">contact@atelierbourgeons.com</a>
             </div>
  
         </div>

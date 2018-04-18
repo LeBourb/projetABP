@@ -102,7 +102,12 @@ class DC_Checkout_Terms_Conditions_Popup_Frontend {
 			}
 			
 			
-			$woocommerce_terms_page_id = get_option('woocommerce_terms_page_id');				
+			$woocommerce_terms_page_id = get_option('woocommerce_terms_page_id');	
+                        $user = wp_get_current_user(); 
+                        $role = ( array ) $user->roles;
+                        if(in_array( 'customer-pro', $role )) {   
+                            $woocommerce_terms_page_id = get_option('woocommerce_terms_pro_page_id');
+                        }
 			?>
 			
 			<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
