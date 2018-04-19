@@ -43,8 +43,10 @@ class WC_Meta_Box_Product_Size_Guide {
            if ( ! current_user_can( 'edit_products' ) ) {
             wp_die( -1 );
            }        
+           if(isset($_POST['post_ID'])) {
             $post_id = $_POST['post_ID'];            
             update_post_meta(  $post_id, 'wc_size_guide' ,  $_POST['wc_size_guide'] );  
+           }
             
             //self::output( get_post($post_id) ); 
             //wp_die();  

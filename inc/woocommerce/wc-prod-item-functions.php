@@ -29,7 +29,7 @@ function wc_add_prod_items( $order_id ) {
         
         $order = wc_get_order($order_id);//<--check this line
 
-        $paymethod = $order->payment_method_title;
+        $paymethod = $order->get_payment_method_title();
         $orderstat = $order->get_status();
 
         $items = $order->get_items();
@@ -71,7 +71,7 @@ function wc_add_prod_items( $order_id ) {
 function  wc_associate_order_item_to_prod_item( $order_id , $order_item_id ) {
     $order = wc_get_order($order_id);//<--check this line
 
-    $paymethod = $order->payment_method_title;
+    $paymethod = $order->get_payment_method_title();
     $orderstat = $order->get_status();
 
 
@@ -301,7 +301,7 @@ function add_to_production_item($order_id) { //<--check this line
     //create an order instance
     $order = wc_get_order($order_id);//<--check this line
 
-    $paymethod = $order->payment_method_title;
+    $paymethod = $order->get_payment_method_title();
     $orderstat = $order->get_status();
     
     $items = $order->get_items();

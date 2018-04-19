@@ -23,7 +23,7 @@ function wc_before_add_to_cart_shipping_estimate() {
         $end = $production->get_estimated_shipping_end();
         $end = strtotime($end);
         $end = date("m/d",$end);
-        echo '<div class="estimated-ship-date">
+        echo '<div class="estimated-ship-date" style="margin-top: 1em;">
             【お届け予定: ' . $start  . '〜' . $end . '】</div>';
     }
 }
@@ -169,7 +169,7 @@ function wc_before_add_to_cart_funding() {
             </div>
         </div>
         <p id="days">
-            <span class="hear-ye">Funding ends in:</span>
+            <span class="hear-ye">予約受付終了まであと:</span>
             <time class="tricky-countdown" data-funding-end="<?php echo $production->get_funding_end(); ?>"></time>
         </p>
         <span class="progress-text"><?php echo $percent;?>% Funded</span>
@@ -192,7 +192,7 @@ function wc_before_add_to_cart_funding() {
                 if (distance < 0) {
                   $('.tricky-countdown').html("EXPIRED");
                 }else {
-                    $('.tricky-countdown').html(days + "d " + hours + "h " + minutes + "m " + seconds + "s ");
+                    $('.tricky-countdown').html(days + "日 " + hours + "時間 " + minutes + "分 " + seconds + "秒 ");
                 }
                 
             },1000);            
@@ -216,7 +216,7 @@ function wc_before_add_to_cart_funding() {
             <li>生産の都合上、お届け時期が予定より前後する場合がございます。</li>
             <li>ご注文後、商品のお届け時期は「MY ORDER」ページより随時ご確認いただけます。</li>
             </ul>
-            <red style="color:red;">【お買い物前にご一読ください】ご利用ガイド</red>
+            <red style="color:red;">【お買い物前にご一読ください】<a href="<?php echo get_permalink(get_option('woocommerce_shopping_guide_page_id')); ?>">ご利用ガイド</a></red>
         </div>
             <?php
     } else {

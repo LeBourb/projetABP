@@ -591,14 +591,42 @@ function atelierbourgeons_pro_terms_conditions( $array ) {
             'desc_tip' => true,
             'autoload' => false,
     );
+    $array[] = array(
+            'title'    => __( 'Shopping guide', 'woocommerce' ),
+            'desc'     => __( 'This page help customer to under understand the process of buying stuffs', 'woocommerce' ),
+            'id'       => 'woocommerce_shopping_guide_page_id',
+            'default'  => '',
+            'class'    => 'wc-enhanced-select-nostd',
+            'css'      => 'min-width:300px;',
+            'type'     => 'single_select_page',
+            'args'     => array(  ),
+            'desc_tip' => true,
+            'autoload' => false,
+    );
+    $array[] = array(
+            'title'    => __( 'Consumer Notice', 'woocommerce' ),
+            'desc'     => __( 'This page help customer to be aware of what is important', 'woocommerce' ),
+            'id'       => 'woocommerce_consumer_notice_page_id',
+            'default'  => '',
+            'class'    => 'wc-enhanced-select-nostd',
+            'css'      => 'min-width:300px;',
+            'type'     => 'single_select_page',
+            'args'     => array(  ),
+            'desc_tip' => true,
+            'autoload' => false,
+    );
     return $array;    
 }
 
 
 add_action( 'woocommerce_update_options' , 'atelierbourgeons_update_pro_terms_conditions' );
 function atelierbourgeons_update_pro_terms_conditions() {
-    update_option('woocommerce_terms_pro_page_id', $_POST['woocommerce_terms_pro_page_id'] );
+    if(isset($_POST['woocommerce_terms_pro_page_id'])) {
+        update_option('woocommerce_terms_pro_page_id', $_POST['woocommerce_terms_pro_page_id'] );
+    }
 }
+
+
 
 add_filter( 'woocommerce_get_terms_page_id', 'atelierbourgeons_get_terms_page_id' , 40 , 1);
 function atelierbourgeons_get_terms_page_id( $page_id ) {
@@ -613,6 +641,20 @@ function atelierbourgeons_get_terms_page_id( $page_id ) {
         //return $page_id;
     }
     return $page_id;
+}
+
+add_action( 'woocommerce_update_options' , 'atelierbourgeons_update_shopping_guide' );
+function atelierbourgeons_update_shopping_guide() {
+    if(isset($_POST['woocommerce_shopping_guide_page_id'])) {
+        update_option('woocommerce_shopping_guide_page_id', $_POST['woocommerce_shopping_guide_page_id'] );
+    }
+}
+
+add_action( 'woocommerce_update_options' , 'atelierbourgeons_update_consumer_notice' );
+function atelierbourgeons_update_consumer_notice() {
+    if(isset($_POST['woocommerce_consumer_notice_page_id'])) {
+        update_option('woocommerce_consumer_notice_page_id', $_POST['woocommerce_consumer_notice_page_id'] );
+    }
 }
 
 function atelierbourgeons_new_user_approved( $user ) {

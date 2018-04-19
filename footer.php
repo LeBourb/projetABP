@@ -149,8 +149,7 @@ footer .address .phone {
         <div class="footer_links">
  
             <!-- Social Media Links  -->
-            <div class="sm columns animated wow fadeInRight" data-wow-delay=".2s">
-                <h3 class="columns_title">Stay Tuned</h3>
+            <div class="sm columns animated wow fadeInRight" data-wow-delay=".2s">                
                 <ul>
                     <li>
                         <a class="fa fa-facebook" href="#">Facebook</a>
@@ -162,21 +161,20 @@ footer .address .phone {
             </div>
  
             <!-- About Links  -->
-            <!--div class="about columns animated wow fadeInRight" data-wow-delay=".3s">
-                <h3 class="columns_title">About</h3>
+            <div class="about columns animated wow fadeInRight" data-wow-delay=".3s">                
                 <ul>
                     <li>
-                        <a href="#">Our Company</a>
+                        <a href="<?php echo get_permalink(get_option('woocommerce_consumer_notice_page_id')); ?>"><?php echo get_the_title(get_option('woocommerce_consumer_notice_page_id'));?></a>
                     </li>
                     <li>
-                        <a href="#">Our Team</a>
+                        <a href="<?php echo get_permalink(get_option('woocommerce_shopping_guide_page_id')); ?>"><?php echo get_the_title(get_option('woocommerce_shopping_guide_page_id'));?></a>
                     </li>
                 </ul>
-            </div-->
+            </div>
  
             <!-- Address  -->
             <div class="address columns animated wow fadeInRight" data-wow-delay=".4s">                
-                <p>日本事務所:</p>
+                <p>Japan office:</p>
                 <p>〒500-8435</p>
                 <p>岐阜県岐阜市宮北町5-3</p>
                 <br>
