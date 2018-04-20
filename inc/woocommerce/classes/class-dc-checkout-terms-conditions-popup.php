@@ -56,6 +56,7 @@ class DC_Checkout_Terms_Conditions_Popup {
 		if (is_admin()) {
 			//$this->load_class('admin');
 			$this->admin = new DC_Checkout_Terms_Conditions_Popup_Admin();
+                          
 		}
 
 		if (!is_admin() || defined('DOING_AJAX')) {

@@ -30,14 +30,21 @@ class DC_Checkout_Terms_Conditions_Popup_Frontend {
 	public $terms_conditions_popup_close_text;
 
 	public function __construct() {
-		$this->terms_conditions_popup_is_enable = get_option('terms_conditions_popup_is_enable');
+		$this->terms_conditions_popup_is_enable = get_option('terms_conditions_popup_is_enable') ? get_option('terms_conditions_popup_is_enable') : 'yes';
 		$this->terms_conditions_popup_pre_text = get_option('terms_conditions_popup_pre_text');
 		$this->terms_conditions_popup_link_text = get_option('terms_conditions_popup_link_text');
-		$this->terms_conditions_popup_js_enable = get_option('terms_conditions_popup_js_enable');
+		$this->terms_conditions_popup_js_enable = get_option('terms_conditions_popup_js_enable') ? get_option('terms_conditions_popup_js_enable') : 'no';
 		$this->terms_conditions_popup_pop_up_width = get_option('terms_conditions_popup_pop_up_width');
 		$this->terms_conditions_popup_pop_up_height = get_option('terms_conditions_popup_pop_up_height');
-		$this->terms_conditions_popup_heading = get_option('terms_conditions_popup_heading');
-		$this->terms_conditions_popup_agree_enable = get_option('terms_conditions_popup_agree_enable');
+                $user = wp_get_current_user(); 
+                $role = ( array ) $user->roles;    
+                $this->terms_conditions_popup_heading = get_option('terms_conditions_popup_heading') ? get_option('terms_conditions_popup_heading') : 'Atelier Bourgeons terms and conditions';
+                if(in_array( 'customer-pro', $role )) {   
+                    $this->terms_conditions_popup_heading = the_title(get_option('woocommerce_terms_pro_page_id'));
+                }else {
+                    $this->terms_conditions_popup_heading = the_title(get_option('woocommerce_terms_page_id'));
+                }		
+		$this->terms_conditions_popup_agree_enable = get_option('terms_conditions_popup_agree_enable') ? get_option('terms_conditions_popup_agree_enable') : 'yes';
 		$this->terms_conditions_popup_button_text = get_option('terms_conditions_popup_button_text');
 		$this->terms_conditions_popup_button_border_color = get_option('terms_conditions_popup_button_border_color');
 		$this->terms_conditions_popup_button_background_color = get_option('terms_conditions_popup_button_background_color');
@@ -45,20 +52,21 @@ class DC_Checkout_Terms_Conditions_Popup_Frontend {
 		$this->terms_conditions_button_border_size = get_option('terms_conditions_button_border_size');
 		$this->terms_conditions_button_border_redius = get_option('terms_conditions_button_border_redius');
 		$this->terms_conditions_popup_button_background_color_hover = get_option('terms_conditions_popup_button_background_color_hover');
-		$this->terms_conditions_popup_button_width = get_option('terms_conditions_popup_button_width');
-		$this->terms_conditions_popup_button_height = get_option('terms_conditions_popup_button_height');
+		$this->terms_conditions_popup_button_width = get_option('terms_conditions_popup_button_width') ? get_option('terms_conditions_popup_button_width') : 400;
+		$this->terms_conditions_popup_button_height = get_option('terms_conditions_popup_button_height') ? get_option('terms_conditions_popup_button_height') : 300;
 		$this->terms_conditions_popup_button_text_color_hover = get_option('terms_conditions_popup_button_text_color_hover');
 		$this->terms_conditions_button_font_size = get_option('terms_conditions_button_font_size');
 		$this->terms_conditions_button_padding = get_option('terms_conditions_button_padding');
 		$this->terms_conditions_popup_alert_enable = get_option('terms_conditions_popup_alert_enable');
 		$this->terms_conditions_popup_alert_msg = get_option('terms_conditions_popup_alert_msg');
 		$this->terms_conditions_popup_div_width = get_option('terms_conditions_popup_div_width');
-		$this->terms_conditions_popup_div_height = get_option('terms_conditions_popup_div_height');
-		$this->terms_conditions_popup_page_scoller = get_option('terms_conditions_popup_page_scoller');
+		$this->terms_conditions_popup_div_height = get_option('terms_conditions_popup_div_height') ? get_option('terms_conditions_popup_div_height') : '95';
+		$this->terms_conditions_popup_page_scoller = get_option('terms_conditions_popup_page_scoller') ? get_option('terms_conditions_popup_page_scoller') : 'no';
 		$this->terms_conditions_popup_close = true;// get_option('terms_conditions_popup_close');
 		$this->terms_conditions_popup_close_text = "Close"; //get_option('terms_conditions_popup_close_text');
-		if($this->terms_conditions_popup_is_enable == "yes") {
+		//if($this->terms_conditions_popup_is_enable == "yes") {
 			
+                    //throw new Exception('Division par zéro.'); 
 			//enqueue scripts
 			//add_action('wp_enqueue_scripts', array(&$this, 'frontend_scripts'));
 			//enqueue styles
@@ -69,7 +77,7 @@ class DC_Checkout_Terms_Conditions_Popup_Frontend {
 			add_action( 'woocommerce_pay_order_before_submit', array($this, 'add_pop_up'), 30);
 			//add_action( 'woocommerce_after_checkout_validation',       array( $this, 'after_checkout_validation' ),10,1 );		
 			
-		}
+		//}
 	}
 	
 	function add_pop_up() {
@@ -111,10 +119,6 @@ class DC_Checkout_Terms_Conditions_Popup_Frontend {
 			?>
 			
 			<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-			<link rel="stylesheet" type="text/css" href="<?php echo get_site_url(); ?>/wp-content/themes/atelierbourgeonspro/assets/css/popup.css" media="screen" />
-			 
-			
-			<script type="text/javascript" src="<?php echo get_site_url();?>/wp-content/themes/atelierbourgeonspro/assets/js/simplepopup.js"></script>
 			
 			<script type="text/javascript" >				
 			jQuery(document).ready(function($) {

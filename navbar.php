@@ -154,7 +154,7 @@
                                     'meta_value' => 'template-help.php'
                                 )); 
                                 if(is_array($pages) && count($pages)) {                                    
-                                    echo '<li><a href="' . get_permalink( $pages[0] ) . '" >' . 'Help' . '</a></li>';
+                                    echo '<li><a href="' . get_permalink(get_option('woocommerce_shopping_guide_page_id')) . '" >' . 'Help' . '</a></li>';
                                 }
                                 if(is_user_logged_in()) {
                                     echo '<li><a href="' . get_permalink( wc_get_page_id ( 'cart' )) . '" >Cart</a></li>'; 

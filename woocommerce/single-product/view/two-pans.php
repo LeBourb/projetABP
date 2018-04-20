@@ -78,14 +78,14 @@
                 
 			
                 <div class="shape-trapezoid">
-                    <div class="parallax-realcontainer" style="background:linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) ), url(<?php echo wp_get_attachment_image_src($media_1, 'large')[0]; ?>) no-repeat center bottom / cover;">
+                    <div class="parallax-realcontainer img-lazy-load" style="background:linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) ), url(<?php echo wp_get_attachment_image_src($media_1, 'large')[0]; ?>) no-repeat center bottom / cover;" data-full-src="<?php echo wp_get_attachment_image_src( $media_1, 'full')[0];?>">
                     </div>
                     <div class="innerContainer">                  
                         <div class="label"><?php echo $text_left;?></div>                          
                     </div>
                 </div>
                 <div class="shape-trapezoid-inv">
-                    <div class="parallax-realcontainer" style="background:linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) ), url(<?php echo wp_get_attachment_image_src($media_2, 'large')[0]; ?>) no-repeat center bottom / cover;">
+                    <div class="parallax-realcontainer img-lazy-load" style="background:linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) ), url(<?php echo wp_get_attachment_image_src($media_2, 'large')[0]; ?>) no-repeat center bottom / cover;" data-full-src="<?php echo wp_get_attachment_image_src( $media_2, 'full')[0];?>">
 
                     </div>
                     <div class="innerContainer">                  

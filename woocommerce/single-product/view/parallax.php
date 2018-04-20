@@ -47,7 +47,7 @@
             color: <?php if($text_color=="white") echo "white"; else echo "black"; ?>
         }
 </style>
-<section id="<?php echo strtolower(str_replace(' ', '', $title));?>" class="parallax-section <?php echo 'awesome_' .  $key; ?>">
+<section id="<?php echo strtolower(str_replace(' ', '', $title));?>" class="parallax-section <?php echo 'awesome_' .  $key; ?> img-lazy-load" data-full-src="<?php echo wp_get_attachment_image_src( $item['media_id'], 'full')[0];?>">
     <div class="container">
         <div class="row">
             <div class="col-md-4 <?php if($text_pos=="left") echo "col-md-offset-1"; else echo "col-md-offset-7"; ?>">            

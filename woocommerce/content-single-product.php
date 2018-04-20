@@ -36,7 +36,7 @@ $workshop_id = get_post_meta( $product->get_id(), 'product_workshop_id' , true);
 if(isset($attachment_ids[1]))
     $image = wp_get_attachment_url( $attachment_ids[1] );
     $main_image = get_post_thumbnail_id( $product->get_id() );
-$product_image = wp_get_attachment_image_src($main_image , 'full' );
+    $product_image = wp_get_attachment_image_src($main_image , 'full' );
 ?>
 
 
@@ -246,9 +246,10 @@ $product_image = wp_get_attachment_image_src($main_image , 'full' );
                                 $attachment_ids = $product->get_gallery_image_ids();
                                 foreach($attachment_ids as $attachment_id) {
                                     
-                                    $image_attachment = wp_get_attachment_image_src( $attachment_id , 'large');                                     
+                                    $image_attachment = wp_get_attachment_image_src( $attachment_id , 'large');  
+                                    $image_full_attachment = wp_get_attachment_image_src( $attachment_id , 'full');  
                                     echo '<div class="item">
-                                            <img src='. $image_attachment[0] . ' />
+                                            <img class="img-lazy-load" data-full-src="'. $image_full_attachment[0] . '" src="'. $image_attachment[0] . '" />
                                         </div>';
                                 }                                    
                              ?>
@@ -348,6 +349,7 @@ $product_image = wp_get_attachment_image_src($main_image , 'full' );
                                 while ( count($attachment_ids) || count($buffer_cell)) {
                                     $attachment_id = null;
                                     $image_attachment_url = null;
+                                    $image_full_attachment_src = null;
                                     $width = 0;
                                     $height = 0;
                                     if(count($attachment_ids)) {
@@ -356,12 +358,13 @@ $product_image = wp_get_attachment_image_src($main_image , 'full' );
                                         $width = $image_meta[1];
                                         $height = $image_meta[2];
                                         $image_attachment_url = $image_meta[0];
+                                        $image_full_attachment_src = wp_get_attachment_image_src($attachment_id,'full');
                                     } 
                                     
                                     if( ( $width > $height || count($buffer_cell) ) && $lg_used_col <= 6 && $md_used_col <= 4 && $sm_used_col <= 0)  {                                        
                                         if(!count($buffer_cell) && $width > $height) {
                                             echo '<div href="'. $image_attachment_url .'" class="wow fadeInUp col-lg-6 col-md-8 col-sm-12 col-xs-12" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
-                                                <img src="' . $image_attachment_url . '" class="img-responsive" alt="sponsors">	
+                                                <img data-full-src="'. $image_full_attachment_src[0] . '"  src="' . $image_attachment_url . '" class="img-responsive img-lazy-load" alt="sponsors">	
                                                 <div class="overlay" style="opacity: 0.9; display:none;"></div>
                                                 </div>';
                                             $lg_used_col += 6;
@@ -376,7 +379,7 @@ $product_image = wp_get_attachment_image_src($main_image , 'full' );
                                         }                            
                                         else if ($width > $height) {
                                             $buffer_cell[] = '<div href="'. $image_attachment_url .'" class="wow fadeInUp col-lg-6 col-md-8 col-sm-12 col-xs-12" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
-                                            <img src="' . $image_attachment_url . '" class="img-responsive" alt="sponsors">	
+                                            <img data-full-src="'. $image_full_attachment_src[0] . '" src="' . $image_attachment_url . '" class="img-responsive img-lazy-load" alt="sponsors">	
                                                 <div class="overlay" style="opacity: 0.9; display:none;"></div>
                                                 </div>';                                            
                                         }
@@ -384,14 +387,14 @@ $product_image = wp_get_attachment_image_src($main_image , 'full' );
                                     }
                                     else if ($width > $height && $image_attachment_url != null) {
                                         $buffer_cell[] = '<div href="'. $image_attachment_url .'" class="wow fadeInUp col-lg-6 col-md-8 col-sm-12 col-xs-12" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
-                                        <img src="' . $image_attachment_url . '" class="img-responsive" alt="sponsors">	
+                                        <img data-full-src="'. $image_full_attachment_src[0] . '" src="' . $image_attachment_url . '" class="img-responsive img-lazy-load" alt="sponsors">	
                                             <div class="overlay" style="opacity: 0.9; display:none;"></div>
                                             </div>';                                  
                                     }
                                     //$image_url = wp_get_attachment_image_src( $image_attachment_id );
                                     else if ($width <= $height){
                                         echo '<div href="'. $image_attachment_url .'" class="wow fadeInUp col-lg-3 col-md-4 col-sm-6 col-xs-6" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
-                                        <img src="' . $image_attachment_url . '" class="img-responsive" alt="sponsors">	
+                                        <img data-full-src="'. $image_full_attachment_src[0] . '" src="' . $image_attachment_url . '" class="img-responsive img-lazy-load" alt="sponsors">	
                                             <div class="overlay" style="opacity: 0.9; display:none;"></div>				   
                                         </div>';
                                         $lg_used_col += 3;
@@ -709,6 +712,21 @@ $('#am-container').on('shown',function(){
             viewer.hide();
         }
     })
+});
+
+$( window ).load(function() {    
+    var idx = 0;
+    $('.img-lazy-load').each(function(img, ){
+        var that = $(this);
+        that.append('<img id="img_highQuality_' + idx + '" src="' + that.data('full-src') + '" style="display:none;">');
+        $("#img_highQuality_" + idx).off().on("load", function() {            
+            that.css({
+                "background-image" : "url(" + $(this).attr('src') + ")"
+            });
+            console.log('change img:' + that);
+        });
+        idx++;
+    });
 });
 
 </script>

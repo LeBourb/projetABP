@@ -93,12 +93,12 @@ footer .footer_links ul li a:hover {
     color: #3c3c3c;
 }
 
-footer .sm ul li a:before {
+/*footer .sm ul li a:before {
     content: "";
     display: inline-block;
     width: 15px;
     margin-right: 20px;
-}
+}*/
 
 footer .sm ul li .facebook:before {
     height: 14px;
@@ -132,6 +132,9 @@ footer .address .phone {
     font-weight: bold;
 }
           
+.fa:before {
+    margin-right: 1em;
+}
             
 @media screen and (max-width:768px) {
     footer .footer_links {
@@ -150,24 +153,27 @@ footer .address .phone {
  
             <!-- Social Media Links  -->
             <div class="sm columns animated wow fadeInRight" data-wow-delay=".2s">                
-                <ul>
-                    <li>
-                        <a class="fa fa-facebook" href="#">Facebook</a>
+                <ul style="margin-left:12em;">
+                    <li style="text-align: left;">
+                        <a class="fa fa-facebook" style="font-family:fontawesome;" href="https://www.facebook.com/atelierbourgeons/">Facebook</a>
                     </li>
-                    <li>
-                        <a class="fa fa-instagram" href="#">Instagram</a>
+                    <li style="text-align: left;">
+                        <a class="fa fa-instagram" style="font-family:fontawesome;" href="https://www.instagram.com/atelier_bourgeons/">Instagram</a>
                     </li>
                 </ul>
             </div>
  
             <!-- About Links  -->
             <div class="about columns animated wow fadeInRight" data-wow-delay=".3s">                
-                <ul>
+                <ul style="margin-left:0;">
                     <li>
                         <a href="<?php echo get_permalink(get_option('woocommerce_consumer_notice_page_id')); ?>"><?php echo get_the_title(get_option('woocommerce_consumer_notice_page_id'));?></a>
                     </li>
                     <li>
                         <a href="<?php echo get_permalink(get_option('woocommerce_shopping_guide_page_id')); ?>"><?php echo get_the_title(get_option('woocommerce_shopping_guide_page_id'));?></a>
+                    </li>
+                    <li>
+                        <a href="<?php echo get_permalink(get_option('woocommerce_privacy_policy_page_id')); ?>"><?php echo get_the_title(get_option('woocommerce_privacy_policy_page_id'));?></a>
                     </li>
                 </ul>
             </div>
@@ -178,7 +184,7 @@ footer .address .phone {
                 <p>〒500-8435</p>
                 <p>岐阜県岐阜市宮北町5-3</p>
                 <br>
-                <p>アトリエ:</p>
+                <p>Atelier:</p>
                 <p>24 rue traversière</p>
                 <p>92100 Boulogne-Billancourt FRANCE</p>
                 <a class="email" href="mailto:contact@atelierbourgeons.com">contact@atelierbourgeons.com</a>

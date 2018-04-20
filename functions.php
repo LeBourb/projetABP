@@ -312,7 +312,9 @@ function theme_enqueue_styles() {
     wp_enqueue_style( 'project-gmap-style', get_template_directory_uri() . '/assets/css/project-gmap.min.css' , array(), 'v1.2');
     wp_enqueue_style( 'main-style', get_template_directory_uri() . '/assets/css/style.min.css' , array(), filemtime( getcwd() .  '/wp-content/themes/atelierbourgeonspro//assets/css/style.min.css' ));
     wp_enqueue_style( 'viewer-style', get_template_directory_uri() . '/assets/css/viewer.min.css' , array(), 'v1.2');
-            
+    wp_enqueue_style( 'popup-style', get_template_directory_uri() . '/assets/css/popup.min.css' , array(), 'v1.2');
+    
+    
     wp_enqueue_script( 'jquery-script', get_template_directory_uri() . '/assets/js/jquery.min.js', array(), 'v1.2' );
     wp_enqueue_script( 'jquery-form-script', get_template_directory_uri() . '/assets/js/jquery.form.min.js', array(), 'v1.2' );
     wp_enqueue_script( 'jquery-validate-script', get_template_directory_uri() . '/assets/js/jquery.validate.min.js', array(), 'v1.2' );
@@ -326,6 +328,7 @@ function theme_enqueue_styles() {
     wp_enqueue_script( 'canvas-script', get_template_directory_uri() . '/assets/js/canvas.min.js', array(), 'v1.2' );
     wp_enqueue_script( 'sly-script', get_template_directory_uri() . '/assets/js/sly.min.js', array(), 'v1.2' );
     wp_enqueue_script( 'viewer-script', get_template_directory_uri() . '/assets/js/viewer.min.js', array(), 'v1.2' );
+    wp_enqueue_script( 'popup-style', get_template_directory_uri() . '/assets/js/simplepopup.min.js', array(), 'v1.2' );
     //wp_enqueue_script( 'project-gmap-infobox-script', get_template_directory_uri() . '/assets/js/project-gmap-infobox.min.js', array(), 'v1.2' );
     //wp_enqueue_script( 'project-gmap-script', get_template_directory_uri() . '/assets/js/project-gmap.min.js', array(), 'v1.2' );
     
@@ -615,6 +618,18 @@ function atelierbourgeons_pro_terms_conditions( $array ) {
             'desc_tip' => true,
             'autoload' => false,
     );
+    $array[] = array(
+            'title'    => __( 'Privacy Policy', 'woocommerce' ),
+            'desc'     => __( 'This page explain about the data privacy policy', 'woocommerce' ),
+            'id'       => 'woocommerce_privacy_policy_page_id',
+            'default'  => '',
+            'class'    => 'wc-enhanced-select-nostd',
+            'css'      => 'min-width:300px;',
+            'type'     => 'single_select_page',
+            'args'     => array(  ),
+            'desc_tip' => true,
+            'autoload' => false,
+    );
     return $array;    
 }
 
@@ -643,6 +658,12 @@ function atelierbourgeons_get_terms_page_id( $page_id ) {
     return $page_id;
 }
 
+add_filter( 'woocommerce_shipping_package_name', 'atelierbourgeons_shipping_package_name' , 10 , 3) ;
+
+function atelierbourgeons_shipping_package_name($arg1, $arg2, $arg3) {
+    return '配送';
+}
+
 add_action( 'woocommerce_update_options' , 'atelierbourgeons_update_shopping_guide' );
 function atelierbourgeons_update_shopping_guide() {
     if(isset($_POST['woocommerce_shopping_guide_page_id'])) {
@@ -654,6 +675,13 @@ add_action( 'woocommerce_update_options' , 'atelierbourgeons_update_consumer_not
 function atelierbourgeons_update_consumer_notice() {
     if(isset($_POST['woocommerce_consumer_notice_page_id'])) {
         update_option('woocommerce_consumer_notice_page_id', $_POST['woocommerce_consumer_notice_page_id'] );
+    }
+}
+
+add_action( 'woocommerce_update_options' , 'atelierbourgeons_update_privacy_policy' );
+function atelierbourgeons_update_privacy_policy() {
+    if(isset($_POST['woocommerce_privacy_policy_page_id'])) {
+        update_option('woocommerce_privacy_policy_page_id', $_POST['woocommerce_privacy_policy_page_id'] );
     }
 }
 
