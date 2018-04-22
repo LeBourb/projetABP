@@ -163,7 +163,8 @@
                                 else {
                                     echo '<li><a href="' . Theme_My_Login::get_page_link( 'login' ) . '" >Login</a></li>';                                
                                     echo '<li><a href="' . Theme_My_Login::get_page_link( 'register' ) . '" >Register</a></li>';                                
-                                }                                
+                                }                   
+                                echo '<li><a href="' . get_permalink( get_option('woocommerce_contact_form_page_id')) . '" >Contact-us</a></li>';
                                 ?>
                             
                                 

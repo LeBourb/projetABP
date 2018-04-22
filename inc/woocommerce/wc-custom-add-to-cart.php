@@ -39,7 +39,7 @@ function wc_before_add_to_cart_size_details() {
    $text_guide = get_post_meta(  $post->ID, 'wc_size_guide', true);
    
    ?>
-    <br><a id="btn_size_details" class="icon-sizing" data-featherlight="#size-details-modal" style="cursor:pointer;"><span>Size and Details</span></a>
+    <br><a id="btn_size_details" class="icon-sizing" data-featherlight="#size-details-modal" style="cursor:pointer;"><span>サイズ & アイテム詳細</span></a>
    
    <div id="wc_size_details" style="display:none;    margin-left: auto;
     margin-right: auto;"> 
@@ -172,7 +172,7 @@ function wc_before_add_to_cart_funding() {
             <span class="hear-ye">予約受付終了まであと:</span>
             <time class="tricky-countdown" data-funding-end="<?php echo $production->get_funding_end(); ?>"></time>
         </p>
-        <span class="progress-text"><?php echo $percent;?>% Funded</span>
+        <span class="progress-text">目標達成度: <?php echo $percent;?>%</span>
         <script>
             var strdate = $('.tricky-countdown').data( 'funding-end' );
             var countDownDate = new Date(strdate).getTime();

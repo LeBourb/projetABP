@@ -631,6 +631,18 @@ function atelierbourgeons_pro_terms_conditions( $array ) {
             'desc_tip' => true,
             'autoload' => false,
     );
+    $array[] = array(
+            'title'    => __( 'Contact Form', 'woocommerce' ),
+            'desc'     => __( 'This is the form contact', 'woocommerce' ),
+            'id'       => 'woocommerce_contact_form_page_id',
+            'default'  => '',
+            'class'    => 'wc-enhanced-select-nostd',
+            'css'      => 'min-width:300px;',
+            'type'     => 'single_select_page',
+            'args'     => array(  ),
+            'desc_tip' => true,
+            'autoload' => false,
+    );
     return $array;    
 }
 
@@ -683,6 +695,13 @@ add_action( 'woocommerce_update_options' , 'atelierbourgeons_update_privacy_poli
 function atelierbourgeons_update_privacy_policy() {
     if(isset($_POST['woocommerce_privacy_policy_page_id'])) {
         update_option('woocommerce_privacy_policy_page_id', $_POST['woocommerce_privacy_policy_page_id'] );
+    }
+}
+
+add_action( 'woocommerce_update_options' , 'atelierbourgeons_update_contact_form' );
+function atelierbourgeons_update_contact_form() {
+    if(isset($_POST['woocommerce_contact_form_page_id'])) {
+        update_option('woocommerce_contact_form_page_id', $_POST['woocommerce_contact_form_page_id'] );
     }
 }
 
@@ -874,7 +893,6 @@ function custom_cart_total() {
     WC()->cart->total *= 0.30;
     //var_dump( WC()->cart->total);
 }*/
-
 
 function create_post_type_production() {
     

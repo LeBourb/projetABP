@@ -52,6 +52,29 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
         grid-column: 1;
         grid-row: 2 / 3;
     }
+    
+    #intro h4 {
+        font-family: "Times New Roman", Times, serif;
+        color: black;
+        font-size: 21px;
+    }
+    
+    #intro row {
+        display: flex;
+    }
+    
+    #detail .asset-item {
+        padding-bottom: 4em;
+        padding-top: 4em;
+        max-width: 25em;        
+    }
+    
+    #detail .asset-item .bottom-line {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
 </style>
 <section id="intro" class="parallax-section">
      <?php // echo wp_video_shortcode( array() );//
@@ -71,8 +94,12 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 		<div class="row">
 
 			<div class="col-md-12 col-sm-12">
-				<h3 class="wow bounceIn" data-wow-delay="0.9s"><?php echo get_post_meta( $post->ID , 'Home Page Date', true ); ?></h3>
-				<h1 class="wow fadeInUp" data-wow-delay="1.6s"><?php echo get_post_meta( $post->ID , 'Home Page Title', true ); ?></h1>
+				<h3 class="wow" data-wow-delay="0.9s" >
+                                    <h4>－外身も中身も、かっこよく。－</h4> 
+                                    <h4>デザインとものづくりの背景</h4>
+                                    <h4>両方からお洒落するレディースブランド</h4>
+                                    <h4>atelier Bourgeons アトリエブルジョン。</h4>
+                                </h3><!--h1 class="wow fadeInUp" data-wow-delay="1.6s"><?php //echo get_post_meta( $post->ID , 'Home Page Title', true ); ?></h1-->
 				<a href="#overview" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s"><?php _e('LEARN MORE','atelierbourgeons') ?></a>
 				<a href="#register" class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s"><?php _e('REGISTER NOW','atelierbourgeons') ?></a>
 			</div>
@@ -173,58 +200,68 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
                             ));    
                             $help_url = get_permalink($pages[0]->ID);
                         ?>
-			<div class="wow fadeInRight col-xs-6 col-sm-3 col-md-3 col-lg-3" data-wow-delay="0.9s">
+			<div class="asset-item wow fadeInRight col-xs-6 col-sm-4 col-md-4 col-lg-4" data-wow-delay="0.9s">
 				<i class="fa">
                                     <img style="width: 1em;" src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/icon/secure-payment.png"></img>
                                 </i>    
                                 <h5>安全&快適なネットショッピング</h5>
                                 <h4>PRIVACY POLICY & SECURE PAIEMENT</h4>
                                 <p>本サイトは「SSL」というセキュリティー技術を採用しており、注文時に入力される全ての個人情報は暗号化によって安全に送信されます。また、当店利用のオンライン決済サービスStripeは、 カード業界の国際安全基準 (PCI DSS) で最も安全な「Level 1」を取得しています。 安心してお買い物をお楽しみください。</p>
-                                <a href="<?php echo get_permalink(get_option('woocommerce_shopping_privacy_policy_id')); ?>" class="btn btn-lg btn-default" data-wow-delay="2.3s" style="visibility: visible; font-size: 0.8em;">プライバシーポリシー</a>
+                                <div class="bottom-line">
+                                    <a href="<?php echo get_permalink(get_option('woocommerce_privacy_policy_page_id')); ?>" class="btn btn-lg btn-default" data-wow-delay="2.3s" style="visibility: visible; font-size: 0.8em;">プライバシーポリシー</a>
+                                </div>
 			</div>
-                    
-                        <div class="wow fadeInRight col-xs-6 col-sm-3 col-md-3 col-lg-3" data-wow-delay="0.9s">				
+                        <div class="clearfix visible-xs"></div>                        
+                        <div class="asset-item wow fadeInRight col-xs-6 col-sm-4 col-md-4 col-lg-4" data-wow-delay="0.9s">				
                                 <i class="fa">
                                     <img style="width: 1em;" src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/icon/flexible-payment.png"></img>
                                 </i>   
                                 <h5>最初に全額払わなくてもOK！状況に応じて選べるお支払い方法</h5>
 				<h4>FLEXIBILITY OF PAYMENT</h4>
 				<p>商品をご予約いただく際に、「全額前払い」「分割２回払い」のいずれかをご指定いただけます。お支払い方法は、「クレジットカード払い」または「銀行振込」からお選びいただけ、分割払いの際は、その都度お支払い方法が変更可能です。</p>
-                                <a href="<?php echo get_permalink(get_option('woocommerce_shopping_guide_page_id')); ?>" class="btn btn-lg btn-default"  style="visibility: visible; font-size: 0.8em;">ご利用ガイド</a>
+                                <div class="bottom-line">
+                                    <a href="<?php echo get_permalink(get_option('woocommerce_privacy_policy_page_id')); ?>" class="btn btn-lg btn-default"  style="visibility: visible; font-size: 0.8em;">ご利用ガイド</a>
+                                </div>
 			</div>   
-                        <div class="clearfix visible-xs"></div>
-                        <div class="wow fadeInRight col-xs-6 col-sm-3 col-md-3 col-lg-3" data-wow-delay="0.9s">				
+                        <div class="clearfix visible-xs"></div>                        
+                        <div class="asset-item wow fadeInRight col-xs-6 col-sm-4 col-md-4 col-lg-4" data-wow-delay="0.9s">				
                                 <i class="fa">
                                     <img style="width: 1em;" src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/icon/deposit.png"></img>
                                 </i>   
                                 <h5>予約注文限定の特別価格で、通常よりもおトクに。</h5>
 				<h4>ADVANTAGE OF PRE-ORDER</h4>
 				<p>予めご注文をいただき、必要な枚数だけ無駄なく生産すれば、コストの削減に繋がります。浮いたコストの分だけ価格を下げ、予約注文だけの「特別価格」で商品を提供できのです。</p>
+                                <div class="bottom-line">                                    
+                                    <a href="#products" class="btn btn-lg btn-default" style="visibility: visible; font-size: 0.8em;">商品ページ</a>
+                                </div>
                                 <!--a href="<?php //echo $help_url;?>/#tracking" class="btn btn-lg btn-default" style="visibility: visible; font-size: 0.8em;">商品ページ</a-->
-			</div>                    
-			<div class="wow fadeInRight col-xs-6 col-sm-3 col-md-3 col-lg-3" data-wow-delay="0.9s">
+			</div>      
+                        <div class="clearfix visible-xs"></div>
+                        <div class="clearfix visible-sm"></div>
+                        <div class="clearfix visible-md"></div>
+			<div class="asset-item wow fadeInRight col-xs-6 col-sm-4 col-md-4 col-lg-4" data-wow-delay="0.9s">
 				<i class="fa">
                                     <img style="width: 1em;" src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/icon/no-minimum-order.png"></img>
                                 </i>   
 				<h5>事業者様には、一枚から卸売価格でご提供。</h5>
 				<h4>No MINUMUM ORDER FOR B to B SALES</h4>
 				<p>事業者（小売業・ブティック等）のお客様は、当サイトにご登録後、卸価格で商品をお求めいただけます。一枚から購入可能なので、簡単・気軽にネットでの買い付けをお試しいただけます。</p>
-                                <a href="<?php echo Theme_My_Login::get_page_link( 'register' ); ?>/#shop-account" class="btn btn-lg btn-default" style="visibility: visible; font-size: 0.8em;">ビジネス会員登録フォーム</a>
+                                <div class="bottom-line">
+                                    <a href="<?php echo Theme_My_Login::get_page_link( 'register' ); ?>/#shop-account" class="btn btn-lg btn-default" style="visibility: visible; font-size: 0.8em;">ビジネス会員登録フォーム</a>
+                                </div>
 			</div>
-                        <div class="clearfix visible-xs"></div>
-                        <div class="clearfix visible-sm"></div>
-                        <div class="clearfix visible-md"></div>
-                        <div class="clearfix visible-lg"></div>
-                        <div class="wow fadeInRight col-xs-6 col-sm-3 col-md-3 col-lg-3" data-wow-delay="0.9s">
+                        <div class="clearfix visible-xs"></div>                        
+                        <div class="asset-item wow fadeInRight col-xs-6 col-sm-4 col-md-4 col-lg-4" data-wow-delay="0.9s">
 				<i class="fa">
                                     <img style="width: 1em;" src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/icon/tracking-order.png"></img>
                                 </i>   
 				<h5>商品の生産状況からお届け予定まで、サイト上で常に確認可能。</h5>
 				<h4>TRAKING SYSTEM OF YOUR ORDER</h4>
 				<p>商品の注文後、当サイトにログイン→「MY ORDER」ページにて、商品の生産状況やお届け予定日をいつでもお好きな時に確認できます。</p>
-                                <a href="<?php echo $help_url;?>/#tracking" class="btn btn-lg btn-default" style="visibility: visible; font-size: 0.8em;">ログイン・登録フォーム</a>
+                                <div class="bottom-line">
+                                    <a href="<?php echo Theme_My_Login::get_page_link( 'register' ); ?>" class="btn btn-lg btn-default" style="visibility: visible; font-size: 0.8em;">ログイン・登録フォーム</a>
+                                </div>
 			</div>
-
 		</div>
 	</div>
 </section>
@@ -237,10 +274,9 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 	<div class="container">
 		<div class="row">
 
-			<div class="wow fadeInUp col-md-6 col-sm-10" data-wow-delay="1.3s">
-				<h2><?php echo get_post_meta( $post->ID , 'Video Title', true ); ?></h2>
-				<h3><?php echo get_post_meta( $post->ID , 'Video Sub Title', true ); ?></h3>
-				<p><?php echo get_post_meta( $post->ID , 'Video Description', true ); ?></p>
+			<div class="wow fadeInUp col-md-6 col-sm-10" data-wow-delay="1.3s" style="text-align: center;letter-spacing: 6px;">
+				<h3 style="margin-top: 16%;">Video - Collection</h3>
+				<h3>A/W 2018-19</h3>				
 			</div>
 			<div class="wow fadeInUp col-md-6 col-sm-10" data-wow-delay="1.6s">
 				<div class="embed-responsive embed-responsive-16by9">
@@ -484,7 +520,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 <!-- =========================
     VENUE SECTION   
 ============================== -->
-<section id="venue" class="parallax-section">
+<!--section id="venue" class="parallax-section">
 	<div class="container">
 		<div class="row">
 
@@ -499,7 +535,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 
 		</div>
 	</div>
-</section>
+</section-->
 
 
 <!-- Back top -->

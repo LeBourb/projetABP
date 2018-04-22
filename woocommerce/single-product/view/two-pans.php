@@ -9,12 +9,15 @@
 <style>
         <?php echo '.awesome_' .  $key; ?> {
             display: block;
-            height: 100vh;
+            height: 90vh;
             position: relative;
         }   
         <?php echo '.awesome_' .  $key; ?> .container {
             width: 100%;
             height: 100%;   
+            padding: 0;
+            display: flex;
+            flex-direction: column;
         }
         
         <?php echo '.awesome_' .  $key; ?> .shape-container {
@@ -29,21 +32,56 @@
         
         <?php echo '.awesome_' .  $key; ?> .shape-trapezoid {
             height: 100%;
-            width: 60%;
-            position: absolute;
+            width: 90%;
+            left: -20%;
+            position: absolute;            
+            transition: left 0.4s ease-in-out;
+            -o-transition: left 0.4s ease-in-out;
+            -ms-transition: left 0.4s ease-in-out;
+            -moz-transition: left 0.4s ease-in-out;
+            -webkit-transition: left 0.4s ease-in-out;
             /*background-color: red;*/
             clip-path: polygon(0 0, 65% 0%, 90% 100%, 0% 100%);
+            -o-clip-path: polygon(0 0, 65% 0%, 90% 100%, 0% 100%);
+            -ms-clip-path: polygon(0 0, 65% 0%, 90% 100%, 0% 100%);
+            -moz-clip-path: polygon(0 0, 65% 0%, 90% 100%, 0% 100%);
+            -webkit-clip-path: polygon(0 0, 65% 0%, 90% 100%, 0% 100%);            
             /* transform: rotate(360deg); 
             background-image: url('<?php echo wp_get_attachment_image_src($media_1, 'large')[0]; ?>');*/
         }
         <?php echo '.awesome_' .  $key; ?> .shape-trapezoid-inv {
             /*background-color: blue;*/
             height: 100%;
-            width: 60%;
+            width: 90%;
             position: absolute;
             left: 40%;
+            transition: left 0.4s ease-in-out;
+            -o-transition: left 0.4s ease-in-out;
+            -ms-transition: left 0.4s ease-in-out;
+            -moz-transition: left 0.4s ease-in-out;
+            -webkit-transition: left 0.4s ease-in-out;
             clip-path: polygon(5% 0%, 100% 0%, 100% 100%, 30% 100%);
+            -o-clip-path: polygon(5% 0%, 100% 0%, 100% 100%, 30% 100%);
+            -ms-clip-path: polygon(5% 0%, 100% 0%, 100% 100%, 30% 100%);
+            -moz-clip-path: polygon(5% 0%, 100% 0%, 100% 100%, 30% 100%);
+            -webkit-clip-path: polygon(5% 0%, 100% 0%, 100% 100%, 30% 100%);
             /*background-image: url('');*/
+        }
+        
+        <?php echo '.awesome_' .  $key; ?>.left-expand .shape-trapezoid-inv {            
+            left:60%;
+        }
+        
+        <?php echo '.awesome_' .  $key; ?>.left-expand .shape-trapezoid {
+            left:0%;
+        }
+                
+        <?php echo '.awesome_' .  $key; ?>.right-expand .shape-trapezoid-inv {            
+            left:20%;
+        }
+        
+        <?php echo '.awesome_' .  $key; ?>.right-expand .shape-trapezoid {
+            left: -40%;
         }
         
         <?php echo '.awesome_' .  $key; ?> .parallax-realcontainer {
@@ -55,18 +93,24 @@
         }
         
         <?php echo '.awesome_' .  $key; ?> .innerContainer {
-            position: relative;
+            height: 100%;    
+            width: 100%;
         }
         
-        <?php echo '.awesome_' .  $key; ?> .innerContainer .label {
-            margin-top: 36%;
+        <?php echo '.awesome_' .  $key; ?> .innerContainer .label {            
             font-weight: 400;
             letter-spacing: 0.025em;
             font-size: 3em;
-            display: block;
+            position: relative;
+            float: left;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);            
         }
         
     </style>
+    
+    
     <section id="<?php echo strtolower(str_replace(' ', '', $title));?>" class="<?php echo 'awesome_' .  $key; ?>">
         <div class="container">
             <div class="col-md-12 col-sm-12 wow bounceIn" style="float: none;">
@@ -74,7 +118,7 @@
 					<h2><?php echo $title;?></h2>
 				</div>
 			</div>
-            <div class="row shape-container">
+            <div class="shape-container">
                 
 			
                 <div class="shape-trapezoid">
@@ -89,12 +133,27 @@
 
                     </div>
                     <div class="innerContainer">                  
-                        <div class="wrapper">
+                        
                           <div class="label"><?php echo $text_right;?></div>                                                        
-                        </div>               
+                        
                     </div>
                 </div>
                 
             </div>
         </div>
     </section>
+    <script>
+        
+         $(".awesome_<?php  echo $key; ?> .shape-trapezoid").mouseenter(function() { 
+            $("<?php echo '.awesome_' .  $key; ?>").addClass('left-expand');
+         });
+         $(".awesome_<?php  echo $key; ?> .shape-trapezoid").mouseleave(function() { 
+            $("<?php echo '.awesome_' .  $key; ?>").removeClass('left-expand');
+         });
+         $(".awesome_<?php  echo $key; ?> .shape-trapezoid-inv").mouseenter(function() { 
+            $("<?php echo '.awesome_' .  $key; ?>").addClass('right-expand');
+         });
+         $(".awesome_<?php  echo $key; ?> .shape-trapezoid-inv").mouseleave(function() { 
+            $("<?php echo '.awesome_' .  $key; ?>").removeClass('right-expand');
+         });
+    </script>
