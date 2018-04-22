@@ -53,14 +53,14 @@ function wc_before_add_to_cart_size_details() {
            $('.modal-product-details.product').append($('#wc_size_details').show());
            $('.modal-product-details.product .images').hide();
            $('.modal-header .fa.fa-arrow-alt-circle-left').show();
-           $('.modal-header #modal-title').text("Size and Details");
+           $('.modal-header #modal-title').text("サイズ & アイテム詳細");
        });
        
        $('.modal-header .fa.fa-arrow-alt-circle-left').click(function() {
             if(window.second_sizing_guide) {                
                 $('.modal-product-details.product #wc_size_details').show();
                 $('.modal-product-details.product #wc_size_guide').hide();
-                $('.modal-header #modal-title').text("Size and Details");
+                $('.modal-header #modal-title').text("サイズ & アイテム詳細");
                 window.second_sizing_guide = false;
             } else {
                 $(this).hide();

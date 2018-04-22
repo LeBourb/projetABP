@@ -1158,7 +1158,7 @@ if ( ! function_exists( 'mail_new_user_confirm_email' ) ) {
               </tr>
               
                 <tr>
-                    <td align="center" style="padding:20px 0 15px">
+                    <td align="left" style="padding:20px 0 15px">
                         <p>※URLのクリックにて登録認証されるまではお手続きが完了しませんので、ご注意ください。
 <p>※本メールに関してお心当たりがない場合、または何かご不明な点がございましたら、恐れ入りますがその旨をご記入のうえ<a href="mailto:contact@atelierbourgeons.com">contact@atelierbourgeons.com</a>までお問い合わせください。</p>
 <p>※本メールは、会員登録申請の際にご入力いただいたメールアドレスへ自動送信しています。</p>
@@ -1225,7 +1225,7 @@ if ( ! function_exists( 'mail_new_user_checking' ) ) {
                 </td>
               </tr>
               <tr>
-                    <td align="center" style="padding:20px 0 15px">
+                    <td align="left" style="padding:20px 0 15px">
                         <p>※本メールは、会員登録申請の際にご入力いただいたメールアドレスへ自動送信しています。</p>
 <p>※ビジネス会員の登録については、当方がお客様のご登録内容を確認後、認証完了のメールをお送りした時点で会員登録完了となります。ご登録内容によっては、稀にご希望に添えない場合がございます。</p>
 <p>※ ご登録内容の確認には、数日かかる場合がございます。</p>

@@ -57,10 +57,17 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
         font-family: "Times New Roman", Times, serif;
         color: black;
         font-size: 21px;
+        /*text-align: start;
+        margin-left: 50%;*/
     }
     
     #intro row {
         display: flex;
+    }
+    
+    #intro .welcome-text {
+       /* writing-mode: vertical-lr;
+        text-orientation: upright; */
     }
     
     #detail .asset-item {
@@ -74,6 +81,10 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
         bottom: 0;
         left: 0;
         right: 0;
+    }
+    
+    #register #progressbar {
+        margin-top: 0;
     }
 </style>
 <section id="intro" class="parallax-section">
@@ -94,12 +105,12 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 		<div class="row">
 
 			<div class="col-md-12 col-sm-12">
-				<h3 class="wow" data-wow-delay="0.9s" >
-                                    <h4>－外身も中身も、かっこよく。－</h4> 
-                                    <h4>デザインとものづくりの背景</h4>
+				<div class="wow welcome-text" data-wow-delay="0.9s" >
+                                    <h4 style="margin-left: 0;">atelier Bourgeons アトリエブルジョン。</h4>
                                     <h4>両方からお洒落するレディースブランド</h4>
-                                    <h4>atelier Bourgeons アトリエブルジョン。</h4>
-                                </h3><!--h1 class="wow fadeInUp" data-wow-delay="1.6s"><?php //echo get_post_meta( $post->ID , 'Home Page Title', true ); ?></h1-->
+                                    <h4>デザインとものづくりの背景</h4>
+                                    <h4>－外身も中身も、かっこよく。－</h4>              
+                                </div><!--h1 class="wow fadeInUp" data-wow-delay="1.6s"><?php //echo get_post_meta( $post->ID , 'Home Page Title', true ); ?></h1-->
 				<a href="#overview" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s"><?php _e('LEARN MORE','atelierbourgeons') ?></a>
 				<a href="#register" class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s"><?php _e('REGISTER NOW','atelierbourgeons') ?></a>
 			</div>
@@ -314,17 +325,14 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 	<div class="container">
 		<div class="row">
 
-			<div class="wow fadeInUp col-md-7 col-sm-7" data-wow-delay="0.6s">
-				<h2><?php echo get_post_meta( $post->ID , 'Register Title', true ); ?></h2>
-				<h3><?php echo get_post_meta( $post->ID , 'Register Sub Title', true ); ?></h3>
-				<p><?php echo get_post_meta( $post->ID , 'Register Description', true ); ?></p>
+			<div class="wow fadeInUp col-md-5 col-sm-5" data-wow-delay="0.6s">
+				<h3 style="font-weight: 0;">今すぐ会員登録！</h3>				
+				<h5>このサイトのネットショッピングは、会員登録制です。こちらの登録フォームから簡単＆無料で登録できます。</h5>
+                                <h5>プライバシーポリシー</h5>
 			</div>
 
-			<div class="wow fadeInUp col-md-5 col-sm-5" data-wow-delay="1s">
+			<div class="wow fadeInUp col-md-7 col-sm-7" data-wow-delay="1s">
                             <div class="steps" id="steps">
-			<span class="step_nb"></span>
-			<p class="form_title">Please Fill The field Bellow</p>
-				
                                     <?php
 		
 		//nm_wpregistration_register_url

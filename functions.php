@@ -153,40 +153,42 @@ function bbloomer_add_name_woo_account_registration() {
     <div class="clear"></div>
  
     <p class="form-row form-row-wide">
-    <label for="reg_billing_company"><?php _e( 'Shop Name', 'woocommerce' ); ?> <span class="required">*</span></label>
+    <label for="reg_billing_company"><?php _e( '運営されている店舗の名前', 'woocommerce' ); ?> <span class="required">*</span></label>
     <input type="text" class="input-text" name="billing_company" id="reg_billing_company" value="<?php if ( ! empty( $_POST['billing_company'] ) ) esc_attr_e( $_POST['billing_company'] ); ?>" required/>
     </p>
     
     <p class="form-row form-row-wide">
-    <label for="reg_url"><?php _e( 'Shop Web Site', 'woocommerce' ); ?></label>
+    <label for="reg_url"><?php _e( '店舗ウェブサイト', 'woocommerce' ); ?></label>
     <input type="text" class="input-text" name="url" id="reg_url" value="<?php if ( ! empty( $_POST['url'] ) ) esc_attr_e( $_POST['url'] ); ?>" />
     </p>
     
     <p class="form-row form-row-wide">
-    <label for="reg_billing_address_1"><?php _e( 'Shop Address 1', 'woocommerce' ); ?> <span class="required">*</span></label>
+    <label for="reg_billing_address_1"><?php _e( '店舗の住所１', 'woocommerce' ); ?> <span class="required">*</span></label>
+    <i>（ネットショップのみで実店舗がない場合は、代表者様の居住地）</i>
+
     <input type="text" class="input-text" name="billing_address_1" id="reg_billing_address_1" value="<?php if ( ! empty( $_POST['billing_address_1'] ) ) esc_attr_e( $_POST['billing_address_1'] ); ?>" required/>
     </p>
     
     <p class="form-row form-row-wide">
-    <label for="reg_billing_address_1"><?php _e( 'Shop Address 2', 'woocommerce' ); ?></label>
+    <label for="reg_billing_address_1"><?php _e( '店舗の住所２', 'woocommerce' ); ?></label>
     <input type="text" class="input-text" name="billing_address_2" id="reg_billing_address_2" value="<?php if ( ! empty( $_POST['billing_address_2'] ) ) esc_attr_e( $_POST['billing_address_2'] ); ?>" required/>
     </p>
     
     <p class="form-row form-row-wide">
-    <label for="reg_billing_city"><?php _e( 'Shop City', 'woocommerce' ); ?> <span class="required">*</span></label>
+    <label for="reg_billing_city"><?php _e( '都道府県', 'woocommerce' ); ?> <span class="required">*</span></label>
     <input type="text" class="input-text" name="billing_city" id="reg_billing_address_2" value="<?php if ( ! empty( $_POST['billing_city'] ) ) esc_attr_e( $_POST['billing_city'] ); ?>" required/>
     </p>
     
     
     <p class="form-row form-row-wide">
-    <label for="reg_billing_postcode"><?php _e( 'Shop ZIP Code', 'woocommerce' ); ?> <span class="required">*</span></label>
+    <label for="reg_billing_postcode"><?php _e( '郵便番号', 'woocommerce' ); ?> <span class="required">*</span></label>
     <input type="text" class="input-text" name="billing_postcode" id="reg_billing_postcode" value="<?php if ( ! empty( $_POST['billing_postcode'] ) ) esc_attr_e( $_POST['billing_postcode'] ); ?>" required/>
     </p>
     
     
     <p class="form-row form-row-wide">
-    <label ><?php _e( 'Shop Country', 'woocommerce' ); ?></label>
-    <label >Japan</label>
+    <label ><?php _e( '国', 'woocommerce' ); ?></label>
+    <label >日本</label>
     </p>
     <?php
 }
@@ -754,7 +756,7 @@ function atelierbourgeons_new_user_approved( $user ) {
                 </td>
               </tr>
             <tr>
-            <td align="center" style="padding:20px 0 15px">
+            <td align="left" style="padding:20px 0 15px">
             ※本メールに関してお心当たりがない場合、または何かご不明点がございましたら、恐れ入りますがその旨をご記入のうえ<a href="mailto:contact@atelierbourgeons.com">contact@atelierbourgeons.com</a>までお問い合わせください。
             </td>
             </tr>

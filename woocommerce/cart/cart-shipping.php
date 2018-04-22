@@ -24,17 +24,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $free_shipping = null;
 foreach($available_methods as $available_method) {
-    //$method_id = $available_method->__get('method_id');
-    //if($method_id == 'free_shipping')
-        //$free_shipping = $available_method;
-    //
+    $method_id = $available_method->__get('method_id');
+    if($method_id == 'free_shipping')
+        $free_shipping = $available_method;
+    
 }
 if($free_shipping) {
-    //$available_methods = array( 'free_shipping:1' => $free_shipping);
-    //WC()->session->set( 'chosen_shipping_methods', $free_shipping->id );
-    WC()->session->cleanup_sessions( );
+    $available_methods = array( 'free_shipping:1' => $free_shipping);
+    $chosen_methods = array();
+    $chosen_methods[] = 'free_shipping:1';
+    WC()->session->set( 'chosen_shipping_methods', $chosen_methods );    
 }
-WC()->session->cleanup_sessions( );
+
 ?>
 <tr class="shipping">
 	<th><?php echo wp_kses_post( $package_name ); ?></th>
