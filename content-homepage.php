@@ -178,9 +178,9 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
                                     <img style="width: 1em;" src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/icon/secure-payment.png"></img>
                                 </i>    
                                 <h5>安全&快適なネットショッピング</h5>
-                                <h4>PLIVACY PROTECTION & PAIEMENT SECULITY</h4>
-                                <p>当店は「SSL」というセキュリティー技術を採用しているため、注文時に入力される全ての個人情報は暗号化され、安全に送信されます。また当店利用のオンライン決済サービスStripeは、 カード業界の国際安全基準「Payment Card Industry Data Security Standard」 で最も安全なLevel 1を取得。 安心してお買い物をお楽しみください。</p>
-                                <a href="<?php echo $help_url; ?>/#security" class="btn btn-lg btn-default" data-wow-delay="2.3s" style="visibility: visible; font-size: 0.8em;">プライバシーポリシー</a>
+                                <h4>PRIVACY POLICY & SECURE PAIEMENT</h4>
+                                <p>本サイトは「SSL」というセキュリティー技術を採用しており、注文時に入力される全ての個人情報は暗号化によって安全に送信されます。また、当店利用のオンライン決済サービスStripeは、 カード業界の国際安全基準 (PCI DSS) で最も安全な「Level 1」を取得しています。 安心してお買い物をお楽しみください。</p>
+                                <a href="<?php echo get_permalink(get_option('woocommerce_shopping_privacy_policy_id')); ?>" class="btn btn-lg btn-default" data-wow-delay="2.3s" style="visibility: visible; font-size: 0.8em;">プライバシーポリシー</a>
 			</div>
                     
                         <div class="wow fadeInRight col-xs-6 col-sm-3 col-md-3 col-lg-3" data-wow-delay="0.9s">				
@@ -189,18 +189,18 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
                                 </i>   
                                 <h5>最初に全額払わなくてもOK！状況に応じて選べるお支払い方法</h5>
 				<h4>FLEXIBILITY OF PAYMENT</h4>
-				<p>商品をご予約いただく際に、「全額前払い」「分割２回払い」のいずれかをご指定いただけます。お支払い方法は「クレジットカード払い」または「銀行振込」からお選びいただけるほか、分割２回払いをご希望の場合は初回に「クレジットカード払い」、残額の支払いを「銀行振込」など、その都度お支払い方法が変更可能です。</p>
-                                <a href="<?php echo $help_url;?>/#payment" class="btn btn-lg btn-default"  style="visibility: visible; font-size: 0.8em;">ご利用ガイド</a>
+				<p>商品をご予約いただく際に、「全額前払い」「分割２回払い」のいずれかをご指定いただけます。お支払い方法は、「クレジットカード払い」または「銀行振込」からお選びいただけ、分割払いの際は、その都度お支払い方法が変更可能です。</p>
+                                <a href="<?php echo get_permalink(get_option('woocommerce_shopping_guide_page_id')); ?>" class="btn btn-lg btn-default"  style="visibility: visible; font-size: 0.8em;">ご利用ガイド</a>
 			</div>   
                         <div class="clearfix visible-xs"></div>
                         <div class="wow fadeInRight col-xs-6 col-sm-3 col-md-3 col-lg-3" data-wow-delay="0.9s">				
                                 <i class="fa">
                                     <img style="width: 1em;" src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/icon/deposit.png"></img>
                                 </i>   
-                                <h5>予約注文限定の特別価格で、通常よりも30%おトクに。</h5>
+                                <h5>予約注文限定の特別価格で、通常よりもおトクに。</h5>
 				<h4>ADVANTAGE OF PRE-ORDER</h4>
 				<p>予めご注文をいただき、必要な枚数だけ無駄なく生産すれば、コストの削減に繋がります。浮いたコストの分だけ価格を下げ、予約注文だけの「特別価格」で商品を提供できのです。</p>
-                                <a href="<?php echo $help_url;?>/#tracking" class="btn btn-lg btn-default" style="visibility: visible; font-size: 0.8em;">商品ページ</a>
+                                <!--a href="<?php //echo $help_url;?>/#tracking" class="btn btn-lg btn-default" style="visibility: visible; font-size: 0.8em;">商品ページ</a-->
 			</div>                    
 			<div class="wow fadeInRight col-xs-6 col-sm-3 col-md-3 col-lg-3" data-wow-delay="0.9s">
 				<i class="fa">
@@ -209,7 +209,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 				<h5>事業者様には、一枚から卸売価格でご提供。</h5>
 				<h4>No MINUMUM ORDER FOR B to B SALES</h4>
 				<p>事業者（小売業・ブティック等）のお客様は、当サイトにご登録後、卸価格で商品をお求めいただけます。一枚から購入可能なので、簡単・気軽にネットでの買い付けをお試しいただけます。</p>
-                                <a href="<?php echo $help_url;?>/#order" class="btn btn-lg btn-default" style="visibility: visible; font-size: 0.8em;"> 事業者向け登録フォーム</a>
+                                <a href="<?php echo Theme_My_Login::get_page_link( 'register' ); ?>/#shop-account" class="btn btn-lg btn-default" style="visibility: visible; font-size: 0.8em;">ビジネス会員登録フォーム</a>
 			</div>
                         <div class="clearfix visible-xs"></div>
                         <div class="clearfix visible-sm"></div>

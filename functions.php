@@ -307,10 +307,10 @@ function theme_enqueue_styles() {
     wp_enqueue_style( 'font-awesome-style', get_template_directory_uri() . '/assets/css/font-awesome.min.css' , array(), 'v1.2');
     wp_enqueue_style( 'owl-theme-style', get_template_directory_uri() . '/assets/css/owl.theme.min.css' , array(), 'v1.2');
     wp_enqueue_style( 'owl-carousel-style', get_template_directory_uri() . '/assets/css/owl.carousel.min.css' , array(), 'v.1.2');
-    wp_enqueue_style( 'homepage-style', get_template_directory_uri() . '/assets/css/homepage.css' , array(), filemtime( getcwd() .  '/wp-content/themes/atelierbourgeonspro//assets/css/homepage.css' ));
+    wp_enqueue_style( 'homepage-style', get_template_directory_uri() . '/assets/css/homepage.css' , array(), filemtime( getcwd() .  '/wp-content/themes/atelierbourgeonspro/assets/css/homepage.css' ));
     wp_enqueue_style( 'timeline-style', get_template_directory_uri() . '/assets/css/timeline.min.css' , array(), 'v1.2');
     wp_enqueue_style( 'project-gmap-style', get_template_directory_uri() . '/assets/css/project-gmap.min.css' , array(), 'v1.2');
-    wp_enqueue_style( 'main-style', get_template_directory_uri() . '/assets/css/style.min.css' , array(), filemtime( getcwd() .  '/wp-content/themes/atelierbourgeonspro//assets/css/style.min.css' ));
+    wp_enqueue_style( 'main-style', get_template_directory_uri() . '/assets/css/style.min.css' , array(), filemtime( getcwd() .  '/wp-content/themes/atelierbourgeonspro/assets/css/style.min.css' ));
     wp_enqueue_style( 'viewer-style', get_template_directory_uri() . '/assets/css/viewer.min.css' , array(), 'v1.2');
     wp_enqueue_style( 'popup-style', get_template_directory_uri() . '/assets/css/popup.min.css' , array(), 'v1.2');
     
@@ -328,7 +328,8 @@ function theme_enqueue_styles() {
     wp_enqueue_script( 'canvas-script', get_template_directory_uri() . '/assets/js/canvas.min.js', array(), 'v1.2' );
     wp_enqueue_script( 'sly-script', get_template_directory_uri() . '/assets/js/sly.min.js', array(), 'v1.2' );
     wp_enqueue_script( 'viewer-script', get_template_directory_uri() . '/assets/js/viewer.min.js', array(), 'v1.2' );
-    wp_enqueue_script( 'popup-style', get_template_directory_uri() . '/assets/js/simplepopup.min.js', array(), 'v1.2' );
+    wp_enqueue_script( 'popup-script', get_template_directory_uri() . '/assets/js/simplepopup.min.js', array(), 'v1.2' );
+    wp_enqueue_script( 'img-lazy-load-script', get_template_directory_uri() . '/assets/js/img-lazy-loading.js', array(), filemtime( getcwd() .  '/wp-content/themes/atelierbourgeonspro/assets/js/img-lazy-loading.js' ) );
     //wp_enqueue_script( 'project-gmap-infobox-script', get_template_directory_uri() . '/assets/js/project-gmap-infobox.min.js', array(), 'v1.2' );
     //wp_enqueue_script( 'project-gmap-script', get_template_directory_uri() . '/assets/js/project-gmap.min.js', array(), 'v1.2' );
     

@@ -23,12 +23,12 @@
 </head>
     <?php
 include('navbar.php');
-$featured_image = get_the_post_thumbnail_url( get_the_ID() );
-
+$featured_image = get_the_post_thumbnail_url( get_the_ID() , 'large' );
+$image_full_attachment =  get_the_post_thumbnail_url( get_the_ID() , 'full' );
 ?>
 
 	
-		<main id="main" class="site-main" role="main" style="background:url(<?php echo $featured_image;?>) no-repeat center fixed; background-size: cover; height: 100%;
+		<main id="main" class="site-main img-lazy-load" data-full-src="<?php echo $image_full_attachment; ?>"  role="main" style="background:url(<?php echo $featured_image;?>) no-repeat center fixed; background-size: cover; height: 100%;
     margin: 0; position:relative; z-index:0;">
 
 			<?php while ( have_posts() ) : the_post();

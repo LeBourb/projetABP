@@ -132,7 +132,7 @@ footer .address .phone {
     font-weight: bold;
 }
           
-.fa:before {
+footer .fa:before {
     margin-right: 1em;
 }
             
