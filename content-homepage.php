@@ -86,6 +86,79 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
     #register #progressbar {
         margin-top: 0;
     }
+    
+    #intro .container {
+        width: 100%;
+    }
+    
+    @font-face {
+        font-family: TestFont;
+        src: url(<?php echo get_site_url() . '/wp-content/themes/atelierbourgeonspro/assets/fonts/AppliMincho.otf'?>);
+        
+    }
+    
+    #intro .container ,
+    #intro .container .row,    
+    #intro .container .row .col-md-12 ,
+    #intro .container .row .col-md-12 .welcome-text-container , 
+    #intro .container .row .col-md-12 .welcome-text-container .welcome-text ,
+    #intro .container .row .col-md-12 .welcome-text-container .welcome-text .desc-wider {
+        height: 100%;
+    }
+    
+    #intro .container p , 
+    #intro .container span {
+        color: black; 
+        background: #ffffff61;
+        font-family: TestFont;
+    }
+    
+    #intro .container p {
+        line-height: 2;
+        font-size: 2em;
+        writing-mode: vertical-lr;
+        color: #16170a;                
+    }
+    #intro .container span {
+        font-size: 1.4em;
+        writing-mode: vertical-lr;
+        line-height: 1;
+        letter-spacing: 6px;
+        color: #16170a;
+    }
+    @media (min-width: 1200px) {
+
+#intro .container p.desc-left{
+    margin-left: 2em;
+    height: 100%;
+}
+#intro .container p.desc-wider{
+    line-height: 7;
+}
+    }
+   @media (max-width: 750px) {
+#intro .container{
+    width: 100%;
+}
+#intro .container p.desc-wider{
+    line-height: 3;
+    font-size: 1.4em;
+}
+#intro .container span{
+    font-size: 1.1em;
+}
+#intro .container .welcome-buttons {
+    display:none;
+}
+}
+
+#pro .btn {
+    margin-left: auto;
+    width: 26em;
+    display: block;
+    margin-right: auto;
+    white-space: normal;
+}
 </style>
 <section id="intro" class="parallax-section">
      <?php // echo wp_video_shortcode( array() );//
@@ -105,14 +178,28 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 		<div class="row">
 
 			<div class="col-md-12 col-sm-12">
-				<div class="wow welcome-text" data-wow-delay="0.9s" >
-                                    <h4 style="margin-left: 0;">atelier Bourgeons アトリエブルジョン。</h4>
-                                    <h4>両方からお洒落するレディースブランド</h4>
-                                    <h4>デザインとものづくりの背景</h4>
-                                    <h4>－外身も中身も、かっこよく。－</h4>              
-                                </div><!--h1 class="wow fadeInUp" data-wow-delay="1.6s"><?php //echo get_post_meta( $post->ID , 'Home Page Title', true ); ?></h1-->
-				<a href="#overview" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s"><?php _e('LEARN MORE','atelierbourgeons') ?></a>
+				<div class="wow welcome-text-container" data-wow-delay="0.9s" style="display: flex;" >                                       
+                                    <div class="welcome-text" style="display:flex;position:  absolute;left: 0;">
+                                    <p class="desc-left" style="">
+							アトリエブルジョン。
+                                    </p>                    <span>atelier Bourgeons</span>
+                                    <p class="desc-wider">両方からお洒落するレディースブランド<br>
+                                    </p>
+                                    </div>
+                                    <div class="welcome-text" style="padding-top: 20%;
+    width: 39%;
+    margin-left: auto;
+    margin-right: auto;"> <a href="#overview" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s"><?php _e('LEARN MORE','atelierbourgeons') ?></a>
 				<a href="#register" class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s"><?php _e('REGISTER NOW','atelierbourgeons') ?></a>
+                                </div>
+                                    <div class="welcome-text welcome-buttons" style="position: absolute;right: 0;overflow: hidden;">
+                                    <p class="desc-wider">「デザイン」 と 「ものづくりの背景」
+                                    <br>                                    
+                                    －外身も中身も、かっこよく。－
+                                    		</p>
+                                        </div>
+                                </div><!--h1 class="wow fadeInUp" data-wow-delay="1.6s"><?php //echo get_post_meta( $post->ID , 'Home Page Title', true ); ?></h1-->
+				
 			</div>
 
 
@@ -231,7 +318,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 				<h4>FLEXIBILITY OF PAYMENT</h4>
 				<p>商品をご予約いただく際に、「全額前払い」「分割２回払い」のいずれかをご指定いただけます。お支払い方法は、「クレジットカード払い」または「銀行振込」からお選びいただけ、分割払いの際は、その都度お支払い方法が変更可能です。</p>
                                 <div class="bottom-line">
-                                    <a href="<?php echo get_permalink(get_option('woocommerce_privacy_policy_page_id')); ?>" class="btn btn-lg btn-default"  style="visibility: visible; font-size: 0.8em;">ご利用ガイド</a>
+                                    <a href="<?php echo get_permalink(get_option('woocommerce_shopping_guide_page_id')); ?>" class="btn btn-lg btn-default"  style="visibility: visible; font-size: 0.8em;">ご利用ガイド</a>
                                 </div>
 			</div>   
                         <div class="clearfix visible-xs"></div>                        
@@ -445,85 +532,6 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 </section>
 
 
-<!-- =========================
-    ICONS SECTION   
-============================== -->
-<style>
-    .collection-stamp {
-        display: flex;
-        flex-wrap: wrap;
-        padding: 20px;
-        justify-content: center;
-    }
-    .stamp {
-        width: 13em;
-        margin: 1em;
-    }
-    .wrapper-eco-fabrics {
-  display: grid;
-  grid-gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
-  width: 40%;
-  min-width: 300px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
-.wrapper-eco-fabrics .header {
-    grid-column: 1 / 4;
-    grid-row: 1;
-}
-.wrapper-eco-fabrics .one {
-  grid-column: 1;
-  grid-row: 2;
-}
-.wrapper-eco-fabrics .two { 
-  grid-column: 2;
-  grid-row: 2;
-}
-.wrapper-eco-fabrics .three {
-  grid-column: 1;
-  grid-row: 3 / 5;
-}
-.wrapper-eco-fabrics .four {
-  grid-column: 2;
-  grid-row: 3;
-}
-.wrapper-eco-fabrics .five {
-  grid-column: 2;
-  grid-row: 4;
-}
-</style>
-<section id="icons" class="parallax-section">
-	<div class="icons">
-            
-	<div class="collection-stamp">
-            
-                
-                <?php $all_terms = get_terms( 'pa_stamp', apply_filters( 'woocommerce_product_attribute_terms', array(
-                        'hide_empty' => false,
-                        )  ) );
-                
-                if ( $all_terms ) {
-                    foreach ( $all_terms as $term ) { 
-                        $image_attachment_id = get_term_meta( $term->term_id, 'image_attachment_id', true);                        
-                        $image_url = wp_get_attachment_image_src( $image_attachment_id );        
-                        ?>
-                        <div class="stamp" >
-                            <div>
-                                <p><img class="aligncenter" title="JAPAN-made" src="<?php echo $image_url[0];?>"><br>
-                                    <strong><?php echo $term->name; ?></strong>
-                                </p>
-                                <p><?php echo $term->description; ?></p>
-		</div>
-                    </div>  <?php }                        
-                }                
-                ?>
-        </div>
- 
-	</div>
-</section>
 
 <!-- =========================
     VENUE SECTION   
@@ -544,6 +552,51 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 		</div>
 	</div>
 </section-->
+
+<!-- =========================
+    VIDEO SECTION   
+============================== -->
+<section id="pro" class="parallax-section">
+	<div class="container">
+		<div class="row" style="font-family: TestFont;">
+                    
+                  <!-- Section title
+			================================================== 
+                  -->
+			<div class="wow bounceIn col-md-10 col-sm-offset-1 col-sm-10 text-center" style="font-weight: 200;margin-top: 3em;">
+				<div class="section-title">
+					<h2>For Professional Buyers - 事業者（法人 & 個人）の皆様へ</h2>
+					<h3>— 卸販売のご案内 —</h3>
+				</div>
+			</div>  
+
+ 
+
+			<div class="wow fadeInUp col-md-6 col-sm-10" data-wow-delay="1.3s" >
+				<p style="text-align: center;letter-spacing: 3px;margin-bottom: 2em; 
+    font-size: 1.4em;">一枚から卸価格にてご購入可能。<br>
+フランス・パリ発のクリエーションを、<br>
+効率的にネットでバイイング。
+</p>
+				<p>atelier Bourgeons アトリエブルジョンでは、事業者（セレクトショップ等の小売業）のお客さま向けに卸販売を行なっております。
+</p><p>
+当サイトに「ビジネス会員」としてご登録いただくと、会員様のみに公開される「ビジネス会員価格（卸価格）」で商品をお求めいただけます。ミニマムオーダーがなく、一枚からご購入可能ですので、お気軽にネットでのバイイングをお試しいただけるのが利点です。簡単 & 無料で会員登録できますので、この機会にぜひご利用ください。
+</p>				
+                            <a href="<?php echo Theme_My_Login::get_page_link( 'register' ); ?>/#shop-account" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">
+                                ビジネス会員登録フォームはこちら
+                                （事業者様のみ)
+                            </a>
+
+			</div>
+			<div class="wow fadeInUp col-md-6 col-sm-10" data-wow-delay="1.6s">
+				
+					<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/homepage/apro.jpg">
+				
+			</div>
+
+		</div>
+	</div>
+</section>
 
 
 <!-- Back top -->

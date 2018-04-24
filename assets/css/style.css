@@ -127,6 +127,7 @@ footer {
 #register-box  .btn,
 #product-intro .btn,
 #checkoutpopupform .btn,
+#pro .btn,
 #contact .btn {
     background: transparent;
     border: 2px solid #ffffff;
@@ -146,6 +147,7 @@ footer {
 #register-box .btn-danger,
 #intro .btn-danger,
 #product-intro  .btn-danger,
+#pro .btn,
 #checkoutpopupform .btn-danger,
 #contact .btn-danger {
     background: #613143;
@@ -158,6 +160,7 @@ footer {
 
 #reservation .btn-danger:hover,
 #register-box .btn-danger:hover,
+#pro .btn-danger:hover,
 #intro .btn-danger:hover ,
 #modal-footer .btn-danger:hover ,
 #product-intro .btn-danger:hover {

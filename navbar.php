@@ -148,17 +148,22 @@
                                 }
                                 echo '</div>';
                                 echo '</li>';
+                                echo '<li id="btob-nav"><a>B to B SALES</a>'
+                                        . '<div class="subnavContainer" style="">'
+                                        . '<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '') . '#pro">卸販売のご案内</a>'
+                                        . '</div>'
+                                        . '</li> ';
                                 echo '<li><a class="separator">|</a></li>';
-                                $pages = get_pages(array(
-                                    'meta_key' => '_wp_page_template',
-                                    'meta_value' => 'template-help.php'
-                                )); 
-                                if(is_array($pages) && count($pages)) {                                    
-                                    echo '<li><a href="' . get_permalink(get_option('woocommerce_shopping_guide_page_id')) . '" >' . 'Help' . '</a></li>';
-                                }
+                                                                  
+                                echo '<li><a href="' . get_permalink(get_option('woocommerce_shopping_guide_page_id')) . '" >' . 'Help' . '</a></li>';
+                                
                                 if(is_user_logged_in()) {
                                     echo '<li><a href="' . get_permalink( wc_get_page_id ( 'cart' )) . '" >Cart</a></li>'; 
-                                    echo '<li><a href="' . get_permalink( wc_get_page_id ( 'myaccount' )) . 'orders/" >Your Orders</a></li>';                                            
+                                    echo '<li><a href="' . get_permalink( wc_get_page_id ( 'myaccount' )) . '" >My Account</a>'
+                                            . '<div class="subnavContainer" style="">'
+                                            . '<a href="' . get_permalink( wc_get_page_id ( 'myaccount' )) . 'orders/" >Your Orders</a>'
+                                            . '</div>'
+                                            . '</li>';
                                 }
                                 else {
                                     echo '<li><a href="' . Theme_My_Login::get_page_link( 'login' ) . '" >Login</a></li>';                                

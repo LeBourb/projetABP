@@ -43,7 +43,7 @@ function wc_before_add_to_cart_size_details() {
    
    <div id="wc_size_details" style="display:none;    margin-left: auto;
     margin-right: auto;"> 
-       <?php  if($text_guide && $text_guide != "") {?><div>See our : <a id="btn_second_size_guide" class="icon-sizing" data-featherlight="#size-guide-modal" style="cursor:pointer;"><span>Sizing Guide</span></a></div> 
+       <?php  if($text_guide && $text_guide != "") {?><div>サイズの測り方はこちら: <a id="btn_second_size_guide" class="icon-sizing" data-featherlight="#size-guide-modal" style="cursor:pointer;"><span>サイズガイド</span></a></div> 
        <?php }?>
        <div><?php echo $text; ?></div> 
    </div>
@@ -73,7 +73,7 @@ function wc_before_add_to_cart_size_details() {
        $('#btn_second_size_guide').click(function() {
             $('.modal-product-details.product').append($('#wc_size_guide').show());
             $('.modal-product-details.product #wc_size_details').hide();            
-            $('.modal-header #modal-title').text("Sizing Guide");
+            $('.modal-header #modal-title').text("サイズガイド");
             window.second_sizing_guide = true;
        });
    </script>
