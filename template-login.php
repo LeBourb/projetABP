@@ -23,8 +23,8 @@
 </head>
     <?php
 include('navbar.php');
-$featured_image = get_the_post_thumbnail_url( get_the_ID() , 'large' );
-$image_full_attachment =  get_the_post_thumbnail_url( get_the_ID() , 'full' );
+$featured_image = get_the_post_thumbnail_url( get_the_ID() , 'medium' );
+$image_full_attachment =  get_the_post_thumbnail_url( get_the_ID() , 'large' );
 ?>
 
 <style>

@@ -6,7 +6,8 @@
  * and open the template in the editor.
  */
 if(!isset($production_id)) {
-    _e('This order is not included in any production','atelierbourgeons');
+    //_e('This order is not included in any production','atelierbourgeons');
+    _e('','atelierbourgeons');
     return;
 }
     

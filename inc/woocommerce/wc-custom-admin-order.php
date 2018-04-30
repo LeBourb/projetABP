@@ -20,7 +20,7 @@ add_action( 'woocommerce_admin_order_item_headers', 'add_order_item_status_heade
 if ( ! function_exists( 'add_order_item_status_header' ) ) {
     function add_order_item_status_header()
     {
-        ?><th class="line_status" data-sort="float">Production Status</th>
+        ?><th class="line_status" data-sort="float">生産状況:</th>
         <?php
     }
 }
@@ -30,7 +30,7 @@ if ( ! function_exists( 'admin_order_item_production_status' ) ) {
     function admin_order_item_production_status($item,  $order_item ) 
     {
         ?><td class="item_status" width="1%">
-		<div class="view"> 
+		<div class="view">
 			<?php
                                //print_r($order_item->get_meta_data());
                         
@@ -38,7 +38,7 @@ if ( ! function_exists( 'admin_order_item_production_status' ) ) {
                                //$order_item->add_meta_data( 'status', 'NOT ASSOCIATED PRODUCT');
                                $production_id = $order_item->get_meta('_production_id', true);
                                if($production_id == '' ) {
-                                   echo "NO PRODUCTION";
+                                   echo "生産前（予約注文受付期間)";
                                } else {
                                    $production = get_post($production_id);                                   
                                    echo '<a href="' . get_edit_post_link($production_id) .'"><mark>' . get_post_status( $production_id) . '</mark></a>'; 

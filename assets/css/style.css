@@ -542,9 +542,20 @@ footer {
     #products .linkWrapper {
         width:  50%;
     }
-
+    
+    .navbar.navbar-fixed-top  {
+        opacity: 1;
+    }
+    
+    .custom-navbar .nav li a { 
+        color:#444;
+    }
     .navbar.navbar-fixed-top .container {
         background-color: white;        
+    }
+    
+    .navbar.navbar-fixed-top .container .site-logo svg {
+        fill: #444;
     }
 }
 /*---------------------------------------

@@ -85,13 +85,13 @@ class DC_Checkout_Terms_Conditions_Popup_Frontend {
 		if ( wc_get_page_id( 'terms' ) > 0 && apply_filters( 'woocommerce_checkout_show_terms', true ) ) { 
 			$pre_text = $this->terms_conditions_popup_pre_text;
 			if($pre_text == "") {
-				$pre_text = "I’ve read and accept the";					
+				$pre_text = "に同意します";					
 			}
 			$link_text = $this->terms_conditions_popup_link_text;
 			if($link_text == "") {
-				$link_text = "Terms & Conditions";					
+				$link_text = "利用規約";					
 			}
-			$line = $pre_text."  <a class='simple_popup_show' href='Javascript:void(0);' title=''>".$link_text."</a>"; 
+			$line = "<a class='simple_popup_show' href='Javascript:void(0);' title=''>".$link_text."</a>" . $pre_text; 
 			
 			$pop_up_button_text = "Agree";
 			$pop_up_width = "80%";

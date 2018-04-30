@@ -14,7 +14,9 @@ $( window ).load(function() {
             that.css({
                 "background-image" : "url(" + $(this).attr('src') + ")"
             });
-            console.log('change img:' + that);
+            if (that.attr('src') !== '') {
+                that.attr('src',$(this).attr('src'));
+            }
         });
         idx++;
     });

@@ -42,6 +42,9 @@ if ( ! class_exists( 'Storefront_WooCommerce' ) ) :
 
 			add_action( 'after_switch_theme',                       array( $this, 'set_storefront_style_theme_mods' ) );
 			add_action( 'customize_save_after',                     array( $this, 'set_storefront_style_theme_mods' ) );
+                        
+                        add_filter( 'woocommerce_payment_gateways',  array( $this,'payment_gateways' ));
+
 		}
 
 		/**
@@ -143,6 +146,11 @@ if ( ! class_exists( 'Storefront_WooCommerce' ) ) :
 
 			return $args;
 		}
+                
+                public function payment_gateways( $load_gateways ) {
+                    $load_gateways[] = 'WC_Gateway_BACS_JP';
+                    return $load_gateways;
+                }
 
 		/**
 		 * Product gallery thumnail columns

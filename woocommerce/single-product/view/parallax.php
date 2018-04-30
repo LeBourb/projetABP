@@ -9,7 +9,7 @@
 ?>
 <style>
         .awesome_<?php echo $key;?> {
-            background: url(<?php echo wp_get_attachment_image_src( $item['media_id'], 'large')[0]; ?>) 50% 0 repeat-y fixed;
+            background: url(<?php echo wp_get_attachment_image_src( $item['media_id'], 'medium')[0]; ?>) 50% 0 repeat-y fixed;
             -webkit-background-size: cover;
             background-size: cover;
             color: #ffffff;
@@ -46,8 +46,16 @@
         .awesome_<?php echo $key;?> p {
             color: <?php if($text_color=="white") echo "white"; else echo "black"; ?>
         }
+        
+        @media (max-width: 768px) {
+            .awesome_<?php echo $key;?> .container {
+               /* background-color: white;
+                opacity: 0.85; */
+                padding: 2em;
+            }
+        }
 </style>
-<section id="<?php echo strtolower(str_replace(' ', '', $title));?>" class="parallax-section <?php echo 'awesome_' .  $key; ?> img-lazy-load" data-full-src="<?php echo wp_get_attachment_image_src( $item['media_id'], 'full')[0];?>">
+<section id="<?php echo strtolower(str_replace(' ', '', $title));?>" class="parallax-section <?php echo 'awesome_' .  $key; ?> img-lazy-load" data-full-src="<?php echo wp_get_attachment_image_src( $item['media_id'], 'large')[0];?>">
     <div class="container">
         <div class="row">
             <div class="col-md-4 <?php if($text_pos=="left") echo "col-md-offset-1"; else echo "col-md-offset-7"; ?>">            

@@ -917,8 +917,72 @@ if ( ! function_exists( 'storefront_primary_navigation_wrapper_close' ) ) {
 
 if ( ! function_exists( 'atelierbourgeons_html_email_template_header' ) ) {
     function atelierbourgeons_html_email_template_header($title) {
-        $header_email = '<html style=""><head><meta name="viewport" content="width=device-width, initial-scale=1">
-            <head/>
+        $header_email = '<html style="">
+            <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0 ">
+                <meta name="format-detection" content="telephone=no">
+                <style type="text/css" class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -1.84615s;">
+                    path,ellipse,circle,rect,polygon,polyline,line { stroke-width: 0; }@keyframes ld-breath {
+                    0% {
+                      -webkit-transform: scale(0.86);
+                      transform: scale(0.86);
+                    }
+                    50% {
+                      -webkit-transform: scale(1.06);
+                      transform: scale(1.06);
+                    }
+                    100% {
+                      -webkit-transform: scale(0.86);
+                      transform: scale(0.86);
+                    }
+                  }
+                  @-webkit-keyframes ld-breath {
+                    0% {
+                      -webkit-transform: scale(0.86);
+                      transform: scale(0.86);
+                    }
+                    50% {
+                      -webkit-transform: scale(1.06);
+                      transform: scale(1.06);
+                    }
+                    100% {
+                      -webkit-transform: scale(0.86);
+                      transform: scale(0.86);
+                    }
+                  }
+                  .ld.ld-breath {
+                    -webkit-animation: ld-breath 1s infinite;
+                    animation: ld-breath 1s infinite;
+                  }
+                   #Logo_Top {
+            position: absolute;
+            width: 50%;
+            z-index: 2000;
+            height: 101%;
+            top: -28%;
+            left: 25%;
+            right: 25%;
+            bottom: 25%;
+        }
+        #Logo_Bottom {
+            position: absolute;
+            width: 50%;
+            z-index: 2000;
+            /* height: 50%; */
+            top: 58%;
+            left: 25%;
+        }
+                </style>
+                <style type="text/css" class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -4.8s;">
+                    .st0{
+                        fill:none;
+                        stroke:#333333;
+                        stroke-width:8;
+                        stroke-miterlimit:10;
+                    }.st1{fill:#333333;} .st2{fill-rule:evenodd;clip-rule:evenodd;fill:#B3B3B3;} .st3{fill:#FFFFFF;} .st4{fill:#B3B3B3;} .st5{fill:#77A4BD;} .st6{fill:#A0C8D7;} .st7{fill:#ABBD81;} .st8{fill:#E15B64;} .st9{fill:#666666;} .st10{fill:none;stroke:#F47E60;stroke-width:8;stroke-linecap:round;stroke-miterlimit:10;} .st11{fill:none;stroke:#F47E60;stroke-width:9.0001;stroke-linecap:round;stroke-miterlimit:10;} .st12{fill:none;stroke:#F47E60;stroke-width:9;stroke-linecap:round;stroke-miterlimit:10;}</style>
+            </head>
             <body>
 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse!important">
   <tbody><tr>
@@ -1049,50 +1113,26 @@ if ( ! function_exists( 'svg_spinner_email' ) ) {
 
 if ( ! function_exists( 'svg_valid_email' ) ) {
     function svg_valid_email() {
-        return '<svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="20 20 60 60" style="width: 42%; transform-origin: 50px 50px 0px;" xml:space="preserve"><g style="transform-origin: 50px 50px 0px; transform: scale(0.6);"><g style="transform-origin: 50px 50px 0px;"><style type="text/css" class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -4.8s;">.st0{fill:none;stroke:#333333;stroke-width:8;stroke-miterlimit:10;} .st1{fill:#333333;} .st2{fill-rule:evenodd;clip-rule:evenodd;fill:#B3B3B3;} .st3{fill:#FFFFFF;} .st4{fill:#B3B3B3;} .st5{fill:#77A4BD;} .st6{fill:#A0C8D7;} .st7{fill:#ABBD81;} .st8{fill:#E15B64;} .st9{fill:#666666;} .st10{fill:none;stroke:#F47E60;stroke-width:8;stroke-linecap:round;stroke-miterlimit:10;} .st11{fill:none;stroke:#F47E60;stroke-width:9.0001;stroke-linecap:round;stroke-miterlimit:10;} .st12{fill:none;stroke:#F47E60;stroke-width:9;stroke-linecap:round;stroke-miterlimit:10;}</style><g class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -4.43077s;"><path class="st0" d="M45.7,10.2L17.6,26.4c-2.7,1.5-4.3,4.4-4.3,7.4v32.4c0,3.1,1.6,5.9,4.3,7.4l28.1,16.2c2.7,1.5,5.9,1.5,8.6,0 l28.1-16.2c2.7-1.5,4.3-4.4,4.3-7.4V33.8c0-3.1-1.6-5.9-4.3-7.4L54.3,10.2C51.6,8.6,48.4,8.6,45.7,10.2z" stroke="#030303" style="stroke: rgb(3, 3, 3);"></path></g><g style="transform-origin: 50px 50px 0px;"><g class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -4.06154s;"><path class="st7" d="M47.3,68.4L73.7,42c1.8-1.8,1.8-4.6,0-6.4c-1.8-1.8-4.6-1.8-6.4,0L44.1,58.8L32.7,47.4c-1.8-1.8-4.6-1.8-6.4,0 c-1.8,1.8-1.8,4.6,0,6.4l14.6,14.6c0.9,0.9,2,1.3,3.2,1.3S46.4,69.2,47.3,68.4z" fill="#d39182" style="fill: rgb(211, 145, 130);"></path></g></g><metadata xmlns:d="https://loading.io/stock/" class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -3.69231s;">
+        return '<svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="20 20 60 60" style="width: 42%; transform-origin: 50px 50px 0px;" xml:space="preserve"><g style="transform-origin: 50px 50px 0px; transform: scale(0.6);"><g style="transform-origin: 50px 50px 0px;"><g class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -4.43077s;"><path class="st0" d="M45.7,10.2L17.6,26.4c-2.7,1.5-4.3,4.4-4.3,7.4v32.4c0,3.1,1.6,5.9,4.3,7.4l28.1,16.2c2.7,1.5,5.9,1.5,8.6,0 l28.1-16.2c2.7-1.5,4.3-4.4,4.3-7.4V33.8c0-3.1-1.6-5.9-4.3-7.4L54.3,10.2C51.6,8.6,48.4,8.6,45.7,10.2z" stroke="#030303" style="stroke: rgb(3, 3, 3);"></path></g><g style="transform-origin: 50px 50px 0px;"><g class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -4.06154s;"><path class="st7" d="M47.3,68.4L73.7,42c1.8-1.8,1.8-4.6,0-6.4c-1.8-1.8-4.6-1.8-6.4,0L44.1,58.8L32.7,47.4c-1.8-1.8-4.6-1.8-6.4,0 c-1.8,1.8-1.8,4.6,0,6.4l14.6,14.6c0.9,0.9,2,1.3,3.2,1.3S46.4,69.2,47.3,68.4z" fill="#d39182" style="fill: rgb(211, 145, 130);"></path></g></g><metadata xmlns:d="https://loading.io/stock/" class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -3.69231s;">
 <d:name class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -3.32308s;">ok</d:name>
 <d:tags class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -2.95385s;">ok,confirm,ready,positive,check,right,correct,affirmative,success,hexagon,form</d:tags>
 <d:license class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -2.58462s;">cc-by</d:license>
 <d:slug class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -2.21538s;">mz1tp2</d:slug>
-</metadata></g></g><style type="text/css" class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -1.84615s;">path,ellipse,circle,rect,polygon,polyline,line { stroke-width: 0; }@keyframes ld-breath {
-  0% {
-    -webkit-transform: scale(0.86);
-    transform: scale(0.86);
-  }
-  50% {
-    -webkit-transform: scale(1.06);
-    transform: scale(1.06);
-  }
-  100% {
-    -webkit-transform: scale(0.86);
-    transform: scale(0.86);
-  }
-}
-@-webkit-keyframes ld-breath {
-  0% {
-    -webkit-transform: scale(0.86);
-    transform: scale(0.86);
-  }
-  50% {
-    -webkit-transform: scale(1.06);
-    transform: scale(1.06);
-  }
-  100% {
-    -webkit-transform: scale(0.86);
-    transform: scale(0.86);
-  }
-}
-.ld.ld-breath {
-  -webkit-animation: ld-breath 1s infinite;
-  animation: ld-breath 1s infinite;
-}
-</style></svg>';
+</metadata></g></g></svg>';
     }
 }
 
+if ( ! function_exists( 'txt_new_user_confirm_email' ) ) {
+    function txt_new_user_confirm_email($activation_url) {
+        return 'atelier Bourgeons （アトリエブルジョン）への会員登録をご申請いただき、誠にありがとうございます。下記のURLをクリックして、あなたのメールアドレスでのアクセスを有効にしてください。
+            \n\r
+             会員登録認証用URL: \n\r
+             ' . $activation_url . '\n\r';
+    }
+}
 
 if ( ! function_exists( 'mail_new_user_confirm_email' ) ) {
-    function mail_new_user_confirm_email($user) {
+    function mail_new_user_confirm_email($user, $activation_url) {
     $message = atelierbourgeons_html_email_template_header('会員登録のお申し込み、誠にありがとうございます！登録完了まであと一歩です。');
     
     global $wpdb, $current_site;
@@ -1102,23 +1142,7 @@ if ( ! function_exists( 'mail_new_user_confirm_email' ) ) {
 
     // Generate an activation key
     //$key = wp_generate_password( 20, false );
-    $code = sha1( $user->ID . time() );    
-
-    /*$wpdb->update( 
-        $wpdb->users, //table name                 
-            array( 'user_activation_key' => $code ), // string    ),                               
-            array('ID' => $user->ID)    
-        );*/
-    $wpdb->update( $wpdb->users, array( 'user_activation_key' => $code ), array( 'ID' => $user->ID ) );
-
-    // Set the activation key for the user
-    //$wpdb->update( $wpdb->users, array( 'user_activation_key' => $key ), array( 'user_login' => $user->user_login ) );
-
-   
-    // The blogname option is escaped with esc_html on the way into the database in sanitize_option
-    // we want to reverse this for the plain text arena of emails.
-    $blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-    $activation_url = add_query_arg( array( 'action' => 'confirm-email', 'key' => $code, 'user' => $user->ID), wp_login_url() );
+    
     $message .= '<tr>
     <td align="center" height="100%" valign="top" width="100%" bgcolor="#F2F5F7" style="padding:0 15px 20px" class="m_4412137695263643084mobile-padding">
       
@@ -1179,7 +1203,12 @@ if ( ! function_exists( 'mail_new_user_confirm_email' ) ) {
     }
 }
 
-
+if ( ! function_exists( 'txt_new_user_checking' ) ) {
+    function txt_new_user_checking($user) {
+        return 'この度は、atelier Bourgeons （アトリエブルジョン）の会員登録をご申請いただき、誠にありがとうございます。
+                           ビジネス会員の登録には、サイト管理者による会員認証が必要です。ご登録内容の確認後、当方より改めてメールをお送りしますので、今しばらくお待ちくださいませ。';
+    }
+}
 
 if ( ! function_exists( 'mail_new_user_checking' ) ) {
     function mail_new_user_checking($user) {

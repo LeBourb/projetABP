@@ -119,15 +119,15 @@
                                 
                                 echo '<li id="product-nav"><a href="' . (!is_front_page() ? get_home_url() : '') . '" >Home</a>'
                                         . '<div class="subnavContainer" style="">
-                                            <a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '') . '#concept">CONCEPT｜コンセプト</a>' 
-                                            . 
-                                            '<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '') . '#material">MATERIAL｜素材</a>'                                            
-                                            . 
-                                            '<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '' ). '#fabric">FABRIC｜生地</a>'
-                                            .
-                                            '<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '' ). '#sawing">SAWING｜縫製</a>' 
-                                            .
-                                            '<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '' ). '#atelier">ATELIER｜アトリエ</a>' 
+                                            <a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '') . '#overview">CONCEPT｜コンセプト</a>' 
+                                            //. 
+                                            //'<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '') . '#material">MATERIAL｜素材</a>'                                            
+                                            //. 
+                                            //'<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '' ). '#fabric">FABRIC｜生地</a>'
+                                            //.
+                                            //'<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '' ). '#sawing">SAWING｜縫製</a>' 
+                                            //.
+                                            //'<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '' ). '#atelier">ATELIER｜アトリエ</a>' 
                                             . '</div>'
                                         . '</li>';                
 
@@ -139,7 +139,7 @@
                                     'return' => 'ids',
                                     'status' => 'publish',
                                 ) );                                    
-                                echo '<li><a>Products</a>';
+                                echo '<li><a href="' . (!is_front_page() ? get_home_url() . '/' : '') . '/#products">Products</a>';
                                 $product_ids = $query->get_products();    
                                 echo '<div id="product-menu" class="subnavContainer" style="">';
                                 foreach($product_ids as $product_id) {
@@ -148,7 +148,7 @@
                                 }
                                 echo '</div>';
                                 echo '</li>';
-                                echo '<li id="btob-nav"><a>B to B SALES</a>'
+                                echo '<li id="btob-nav"><a href="' . (!is_front_page() ? get_home_url() . '/' : '') . '#pro">B to B SALES</a>'
                                         . '<div class="subnavContainer" style="">'
                                         . '<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '') . '#pro">卸販売のご案内</a>'
                                         . '</div>'

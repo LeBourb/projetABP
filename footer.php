@@ -145,7 +145,7 @@ footer .fa:before {
 
 
         </style>
-<footer class="clearfix">
+<footer class="clearfix" style="padding:0;">
     <div class="container">
         
        
@@ -153,11 +153,11 @@ footer .fa:before {
  
             <!-- Social Media Links  -->
             <div class="sm columns animated wow fadeInRight" data-wow-delay=".2s">                
-                <ul style="margin-left:12em;">
-                    <li style="text-align: left;">
+                <ul style="">
+                    <li style="text-align: right;">
                         <a class="fa fa-facebook" style="font-family:fontawesome;" href="https://www.facebook.com/atelierbourgeons/">Facebook</a>
                     </li>
-                    <li style="text-align: left;">
+                    <li style="text-align: right;">
                         <a class="fa fa-instagram" style="font-family:fontawesome;" href="https://www.instagram.com/atelier_bourgeons/">Instagram</a>
                     </li>
                 </ul>
@@ -193,7 +193,7 @@ footer .fa:before {
         </div>
         
          <!-- Copyrights  -->
-        <div class="copyright animated wow fadeInUp">            
+        <div class="copyright animated wow fadeInUp"  style="margin-top: 5em;">            
             <p>© 2018 copyright atelierbourgeons - All rights reserved</p>            
         </div>
         
