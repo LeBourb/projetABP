@@ -93,8 +93,14 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
     
     @font-face {
         font-family: TestFont;
-        src: url(<?php echo get_site_url() . '/wp-content/themes/atelierbourgeonspro/assets/fonts/AppliMincho.otf'?>);
+        /*src: url(<?php //echo get_site_url() . '/wp-content/themes/atelierbourgeonspro/assets/fonts/AppliMincho.otf'?>);*/
         
+    }
+    
+    #intro .container .row .col-md-12 .welcome-text-container {
+        width:  70%;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     #intro .container ,
@@ -102,7 +108,8 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
     #intro .container .row .col-md-12 ,
     #intro .container .row .col-md-12 .welcome-text-container , 
     #intro .container .row .col-md-12 .welcome-text-container .welcome-text ,
-    #intro .container .row .col-md-12 .welcome-text-container .welcome-text .desc-wider {
+    #intro .container .row .col-md-12 .welcome-text-container .welcome-text .desc-wider,
+    #intro .container .row .col-md-12 .welcome-text-container .welcome-text .desc-wider-right {
         height: 100%;
     }
     
@@ -126,31 +133,79 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
         letter-spacing: 6px;
         color: #16170a;
     }
+    
+    #intro .background-img {
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-origin: padding-box;
+    background-position-x: right;
+    background-position-y: top;
+    background-size: cover;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#intro .background-img::before {
+    content: "";
+    display: block;
+    height: 100%;
+    opacity: 0;
+    
+    
+}
+ #intro .container .welcome-text-right {
+        width:7em;
+    }
     @media (min-width: 1200px) {
 
 #intro .container p.desc-left{
-    margin-left: 2em;
+    margin-left: 0; /*2em;*/
+    padding-left: 1em;
     height: 100%;
 }
 #intro .container p.desc-wider{
-    line-height: 7;
+    /*line-height: 7;*/
+    padding-right: 1em;
 }
+
+        #intro .container .desc-wider-right {
+            padding-left:1em;
+            padding-right:1em;
+        }
+        
+        #intro .container .welcome-text-right {
+            width:12em;
+        }
     }
+   
    @media (max-width: 750px) {
-#intro .container{
-    width: 100%;
-}
-#intro .container p.desc-wider{
-    line-height: 3;
-    font-size: 1.4em;
-}
-#intro .container span{
-    font-size: 1.1em;
-}
-#intro .container .welcome-buttons {
-    display:none;
-}
-}
+        #intro .container{
+            width: 100%;
+        }
+        #intro .container p.desc-wider,
+        #intro .container p.desc-wider-right,
+        #intro .container p.desc-left
+        {
+            line-height: 1.9;
+            font-size: 1.4em;
+        }
+
+        #intro .container span{
+            font-size: 1.1em;
+        }
+        #intro .container .welcome-buttons {
+            /*display:none;*/
+        }
+        
+        #intro .container .welcome-text-right {
+            width: 5em;
+        }
+     
+    }
 
 #pro .btn {
     margin-left: auto;
@@ -160,6 +215,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
     white-space: normal;
 }
 </style>
+
 <section id="intro" class="parallax-section">
      <?php // echo wp_video_shortcode( array() );//
     //echo wp_get_attachment_url(  );
@@ -169,35 +225,186 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
         $video = reset($videos);
         //https://la-cascade.io/video-en-background/
  ?>
-<video id="bgvid" playsinline autoplay muted loop >
+<!--video id="bgvid" playsinline autoplay muted loop >
 
-<source src="<?php echo wp_get_attachment_url( $video->ID );?>" type="video/mp4">
-</video>  <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
+<source src="<?php //echo wp_get_attachment_url( $video->ID );?>" type="video/mp4">
+
+</video-->  <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
+  <script id='custom-homepage' type="text/javascript">
+        
+       
+
+        
+    var bgimgs  = new Array();
+    var bgFocusX = new Array();
+   var bgFocusY = new Array();
+                <?php 
+ 
+//$images = get_attached_media('image', $post->ID);
+$index = 0;
+$gallery = get_post_gallery( get_the_ID(), false );
+$images = explode ( ',',$gallery['ids']);
+
+foreach($images as $image) { 
+    
+    
+        $index++;
+   $image_attributes_medium = wp_get_attachment_image_src($image,'medium');
+   $image_attributes_large = wp_get_attachment_image_src($image,'large');
+   $image_metas_x = get_post_meta( $image, 'focus_position_x', true );//( $image->ID ); 
+   if($image_attributes_medium[0] != "") {
+        $value = 'bgimgs.push({'
+                . 'medium:"' . $image_attributes_medium[0] . '",'
+                . 'large:"' . $image_attributes_large[0] . '",'
+                . 'loaded:false'
+                . '});';
+        if($image_metas_x != "") {
+         $focus_x = "$image_metas_x%";
+        }
+        else {
+         $focus_x = 'right';
+        }
+
+        $image_metas_y = get_post_meta( $image, 'focus_position_y', true );
+        if($image_metas_y != "") {
+         $focus_y = "$image_metas_y%";
+        }
+        else {
+         $focus_y = 'center';
+        }
+
+        echo ($value);
+        echo "bgFocusX.push(\"$focus_x\");";
+        echo "bgFocusY.push(\"$focus_y\");";
+   }
+   ?>
+            
+            
+    
+					
+    <?php  } ?>
+        var idx= 0;
+        bgimgs.forEach(function(elem){            
+            $('#intro').append('<img id="img_loawQuality_' + idx + '" src="' + elem.medium + '" style="display:none;">');
+            $('#intro').append('<img id="img_highQuality_' + idx + '" src="' + elem.large + '" style="display:none;">');
+            $("#img_highQuality_" + idx).off().on("load", function() {            
+                elem.loaded = true;
+            });
+            idx++;
+        }); 
+        
+     $(window).on("load", function() {
+        var i = 0;
+    
+        
+        var changeimage = function () {            
+            var bgimg = bgimgs[i].medium;
+            if(bgimgs[i].loaded) 
+                bgimg = bgimgs[i].large;
+            
+                
+            $("#wrapper_bottom").css("opacity", 0);
+            $('#wrapper_bottom').css('background-image','url(' + bgimg + ')');         
+            $('#wrapper_bottom').css('background-position-x',bgFocusX[i]);
+            $('#wrapper_bottom').css('background-position-y',bgFocusY[i]);
+    
+    // Your function
+    // TODO: you should declare this outside of this scope
+        
+            $('#wrapper_bottom')
+                .animate({"opacity": 1}, 2000, function(){
+              //changeImage('#wrapper_top', images[i], 1);
+                //$('#wrapper_top').css('opacity',0);         
+                $('#wrapper_top').css('background-image','url(' + bgimg + ')');         
+                $('#wrapper_top').css('background-position-x',bgFocusX[i]);
+                $('#wrapper_top').css('background-position-y',bgFocusY[i]);
+                $('#wrapper_top')
+                //.animate({"opacity": 1}, 500, function(){                    
+                    if (++i >= bgimgs.length) { i = 0; } 
+                    $("#wrapper_bottom").css("opacity", 0);
+                    $('#wrapper_bottom').css('background-image','url(' + bgimg + ')');         
+                    $('#wrapper_bottom').css('background-position-x',bgFocusX[i]);
+                    $('#wrapper_bottom').css('background-position-y',bgFocusY[i]);
+               // });
+              
+              //changeImage('#wrapper_bottom', images[i]);
+              
+              
+              
+          });
+          
+          
+        
+  
+            
+        };
+        window.setInterval(changeimage, 6000);
+    changeimage();
+    
+ 
+
+});    
+
+    
+    
+</script>
+        
+        <div id="wrapper_top" class="background-img" style="            
+            z-index: 0">            
+            <div id='wrapper_bottom'  class="background-img" style=" z-index: -1;
+            top: 0;
+            height: 100%;
+            position: absolute;
+            width: 100%;">
+                
+
+            </div>
+        </div>  
+    
+            
+            <?php 
+ 
+$images = get_attached_media('image', $post->ID);
+$index = 0;
+
+foreach($images as $image) { 
+    
+    if($index == 0) {
+        $index++;
+   $image_attributes = wp_get_attachment_image_src($image->ID,'large');
+   //<img class="bgimgs" src="<?php echo $image_attributes[0]
+     //<img class="bgimgs portrait" src="<?php echo $image_attributes[0]
+   ?>
+
+            
+    
+					
+    <?php } }?>
 
 	<div class="container">
 		<div class="row">
 
 			<div class="col-md-12 col-sm-12">
-				<div class="wow welcome-text-container" data-wow-delay="0.9s" style="display: flex;" >                                       
-                                    <div class="welcome-text" style="display:flex;position:  absolute;left: 0;">
+				<div class="wow welcome-text-container" data-wow-delay="0.9s" style="position:relative;" >                                       
+                                    <!--div class="welcome-text" style="display:flex;position:  absolute;left: 0;height:100%;">
                                     <p class="desc-left" style="">
 							アトリエブルジョン。
                                     </p>                    <span>atelier Bourgeons</span>
                                     <p class="desc-wider">両方からお洒落するレディースブランド<br>
                                     </p>
-                                    </div>
-                                    <div class="welcome-text" style="padding-top: 20%;
-    width: 39%;
+                                    </div-->
+                                    <div class="welcome-text welcome-buttons" style="padding-top: 33%;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;"> <a href="#overview" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s"><?php _e('LEARN MORE','atelierbourgeons') ?></a>
 				<a href="#register" class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s"><?php _e('REGISTER NOW','atelierbourgeons') ?></a>
                                 </div>
-                                    <div class="welcome-text welcome-buttons" style="position: absolute;right: 0;overflow: hidden;">
-                                    <p class="desc-wider">「デザイン」 と 「ものづくりの背景」
+                                    <!--div class="welcome-text welcome-text-right" style="position: absolute;right: 0; top:0;overflow: hidden;height:100%;  /*margin-right: 2em;*/">
+                                    <p class="desc-wider-right" style="">「デザイン」 と 「ものづくりの背景」
                                     <br>                                    
                                     －外身も中身も、かっこよく。－
                                     		</p>
-                                        </div>
+                                        </div-->
                                 </div><!--h1 class="wow fadeInUp" data-wow-delay="1.6s"><?php //echo get_post_meta( $post->ID , 'Home Page Title', true ); ?></h1-->
 				
 			</div>
@@ -211,11 +418,11 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 <!-- =========================
     OVERVIEW SECTION   
 ============================== -->
-<section id="overview" class="parallax-section">
+<section id="overview" class="">
 	<div class="container">
-		<div class="row" style="display: flex; align-items: center;">
+		<div class="row" style="">
 
-			<div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.6s" style="text-align: center;">                            
+			<div class="wow fadeInUp col-md-offset-0 col-sm-offset-1 col-xs-offset-1 col-md-6 col-sm-10 col-xs-10 col-lg-6" data-wow-delay="0.6s" style="text-align: center;">                            
                             <p>－外身も中身も、かっこよく。－
                                 <br>
                                 ……………………………………………………… 
@@ -257,7 +464,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
                         </p>
 			</div>
 					
-			<div class="wow fadeInUp col-md-6 col-sm-6 " data-wow-delay="0.9s">
+			<div class="wow fadeInUp col-md-offset-0 col-md-6 col-sm-offset-1 col-xs-offset-1 col-sm-10 col-xs-10 col-lg-6" data-wow-delay="0.9s" style="padding-top:2em;">
                             <div class="concept-grid">
                                 <div class="one" style="width: 87%;">
                                     <img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/homepage/amb_1.jpg" class="img-responsive" alt="Overview">
@@ -328,7 +535,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
                                 </i>   
                                 <h5>予約注文限定の特別価格で、通常よりもおトクに。</h5>
 				<h4>ADVANTAGE OF PRE-ORDER</h4>
-				<p>予めご注文をいただき、必要な枚数だけ無駄なく生産すれば、コストの削減に繋がります。浮いたコストの分だけ価格を下げ、予約注文だけの「特別価格」で商品を提供できのです。</p>
+				<p>予め注文を受けた枚数を生産し、余分な在庫やコストを減らすことで、良心的な価格設定が可能になります。そのため、当サイトにて予約注文していただく個人のお客様には、先行予約の特別価格で商品をお求めいただけます。</p>
                                 <div class="bottom-line">                                    
                                     <a href="#products" class="btn btn-lg btn-default" style="visibility: visible; font-size: 0.8em;">商品ページ</a>
                                 </div>
@@ -408,14 +615,15 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
    REGISTER SECTION   
 ============================== -->
 
+
 <section id="register" class="parallax-section">
 	<div class="container">
 		<div class="row">
 
 			<div class="wow fadeInUp col-md-5 col-sm-5" data-wow-delay="0.6s">
 				<h3 style="font-weight: 0;">今すぐ会員登録！</h3>				
-				<h5>このサイトのネットショッピングは、会員登録制です。こちらの登録フォームから簡単＆無料で登録できます。</h5>
-                                <h5>プライバシーポリシー</h5>
+				<h5>当サイトのウェブショップは、無料会員登録制です。こちらのフォームから簡単にご登録いただけます。</h5>
+                                <a href="<?php echo get_permalink(get_option('woocommerce_privacy_policy_page_id')); ?>"><h5>プライバシーポリシー</h5></a>
 			</div>
 
 			<div class="wow fadeInUp col-md-7 col-sm-7" data-wow-delay="1s">
@@ -556,14 +764,14 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 <!-- =========================
     VIDEO SECTION   
 ============================== -->
-<section id="pro" class="parallax-section">
+<section id="pro" class="parallax-section" style="padding-bottom: 2em;">
 	<div class="container">
 		<div class="row" style="font-family: TestFont;">
                     
                   <!-- Section title
 			================================================== 
                   -->
-			<div class="wow bounceIn col-md-10 col-sm-offset-1 col-sm-10 text-center" style="font-weight: 200;margin-top: 3em;">
+			<div class="wow bounceIn col-md-10 col-md-offset-0  col-sm-10 text-center" style="font-weight: 200;margin-top: 3em;">
 				<div class="section-title">
 					<h2>For Professional Buyers - 事業者（法人 & 個人）の皆様へ</h2>
 					<h3>— 卸販売のご案内 —</h3>
@@ -572,7 +780,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 
  
 
-			<div class="wow fadeInUp col-md-6 col-sm-10" data-wow-delay="1.3s" >
+			<div class="wow fadeInUp col-md-6 col-md-offset-0 col-sm-offset-1 col-sm-10" data-wow-delay="1.3s" >
 				<p style="text-align: center;letter-spacing: 3px;margin-bottom: 2em; 
     font-size: 1.4em;">一枚から卸価格にてご購入可能。<br>
 フランス・パリ発のクリエーションを、<br>
@@ -588,7 +796,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
                             </a>
 
 			</div>
-			<div class="wow fadeInUp col-md-6 col-sm-10" data-wow-delay="1.6s">
+			<div class="wow fadeInUp col-md-6  col-md-offset-0 col-sm-offset-1 col-sm-10" data-wow-delay="1.6s">
 				
 					<img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/homepage/apro.jpg">
 				
@@ -602,7 +810,9 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 <!-- Back top -->
 <a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
 
-
+<?php
+return;
+?>
 
 	</div>
 </div><!-- #post-## -->

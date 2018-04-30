@@ -57,6 +57,7 @@ if ( storefront_is_woocommerce_activated() ) {
         require 'inc/woocommerce/class-wc-product-attribute-fabrics-form.php';        
         require 'inc/woocommerce/wc-prod-admin-variable-pre-sale.php';
         require 'inc/woocommerce/wc-custom-product-price.php';
+        require 'inc/woocommerce/gateways/class-wc-gateway-bacs-jp.php';
         require 'inc/woocommerce/wc-custom-product-supplies-tab.php';
         require 'inc/woocommerce/wc-checkout_terms_conditions_popup.php';
         require 'inc/admin/class-wc-meta-box-product-awesome-description.php';
@@ -305,7 +306,7 @@ add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 function theme_enqueue_styles() {    
     wp_enqueue_style( 'bootstrap-style', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), 'v1.2' );
     wp_enqueue_style( 'animate-style', get_template_directory_uri() . '/assets/css/animate.css', array(), 'v1.2' );
-    wp_enqueue_style( 'fa-solid-style', get_template_directory_uri() . '/assets/css/fa-solid.min.css' , array(), 'v1.3');
+    //wp_enqueue_style( 'fa-solid-style', get_template_directory_uri() . '/assets/css/fa-solid.min.css' , array(), 'v1.3');
     wp_enqueue_style( 'font-awesome-style', get_template_directory_uri() . '/assets/css/font-awesome.min.css' , array(), 'v1.2');
     wp_enqueue_style( 'owl-theme-style', get_template_directory_uri() . '/assets/css/owl.theme.min.css' , array(), 'v1.2');
     wp_enqueue_style( 'owl-carousel-style', get_template_directory_uri() . '/assets/css/owl.carousel.min.css' , array(), 'v.1.2');
@@ -413,6 +414,19 @@ function add_attachment_field_position_y_save( $post, $attachment ) {
     return $post;
 }
 add_filter( 'attachment_fields_to_save', 'add_attachment_field_position_y_save', 11, 3 );
+
+
+add_filter( 'woocommerce_order_button_text', 'atelierbourgeons_order_button_text' );
+function atelierbourgeons_order_button_text( ) {
+    return '注文を確定する';
+}
+
+add_filter( 'woocommerce_date_format', 'atelierbourgeons_date_format' );
+function atelierbourgeons_date_format( ) {
+    return 'Y年m月d日';
+}
+
+
 
 /**
 * Output custom columns for prods.
@@ -564,7 +578,7 @@ function atelierbourgeons_tml_message( $message, $action ) {
         
         //$message .= $_GET['key'];
         if(hash_equals( $row->user_activation_key, $_GET['key'])) {
-            $message .= 'Congratulations, your emails has been approved, you can now login';
+            $message .= 'ありがとうございます！お客さまのアカウントが有効になりました。こちらからログインしてください。';
             update_user_meta( $_GET['user'], 'pw_user_status', 'approved'  );
             //pw_new_user_approve()->update_user_status( $_GET['user'] , 'approved' );
         }
@@ -772,6 +786,8 @@ function atelierbourgeons_new_user_approved( $user ) {
 add_filter( 'new_user_approve_approve_user_message_default', 'atelierbourgeons_new_user_approved' , 21 ,12);
 
 
+
+
 function atelierbourgeons_new_user_checking( $status, $user_id ) {
     //if($action == 'login')
     
@@ -785,36 +801,48 @@ function atelierbourgeons_new_user_checking( $status, $user_id ) {
     $user_login = stripslashes( $user->data->user_login );
     $user_email = stripslashes( $user->data->user_email );
 
-    $admin_email = get_option( 'admin_email' );    
-    $from_name = get_option( 'blogname' );
-    $headers = array("From: \"{$from_name}\" <{$admin_email}>");
+    $admin_email = 'contact@atelierbourgeons.com';    
+    $from_name = 'atelier Bourgeons アトリエブルジョン';
+    $headers = array('From: "' . $from_name . '" <' . $admin_email . '>');
+    //$headers = 'From: atelierbourgeons \r\n';
+    $headers[] = 'MIME-Version: 1.0;';
+    $headers[] = 'Content-Type: text/html; charset=UTF-8';
+            
     // multi part email
     //$headers[] = '';
     //$headers[] = '';
     
     $message = null;
+    $txt = null;
     if ($status == "confirm-email") {
-        $subject = 'Atelier bourgeons Pro Registration In-Review';    
-        $message = mail_new_user_confirm_email($user);
+        $subject = '【ご登録のアカウントを有効化してください】/atelier Bourgeons （ｱﾄﾘｴﾌﾞﾙｼﾞｮﾝ）';   
+        $code = sha1( $user->ID . time() ); 
+        global $wpdb;
+        $wpdb->update( $wpdb->users, array( 'user_activation_key' => $code ), array( 'ID' => $user->ID ) );
+        //$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+        $activation_url = add_query_arg( array( 'action' => 'confirm-email', 'key' => $code, 'user' => $user->ID), wp_login_url() );
+        $message = mail_new_user_confirm_email($user,$activation_url);
+        $txt = txt_new_user_confirm_email($activation_url);
     }else {
-        $subject = 'Atelier bourgeons Pro Registration Confirm email';
+        $subject = '【会員認証の完了までしばらくお待ちください】/atelier Bourgeons （ｱﾄﾘｴﾌﾞﾙｼﾞｮﾝ）';
         $message = mail_new_user_checking($user);
+        $txt = txt_new_user_checking();
     }
     
-    $message = '
-         MIME-Version: 1.0; \r\n Content-Type: multipart/alternative; \r\n
-         boundary=\"----=_NextPart_DC7E1BB5_1105_4DB3_BAE3_2A6208EB099D\" \r\n
-         ------=_NextPart_DC7E1BB5_1105_4DB3_BAE3_2A6208EB099D \r\n
-Content-type: text/plain; charset=iso-8859-1  \r\n
-Content-Transfer-Encoding: quoted-printable \r\n
-
-Sample Text Content  \r\n
-------=_NextPart_DC7E1BB5_1105_4DB3_BAE3_2A6208EB099D \r\n
-
- ' . $message . '   '
-            . '------=_NextPart_DC7E1BB5_1105_4DB3_BAE3_2A6208EB099D--';
+    /*$message = '--boundary42 \r\n
+Content-type: text/plain; charset=iso-8859-1 \r\n
+' . $txt . '  \r\n
+--boundary42 \r\n
+Content-type: text/html; charset=iso-8859-1 \r\n
+ ' . $message . '  \r\n '
+            . '--boundary42--';*/
         
+    /*function wpse27856_set_content_type(){
+        return "multipart/alternative; boundary=boundary42";
+    }*/
+    //add_filter( 'wp_mail_content_type','wpse27856_set_content_type' );
     wp_mail( $user_email, $subject, $message, $headers);
+    //remove_filter( 'wp_mail_content_type', 'wpse27856_set_content_type' );
     
     return $status;
 }

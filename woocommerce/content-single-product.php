@@ -36,7 +36,7 @@ $workshop_id = get_post_meta( $product->get_id(), 'product_workshop_id' , true);
 if(isset($attachment_ids[1]))
     $image = wp_get_attachment_url( $attachment_ids[1] );
     $main_image = get_post_thumbnail_id( $product->get_id() );
-    $product_image = wp_get_attachment_image_src($main_image , 'full' );
+    $product_image = wp_get_attachment_image_src($main_image , 'large' );
 ?>
 
 
@@ -206,7 +206,7 @@ if(isset($attachment_ids[1]))
     <!-- =========================
     INTRO SECTION   
 ============================== -->
-<section id="product-intro" class="parallax-section">
+<section id="product-intro" class="parallax-section img-lazy-load" data-full-src="<?php echo wp_get_attachment_image_src( $main_image, 'full')[0];?>">
 	<div class="container">
 		<div class="row">
 
@@ -251,8 +251,8 @@ if(isset($attachment_ids[1]))
                                 $attachment_ids = $product->get_gallery_image_ids();
                                 foreach($attachment_ids as $attachment_id) {
                                     
-                                    $image_attachment = wp_get_attachment_image_src( $attachment_id , 'large');  
-                                    $image_full_attachment = wp_get_attachment_image_src( $attachment_id , 'full');  
+                                    $image_attachment = wp_get_attachment_image_src( $attachment_id , 'medium');  
+                                    $image_full_attachment = wp_get_attachment_image_src( $attachment_id , 'large');  
                                     echo '<div class="item">
                                             <img class="img-lazy-load" data-full-src="'. $image_full_attachment[0] . '" src="'. $image_attachment[0] . '" />
                                         </div>';
@@ -359,11 +359,11 @@ if(isset($attachment_ids[1]))
                                     $height = 0;
                                     if(count($attachment_ids)) {
                                         $attachment_id = array_shift($attachment_ids);                                                                            
-                                        $image_meta = wp_get_attachment_image_src($attachment_id,'large');
+                                        $image_meta = wp_get_attachment_image_src($attachment_id,'medium');
                                         $width = $image_meta[1];
                                         $height = $image_meta[2];
                                         $image_attachment_url = $image_meta[0];
-                                        $image_full_attachment_src = wp_get_attachment_image_src($attachment_id,'full');
+                                        $image_full_attachment_src = wp_get_attachment_image_src($attachment_id,'large');
                                     } 
                                     
                                     if( ( $width > $height || count($buffer_cell) ) && $lg_used_col <= 6 && $md_used_col <= 4 && $sm_used_col <= 0)  {                                        
