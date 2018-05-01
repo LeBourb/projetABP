@@ -29,8 +29,22 @@ $image_full_attachment =  get_the_post_thumbnail_url( get_the_ID() , 'large' );
 
 <style>
     main.site-main .entry-content {
-        margin-top: 5%
+        margin-top: 3em;
     }
+    
+    .wp-social-login-widget {
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+    
+    .wp-social-login-provider-list {
+        display: flex;
+    }
+    
+    .wp-social-login-provider-list a.wp-social-login-provider {
+        margin-right: 2em;
+    }
+    
     </style>
 		<main id="main" class="site-main img-lazy-load" data-full-src="<?php echo $image_full_attachment; ?>"  role="main" style="background:url(<?php echo $featured_image;?>) no-repeat center fixed; background-size: cover; height: 100vh;
     margin: 0px;

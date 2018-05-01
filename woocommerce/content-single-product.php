@@ -225,8 +225,9 @@ if(isset($attachment_ids[1]))
 
 			<div class="col-md-12 col-sm-12">
 				<h3 class="wow bounceIn" data-wow-delay="0.9s"><?php echo $product->get_title(); ?></h3>				
-				<a href="#product-in-short" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">詳しくみる</a>
-                                <a id="reservation" class="btn btn-lg btn-danger smoothScroll wow fadeInUp btn-reservation" data-wow-delay="2.3s">価格 & 詳細</a>
+				<a href="#story" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">Story<br>この服のおはなし</a>
+                                <a href="#gallery" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">Photo Gallery<br>ギャラリー</a>
+                                <a id="reservation" class="btn btn-lg btn-danger smoothScroll wow fadeInUp btn-reservation" data-wow-delay="2.3s">Price & Detail<br>購入ページ</a>
                                 
 			</div>
 
@@ -308,23 +309,12 @@ if(isset($attachment_ids[1]))
             global $product;
             echo str_replace("|","<br>",$product->get_title());?></div>
             <div class="linkContainer-11-195">
-                <a class="sectionLink-11-196" href="#galery">Galery</a>
-                <?php
-                    $data = get_post_meta( $post->ID, 'wc_awesome_descriptions', true );
-                    if(is_array($data)){
-                        foreach ($data as $key => $item) { 
-                            $title = isset($item['title']) ? $item['title'] : '';
-                            if($title && $title != "") {
-                                $smp_title = strtolower(str_replace(' ', '', $title));                            
-                                echo '<a class="sectionLink-11-196" href="#' . $smp_title . '" >' . $title . '</a>';
-                            }
-                        }
-                    }
-                ?>
+                <a class="sectionLink-11-196" href="#gallery">Photo Gallery<br>ギャラリー</a>
+                <a class="sectionLink-11-196" href="#story">Story<br>この服のおはなし</a>                
             </div>                  
         </div><!-- react-text: 99 --><!-- /react-text -->
         <div id="reservation" class="container-15-202" >            
-            <a class="btn btn-lg btn-danger btn-reservation" >価格 & 詳細</a>            
+            <a class="btn btn-lg btn-danger btn-reservation" >Price & Detail<br>購入ページ</a>            
         </div> 
     </div>
 </div>
@@ -454,6 +444,9 @@ if(isset($attachment_ids[1]))
     <!-- =========================
         Awesome SECTIONS   
     ============================== -->
+    <section id="story">
+    </section>
+        
     <?php
     $data = get_post_meta( $post->ID, 'wc_awesome_descriptions', true );
     if(is_array($data)) {
@@ -723,7 +716,7 @@ $(document).on('click','#modal-reservation .modal-close' ,function(){
             display:flex;
         }
         .linkContainer-11-195 {
-            width: 77.7%;
+            width: 47.7%;
             flex-grow: 1;
             display: flex;
         }

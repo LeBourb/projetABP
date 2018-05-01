@@ -305,7 +305,7 @@ foreach($images as $image) {
 			<div class="col-md-12 col-sm-12">
                             
                             <a href="#overview" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">アトリエのこと</a>
-				<a href="#register" class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s">会員登録</a>
+				<a href="#register" class="btn btn-lg btn-danger smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">会員登録</a>
 				<!--div class="wow welcome-text-container" data-wow-delay="0.9s" style="position:relative;" >                                       
                                     
                                     <!--div class="welcome-text" style="display:flex;position:  absolute;left: 0;height:100%;">

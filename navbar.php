@@ -155,21 +155,43 @@
                                         . '</li> ';
                                 echo '<li><a class="separator">|</a></li>';
                                                                   
-                                echo '<li><a href="' . get_permalink(get_option('woocommerce_shopping_guide_page_id')) . '" >' . 'Help' . '</a></li>';
+                                echo '<li><a href="' . get_permalink(get_option('woocommerce_shopping_guide_page_id')) . '" >' . 'Help' . '</a>'
+                                        . '<div class="subnavContainer" style="">'
+                                        . '<a class="subnav" href="' .  get_permalink(get_option('woocommerce_shopping_guide_page_id')) . '">ご利用ガイド</a>'
+                                        . '</div>'
+                                        . '</li>';
                                 
-                                if(is_user_logged_in()) {
-                                    echo '<li><a href="' . get_permalink( wc_get_page_id ( 'cart' )) . '" >Cart</a></li>'; 
+                                echo '<li><a href="' . get_permalink( wc_get_page_id ( 'cart' )) . '" >Cart</a>'
+                                        . '<div class="subnavContainer" style="">'
+                                        . '<a href="' . get_permalink( wc_get_page_id ( 'cart' )) . '" >カート</a>'                                        
+                                        . '</div>'
+                                        .'</li>'; 
+                                if(is_user_logged_in()) {                                    
                                     echo '<li><a href="' . get_permalink( wc_get_page_id ( 'myaccount' )) . '" >My Account</a>'
                                             . '<div class="subnavContainer" style="">'
-                                            . '<a href="' . get_permalink( wc_get_page_id ( 'myaccount' )) . 'orders/" >Your Orders</a>'
+                                            . '<a href="' . get_permalink( wc_get_page_id ( 'myaccount' )) . '" >マイアカウント</a>'
+                                            . '<a href="' . get_permalink( wc_get_page_id ( 'myaccount' )) . 'orders/" >ご注文履歴</a>'
                                             . '</div>'
                                             . '</li>';
                                 }
                                 else {
-                                    echo '<li><a href="' . Theme_My_Login::get_page_link( 'login' ) . '" >Login</a></li>';                                
-                                    echo '<li><a href="' . Theme_My_Login::get_page_link( 'register' ) . '" >Register</a></li>';                                
+                                    echo '<li><a href="' . Theme_My_Login::get_page_link( 'login' ) . '" >Login</a>'
+                                        . '<div class="subnavContainer" style="">'
+                                        . '<a class="subnav" href="' .  Theme_My_Login::get_page_link( 'login' ) . '">ログイン</a>'
+                                        . '</div>'
+                                        . '</li>';
+                                    
+                                    echo '<li><a href="' . Theme_My_Login::get_page_link( 'register' ) . '" >Register</a>'
+                                        . '<div class="subnavContainer" style="">'
+                                        . '<a class="subnav" href="' .  Theme_My_Login::get_page_link( 'register' ) . '">新規会員登録</a>'
+                                        . '</div>'    
+                                        .'</li>';                                
                                 }                   
-                                echo '<li><a href="' . get_permalink( get_option('woocommerce_contact_form_page_id')) . '" >Contact-us</a></li>';
+                                echo '<li><a href="' . get_permalink( get_option('woocommerce_contact_form_page_id')) . '" >Contact-us</a>'
+                                        . '<div class="subnavContainer" style="">'
+                                        . '<a class="subnav" href="' .  get_permalink( get_option('woocommerce_contact_form_page_id')) . '">お問い合わせ</a>'
+                                        . '</div>'    
+                                        . '</li>';
                                 ?>
                             
                                 

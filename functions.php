@@ -1068,6 +1068,7 @@ if (!function_exists('get_post_ids_by_meta_key_and_value')) {
 /**
  * WordPress function for redirecting users on login based on user role
  */
+/*
 function my_login_redirect( $url, $request, $user ){
     if( $user && is_object( $user ) && is_a( $user, 'WP_User' ) ) {
         if( $user->has_cap( 'administrator' ) ) {
@@ -1079,7 +1080,14 @@ function my_login_redirect( $url, $request, $user ){
     return $url;
 }
 add_filter('login_redirect', 'my_login_redirect', 10, 3 );
+*/
 
+       /*
+function my_login_error( $errors ){
+    print_r($errors);
+}
+add_filter('login_errors', 'my_login_error', 10, 1 );
+      */  
 add_role( 'customer-pro', 'Professional Customer', array( 'read' => true, 'level_0' => true ) );
 //init the meta box
 add_action( 'after_setup_theme', 'custom_postimage_setup' );

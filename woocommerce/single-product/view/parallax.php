@@ -64,12 +64,12 @@
         <div class="row">
             <div class="col-lg-4 col-md-4 <?php 
             if($text_pos=="left") {
-                echo "col-md-offset-1"; 
-                echo "col-lg-offset-1"; 
+                echo " col-md-offset-1 "; 
+                echo " col-lg-offset-1 "; 
             }
             else {
-                echo "col-md-offset-7";
-                echo "col-lg-offset-7"; 
+                echo " col-md-offset-7 ";
+                echo " col-lg-offset-7 "; 
             }?>">            
                 <?php echo $item['text'];?>
             </div>
