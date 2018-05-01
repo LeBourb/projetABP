@@ -7,10 +7,10 @@ http://www.templatemo.com/tm-486-new-event
 */
 
 body {
-		background: #ffffff;
-    font-family: 'Poppins', sans-serif;
+    background: #ffffff;
+    font-family: 'times new roman', times, serif;
     font-style: normal;
-		font-weight: 400;
+    font-weight: 400;
 }
 
 /*---------------------------------------
@@ -22,14 +22,14 @@ body {
     margin-top: 4%;
     padding: 2%;
     background-color: rgba(221, 221, 221, 0.8);
-    max-height: 100%;
+    max-height: 80%;
     overflow-y: auto;    
     max-width: 413px;
 }
 
-@media(min-width:768px) {
+@media(max-width:768px) {
     .tml {
-        max-height: 80%;
+        max-height: 70%;
     }
 }
 
@@ -1151,6 +1151,10 @@ footer {
 
 /* Back top */
 .go-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: white;
   background-color: #222;
   bottom: 6em;
   right: 18pt;
@@ -1276,6 +1280,39 @@ footer {
 
   #intro {
     height: 100vh;
+  }
+  
+  h1,h2,h3,h4,h5,h6 {
+    font-weight: 500;
+  }
+
+  h3,h5 {
+    font-weight: 400;
+  }
+
+  h1 {
+      font-size: 30px;
+      letter-spacing: 1px;
+  }
+
+  h2 {
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    line-height: 8px;
+  }
+
+  h5 {
+      letter-spacing: 1px;
+      padding-top: 2px;
+  }
+
+  p {
+      color: #707070;
+      font-size: 12px;
+      line-height: 19px;
   }
 
 }
