@@ -27,6 +27,20 @@ body {
     max-width: 413px;
 }
 
+
+.wp-social-login-widget {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.wp-social-login-provider-list {
+    display: flex;
+}
+
+.wp-social-login-provider-list a.wp-social-login-provider {
+    margin-right: 2em;
+}
+
 @media(max-width:768px) {
     .tml {
         max-height: 70%;

@@ -305,7 +305,11 @@ foreach($images as $image) {
 			<div class="col-md-12 col-sm-12">
                             
                             <a href="#overview" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">アトリエのこと</a>
-				<a href="#register" class="btn btn-lg btn-danger smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">会員登録</a>
+				<?php if (!is_user_logged_in()) { ?>
+                                    <a href="#register" class="btn btn-lg btn-danger smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">会員登録</a>
+                                <?php } else  { ?>
+                                    <a href="#products" class="btn btn-lg btn-danger smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">商品ページ</a>
+                                <?php } ?>
 				<!--div class="wow welcome-text-container" data-wow-delay="0.9s" style="position:relative;" >                                       
                                     
                                     <!--div class="welcome-text" style="display:flex;position:  absolute;left: 0;height:100%;">
@@ -521,7 +525,7 @@ foreach($images as $image) {
    REGISTER SECTION   
 ============================== -->
 
-
+<?php if(!is_user_logged_in()) { ?>
 <section id="register" class="parallax-section">
 	<div class="container">
 		<div class="row">
@@ -571,6 +575,7 @@ foreach($images as $image) {
         });
     });
 </script>
+<?php } ?>
 <!-- =========================
     FAQ SECTION   
 ============================== -->
