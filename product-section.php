@@ -15,7 +15,7 @@
   $products = get_posts( $args ); 
   foreach($products as $product_id) {
       $product =  wc_get_product($product_id);
-      $image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->get_id() ), 'large' );
+      $image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->get_id() ), 'medium' );
 
   ?>
 

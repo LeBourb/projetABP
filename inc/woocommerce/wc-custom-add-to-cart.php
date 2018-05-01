@@ -52,11 +52,11 @@ function wc_before_add_to_cart_size_details() {
        $('#btn_size_details').click(function() {
            $('.modal-product-details.product').append($('#wc_size_details').show());
            $('.modal-product-details.product .images').hide();
-           $('.modal-header .fa.fa-arrow-alt-circle-left').show();
+           $('.modal-header #btn-modal-back').show();
            $('.modal-header #modal-title').text("サイズ & アイテム詳細");
        });
        
-       $('.modal-header .fa.fa-arrow-alt-circle-left').click(function() {
+       $('.modal-header #btn-modal-back').click(function() {
             if(window.second_sizing_guide) {                
                 $('.modal-product-details.product #wc_size_details').show();
                 $('.modal-product-details.product #wc_size_guide').hide();
@@ -137,12 +137,12 @@ function wc_before_add_to_cart_funding() {
             font-size: 1rem;
             color: #363636;
             float: right;
-            margin-right: 0.5em;
-            margin-top: -1.25em;
+            margin:0.75em 0.5em 0;
         }
         #days {
             font-size: 1.1rem;
             color: #0f2130;
+            float: left;
             text-align: left;
             margin: 0.75em 0.5em 0;
             padding: 0;
@@ -158,6 +158,12 @@ function wc_before_add_to_cart_funding() {
         }
         #price-field >* {
             flex-basis: 49%;
+        }
+        
+        @media screen and (max-width: 760px) {
+            .progress-text, #days {
+                font-size: 9px;
+            }
         }
         </style>
         
@@ -208,7 +214,7 @@ function wc_before_add_to_cart_funding() {
             })
             
         </script>
-        <div style="background-color:#e8e8e8;margin:1em;padding:1em;">
+        <div style="background-color:#e8e8e8;margin:1em;padding:1em;margin-top: 4em;">
             こちらは予約商品のため、<red style="color:red;">注文確定後のキャンセル、返品、交換はできません。</red>
             <br>
             <ul>

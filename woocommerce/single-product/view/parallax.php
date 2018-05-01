@@ -49,16 +49,28 @@
         
         @media (max-width: 768px) {
             .awesome_<?php echo $key;?> .container {
-               /* background-color: white;
-                opacity: 0.85; */
+                background-color: white;
+                color: black;
+                opacity: 0.7;
                 padding: 2em;
+            }
+            .awesome_<?php echo $key;?> .container p {
+                color: black;
             }
         }
 </style>
 <section id="<?php echo strtolower(str_replace(' ', '', $title));?>" class="parallax-section <?php echo 'awesome_' .  $key; ?> img-lazy-load" data-full-src="<?php echo wp_get_attachment_image_src( $item['media_id'], 'large')[0];?>">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 <?php if($text_pos=="left") echo "col-md-offset-1"; else echo "col-md-offset-7"; ?>">            
+            <div class="col-lg-4 col-md-4 <?php 
+            if($text_pos=="left") {
+                echo "col-md-offset-1"; 
+                echo "col-lg-offset-1"; 
+            }
+            else {
+                echo "col-md-offset-7";
+                echo "col-lg-offset-7"; 
+            }?>">            
                 <?php echo $item['text'];?>
             </div>
         </div>

@@ -1004,7 +1004,7 @@ if ( ! function_exists( 'atelierbourgeons_html_email_template_header' ) ) {
         <tr>
           <td align="center" bgcolor="#ffffff" style="border-radius:10px 10px 0 0">
             <div class="m_4412137695263643084headline" style="border-bottom-color:rgba(0,0,0,0.1);border-bottom-style:solid;border-width:0 0 1px;font-size:normal;font-style:normal;font-variant:normal;font-weight:normal;height:113px;line-height:normal;margin:auto 30px;padding:0;vertical-align:baseline">
-            <h2 style="border:0;color:#1e2c3a;font:400 30px/40px apple-system,BlinkMacSystemFont,Arial,\'Segoe UI\',\'Helvetica Neue\',sans-serif;margin:0;padding:35px 0 0;vertical-align:baseline" align="center">' . $title .'</h2>
+            <h2 style="border:0;color:#1e2c3a;font:400 20px/30px apple-system,BlinkMacSystemFont,Arial,\'Segoe UI\',\'Helvetica Neue\',sans-serif;margin:0;padding:35px 0 0;vertical-align:baseline" align="center">' . $title .'</h2>
             </div>
           </td>
         </tr>
@@ -1113,12 +1113,7 @@ if ( ! function_exists( 'svg_spinner_email' ) ) {
 
 if ( ! function_exists( 'svg_valid_email' ) ) {
     function svg_valid_email() {
-        return '<svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="20 20 60 60" style="width: 42%; transform-origin: 50px 50px 0px;" xml:space="preserve"><g style="transform-origin: 50px 50px 0px; transform: scale(0.6);"><g style="transform-origin: 50px 50px 0px;"><g class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -4.43077s;"><path class="st0" d="M45.7,10.2L17.6,26.4c-2.7,1.5-4.3,4.4-4.3,7.4v32.4c0,3.1,1.6,5.9,4.3,7.4l28.1,16.2c2.7,1.5,5.9,1.5,8.6,0 l28.1-16.2c2.7-1.5,4.3-4.4,4.3-7.4V33.8c0-3.1-1.6-5.9-4.3-7.4L54.3,10.2C51.6,8.6,48.4,8.6,45.7,10.2z" stroke="#030303" style="stroke: rgb(3, 3, 3);"></path></g><g style="transform-origin: 50px 50px 0px;"><g class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -4.06154s;"><path class="st7" d="M47.3,68.4L73.7,42c1.8-1.8,1.8-4.6,0-6.4c-1.8-1.8-4.6-1.8-6.4,0L44.1,58.8L32.7,47.4c-1.8-1.8-4.6-1.8-6.4,0 c-1.8,1.8-1.8,4.6,0,6.4l14.6,14.6c0.9,0.9,2,1.3,3.2,1.3S46.4,69.2,47.3,68.4z" fill="#d39182" style="fill: rgb(211, 145, 130);"></path></g></g><metadata xmlns:d="https://loading.io/stock/" class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -3.69231s;">
-<d:name class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -3.32308s;">ok</d:name>
-<d:tags class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -2.95385s;">ok,confirm,ready,positive,check,right,correct,affirmative,success,hexagon,form</d:tags>
-<d:license class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -2.58462s;">cc-by</d:license>
-<d:slug class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -2.21538s;">mz1tp2</d:slug>
-</metadata></g></g></svg>';
+        return '<svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="20 20 60 60" style="width: 42%; transform-origin: 50px 50px 0px;" xml:space="preserve"><g style="transform-origin: 50px 50px 0px; transform: scale(0.6);"><g style="transform-origin: 50px 50px 0px;"><g class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -4.43077s;"><path class="st0" d="M45.7,10.2L17.6,26.4c-2.7,1.5-4.3,4.4-4.3,7.4v32.4c0,3.1,1.6,5.9,4.3,7.4l28.1,16.2c2.7,1.5,5.9,1.5,8.6,0 l28.1-16.2c2.7-1.5,4.3-4.4,4.3-7.4V33.8c0-3.1-1.6-5.9-4.3-7.4L54.3,10.2C51.6,8.6,48.4,8.6,45.7,10.2z" stroke="#030303" style="stroke: rgb(3, 3, 3);"></path></g><g style="transform-origin: 50px 50px 0px;"><g class="ld ld-breath" style="transform-origin: 50px 50px 0px; animation-duration: 4.8s; animation-delay: -4.06154s;"><path class="st7" d="M47.3,68.4L73.7,42c1.8-1.8,1.8-4.6,0-6.4c-1.8-1.8-4.6-1.8-6.4,0L44.1,58.8L32.7,47.4c-1.8-1.8-4.6-1.8-6.4,0 c-1.8,1.8-1.8,4.6,0,6.4l14.6,14.6c0.9,0.9,2,1.3,3.2,1.3S46.4,69.2,47.3,68.4z" fill="#d39182" style="fill: rgb(211, 145, 130);"></path></g></g></g></g></svg>';
     }
 }
 
@@ -1133,7 +1128,7 @@ if ( ! function_exists( 'txt_new_user_confirm_email' ) ) {
 
 if ( ! function_exists( 'mail_new_user_confirm_email' ) ) {
     function mail_new_user_confirm_email($user, $activation_url) {
-    $message = atelierbourgeons_html_email_template_header('会員登録のお申し込み、誠にありがとうございます！登録完了まであと一歩です。');
+    $message = atelierbourgeons_html_email_template_header('会員登録のご申請ありがとうございます！登録完了まであと一歩です。');
     
     global $wpdb, $current_site;
     
@@ -1148,7 +1143,7 @@ if ( ! function_exists( 'mail_new_user_confirm_email' ) ) {
       
       <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse!important;max-width:600px">
         <tbody><tr>
-          <td align="center" valign="top" style="font-family:Open Sans,Helvetica,Arial,sans-serif;padding:0 0 25px">
+          <td align="center" valign="top" style="font-weight: 100;font-size: 18px;">
             <table cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse:collapse!important">
               <tbody><tr>
                 <td align="center" bgcolor="#ffffff" style="border-radius:0 0 10px 10px;padding:25px">
@@ -1158,25 +1153,14 @@ if ( ! function_exists( 'mail_new_user_confirm_email' ) ) {
                       
                     </tr>
                     <tr>
-                      <td align="center" style="font-family:Open Sans,Helvetica,Arial,sans-serif">                        
+                      <td align="center" style="">                        
                         <p style="">
                             atelier Bourgeons （アトリエブルジョン）への会員登録をご申請いただき、誠にありがとうございます。下記のURLをクリックして、あなたのメールアドレスでのアクセスを有効にしてください。                          
                   </p><p>会員登録認証用URL:
              <a href="' . $activation_url . '">' . $activation_url . '</a>' 
              . '</p>
                       </td>
-                    </tr>
-                    <tr>
-                      <td align="center" style="padding:20px 0 15px">
-                        <table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse!important">
-                          <tbody><tr>
-                            <td align="center" style="border-radius:26px" bgcolor="#0570D4">
-                              <a href="'. get_site_url() .'" style="background: #613143;border: 1px solid #613143;border-radius: 14px;color:#ffffff;display:block;font-family:Open Sans,Helvetica,Arial,sans-serif;font-size:16px;padding:14px 26px;text-decoration:none" target="_blank" data-saferedirecturl="">サイトへ移動</a>
-                            </td>
-                          </tr>
-                        </tbody></table>
-                      </td>
-                    </tr>
+                    </tr>                    
                   </tbody></table>
                 </td>
               </tr>
@@ -1222,7 +1206,7 @@ if ( ! function_exists( 'mail_new_user_checking' ) ) {
       
       <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse!important;max-width:600px">
         <tbody><tr>
-          <td align="center" valign="top" style="font-family:Open Sans,Helvetica,Arial,sans-serif;padding:0 0 25px">
+          <td align="center" valign="top" style="">
             <table cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse:collapse!important">
               <tbody><tr>
                 <td align="center" bgcolor="#ffffff" style="border-radius:0 0 10px 10px;padding:25px">
@@ -1232,7 +1216,7 @@ if ( ! function_exists( 'mail_new_user_checking' ) ) {
                       
                     </tr>
                     <tr>
-                      <td align="center" style="font-family:Open Sans,Helvetica,Arial,sans-serif">                        
+                      <td align="center" style="">                        
                         <p>
                           この度は、atelier Bourgeons （アトリエブルジョン）の会員登録をご申請いただき、誠にありがとうございます。
                            ビジネス会員の登録には、サイト管理者による会員認証が必要です。ご登録内容の確認後、当方より改めてメールをお送りしますので、今しばらくお待ちくださいませ。
@@ -1244,7 +1228,7 @@ if ( ! function_exists( 'mail_new_user_checking' ) ) {
                         <table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse!important">
                           <tbody><tr>
                             <td align="center" style="border-radius:26px" bgcolor="#0570D4">
-                              <a href="'. get_site_url() .'" style="background: #613143;border: 1px solid #613143;border-radius: 14px;color:#ffffff;display:block;font-family:Open Sans,Helvetica,Arial,sans-serif;font-size:16px;padding:14px 26px;text-decoration:none" target="_blank" data-saferedirecturl="">サイトへ移動</a>
+                              <a href="'. get_site_url() .'" style="background: #613143;border: 1px solid #613143;border-radius: 14px;color:#ffffff;display:block;font-size:16px;padding:14px 26px;text-decoration:none" target="_blank" data-saferedirecturl="">サイトへ移動</a>
                             </td>
                           </tr>
                         </tbody></table>

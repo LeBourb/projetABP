@@ -53,8 +53,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
         grid-row: 2 / 3;
     }
     
-    #intro h4 {
-        font-family: "Times New Roman", Times, serif;
+    #intro h4 {       
         color: black;
         font-size: 21px;
         /*text-align: start;
@@ -83,57 +82,16 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
         right: 0;
     }
     
+    #detail h5 {
+        font-weight: 600;
+    }
+    
     #register #progressbar {
         margin-top: 0;
     }
     
-    #intro .container {
-        width: 100%;
-    }
-    
-    @font-face {
-        font-family: TestFont;
-        /*src: url(<?php //echo get_site_url() . '/wp-content/themes/atelierbourgeonspro/assets/fonts/AppliMincho.otf'?>);*/
         
-    }
-    
-    #intro .container .row .col-md-12 .welcome-text-container {
-        width:  70%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    #intro .container ,
-    #intro .container .row,    
-    #intro .container .row .col-md-12 ,
-    #intro .container .row .col-md-12 .welcome-text-container , 
-    #intro .container .row .col-md-12 .welcome-text-container .welcome-text ,
-    #intro .container .row .col-md-12 .welcome-text-container .welcome-text .desc-wider,
-    #intro .container .row .col-md-12 .welcome-text-container .welcome-text .desc-wider-right {
-        height: 100%;
-    }
-    
-    #intro .container p , 
-    #intro .container span {
-        color: black; 
-        background: #ffffff61;
-        font-family: TestFont;
-    }
-    
-    #intro .container p {
-        line-height: 2;
-        font-size: 2em;
-        writing-mode: vertical-lr;
-        color: #16170a;                
-    }
-    #intro .container span {
-        font-size: 1.4em;
-        writing-mode: vertical-lr;
-        line-height: 1;
-        letter-spacing: 6px;
-        color: #16170a;
-    }
-    
+   
     #intro .background-img {
     background-repeat: no-repeat;
     background-attachment: scroll;
@@ -157,55 +115,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
     
     
 }
- #intro .container .welcome-text-right {
-        width:7em;
-    }
-    @media (min-width: 1200px) {
-
-#intro .container p.desc-left{
-    margin-left: 0; /*2em;*/
-    padding-left: 1em;
-    height: 100%;
-}
-#intro .container p.desc-wider{
-    /*line-height: 7;*/
-    padding-right: 1em;
-}
-
-        #intro .container .desc-wider-right {
-            padding-left:1em;
-            padding-right:1em;
-        }
-        
-        #intro .container .welcome-text-right {
-            width:12em;
-        }
-    }
-   
-   @media (max-width: 750px) {
-        #intro .container{
-            width: 100%;
-        }
-        #intro .container p.desc-wider,
-        #intro .container p.desc-wider-right,
-        #intro .container p.desc-left
-        {
-            line-height: 1.9;
-            font-size: 1.4em;
-        }
-
-        #intro .container span{
-            font-size: 1.1em;
-        }
-        #intro .container .welcome-buttons {
-            /*display:none;*/
-        }
-        
-        #intro .container .welcome-text-right {
-            width: 5em;
-        }
-     
-    }
+ 
 
 #pro .btn {
     margin-left: auto;
@@ -283,24 +193,32 @@ foreach($images as $image) {
     
 					
     <?php  } ?>
+        
+        
+     $(window).on("load", function() {
+        
+        
         var idx= 0;
         bgimgs.forEach(function(elem){            
-            $('#intro').append('<img id="img_loawQuality_' + idx + '" src="' + elem.medium + '" style="display:none;">');
-            $('#intro').append('<img id="img_highQuality_' + idx + '" src="' + elem.large + '" style="display:none;">');
+            if ( window.innerWidth < 450 ) {
+                $('#intro').append('<img id="img_lowQuality_' + idx + '" src="' + elem.medium + '" style="display:none;">');
+            }else {
+                $('#intro').append('<img id="img_highQuality_' + idx + '" src="' + elem.large + '" style="display:none;">');
+            }
             $("#img_highQuality_" + idx).off().on("load", function() {            
                 elem.loaded = true;
             });
             idx++;
         }); 
-        
-     $(window).on("load", function() {
-        var i = 0;
     
-        
-        var changeimage = function () {            
+        var i = 1;
+        var changeimage = function () {                
             var bgimg = bgimgs[i].medium;
             if(bgimgs[i].loaded) 
                 bgimg = bgimgs[i].large;
+            else if (!bgimgs[i].loaded && window.innerWidth >= 450) {
+                return;
+            }
             
                 
             $("#wrapper_bottom").css("opacity", 0);
@@ -339,10 +257,6 @@ foreach($images as $image) {
             
         };
         window.setInterval(changeimage, 6000);
-    changeimage();
-    
- 
-
 });    
 
     
@@ -350,7 +264,11 @@ foreach($images as $image) {
 </script>
         
         <div id="wrapper_top" class="background-img" style="            
-            z-index: 0">            
+            z-index: 0;
+            background-image: url('<?php echo wp_get_attachment_image_src($images[0],'large')[0]; ?>');
+            background-position-x: <?php echo get_post_meta( $images[0], 'focus_position_x', true )?>%;
+            background-position-y: <?php echo get_post_meta( $images[0], 'focus_position_y', true )?>%;
+            ">            
             <div id='wrapper_bottom'  class="background-img" style=" z-index: -1;
             top: 0;
             height: 100%;
@@ -385,7 +303,11 @@ foreach($images as $image) {
 		<div class="row">
 
 			<div class="col-md-12 col-sm-12">
-				<div class="wow welcome-text-container" data-wow-delay="0.9s" style="position:relative;" >                                       
+                            
+                            <a href="#overview" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">アトリエのこと</a>
+				<a href="#register" class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s">会員登録</a>
+				<!--div class="wow welcome-text-container" data-wow-delay="0.9s" style="position:relative;" >                                       
+                                    
                                     <!--div class="welcome-text" style="display:flex;position:  absolute;left: 0;height:100%;">
                                     <p class="desc-left" style="">
 							アトリエブルジョン。
@@ -393,11 +315,10 @@ foreach($images as $image) {
                                     <p class="desc-wider">両方からお洒落するレディースブランド<br>
                                     </p>
                                     </div-->
-                                    <div class="welcome-text welcome-buttons" style="padding-top: 33%;
+                                    <!--div class="welcome-text welcome-buttons" style="padding-top: 33%;
     width: 50%;
     margin-left: auto;
-    margin-right: auto;"> <a href="#overview" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s"><?php _e('LEARN MORE','atelierbourgeons') ?></a>
-				<a href="#register" class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s"><?php _e('REGISTER NOW','atelierbourgeons') ?></a>
+    margin-right: auto;"> 
                                 </div>
                                     <!--div class="welcome-text welcome-text-right" style="position: absolute;right: 0; top:0;overflow: hidden;height:100%;  /*margin-right: 2em;*/">
                                     <p class="desc-wider-right" style="">「デザイン」 と 「ものづくりの背景」
@@ -405,7 +326,7 @@ foreach($images as $image) {
                                     －外身も中身も、かっこよく。－
                                     		</p>
                                         </div-->
-                                </div><!--h1 class="wow fadeInUp" data-wow-delay="1.6s"><?php //echo get_post_meta( $post->ID , 'Home Page Title', true ); ?></h1-->
+                                <!--/div><!--h1 class="wow fadeInUp" data-wow-delay="1.6s"><?php //echo get_post_meta( $post->ID , 'Home Page Title', true ); ?></h1-->
 				
 			</div>
 
@@ -464,18 +385,8 @@ foreach($images as $image) {
                         </p>
 			</div>
 					
-			<div class="wow fadeInUp col-md-offset-0 col-md-6 col-sm-offset-1 col-xs-offset-1 col-sm-10 col-xs-10 col-lg-6" data-wow-delay="0.9s" style="padding-top:2em;">
-                            <div class="concept-grid">
-                                <div class="one" style="width: 87%;">
-                                    <img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/homepage/amb_1.jpg" class="img-responsive" alt="Overview">
-                                </div>
-                                <div class="two">
-                                    <img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/homepage/amb_3.jpg" class="img-responsive" alt="Overview">
-                                </div>
-                                <div class="three">
-                                    <img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/homepage/amb_2.jpg" class="img-responsive" alt="Overview">
-                                </div>
-                            </div>
+			<div class="wow fadeInUp col-md-offset-0 col-md-6 col-sm-offset-1 col-xs-offset-1 col-sm-10 col-xs-10 col-lg-6" data-wow-delay="0.9s" style="padding-top:2em;">                            
+                            <img src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/homepage/concept.jpg">
 			</div>
 
 		</div>
@@ -492,12 +403,7 @@ foreach($images as $image) {
 	<div class="container" style="width:100%;">
 		<div class="row" style="display:flex;flex-wrap:wrap;justify-content: center;">
 
-			<!--div class="wow fadeInLeft col-md-4 col-sm-4" data-wow-delay="0.3s">
-				<i class="fa fa-handshake-o"></i>
-				<h3>650 Participants</h3>
-				<p>Quisque ut libero sapien. Integer tellus nisl, efficitur sed dolor at, vehicula finibus massa. Sed tincidunt metus sed eleifend suscipit.</p>
-			</div-->
-
+			
                         <?php
                             $pages = get_pages(array(
                                 'meta_key' => '_wp_page_template',
@@ -766,14 +672,14 @@ foreach($images as $image) {
 ============================== -->
 <section id="pro" class="parallax-section" style="padding-bottom: 2em;">
 	<div class="container">
-		<div class="row" style="font-family: TestFont;">
+		<div class="row" style="">
                     
                   <!-- Section title
 			================================================== 
                   -->
-			<div class="wow bounceIn col-md-10 col-md-offset-0  col-sm-10 text-center" style="font-weight: 200;margin-top: 3em;">
+			<div class="wow bounceIn col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 text-center" style="font-weight: 200;margin-top: 3em;">
 				<div class="section-title">
-					<h2>For Professional Buyers - 事業者（法人 & 個人）の皆様へ</h2>
+					<h2>For Professional Buyers <br> 事業者（法人 & 個人）の皆様へ</h2>
 					<h3>— 卸販売のご案内 —</h3>
 				</div>
 			</div>  
@@ -781,8 +687,7 @@ foreach($images as $image) {
  
 
 			<div class="wow fadeInUp col-md-6 col-md-offset-0 col-sm-offset-1 col-sm-10" data-wow-delay="1.3s" >
-				<p style="text-align: center;letter-spacing: 3px;margin-bottom: 2em; 
-    font-size: 1.4em;">一枚から卸価格にてご購入可能。<br>
+				<p style="text-align: center;letter-spacing: 3px;margin-bottom: 2em;">一枚から卸価格にてご購入可能。<br>
 フランス・パリ発のクリエーションを、<br>
 効率的にネットでバイイング。
 </p>
@@ -808,7 +713,9 @@ foreach($images as $image) {
 
 
 <!-- Back top -->
-<a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
+<a href="#back-top" class="go-top"><!--i class="fa fa-angle-up"></i-->
+    <svg width="40px" height="40px" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1395 1184q0 13-10 23l-50 50q-10 10-23 10t-23-10l-393-393-393 393q-10 10-23 10t-23-10l-50-50q-10-10-10-23t10-23l466-466q10-10 23-10t23 10l466 466q10 10 10 23z"/></svg>
+</a>
 
 <?php
 return;

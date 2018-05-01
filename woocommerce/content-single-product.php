@@ -162,7 +162,6 @@ if(isset($attachment_ids[1]))
         
         .product-description {
             width: 50%;
-            min-width: 350px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -180,7 +179,7 @@ if(isset($attachment_ids[1]))
             right:0;
         }
         
-        .modal .modal-header .fa.fa-arrow-alt-circle-left {            
+        .modal .modal-header #btn-modal-back {            
             font-size: 1.5em;
             cursor: pointer;
         }
@@ -202,6 +201,20 @@ if(isset($attachment_ids[1]))
             }
         }
         
+        @media screen and (max-width: 760px) {
+            #product-intro h3 , 
+            #modal-reservation h3 {
+                line-height: 36px;
+                font-size: 19px;
+            }            
+            #modal-reservation .product-description {
+                width: 100%;                
+            }
+            #modal-reservation .product-description small {
+                font-size: 70%;
+            }
+        }
+        
     </style>
     <!-- =========================
     INTRO SECTION   
@@ -212,12 +225,9 @@ if(isset($attachment_ids[1]))
 
 			<div class="col-md-12 col-sm-12">
 				<h3 class="wow bounceIn" data-wow-delay="0.9s"><?php echo $product->get_title(); ?></h3>				
-				<a href="#overview" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">LEARN MORE</a>
-                                <?php if(is_user_logged_in()) { ?>
-                                    <a id="reservation" class="btn btn-lg btn-danger smoothScroll wow fadeInUp btn-reservation" data-wow-delay="2.3s">RESERVE NOW</a>
-                                <?php } else  { ?>
-                                    <a id="reservation" href="<?php echo Theme_My_Login::get_page_link( 'login' ); ?>" class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s">RESERVE NOW</a>
-                                <?php }?>        
+				<a href="#product-in-short" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">詳しくみる</a>
+                                <a id="reservation" class="btn btn-lg btn-danger smoothScroll wow fadeInUp btn-reservation" data-wow-delay="2.3s">価格 & 詳細</a>
+                                
 			</div>
 
 
@@ -228,7 +238,7 @@ if(isset($attachment_ids[1]))
     <h4 style="margin:2em;" ><?php echo $product->get_data()['short_description']; ?></h4>
 </section>
     <div class="refills-components">
-        <?php if(is_user_logged_in()) { ?>
+        
 <div id="modal-reservation" class="modal">
     <input class="modal-state" id="modal-1" type="checkbox" />
     
@@ -236,7 +246,9 @@ if(isset($attachment_ids[1]))
         <div class="modal-inner">
             
         <div class="modal-header">        
-            <div class="fa fa-arrow-alt-circle-left" id="btn-modal-back" style="display:none;"></div>
+            <div class="" id="btn-modal-back" style="display:none;">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" width="15px" height="15px" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512"><path d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm116-292H256v-70.9c0-10.7-13-16.1-20.5-8.5L121.2 247.5c-4.7 4.7-4.7 12.2 0 16.9l114.3 114.9c7.6 7.6 20.5 2.2 20.5-8.5V300h116c6.6 0 12-5.4 12-12v-64c0-6.6-5.4-12-12-12z" fill="#626262"/></svg>
+            </div>
             <h5 id="modal-title">
                 </h5>
             <div class="modal-close" for="modal-1"></div>            
@@ -284,26 +296,7 @@ if(isset($attachment_ids[1]))
       
     </div>
 </div>
-        <?php } else { 
-            // login panel
-            ?>
-        <div id="modal-login" class="modal">
-    <input class="modal-state" id="modal-1" type="checkbox" />
-    
-    <div class="modal-fade-screen">
-        <div class="modal-inner">
-        <div class="modal-close" for="modal-1"></div>
-       
-            <?php //woocommerce_login_form( ); 
-            $widget = new Theme_My_Login_Widget();
-            $widget->widget(array(),array());?>
-       
-    </div>
-      
-    </div>
-</div>
-            
-        <?php } ?>
+        
     </div>
 <!-- =========================
         NAV BAR
@@ -331,7 +324,7 @@ if(isset($attachment_ids[1]))
             </div>                  
         </div><!-- react-text: 99 --><!-- /react-text -->
         <div id="reservation" class="container-15-202" >            
-            <a class="btn btn-lg btn-danger btn-reservation" <?php if(!is_user_logged_in()) { echo 'href="'. Theme_My_Login::get_page_link( 'login' ) .'"'; } ?>>RESERVE NOW</a>            
+            <a class="btn btn-lg btn-danger btn-reservation" >価格 & 詳細</a>            
         </div> 
     </div>
 </div>
@@ -599,7 +592,9 @@ if(isset($attachment_ids[1]))
 
 
     <!-- Back top -->
-    <a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
+    <a href="#back-top" class="go-top">
+        <svg width="40px" height="40px" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1395 1184q0 13-10 23l-50 50q-10 10-23 10t-23-10l-393-393-393 393q-10 10-23 10t-23-10l-50-50q-10-10-10-23t10-23l466-466q10-10 23-10t23 10l466 466q10 10 10 23z"/></svg>
+    </a>
 <!--/div-->
 <script>
 var viewer = new Viewer(document.getElementById('am-container'), {toolbar:false, title:false});
@@ -632,15 +627,17 @@ $('#am-container').on('shown',function(){
 
 </script>
 <script type='text/javascript'>
-<?php if(is_user_logged_in()) { ?>            
+
 $(document).on('click', '#reservation', function(){     
-    $('#modal-reservation').addClass('modal-open');    
+    $('#modal-reservation').addClass('modal-open');   
+    $(document.body).css('overflow-y','hidden');
 });
 
 $(document).on('click','#modal-reservation .modal-close' ,function(){ 
  $('#modal-reservation').removeClass('modal-open'); 
+ $(document.body).css('overflow-y','scroll');
 });
-<?php } ?>
+
 
 
 </script>

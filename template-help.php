@@ -16,7 +16,7 @@ get_header();
 ?>
 
 
-<div style="width: 80%;margin-left: auto;margin-right: auto;">
+<div style="width: 80%;margin-left: auto;margin-right: auto;padding-top: 5em;">
     <header class="entry-header">
         <h1 class="entry-title">
             <?php 
@@ -24,9 +24,9 @@ get_header();
             ?>
         </h1>		
     </header>
-    <div class="entry-content">
+    <div class="entry-content" style="margin-bottom: 6em;">
         <?php 
-            echo $post->post_content;    
+            echo do_shortcode($post->post_content);    
         ?>
     </div>    
 </div>
@@ -35,6 +35,7 @@ get_header();
 get_footer();
 return;?>
 <style>
+    
     .custom-block:nth-child(3n+1) {
         clear: left;
     }

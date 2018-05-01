@@ -15,7 +15,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <!-- Google Font -->
-<link href='https://fonts.googleapis.com/css?family=Poppins:400,500,600' rel='stylesheet' type='text/css'>
+<!--link href='https://fonts.googleapis.com/css?family=Poppins:400,500,600' rel='stylesheet' type='text/css'-->
 <!-- =========================
      SCRIPTS    
 ============================== -->
@@ -77,7 +77,7 @@
 <!-- =========================
      NAVIGATION LINKS     
 ============================== -->
-<div class="navbar navbar-fixed-top custom-navbar" role="navigation">
+<div class="navbar navbar-fixed-top custom-navbar active" role="navigation" style="height:auto;">
 	<div class="container">
 
 		<!-- navbar header -->
@@ -180,7 +180,7 @@
 		</div>
                 <script>
     
-    $('.navbar.custom-navbar').mouseenter(function() {
+    /*$('.navbar.custom-navbar').mouseenter(function() {
         if(screen.width < 768 ) 
             return;
         that = $(this);
@@ -204,7 +204,7 @@
             },'slow');
         });
     });
-  
+  */
     $('.nav.navbar-nav li').mouseenter(function() {
         $(this).find('.subnavContainer').addClass('active');
         

@@ -172,7 +172,7 @@ function bbloomer_add_name_woo_account_registration() {
     
     <p class="form-row form-row-wide">
     <label for="reg_billing_address_1"><?php _e( '店舗の住所２', 'woocommerce' ); ?></label>
-    <input type="text" class="input-text" name="billing_address_2" id="reg_billing_address_2" value="<?php if ( ! empty( $_POST['billing_address_2'] ) ) esc_attr_e( $_POST['billing_address_2'] ); ?>" required/>
+    <input type="text" class="input-text" name="billing_address_2" id="reg_billing_address_2" value="<?php if ( ! empty( $_POST['billing_address_2'] ) ) esc_attr_e( $_POST['billing_address_2'] ); ?>"/>
     </p>
     
     <p class="form-row form-row-wide">
@@ -305,12 +305,12 @@ add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
     
 function theme_enqueue_styles() {    
     wp_enqueue_style( 'bootstrap-style', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), 'v1.2' );
-    wp_enqueue_style( 'animate-style', get_template_directory_uri() . '/assets/css/animate.css', array(), 'v1.2' );
+    wp_enqueue_style( 'animate-style', get_template_directory_uri() . '/assets/css/animate.min.css', array(), 'v1.2' );
     //wp_enqueue_style( 'fa-solid-style', get_template_directory_uri() . '/assets/css/fa-solid.min.css' , array(), 'v1.3');
-    wp_enqueue_style( 'font-awesome-style', get_template_directory_uri() . '/assets/css/font-awesome.min.css' , array(), 'v1.2');
+    //wp_enqueue_style( 'font-awesome-style', get_template_directory_uri() . '/assets/css/font-awesome.min.css' , array(), 'v1.2');
     wp_enqueue_style( 'owl-theme-style', get_template_directory_uri() . '/assets/css/owl.theme.min.css' , array(), 'v1.2');
     wp_enqueue_style( 'owl-carousel-style', get_template_directory_uri() . '/assets/css/owl.carousel.min.css' , array(), 'v.1.2');
-    wp_enqueue_style( 'homepage-style', get_template_directory_uri() . '/assets/css/homepage.css' , array(), filemtime( getcwd() .  '/wp-content/themes/atelierbourgeonspro/assets/css/homepage.css' ));
+    //wp_enqueue_style( 'homepage-style', get_template_directory_uri() . '/assets/css/homepage.min.css' , array(), filemtime( getcwd() .  '/wp-content/themes/atelierbourgeonspro/assets/css/homepage.css' ));
     wp_enqueue_style( 'timeline-style', get_template_directory_uri() . '/assets/css/timeline.min.css' , array(), 'v1.2');
     wp_enqueue_style( 'project-gmap-style', get_template_directory_uri() . '/assets/css/project-gmap.min.css' , array(), 'v1.2');
     wp_enqueue_style( 'main-style', get_template_directory_uri() . '/assets/css/style.min.css' , array(), filemtime( getcwd() .  '/wp-content/themes/atelierbourgeonspro/assets/css/style.min.css' ));
@@ -327,12 +327,12 @@ function theme_enqueue_styles() {
     wp_enqueue_script( 'smoothscroll-script', get_template_directory_uri() . '/assets/js/smoothscroll.min.js', array(), 'v1.2' );
     wp_enqueue_script( 'wow-script', get_template_directory_uri() . '/assets/js/wow.min.js', array(), 'v1.2' );
     wp_enqueue_script( 'custom-script', get_template_directory_uri() . '/assets/js/custom.min.js', array(), 'v1.2' );
-    wp_enqueue_script( 'easy-pie-chart-script', get_template_directory_uri() . '/assets/js/easy-pie-chart.min.js', array(), 'v1.2' );
+    //wp_enqueue_script( 'easy-pie-chart-script', get_template_directory_uri() . '/assets/js/easy-pie-chart.min.js', array(), 'v1.2' );
     wp_enqueue_script( 'canvas-script', get_template_directory_uri() . '/assets/js/canvas.min.js', array(), 'v1.2' );
-    wp_enqueue_script( 'sly-script', get_template_directory_uri() . '/assets/js/sly.min.js', array(), 'v1.2' );
+    //wp_enqueue_script( 'sly-script', get_template_directory_uri() . '/assets/js/sly.min.js', array(), 'v1.2' );
     wp_enqueue_script( 'viewer-script', get_template_directory_uri() . '/assets/js/viewer.min.js', array(), 'v1.2' );
     wp_enqueue_script( 'popup-script', get_template_directory_uri() . '/assets/js/simplepopup.min.js', array(), 'v1.2' );
-    wp_enqueue_script( 'img-lazy-load-script', get_template_directory_uri() . '/assets/js/img-lazy-loading.js', array(), filemtime( getcwd() .  '/wp-content/themes/atelierbourgeonspro/assets/js/img-lazy-loading.js' ) );
+    wp_enqueue_script( 'img-lazy-load-script', get_template_directory_uri() . '/assets/js/img-lazy-loading.min.js', array(), filemtime( getcwd() .  '/wp-content/themes/atelierbourgeonspro/assets/js/img-lazy-loading.min.js' ) );
     //wp_enqueue_script( 'project-gmap-infobox-script', get_template_directory_uri() . '/assets/js/project-gmap-infobox.min.js', array(), 'v1.2' );
     //wp_enqueue_script( 'project-gmap-script', get_template_directory_uri() . '/assets/js/project-gmap.min.js', array(), 'v1.2' );
     
@@ -1073,7 +1073,7 @@ function my_login_redirect( $url, $request, $user ){
         if( $user->has_cap( 'administrator' ) ) {
             $url = admin_url();
         } else {            
-            $url = get_permalink( woocommerce_get_page_id( 'shop' ) );
+            $url = get_home_url();
         }
     }
     return $url;
@@ -1185,7 +1185,7 @@ function custom_postimage_meta_box_save($post_id){
     }
 }
 
-add_action('woocommerce_view_order','display_bank_details_and_timeline_order');
+/*add_action('woocommerce_view_order','display_bank_details_and_timeline_order');
  
 function display_bank_details_and_timeline_order($order_id)
 {
@@ -1202,5 +1202,5 @@ function display_bank_details_and_timeline_order($order_id)
     include 'woocommerce/wc-timeline-single-product.php'; 
     echo '</section>';
       
-}
+}*/
 
