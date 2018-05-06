@@ -32,8 +32,7 @@ if ( ! function_exists( 'admin_order_item_production_status' ) ) {
         ?><td class="item_status" width="1%">
 		<div class="view">
 			<?php
-                               //print_r($order_item->get_meta_data());
-                        
+                                                      
                                 if(get_class  ( $order_item ) == 'WC_Order_Item_Product') {
                                //$order_item->add_meta_data( 'status', 'NOT ASSOCIATED PRODUCT');
                                $production_id = $order_item->get_meta('_production_id', true);
@@ -57,6 +56,7 @@ if ( ! function_exists( 'admin_wc_after_order_itemmeta' ) )
 {
     function admin_wc_after_order_itemmeta( $item_id, $item, $_product ) {
         global $wpdb;
+        
         if(is_a($item,'WC_Order_Item_Shipping')) {
             //$_product = $item->get_product_id();
             return;
@@ -68,8 +68,8 @@ if ( ! function_exists( 'admin_wc_after_order_itemmeta' ) )
         }else {
             $product_id = $_product->get_id();
         }
-        $production_id = wc_get_not_stated_production_item ($product_id);
-        if($production_id != null) {
+        $production_id = wc_get_not_stated_production_item ($product_id);        
+        if($item->get_meta('_production_id', true) != '' ) {
             return;
         }
         ?>

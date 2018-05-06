@@ -85,7 +85,7 @@ ul#' . esc_attr( $id ) . ' li input {
         
               
         $html  .= '<ul id="' . esc_attr( $id ) . '" class="custom-select" name="' . esc_attr( $name ) . '" data-attribute_name="attribute_' . esc_attr( sanitize_title( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '" size="' . count($options) .'" style="overflow: auto;">';
-        $html  .= '<li><h6 style="margin-right:1em">' . get_taxonomy( $attribute )->label . ':</h3></li>';   
+        $html  .= '<li><h6 style="margin-right:1em">' . get_taxonomy( $attribute )->label . ':</h6></li>';   
         //$html .= '<option value="">' . esc_html( $show_option_none_text ) . '</option>';
 
         if ( ! empty( $options ) ) {
@@ -97,13 +97,23 @@ ul#' . esc_attr( $id ) . ' li input {
 
                 foreach ( $terms as $term ) {
                     if ( in_array( $term->slug, $options, true ) ) {
-                        $html .= '<li><input type="radio" name="' . esc_attr( $name ) . '" value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . ' id="html-' . esc_attr( $term->slug ) . '"><label for="html-' . esc_attr( $term->slug ) . '">' . esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name ) ) . '</li>';
+                        $selected = $args['selected'];                        
+                        if($selected == esc_attr( esc_attr( $term->slug ) ))
+                            $selected = 'checked';
+                        else 
+                            $selected = '';
+                        $html .= '<li><input type="radio" name="' . esc_attr( $name ) . '" value="' . esc_attr( $term->slug ) . '" ' . $selected  . ' id="html-' . esc_attr( $term->slug ) . '"><label for="html-' . esc_attr( $term->slug ) . '">' . esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name ) ) . '</li>';
                     }
                 }
             } else {
                 foreach ( $options as $option ) {
                     // This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
                     $selected = sanitize_title( $args['selected'] ) === $args['selected'] ? selected( $args['selected'], sanitize_title( $option ), false ) : selected( $args['selected'], $option, false );
+                    /*if($selected == esc_attr( $option ))
+                        $selected = 'checked';
+                    else */
+                        $selected = '';
+                        
                     $html    .= '<li><input type="radio" name="' . esc_attr( $name ) . '" value="' . esc_attr( $option ) . '" ' . $selected . ' id="html-' . esc_attr( $option ) . '><label for="html-' . esc_attr( $option ) . '">' . esc_html( apply_filters( 'woocommerce_variation_option_name', $option ) ) . '</label></li>';
                 }
             }
@@ -133,9 +143,11 @@ ul#' . esc_attr( $id ) . ' li input {
 							<?php
 								$selected = isset( $_REQUEST[ 'attribute_' . sanitize_title( $attribute_name ) ] ) ? wc_clean( stripslashes( urldecode( $_REQUEST[ 'attribute_' . sanitize_title( $attribute_name ) ] ) ) ) : $product->get_variation_default_attribute( $attribute_name );
 								wc_checkbox_variation_attribute_options( array( 'options' => $options, 'attribute' => $attribute_name, 'product' => $product, 'selected' => $selected ) );
-								echo end( $attribute_keys ) === $attribute_name ? apply_filters( 'woocommerce_reset_variations_link', '<a class="reset_variations" href="#">' . esc_html__( 'Clear', 'woocommerce' ) . '</a>' ) : '';
+                                                                wc_dropdown_variation_attribute_options( array( 'options' => $options, 'attribute' => $attribute_name, 'product' => $product, 'selected' => $selected, 'class' => 'hide' ) );
+								//echo end( $attribute_keys ) === $attribute_name ? apply_filters( 'woocommerce_reset_variations_link', '<a class="reset_variations" href="#">' . esc_html__( 'Clear', 'woocommerce' ) . '</a>' ) : '';
 							?>
 						</td>
+                                                
 					</tr>
 				<?php endforeach;?>
 			</tbody>
@@ -171,6 +183,13 @@ ul#' . esc_attr( $id ) . ' li input {
 
 	<?php do_action( 'woocommerce_after_variations_form' ); ?>
 </form>
-
+<script>
+        $('.variations_form.cart input[type="radio"]').on('click', function(evt) {            
+            $('select[name=' + $(this).attr('name') + ']').val($(this).attr('value')); 
+            $('.variations_form.cart').find( 'input[name="variation_id"], input.variation_id' ).val( '' ).change();
+            $('.variations_form.cart').find( '.wc-no-matching-variations' ).remove();
+            $('.variations_form.cart').trigger("check_variations");
+        });
+    </script>
 <?php
 do_action( 'woocommerce_after_add_to_cart_form' );

@@ -30,6 +30,6 @@ echo mail_new_user_checking( $user );
 ?>
 <p>New user confirm email: </p>
 <?php
-echo mail_new_user_confirm_email( $user );
+echo mail_new_user_confirm_email( $user , '');
 
 ?>

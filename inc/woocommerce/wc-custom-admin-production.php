@@ -59,8 +59,8 @@ if ( ! function_exists( 'production_meta_boxes' ) ) {
  if(!class_exists('WC_Meta_Box_Production_Data')) {
         require_once 'class-wc-meta-box-production-data.php';
     }
-add_action( 'save_post', 'WC_Meta_Box_Production_Actions::save' , 1, 2 );
-add_action( 'save_post', 'WC_Meta_Box_Production_Data::save' , 1, 2 );
+add_action( 'save_post_shop_production', 'WC_Meta_Box_Production_Actions::save' , 1, 2 );
+add_action( 'save_post_shop_production', 'WC_Meta_Box_Production_Data::save' , 1, 2 );
 
 
 

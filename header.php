@@ -50,7 +50,7 @@
 			//do_action( 'storefront_header' ); ?>
 
 		</div>
-	</header><!-- #masthead -->
+	</header>-->
 
 	<?php
 	/**

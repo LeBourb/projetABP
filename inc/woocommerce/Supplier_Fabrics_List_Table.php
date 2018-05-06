@@ -329,5 +329,5 @@ function saveServices($postID) {
     empty($servicesData) ? delete_post_meta($postID,'currentServices') : update_post_meta($postID,'currentServices',$servicesData);
     wp_set_object_terms($postID,$services,'service');
 }
-add_action('save_post','saveServices');
+//add_action('save_post','saveServices');
 

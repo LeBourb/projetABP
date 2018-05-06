@@ -9,14 +9,21 @@ $( window ).load(function() {
     var idx = 0;
     $('.img-lazy-load').each(function(){
         var that = $(this);
-        that.append('<img id="img_highQuality_' + idx + '" src="' + that.data('full-src') + '" style="display:none;">');
-        $("#img_highQuality_" + idx).off().on("load", function() {            
-            that.css({
-                "background-image" : "url(" + $(this).attr('src') + ")"
-            });
+        if(that.data('parent-id')) {
+            $('#' + that.data('parent-id')).append('<img id="img_highQuality_' + idx + '" src="' + that.data('full-src') + '" style="display:none;">');
+        }else {
+            that.append('<img id="img_highQuality_' + idx + '" src="' + that.data('full-src') + '" style="display:none;">');
+        }
+        
+        $("#img_highQuality_" + idx).off().on("load", function() { 
+            if(!that.hasClass('no-background')) {
+                that.css({
+                    "background-image" : "url(" + $(this).attr('src') + ")"
+                });
+            }   
             if (that.attr('src') !== '') {
                 that.attr('src',$(this).attr('src'));
-            }
+            }            
         });
         idx++;
     });

@@ -670,6 +670,17 @@ function atelierbourgeons_update_pro_terms_conditions() {
     }
 }
 
+add_filter( 'woocommerce_shipping_chosen_method', 'atelierbourgeons_shipping_chosen_method' , 40, 3);
+function atelierbourgeons_shipping_chosen_method($default, $package_rates, $chosen_method ) {
+    foreach ($package_rates as $package_rate) {
+        if($package_rate->__get('method_id') ==  'free_shipping') {
+            return $package_rate->__get('id');
+        }    
+    }
+    return $default;
+}
+    
+
 
 
 add_filter( 'woocommerce_get_terms_page_id', 'atelierbourgeons_get_terms_page_id' , 40 , 1);
@@ -750,8 +761,7 @@ function atelierbourgeons_new_user_approved( $user ) {
                       <td align="center" style="font-family:Open Sans,Helvetica,Arial,sans-serif">
                         <h2></h2>
                         <p>
-                            この度は、atelier Bourgeons （アトリエブルジョン）の会員登録をご申請いただき、誠にありがとうございます。
-                            ビジネス会員の登録認証が完了しましたので、お知らせいたします。下記のアカウントにてログイン後、ビジネス会員価格で商品をご注文いただけます。
+                            atelier Bourgeons （アトリエブルジョン）の ビジネス会員登録にお申し込みいただき、誠にありがとうございます。 会員の登録認証が完了しましたので、お知らせいたします。ログイン後、ビジネス会員様のみに公開される卸価格にて商品をご購入いただけます。
                         </p>
                       </td>
                     </tr>
@@ -760,7 +770,7 @@ function atelierbourgeons_new_user_approved( $user ) {
                         <table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse!important">
                           <tbody><tr>
                             <td align="center" style="border-radius:26px" bgcolor="#0570D4">
-                              <a href="'. get_site_url() .'" style="background: #613143;border: 1px solid #613143;border-radius: 14px;color:#ffffff;display:block;font-family:Open Sans,Helvetica,Arial,sans-serif;font-size:16px;padding:14px 26px;text-decoration:none" target="_blank" data-saferedirecturl="">ビジネス会員価格でバイイングを始める→</a>
+                              <a href="'. get_site_url() .'" style="background: #613143;border: 1px solid #613143;border-radius: 14px;color:#ffffff;display:block;font-family:Open Sans,Helvetica,Arial,sans-serif;font-size:16px;padding:14px 26px;text-decoration:none" target="_blank" data-saferedirecturl="">サイトに移動</a>
                             </td>
                           </tr>
                         </tbody></table>
@@ -787,6 +797,12 @@ add_filter( 'new_user_approve_approve_user_message_default', 'atelierbourgeons_n
 
 
 
+
+function atelierbourgeons_new_user_approve_subject ( $subject ) {
+    return '【ビジネス会員登録の認証が完了しました】/atelier Bourgeons （ｱﾄﾘｴﾌﾞﾙｼﾞｮﾝ）';
+}
+
+add_filter( 'new_user_approve_approve_user_subject', 'atelierbourgeons_new_user_approve_subject' , 10 , 1 );
 
 function atelierbourgeons_new_user_checking( $status, $user_id ) {
     //if($action == 'login')
@@ -815,18 +831,16 @@ function atelierbourgeons_new_user_checking( $status, $user_id ) {
     $message = null;
     $txt = null;
     if ($status == "confirm-email") {
-        $subject = '【ご登録のアカウントを有効化してください】/atelier Bourgeons （ｱﾄﾘｴﾌﾞﾙｼﾞｮﾝ）';   
+        $subject = '【ご登録完了まであと少しです】/atelier Bourgeons （ｱﾄﾘｴﾌﾞﾙｼﾞｮﾝ）';   
         $code = sha1( $user->ID . time() ); 
         global $wpdb;
         $wpdb->update( $wpdb->users, array( 'user_activation_key' => $code ), array( 'ID' => $user->ID ) );
         //$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
         $activation_url = add_query_arg( array( 'action' => 'confirm-email', 'key' => $code, 'user' => $user->ID), wp_login_url() );
         $message = mail_new_user_confirm_email($user,$activation_url);
-        $txt = txt_new_user_confirm_email($activation_url);
     }else {
         $subject = '【会員認証の完了までしばらくお待ちください】/atelier Bourgeons （ｱﾄﾘｴﾌﾞﾙｼﾞｮﾝ）';
         $message = mail_new_user_checking($user);
-        $txt = txt_new_user_checking();
     }
     
     /*$message = '--boundary42 \r\n
@@ -1093,7 +1107,7 @@ add_role( 'customer-pro', 'Professional Customer', array( 'read' => true, 'level
 add_action( 'after_setup_theme', 'custom_postimage_setup' );
 function custom_postimage_setup(){
     add_action( 'add_meta_boxes', 'custom_postimage_meta_box' );
-    add_action( 'save_post', 'custom_postimage_meta_box_save' );
+    add_action( 'save_post_shop_product', 'custom_postimage_meta_box_save' );
 }
 
 function custom_postimage_meta_box(){
@@ -1112,8 +1126,8 @@ function custom_postimage_meta_box(){
 add_action( 'wp_ajax_woocommerce_add_awesome_description', 'WC_Meta_Box_Product_Awesome_Description::add' );
 add_action( 'wp_ajax_woocommerce_remove_awesome_description', 'WC_Meta_Box_Product_Awesome_Description::remove' );
 add_action( 'wp_ajax_woocommerce_save_awesome_description', 'WC_Meta_Box_Product_Awesome_Description::save' );
-add_action( 'save_post', 'WC_Meta_Box_Product_Size_Details::save' );
-add_action( 'save_post', 'WC_Meta_Box_Product_Size_Guide::save' );
+add_action( 'save_post_shop_product', 'WC_Meta_Box_Product_Size_Details::save' );
+add_action( 'save_post_shop_product', 'WC_Meta_Box_Product_Size_Guide::save' );
     
 function custom_postimage_meta_box_func($post){
 

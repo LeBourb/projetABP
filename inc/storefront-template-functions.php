@@ -1117,18 +1117,9 @@ if ( ! function_exists( 'svg_valid_email' ) ) {
     }
 }
 
-if ( ! function_exists( 'txt_new_user_confirm_email' ) ) {
-    function txt_new_user_confirm_email($activation_url) {
-        return 'atelier Bourgeons （アトリエブルジョン）への会員登録をご申請いただき、誠にありがとうございます。下記のURLをクリックして、あなたのメールアドレスでのアクセスを有効にしてください。
-            \n\r
-             会員登録認証用URL: \n\r
-             ' . $activation_url . '\n\r';
-    }
-}
-
 if ( ! function_exists( 'mail_new_user_confirm_email' ) ) {
     function mail_new_user_confirm_email($user, $activation_url) {
-    $message = atelierbourgeons_html_email_template_header('会員登録のご申請ありがとうございます！登録完了まであと一歩です。');
+    $message = atelierbourgeons_html_email_template_header('会員登録のお申し込みありがとうございます！<br>登録完了まであと少しです。');
     
     global $wpdb, $current_site;
     
@@ -1155,7 +1146,7 @@ if ( ! function_exists( 'mail_new_user_confirm_email' ) ) {
                     <tr>
                       <td align="center" style="">                        
                         <p style="">
-                            atelier Bourgeons （アトリエブルジョン）への会員登録をご申請いただき、誠にありがとうございます。下記のURLをクリックして、あなたのメールアドレスでのアクセスを有効にしてください。                          
+                            atelier Bourgeons （アトリエブルジョン）への会員登録にお申し込みいただき、誠にありがとうございます。下記のURLをクリックして、登録を完了してください。
                   </p><p>会員登録認証用URL:
              <a href="' . $activation_url . '">' . $activation_url . '</a>' 
              . '</p>
@@ -1196,7 +1187,7 @@ if ( ! function_exists( 'txt_new_user_checking' ) ) {
 
 if ( ! function_exists( 'mail_new_user_checking' ) ) {
     function mail_new_user_checking($user) {
-    $message = atelierbourgeons_html_email_template_header('ビジネス会員登録のお申し込み、誠にありがとうございます！');
+    $message = atelierbourgeons_html_email_template_header('ビジネス会員登録へのお申し込み<br>ありがとうございます');
     
     $user_login = stripslashes( $user->user_login );
     $user_email = stripslashes( $user->user_email );
@@ -1218,8 +1209,7 @@ if ( ! function_exists( 'mail_new_user_checking' ) ) {
                     <tr>
                       <td align="center" style="">                        
                         <p>
-                          この度は、atelier Bourgeons （アトリエブルジョン）の会員登録をご申請いただき、誠にありがとうございます。
-                           ビジネス会員の登録には、サイト管理者による会員認証が必要です。ご登録内容の確認後、当方より改めてメールをお送りしますので、今しばらくお待ちくださいませ。
+                          atelier Bourgeons （アトリエブルジョン）の会員登録にお申し込みいただき、誠にありがとうございます。 ビジネス会員の登録には、サイト管理者による会員認証が必要です。ご登録内容の確認後、当方より改めてメールをお送りしますので、今しばらくお待ちください。
                         </p>
                       </td>
                     </tr>

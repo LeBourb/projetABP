@@ -323,7 +323,7 @@ if(isset($attachment_ids[1]))
     ============================== -->
     <section id="gallery" class="parallax-section">
             <div class="container">
-                    <div class="row">
+                    <div class="row" id="parent-am-container-img">
                         <div id="am-container" class="">
                             <?php
                                 $attachment_ids = $product->get_gallery_image_ids();
@@ -341,18 +341,18 @@ if(isset($attachment_ids[1]))
                                     $width = 0;
                                     $height = 0;
                                     if(count($attachment_ids)) {
-                                        $attachment_id = array_shift($attachment_ids);                                                                            
-                                        $image_meta = wp_get_attachment_image_src($attachment_id,'medium');
+                                        $attachment_id = array_shift($attachment_ids);     
+                                        $image_meta = wp_get_attachment_image_src($attachment_id,'large');
                                         $width = $image_meta[1];
                                         $height = $image_meta[2];
                                         $image_attachment_url = $image_meta[0];
-                                        $image_full_attachment_src = wp_get_attachment_image_src($attachment_id,'large');
+                                        $image_full_attachment_src = wp_get_attachment_image_src($attachment_id,'full');
                                     } 
                                     
                                     if( ( $width > $height || count($buffer_cell) ) && $lg_used_col <= 6 && $md_used_col <= 4 && $sm_used_col <= 0)  {                                        
                                         if(!count($buffer_cell) && $width > $height) {
-                                            echo '<div href="'. $image_attachment_url .'" class="wow fadeInUp col-lg-6 col-md-8 col-sm-12 col-xs-12" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
-                                                <img data-full-src="'. $image_full_attachment_src[0] . '"  src="' . $image_attachment_url . '" class="img-responsive img-lazy-load" alt="sponsors">	
+                                            echo '<div href="'. $image_full_attachment_src[0] .'" class="wow fadeInUp col-lg-6 col-md-8 col-sm-12 col-xs-12" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
+                                                <img data-parent-id="parent-am-container-img" data-full-src="'. $image_full_attachment_src[0] . '"  src="' . $image_attachment_url . '" class="img-responsive img-lazy-load" alt="sponsors">	
                                                 <div class="overlay" style="opacity: 0.9; display:none;"></div>
                                                 </div>';
                                             $lg_used_col += 6;
@@ -366,23 +366,23 @@ if(isset($attachment_ids[1]))
                                             $sm_used_col += 12;
                                         }                            
                                         else if ($width > $height) {
-                                            $buffer_cell[] = '<div href="'. $image_attachment_url .'" class="wow fadeInUp col-lg-6 col-md-8 col-sm-12 col-xs-12" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
-                                            <img data-full-src="'. $image_full_attachment_src[0] . '" src="' . $image_attachment_url . '" class="img-responsive img-lazy-load" alt="sponsors">	
+                                            $buffer_cell[] = '<div href="'. $image_full_attachment_src[0] .'" class="wow fadeInUp col-lg-6 col-md-8 col-sm-12 col-xs-12" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
+                                            <img data-parent-id="parent-am-container-img" data-full-src="'. $image_full_attachment_src[0] . '" src="' . $image_attachment_url . '" class="img-responsive img-lazy-load" alt="sponsors">	
                                                 <div class="overlay" style="opacity: 0.9; display:none;"></div>
                                                 </div>';                                            
                                         }
                                         
                                     }
                                     else if ($width > $height && $image_attachment_url != null) {
-                                        $buffer_cell[] = '<div href="'. $image_attachment_url .'" class="wow fadeInUp col-lg-6 col-md-8 col-sm-12 col-xs-12" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
-                                        <img data-full-src="'. $image_full_attachment_src[0] . '" src="' . $image_attachment_url . '" class="img-responsive img-lazy-load" alt="sponsors">	
+                                        $buffer_cell[] = '<div href="'. $image_full_attachment_src[0] .'" class="wow fadeInUp col-lg-6 col-md-8 col-sm-12 col-xs-12" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
+                                        <img data-parent-id="parent-am-container-img" data-full-src="'. $image_full_attachment_src[0] . '" src="' . $image_attachment_url . '" class="img-responsive img-lazy-load" alt="sponsors">	
                                             <div class="overlay" style="opacity: 0.9; display:none;"></div>
                                             </div>';                                  
                                     }
                                     //$image_url = wp_get_attachment_image_src( $image_attachment_id );
                                     else if ($width <= $height){
-                                        echo '<div href="'. $image_attachment_url .'" class="wow fadeInUp col-lg-3 col-md-4 col-sm-6 col-xs-6" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
-                                        <img data-full-src="'. $image_full_attachment_src[0] . '" src="' . $image_attachment_url . '" class="img-responsive img-lazy-load" alt="sponsors">	
+                                        echo '<div href="'. $image_full_attachment_src[0] .'" class="wow fadeInUp col-lg-3 col-md-4 col-sm-6 col-xs-6" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
+                                        <img data-parent-id="parent-am-container-img" data-full-src="'. $image_full_attachment_src[0] . '" src="' . $image_attachment_url . '" class="img-responsive img-lazy-load" alt="sponsors">	
                                             <div class="overlay" style="opacity: 0.9; display:none;"></div>				   
                                         </div>';
                                         $lg_used_col += 3;
