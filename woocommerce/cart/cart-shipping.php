@@ -33,8 +33,15 @@ if($free_shipping) {
     $available_methods = array( 'free_shipping:1' => $free_shipping);
     $chosen_methods = array();
     $chosen_methods[] = 'free_shipping:1';
+    //$previous_chosen_methods[] = 'previous_shipping:2';
+    
+    //print_r(WC()->session->get( 'previous_shipping_methods'));
     WC()->session->set( 'chosen_shipping_methods', $chosen_methods );    
+    WC()->session->set( 'shipping_method_counts', '1' );
+    WC()->session->set( 'previous_shipping_methods' , array( ) );
+    WC()->cart->calculate_shipping( );
 }
+
 
 ?>
 <tr class="shipping">
