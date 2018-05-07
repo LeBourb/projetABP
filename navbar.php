@@ -201,43 +201,19 @@
 
 		</div>
                 <script>
-    
-    /*$('.navbar.custom-navbar').mouseenter(function() {
-        if(screen.width < 768 ) 
-            return;
-        that = $(this);
-        $(this).stop().animate({
-            'padding-top':'0' ,
-            opacity:'0.6',
-            backgroundColor: 'white'
-        }, 'slow', function() {
-            that.addClass('active');
+    (function($) {
+        $('.nav.navbar-nav li').mouseenter(function() {
+            $(this).find('.subnavContainer').addClass('active');
+
         });
-    });
-    $('.navbar.custom-navbar').mouseleave(function() {
-        if(screen.width < 768 ) 
-            return;
-        that = $(this);
-        that.removeClass('active');
-        setTimeout(function(){
-            that.stop().animate({
-                'padding-top':'20px',
-                backgroundColor: 'black'
-            },'slow');
+        $( ".subnavContainer" ).mouseleave(function() {
+            //$(this).hide();
+            $(this).removeClass('active');
         });
-    });
-  */
-    $('.nav.navbar-nav li').mouseenter(function() {
-        $(this).find('.subnavContainer').addClass('active');
-        
-    });
-    $( ".subnavContainer" ).mouseleave(function() {
-        //$(this).hide();
-        $(this).removeClass('active');
-    });
-    $( ".nav.navbar-nav li" ).mouseleave(function() {
-        $(this).find('.subnavContainer').removeClass('active');
-    });
+        $( ".nav.navbar-nav li" ).mouseleave(function() {
+            $(this).find('.subnavContainer').removeClass('active');
+        });
+    }(jQuery));
     </script>
 
 	</div>

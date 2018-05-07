@@ -48,13 +48,13 @@ if ( empty( $prices['price'] ) ) {
     if(in_array( 'customer-pro', $role )) {
         return '<b id="price-field" class="price crowdfunding" itemprop="offers" itemscope="" itemtype="//schema.org/Offer">'
             . '<span class="priv-sale"><small>卸価格: </small>' . $priv_sale_price . '</span>'            
-            . '<span class="pre-sale" style="font-size:0.7em;margin-left:1em;"><small>先行予約注文価格: </small><del>' . $pre_sale_price . '</del></span>'
+            . '<span class="pre-sale" style="font-size:0.7em;margin-left:1em;"><small>先行予約価格: </small><del>' . $pre_sale_price . '</del></span>'
             . '<span class="regular" style="font-size:0.7em;margin-left:1em;"><small>通常価格: </small><del>' . $regular_price .'</del></span>'
             . '</b>';
     }
     
     return '<b id="price-field" class="price crowdfunding" itemprop="offers" itemscope="" itemtype="//schema.org/Offer">'
-            . '<span class="pre-sale"><small>先行予約注文価格: </small>' . $pre_sale_price . '</span>'            
+            . '<span class="pre-sale"><small>先行予約価格: </small>' . $pre_sale_price . '</span>'            
             . '<span class="regular" style="font-size:0.7em;margin-left:1em;"><small>通常価格: </small><del>' . $regular_price .'</del></span> '
             . '</b>';
     //wc_price($that->get_regular_price())

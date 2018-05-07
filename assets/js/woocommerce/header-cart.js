@@ -3,11 +3,10 @@
  * Mouseover is used as items can be added to the cart via ajax and we'll need to recheck.
  */
 ( function() {
-	if ( document.body.classList.contains( 'woocommerce-cart' ) || document.body.classList.contains( 'woocommerce-checkout' ) || window.innerWidth < 768 || ! document.getElementById( 'site-header-cart' ) ) {
-		return;
-	}
-
 	window.addEventListener( 'load', function() {
+            if ( document.body.classList.contains( 'woocommerce-cart' ) || document.body.classList.contains( 'woocommerce-checkout' ) || window.innerWidth < 768 || ! document.getElementById( 'site-header-cart' ) ) {
+                    return;
+            }
 		var cart = document.querySelector( '.site-header-cart' );
 
 		cart.addEventListener( 'mouseover', function() {

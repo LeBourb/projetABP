@@ -215,6 +215,13 @@ if(isset($attachment_ids[1]))
             }
         }
         
+        #price-field .woocommerce-Price-amount.amount ,
+        #price-field small
+        {
+            display: block;
+            line-height: 20px;
+        }
+        
     </style>
     <!-- =========================
     INTRO SECTION   
@@ -227,7 +234,7 @@ if(isset($attachment_ids[1]))
 				<h3 class="wow bounceIn" data-wow-delay="0.9s"><?php echo $product->get_title(); ?></h3>				
 				<a href="#story" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">Story<br>この服のおはなし</a>
                                 <a href="#gallery" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">Photo Gallery<br>ギャラリー</a>
-                                <a id="reservation" class="btn btn-lg btn-danger smoothScroll wow fadeInUp btn-reservation" data-wow-delay="2.3s">Price & Detail<br>購入ページ</a>
+                                <a id="reservation" class="btn btn-lg btn-danger smoothScroll wow fadeInUp btn-reservation" data-wow-delay="2.3s">Price & Details<br>購入ページ</a>
                                 
 			</div>
 
@@ -314,7 +321,7 @@ if(isset($attachment_ids[1]))
             </div>                  
         </div><!-- react-text: 99 --><!-- /react-text -->
         <div id="reservation" class="container-15-202" >            
-            <a class="btn btn-lg btn-danger btn-reservation" >Price & Detail<br>購入ページ</a>            
+            <a class="btn btn-lg btn-danger btn-reservation" >Price & Details<br>購入ページ</a>            
         </div> 
     </div>
 </div>

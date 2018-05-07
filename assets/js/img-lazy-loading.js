@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+(function($) {
 // Lazy-loading
 $( window ).load(function() {    
     var idx = 0;
@@ -38,3 +38,4 @@ var html = document.getElementsByTagName('html')[0];
 if (classNames.length) classNames.push('on-device');
 if (html.classList) html.classList.add.apply(html.classList, classNames);
 
+}(jQuery));

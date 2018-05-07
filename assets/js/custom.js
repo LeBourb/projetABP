@@ -1,4 +1,4 @@
-
+(function($) {
  /* jQuery Pre loader
   -----------------------------------------------*/
 $(window).load(function(){
@@ -198,3 +198,4 @@ $( document ).scroll(function() {
     }
   }
 
+}(jQuery));

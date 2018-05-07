@@ -124,6 +124,17 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
     margin-right: auto;
     white-space: normal;
 }
+
+#intro h3#homepage-catch-phrase {
+    line-height: 40px;
+}
+
+@media screen and (max-width:768px) {
+    #intro h3#homepage-catch-phrase {
+        font-size: 1.3em;
+    }
+}
+
 </style>
 
 <section id="intro" class="parallax-section">
@@ -142,7 +153,7 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 </video-->  <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
   <script id='custom-homepage' type="text/javascript">
         
-       
+       (function($) {
 
         
     var bgimgs  = new Array();
@@ -160,13 +171,15 @@ foreach($images as $image) {
     
         $index++;
    $image_attributes_medium = wp_get_attachment_image_src($image,'medium');
+   $attachment = get_post( $image );
    $image_attributes_large = wp_get_attachment_image_src($image,'large');
    $image_metas_x = get_post_meta( $image, 'focus_position_x', true );//( $image->ID ); 
    if($image_attributes_medium[0] != "") {
         $value = 'bgimgs.push({'
                 . 'medium:"' . $image_attributes_medium[0] . '",'
                 . 'large:"' . $image_attributes_large[0] . '",'
-                . 'loaded:false'
+                . 'loaded:false,'
+                . 'description:"' . preg_replace("/[\n\r]/","", $attachment->post_content) . '"'
                 . '});';
         if($image_metas_x != "") {
          $focus_x = "$image_metas_x%";
@@ -195,72 +208,81 @@ foreach($images as $image) {
     <?php  } ?>
         
         
-     $(window).on("load", function() {
-        
-        
-        var idx= 0;
-        bgimgs.forEach(function(elem){            
-            if ( window.innerWidth < 450 ) {
-                $('#intro').append('<img id="img_lowQuality_' + idx + '" src="' + elem.medium + '" style="display:none;">');
-            }else {
-                $('#intro').append('<img id="img_highQuality_' + idx + '" src="' + elem.large + '" style="display:none;">');
-            }
-            $("#img_highQuality_" + idx).off().on("load", function() {            
-                elem.loaded = true;
-            });
-            idx++;
-        }); 
-    
-        var i = 1;
-        var changeimage = function () {                
-            var bgimg = bgimgs[i].medium;
-            if(bgimgs[i].loaded) 
-                bgimg = bgimgs[i].large;
-            else if (!bgimgs[i].loaded && window.innerWidth >= 450) {
-                return;
-            }
-            
-                
-            $("#wrapper_bottom").css("opacity", 0);
-            $('#wrapper_bottom').css('background-image','url(' + bgimg + ')');         
-            $('#wrapper_bottom').css('background-position-x',bgFocusX[i]);
-            $('#wrapper_bottom').css('background-position-y',bgFocusY[i]);
-    
-    // Your function
-    // TODO: you should declare this outside of this scope
-        
-            $('#wrapper_bottom')
-                .animate({"opacity": 1}, 2000, function(){
-              //changeImage('#wrapper_top', images[i], 1);
-                //$('#wrapper_top').css('opacity',0);         
-                $('#wrapper_top').css('background-image','url(' + bgimg + ')');         
-                $('#wrapper_top').css('background-position-x',bgFocusX[i]);
-                $('#wrapper_top').css('background-position-y',bgFocusY[i]);
-                $('#wrapper_top')
-                //.animate({"opacity": 1}, 500, function(){                    
-                    if (++i >= bgimgs.length) { i = 0; } 
-                    $("#wrapper_bottom").css("opacity", 0);
-                    $('#wrapper_bottom').css('background-image','url(' + bgimg + ')');         
-                    $('#wrapper_bottom').css('background-position-x',bgFocusX[i]);
-                    $('#wrapper_bottom').css('background-position-y',bgFocusY[i]);
-               // });
-              
-              //changeImage('#wrapper_bottom', images[i]);
-              
-              
-              
-          });
-          
-          
-        
-  
-            
-        };
-        window.setInterval(changeimage, 6000);
-});    
+        $(window).on("load", function() {
+
+
+           var idx= 0;
+           bgimgs.forEach(function(elem){            
+               if ( window.innerWidth < 450 ) {
+                   $('#intro').append('<img id="img_lowQuality_' + idx + '" src="' + elem.medium + '" style="display:none;">');
+               }else {
+                   $('#intro').append('<img id="img_highQuality_' + idx + '" src="' + elem.large + '" style="display:none;">');
+               }
+               $("#img_highQuality_" + idx).off().on("load", function() {            
+                   elem.loaded = true;
+               });
+               idx++;
+           }); 
+
+           var i = 1;
+           var changeimage = function () {                
+               var bgimg = bgimgs[i].medium;
+               if(bgimgs[i].loaded) 
+                   bgimg = bgimgs[i].large;
+               else if (!bgimgs[i].loaded && window.innerWidth >= 450) {
+                   return;
+               }
+               var description = bgimgs[i].description;
+
+               $("#wrapper_bottom").css("opacity", 0);
+               $('#wrapper_bottom').css('background-image','url(' + bgimg + ')');         
+               $('#wrapper_bottom').css('background-position-x',bgFocusX[i]);
+               $('#wrapper_bottom').css('background-position-y',bgFocusY[i]);
+
+       // Your function
+       // TODO: you should declare this outside of this scope
+               $('#homepage-catch-phrase').removeClass('fadeInUp');
+               $('#homepage-catch-phrase').removeClass('animated');
+               $('#homepage-catch-phrase').addClass('fadeOutDown');
+               $('#homepage-catch-phrase').fadeOut(2000);
+               $('#wrapper_bottom')
+                   .animate({"opacity": 1}, 2000, function(){
+                 //changeImage('#wrapper_top', images[i], 1);
+                   //$('#wrapper_top').css('opacity',0);         
+                   $('#wrapper_top').css('background-image','url(' + bgimg + ')');         
+                   $('#wrapper_top').css('background-position-x',bgFocusX[i]);
+                   $('#wrapper_top').css('background-position-y',bgFocusY[i]);
+                   $('#homepage-catch-phrase').empty();
+                   $('#homepage-catch-phrase').append(description);
+                   $('#homepage-catch-phrase').removeClass('animated');
+                   $('#homepage-catch-phrase').removeClass('fadeOutDown');
+                   $('#homepage-catch-phrase').addClass('fadeInUp');
+                   $('#homepage-catch-phrase').fadeIn(1000);
+
+                   //.animate({"opacity": 1}, 500, function(){                    
+                       if (++i >= bgimgs.length) { i = 0; } 
+                       $("#wrapper_bottom").css("opacity", 0);
+                       $('#wrapper_bottom').css('background-image','url(' + bgimg + ')');         
+                       $('#wrapper_bottom').css('background-position-x',bgFocusX[i]);
+                       $('#wrapper_bottom').css('background-position-y',bgFocusY[i]);
+                  // });
+
+                 //changeImage('#wrapper_bottom', images[i]);
+
+
+
+             });
+
+
+
+
+
+           };
+           window.setInterval(changeimage, 6000);
+   });    
 
     
-    
+    }(jQuery));
 </script>
         
         <div id="wrapper_top" class="background-img" style="            
@@ -282,7 +304,7 @@ foreach($images as $image) {
             
             <?php 
  
-$images = get_attached_media('image', $post->ID);
+/*$images = get_attached_media('image', $post->ID);
 $index = 0;
 
 foreach($images as $image) { 
@@ -292,18 +314,24 @@ foreach($images as $image) {
    $image_attributes = wp_get_attachment_image_src($image->ID,'large');
    //<img class="bgimgs" src="<?php echo $image_attributes[0]
      //<img class="bgimgs portrait" src="<?php echo $image_attributes[0]
-   ?>
-
-            
-    
-					
-    <?php } }?>
+ 
+   } }
+ * * 
+ */?>
+ 
 
 	<div class="container">
 		<div class="row">
 
 			<div class="col-md-12 col-sm-12">
-                            
+                            <h3 class="wow fadeInUp" id="homepage-catch-phrase">
+                                <?php  
+                                ///print_r($images);
+                                $attachment = get_post( $images[0] );
+                                echo $attachment->post_content;
+                                
+                                 ?>
+                            </h3>
                             <a href="#overview" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">アトリエのこと</a>
 				<?php if (!is_user_logged_in()) { ?>
                                     <a href="#register" class="btn btn-lg btn-danger smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">会員登録</a>
@@ -471,7 +499,7 @@ foreach($images as $image) {
                                     <img style="width: 1em;" src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/icon/tracking-order.png"></img>
                                 </i>   
 				<h5>商品の生産状況からお届け予定まで、サイト上で常に確認可能。</h5>
-				<h4>TRAKING SYSTEM OF YOUR ORDER</h4>
+				<h4>TRACKING SYSTEM OF YOUR ORDER</h4>
 				<p>商品の注文後、当サイトにログイン→「MY ORDER」ページにて、商品の生産状況やお届け予定日をいつでもお好きな時に確認できます。</p>
                                 <div class="bottom-line">
                                     <a href="<?php echo Theme_My_Login::get_page_link( 'register' ); ?>" class="btn btn-lg btn-default" style="visibility: visible; font-size: 0.8em;">ログイン・登録フォーム</a>

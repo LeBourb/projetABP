@@ -123,7 +123,7 @@ class DC_Checkout_Terms_Conditions_Popup_Frontend {
 			<script type="text/javascript" >				
 			jQuery(document).ready(function($) {
 				<?php if(!isset($_GET['pay_for_order'])) {?>
-				$( window ).bind( 'updated_checkout', function() {
+				jQuery( document.body ).bind( 'updated_checkout', function() {
 					$(".form-row").find(".terms > label > span:first").html("<?php echo $line; ?>");	
 					 $('.simple_popup_show').click(function(){
 					 		 $('#checkoutpopupform').simplepopup();
