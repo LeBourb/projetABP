@@ -132,9 +132,9 @@
                     <div class="parallax-realcontainer img-lazy-load" style="background:linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) ), url(<?php echo wp_get_attachment_image_src($media_2, 'medium')[0]; ?>) no-repeat center bottom / cover;" data-full-src="<?php echo wp_get_attachment_image_src( $media_2, 'large')[0];?>">
 
                     </div>
-                    <div class="innerContainer">                  
+                    <div class="innerContainer" >                  
                         
-                          <div class="label"><?php echo $text_right;?></div>                                                        
+                          <div class="label" style="left:44%;"><?php echo $text_right;?></div>                                                        
                         
                     </div>
                 </div>

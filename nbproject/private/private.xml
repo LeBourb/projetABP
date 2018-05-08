@@ -3,18 +3,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/class-storefront-woocommerce.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/functions.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/classes/class-dc-checkout-terms-conditions-popup-frontend.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-prod-functions.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-prod-admin-variable-pre-sale.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/custom.js</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/class-wc-meta-box-production-actions.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/customizer/class-storefront-customizer.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/content-homepage.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/admin/admin.js</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/style.css</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/class-wc-meta-box-product-awesome-description.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/canvas.js</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-add-to-cart.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/woocommerce/checkout.js</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/class-wc-meta-box-production-actions.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/admin/customizer.js</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/navbar.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/content-homepage.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/single-product/add-to-cart/variable.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-product-price.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/gateways/class-wc-gateway-bacs-jp.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/classes/class-dc-checkout-terms-conditions-popup-frontend.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-prod-admin-variable-pre-sale.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/custom.js</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/img-lazy-loading.js</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/view/html-product-awesome-parallax.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/customizer/class-storefront-customizer.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/class-storefront-woocommerce.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/canvas.min.js</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/woocommerce/header-cart.js</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/content-single-product.php</file>
         </group>
     </open-files>
 </project-private>

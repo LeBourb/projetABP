@@ -586,7 +586,7 @@ foreach($images as $image) {
 </section>
 
 <script>
-    jQuery( document ).ready( function() {
+    jQuery( document ).ready( function($) {
         $( document ).on( 'click', '#register-form-submit' , function(e) {
             var register_url='<?php
 		

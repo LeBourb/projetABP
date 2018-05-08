@@ -49,6 +49,7 @@ function wc_before_add_to_cart_size_details() {
    </div>
    
    <script>
+       (function($) {
        $('#btn_size_details').click(function() {
            $('.modal-product-details.product').append($('#wc_size_details').show());
            $('.modal-product-details.product .images').hide();
@@ -76,6 +77,7 @@ function wc_before_add_to_cart_size_details() {
             $('.modal-header #modal-title').text("サイズガイド");
             window.second_sizing_guide = true;
        });
+       }(jQuery));
    </script>
    
    <?php
@@ -180,6 +182,7 @@ function wc_before_add_to_cart_funding() {
         </p>
         <span class="progress-text">目標達成度: <?php echo $percent;?>%</span>
         <script>
+            (function($) {
             var strdate = $('.tricky-countdown').data( 'funding-end' );
             var countDownDate = new Date(strdate).getTime();
             window.setInterval(function() {
@@ -212,6 +215,7 @@ function wc_before_add_to_cart_funding() {
                 //Do something 
                 });
             })
+            }(jQuery));
             
         </script>
         <div style="background-color:#e8e8e8;margin:1em;padding:1em;margin-top: 4em;">

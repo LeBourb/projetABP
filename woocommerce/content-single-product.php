@@ -281,7 +281,8 @@ if(isset($attachment_ids[1]))
                              
                 </div>
                      <script>
-                        $('#product-carousel').owlCarousel({
+                         
+                        jQuery('#product-carousel').owlCarousel({
                             animateOut: 'slideOutDown',
                             animateIn: 'flipInX',
                             items:1,
@@ -597,6 +598,8 @@ if(isset($attachment_ids[1]))
     </a>
 <!--/div-->
 <script>
+    (function($) {
+
 var viewer = new Viewer(document.getElementById('am-container'), {toolbar:false, title:false});
 // leave preview if click outside box: 
 var RectContains = function (Ax,w,Ay,h,x, y) {
@@ -625,9 +628,6 @@ $('#am-container').on('shown',function(){
     })
 });
 
-</script>
-<script type='text/javascript'>
-
 $(document).on('click', '#reservation', function(){     
     $('#modal-reservation').addClass('modal-open');   
     $(document.body).css('overflow-y','hidden');
@@ -638,8 +638,7 @@ $(document).on('click','#modal-reservation .modal-close' ,function(){
  $(document.body).css('overflow-y','scroll');
 });
 
-
-
+}(jQuery));
 </script>
     
 <style>

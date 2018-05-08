@@ -184,12 +184,14 @@ ul#' . esc_attr( $id ) . ' li input {
 	<?php do_action( 'woocommerce_after_variations_form' ); ?>
 </form>
 <script>
+    (function($) {
         $('.variations_form.cart input[type="radio"]').on('click', function(evt) {            
             $('select[name=' + $(this).attr('name') + ']').val($(this).attr('value')); 
             $('.variations_form.cart').find( 'input[name="variation_id"], input.variation_id' ).val( '' ).change();
             $('.variations_form.cart').find( '.wc-no-matching-variations' ).remove();
             $('.variations_form.cart').trigger("check_variations");
         });
+    }(jQuery));
     </script>
 <?php
 do_action( 'woocommerce_after_add_to_cart_form' );

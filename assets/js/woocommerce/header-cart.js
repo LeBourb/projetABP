@@ -2,8 +2,8 @@
  * Makes the header cart content scrollable if the height of the dropdown exceeds the window height.
  * Mouseover is used as items can be added to the cart via ajax and we'll need to recheck.
  */
-( function() {
-	window.addEventListener( 'load', function() {
+( function($) {
+	window.addEventListener( 'load', function($) {
             if ( document.body.classList.contains( 'woocommerce-cart' ) || document.body.classList.contains( 'woocommerce-checkout' ) || window.innerWidth < 768 || ! document.getElementById( 'site-header-cart' ) ) {
                     return;
             }
@@ -20,4 +20,4 @@
 			}
 		} );
 	} );
-} )();
+}(jQuery));

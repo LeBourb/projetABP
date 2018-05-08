@@ -303,7 +303,9 @@ function bbloomer_save_name_fields( $customer_id ) {
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );    
 
     
-function theme_enqueue_styles() {    
+function theme_enqueue_styles() {   
+    $theme              = wp_get_theme( 'storefront' );
+$storefront_version = $theme['Version'];
     wp_enqueue_style( 'bootstrap-style', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), 'v1.2' );
     wp_enqueue_style( 'animate-style', get_template_directory_uri() . '/assets/css/animate.min.css', array(), 'v1.2' );
     //wp_enqueue_style( 'fa-solid-style', get_template_directory_uri() . '/assets/css/fa-solid.min.css' , array(), 'v1.3');
@@ -319,20 +321,20 @@ function theme_enqueue_styles() {
     
     
     //wp_enqueue_script( 'jquery-script', get_template_directory_uri() . '/assets/js/jquery.min.js', array(), 'v1.2' );
-    wp_enqueue_script( 'jquery-form-script', get_template_directory_uri() . '/assets/js/jquery.form.min.js', array(), 'v1.2' );
-    wp_enqueue_script( 'jquery-validate-script', get_template_directory_uri() . '/assets/js/jquery.validate.min.js', array(), 'v1.2' );
-    wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array(), 'v1.2' );
-    wp_enqueue_script( 'jquery-parallax-script', get_template_directory_uri() . '/assets/js/jquery.parallax.min.js', array(), 'v1.2' );
-    wp_enqueue_script( 'owl-carousel-script', get_template_directory_uri() . '/assets/js/owl.carousel.min.js', array(), 'v1.2' );
-    wp_enqueue_script( 'smoothscroll-script', get_template_directory_uri() . '/assets/js/smoothscroll.min.js', array(), 'v1.2' );
-    wp_enqueue_script( 'wow-script', get_template_directory_uri() . '/assets/js/wow.min.js', array(), 'v1.2' );
-    wp_enqueue_script( 'custom-script', get_template_directory_uri() . '/assets/js/custom.min.js', array(), 'v1.2' );
+    wp_enqueue_script( 'jquery-form-script', get_template_directory_uri() . '/assets/js/jquery.form.min.js', array(), $storefront_version );
+    wp_enqueue_script( 'jquery-validate-script', get_template_directory_uri() . '/assets/js/jquery.validate.min.js', array(), $storefront_version);
+    wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array(), $storefront_version );
+    wp_enqueue_script( 'jquery-parallax-script', get_template_directory_uri() . '/assets/js/jquery.parallax.min.js', array(), $storefront_version );
+    wp_enqueue_script( 'owl-carousel-script', get_template_directory_uri() . '/assets/js/owl.carousel.min.js', array(), $storefront_version );
+    wp_enqueue_script( 'smoothscroll-script', get_template_directory_uri() . '/assets/js/smoothscroll.min.js', array(), $storefront_version );
+    wp_enqueue_script( 'wow-script', get_template_directory_uri() . '/assets/js/wow.min.js', array(), $storefront_version );
+    wp_enqueue_script( 'custom-script', get_template_directory_uri() . '/assets/js/custom.min.js', array(), $storefront_version );
     //wp_enqueue_script( 'easy-pie-chart-script', get_template_directory_uri() . '/assets/js/easy-pie-chart.min.js', array(), 'v1.2' );
-    wp_enqueue_script( 'canvas-script', get_template_directory_uri() . '/assets/js/canvas.min.js', array(), 'v1.2' );
+    wp_enqueue_script( 'canvas-script', get_template_directory_uri() . '/assets/js/canvas.min.js', array(), $storefront_version );
     //wp_enqueue_script( 'sly-script', get_template_directory_uri() . '/assets/js/sly.min.js', array(), 'v1.2' );
-    wp_enqueue_script( 'viewer-script', get_template_directory_uri() . '/assets/js/viewer.min.js', array(), 'v1.2' );
-    wp_enqueue_script( 'popup-script', get_template_directory_uri() . '/assets/js/simplepopup.min.js', array(), 'v1.2' );
-    wp_enqueue_script( 'img-lazy-load-script', get_template_directory_uri() . '/assets/js/img-lazy-loading.min.js', array(), filemtime( getcwd() .  '/wp-content/themes/atelierbourgeonspro/assets/js/img-lazy-loading.min.js' ) );
+    wp_enqueue_script( 'viewer-script', get_template_directory_uri() . '/assets/js/viewer.min.js', array(), $storefront_version );
+    wp_enqueue_script( 'popup-script', get_template_directory_uri() . '/assets/js/simplepopup.min.js', array(), $storefront_version );
+    wp_enqueue_script( 'img-lazy-load-script', get_template_directory_uri() . '/assets/js/img-lazy-loading.min.js', array(), $storefront_version );
     //wp_enqueue_script( 'project-gmap-infobox-script', get_template_directory_uri() . '/assets/js/project-gmap-infobox.min.js', array(), 'v1.2' );
     //wp_enqueue_script( 'project-gmap-script', get_template_directory_uri() . '/assets/js/project-gmap.min.js', array(), 'v1.2' );
     
@@ -697,6 +699,16 @@ function atelierbourgeons_get_terms_page_id( $page_id ) {
     }
     return $page_id;
 }
+
+function atelierbourgeons_woocommerce_coupons_enabled( $enable_coupon ) {
+    $user = wp_get_current_user(); 
+    $role = ( array ) $user->roles;    
+    if(in_array( 'customer-pro', $role )) {   
+        $enable_coupon = false;        
+    }
+    return $enable_coupon;
+}
+add_filter( 'woocommerce_coupons_enabled', 'atelierbourgeons_woocommerce_coupons_enabled' , 10 , 1 );
 
 add_filter( 'woocommerce_shipping_package_name', 'atelierbourgeons_shipping_package_name' , 10 , 3) ;
 
