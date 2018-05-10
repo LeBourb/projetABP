@@ -39,13 +39,15 @@ class WC_Meta_Box_Product_Size_Details {
         */
         public static function save() {
            //check_ajax_referer( 'save-advanced-attributes', 'security' );
-            
-           if ( ! current_user_can( 'edit_products' ) ) {
-            wp_die( -1 );
-           }        
             if(isset($_POST['post_ID'])) {
-                $post_id = $_POST['post_ID'];            
-                update_post_meta(  $post_id, 'wc_size_details' ,  $_POST['wc_size_details'] );  
+                $post_id = $_POST['post_ID'];
+                //if(get_post_type($post_id) == 'product') {
+                    if ( ! current_user_can( 'edit_products' ) ) {
+                    wp_die( -1 );
+                   }     
+                    $post_id = $_POST['post_ID'];            
+                    update_post_meta(  $post_id, 'wc_size_details' ,  $_POST['wc_size_details'] );  
+                //}
             }
             
             

@@ -448,7 +448,7 @@ foreach($images as $image) {
                                     <img style="width: 1em;" src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/icon/secure-payment.png"></img>
                                 </i>    
                                 <h5>安全&快適なネットショッピング</h5>
-                                <h4>PRIVACY POLICY & SECURE PAIEMENT</h4>
+                                <h4>PRIVACY POLICY & SECURE PAYMENT</h4>
                                 <p>本サイトは「SSL」というセキュリティー技術を採用しており、注文時に入力される全ての個人情報は暗号化によって安全に送信されます。また、当店利用のオンライン決済サービスStripeは、 カード業界の国際安全基準 (PCI DSS) で最も安全な「Level 1」を取得しています。 安心してお買い物をお楽しみください。</p>
                                 <div class="bottom-line">
                                     <a href="<?php echo get_permalink(get_option('woocommerce_privacy_policy_page_id')); ?>" class="btn btn-lg btn-default" data-wow-delay="2.3s" style="visibility: visible; font-size: 0.8em;">プライバシーポリシー</a>
@@ -710,7 +710,7 @@ foreach($images as $image) {
                   <!-- Section title
 			================================================== 
                   -->
-			<div class="wow bounceIn col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 text-center" style="font-weight: 200;margin-top: 3em;">
+			<div class="wow col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 text-center" style="font-weight: 200;margin-top: 3em;">
 				<div class="section-title">
 					<h2>For Professional Buyers <br> 事業者（法人 & 個人）の皆様へ</h2>
 					<h3>— 卸販売のご案内 —</h3>

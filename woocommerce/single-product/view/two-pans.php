@@ -143,7 +143,7 @@
         </div>
     </section>
     <script>
-        
+        (function($) {
          $(".awesome_<?php  echo $key; ?> .shape-trapezoid").mouseenter(function() { 
             $("<?php echo '.awesome_' .  $key; ?>").addClass('left-expand');
          });
@@ -156,4 +156,5 @@
          $(".awesome_<?php  echo $key; ?> .shape-trapezoid-inv").mouseleave(function() { 
             $("<?php echo '.awesome_' .  $key; ?>").removeClass('right-expand');
          });
+         }(jQuery));
     </script>

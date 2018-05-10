@@ -28,7 +28,7 @@ function wc_before_add_to_cart_shipping_estimate() {
     }
 }
 
-add_action( 'woocommerce_before_add_to_cart_form', 'wc_before_add_to_cart_size_details', 20 );
+//add_action( 'woocommerce_before_add_to_cart_form', 'wc_before_add_to_cart_size_details', 20 );
  
 function wc_before_add_to_cart_size_details() {
    global $post;
@@ -41,7 +41,7 @@ function wc_before_add_to_cart_size_details() {
    ?>
     <br><a id="btn_size_details" class="icon-sizing" data-featherlight="#size-details-modal" style="cursor:pointer;"><span>サイズ & アイテム詳細</span></a>
    
-   <div id="wc_size_details" style="display:none;    margin-left: auto;
+   <div id="wc_size_details" style="display:none;    margin-left: auto; overflow-x: auto;
     margin-right: auto;"> 
        <?php  if($text_guide && $text_guide != "") {?><div>サイズの測り方はこちら: <a id="btn_second_size_guide" class="icon-sizing" data-featherlight="#size-guide-modal" style="cursor:pointer;"><span>サイズガイド</span></a></div> 
        <?php }?>
@@ -85,7 +85,7 @@ function wc_before_add_to_cart_size_details() {
 }
 
 
-add_action( 'woocommerce_before_add_to_cart_form', 'wc_before_add_to_cart_size_guide', 21 );
+//add_action( 'woocommerce_before_add_to_cart_form', 'wc_before_add_to_cart_size_guide', 21 );
  
 function wc_before_add_to_cart_size_guide() {
    global $post;
@@ -95,7 +95,7 @@ function wc_before_add_to_cart_size_guide() {
    ?>
     <!--a id="btn_size_guide" class="icon-sizing" data-featherlight="#size-guide-modal" style="cursor:pointer;"><span>Sizing Guide</span></a-->
    
-   <div id="wc_size_guide" style="display:none;    margin-left: auto;
+   <div id="wc_size_guide" style="display:none;    margin-left: auto; overflow-x: auto;
     margin-right: auto;"> <?php echo $text; ?> </div>
    
    <?php

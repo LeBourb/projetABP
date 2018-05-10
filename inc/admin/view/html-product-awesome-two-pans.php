@@ -59,6 +59,7 @@ echo '</div>';
     <?php  ?>
    
 <script>
+(function($) {
     $( 'button#<?php echo $awesome_key;?>.remove_awesome_description').on('click',function(){
             var $wrapper     = $( this ).closest( '#wc_awesome_tab' );
             var id = $( this ).attr('id'); 
@@ -156,5 +157,6 @@ echo '</div>';
         custom_postimage_uploader.open();
         return false;
     });
+}(jQuery));
 </script>
 <!--/div-->

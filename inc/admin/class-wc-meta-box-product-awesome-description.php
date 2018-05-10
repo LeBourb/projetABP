@@ -110,7 +110,7 @@ class WC_Meta_Box_Product_Awesome_Description {
             return false;
         });
         */
-    });
+    }(jQuery));
 </script><?php
                 include 'view/html-product-awesome-description.php';
                 echo '</div>';

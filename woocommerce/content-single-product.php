@@ -185,8 +185,7 @@ if(isset($attachment_ids[1]))
         }
         
         .modal .modal-header {
-            text-align:center;
-            display: flex;
+            padding-bottom: 0;
         }
         
         .modal .modal-header #modal-title {
@@ -222,6 +221,13 @@ if(isset($attachment_ids[1]))
             line-height: 20px;
         }
         
+        .modal-inner .nav-pills>li.active>a, 
+        .modal-inner .nav-pills>li.active>a:focus, 
+        .modal-inner .nav-pills>li.active>a:hover {
+            background: #b7b7b7;
+            border-color: transparent;
+        }
+        
     </style>
     <!-- =========================
     INTRO SECTION   
@@ -232,8 +238,8 @@ if(isset($attachment_ids[1]))
 
 			<div class="col-md-12 col-sm-12">
 				<h3 class="wow bounceIn" data-wow-delay="0.9s"><?php echo $product->get_title(); ?></h3>				
-				<a href="#story" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">Story<br>この服のおはなし</a>
                                 <a href="#gallery" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">Photo Gallery<br>ギャラリー</a>
+				<a href="#story" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">Story<br>この服のおはなし</a>                                
                                 <a id="reservation" class="btn btn-lg btn-danger smoothScroll wow fadeInUp btn-reservation" data-wow-delay="2.3s">Price & Details<br>購入ページ</a>
                                 
 			</div>
@@ -244,6 +250,7 @@ if(isset($attachment_ids[1]))
 </section>
 <section id="product-in-short" class="">
     <h4 style="margin:2em;" ><?php echo $product->get_data()['short_description']; ?></h4>
+    <a id="btn-size-info">Button Size Info</a>
 </section>
     <div class="refills-components">
         
@@ -252,61 +259,103 @@ if(isset($attachment_ids[1]))
     
     <div class="modal-fade-screen">
         <div class="modal-inner">
+            <div style="position:relative;">
+        <div class="modal-close" for="modal-1" style="top:0;right:0;"></div> 
+        </div>
+        <!--div class="modal-header">  </div-->  
+            <!-- Nav tabs -->
+            <ul class="nav modal-header nav-pills nav-justified" role="tablist" style="margin:0;">
+              <li role="presentation" class="active"><a id="btn-tab-product-details" href="#wc-product-details" aria-controls="wc-product-details" role="tab" data-toggle="tab">アイテム詳細・購入</a></li>
+              <li role="presentation"><a id="btn-tab-size-info" href="#wc-size-info" aria-controls="wc-size-info" role="tab" data-toggle="tab">サイズ・素材</a></li>
+              <li role="presentation"><a id="btn-tab-size-guide" href="#wc-size-guide" aria-controls="wc-size-guide" role="tab" data-toggle="tab">サイズガイド</a></li>    
+            </ul>
             
-        <div class="modal-header">        
-            <div class="" id="btn-modal-back" style="display:none;">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" width="15px" height="15px" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512"><path d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm116-292H256v-70.9c0-10.7-13-16.1-20.5-8.5L121.2 247.5c-4.7 4.7-4.7 12.2 0 16.9l114.3 114.9c7.6 7.6 20.5 2.2 20.5-8.5V300h116c6.6 0 12-5.4 12-12v-64c0-6.6-5.4-12-12-12z" fill="#626262"/></svg>
+        
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="wc-product-details">
+                <div class="modal-product-details product">
+                  <div class="images" style="display:flex;flex-wrap: wrap;width: 100%;">
+                      <div class="woocommerce-product-gallery__image" style="">
+                          <!--img class="wp-post-image"></img-->
+
+                               <div id="product-carousel" class="fadeOut owl-carousel owl-theme">
+                                   <?php 
+                                      $attachment_ids = $product->get_gallery_image_ids();
+                                      foreach($attachment_ids as $attachment_id) {
+
+                                          $image_attachment = wp_get_attachment_image_src( $attachment_id , 'medium');  
+                                          $image_full_attachment = wp_get_attachment_image_src( $attachment_id , 'large');  
+                                          echo '<div class="item">
+                                                  <img class="img-lazy-load" data-full-src="'. $image_full_attachment[0] . '" src="'. $image_attachment[0] . '" />
+                                              </div>';
+                                      }                                    
+                                   ?>
+
+                      </div>
+                           <script>
+
+                              jQuery('#product-carousel').owlCarousel({
+                                  animateOut: 'slideOutDown',
+                                  animateIn: 'flipInX',
+                                  items:1,
+                                  margin:30,
+                                  stagePadding:30,
+                                  smartSpeed:450,
+                                  loop:true,
+                                  autoplay:true,
+                                  autoplayTimeout:1000,
+                                  autoplayHoverPause:true
+                              });
+
+                      </script>
+                  </div>
+                  <div class="product-description">
+                      <?php do_action( 'woocommerce_single_product_summary' ); ?>
+                  </div>
+              </div>
+          </div>
             </div>
-            <h5 id="modal-title">
-                </h5>
-            <div class="modal-close" for="modal-1"></div>            
-        </div>
-        <div class="modal-product-details product">
-            <div class="images" style="display:flex;flex-wrap: wrap;width: 100%;">
-                <div class="woocommerce-product-gallery__image" style="">
-                    <!--img class="wp-post-image"></img-->
-                    
-                         <div id="product-carousel" class="fadeOut owl-carousel owl-theme">
-                             <?php 
-                                $attachment_ids = $product->get_gallery_image_ids();
-                                foreach($attachment_ids as $attachment_id) {
-                                    
-                                    $image_attachment = wp_get_attachment_image_src( $attachment_id , 'medium');  
-                                    $image_full_attachment = wp_get_attachment_image_src( $attachment_id , 'large');  
-                                    echo '<div class="item">
-                                            <img class="img-lazy-load" data-full-src="'. $image_full_attachment[0] . '" src="'. $image_attachment[0] . '" />
-                                        </div>';
-                                }                                    
-                             ?>
-                             
+            <div role="tabpanel" class="tab-pane" id="wc-size-info">
+            <?php    
+            global $post;
+                $text = get_post_meta(  $post->ID, 'wc_size_details', true);
+                if( $text && $text != "" ) {
+                    $text_guide = get_post_meta(  $post->ID, 'wc_size_guide', true);   
+            ?>                
+                <div id="wc_size_details" style="margin-left: auto; overflow-x: auto;
+                    margin-right: auto;"> 
+                <div><?php echo $text; ?></div> 
                 </div>
-                     <script>
-                         
-                        jQuery('#product-carousel').owlCarousel({
-                            animateOut: 'slideOutDown',
-                            animateIn: 'flipInX',
-                            items:1,
-                            margin:30,
-                            stagePadding:30,
-                            smartSpeed:450,
-                            loop:true,
-                            autoplay:true,
-                            autoplayTimeout:1000,
-                            autoplayHoverPause:true
-                        });
-   
-                </script>
+            <?php 
+            }
+            ?>
             </div>
-            <div class="product-description">
-                <?php do_action( 'woocommerce_single_product_summary' ); ?>
+            <div role="tabpanel" class="tab-pane" id="wc-size-guide">
+              <?php  
+                $text = get_post_meta(  $post->ID, 'wc_size_guide', true);
+                if( $text && $text != "" ) {                    
+                ?>
+    <!--a id="btn_size_guide" class="icon-sizing" data-featherlight="#size-guide-modal" style="cursor:pointer;"><span>Sizing Guide</span></a-->   
+                    <div id="wc_size_guide" style="margin-left: auto; overflow-x: auto;
+                        margin-right: auto;"> <?php echo $text; ?> </div>
+                <?php }
+                ?>
             </div>
         </div>
-    </div>
+
+      </div>
+            <!--div class="" id="btn-modal-back" style="display:none;">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" width="15px" height="15px" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512"><path d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm116-292H256v-70.9c0-10.7-13-16.1-20.5-8.5L121.2 247.5c-4.7 4.7-4.7 12.2 0 16.9l114.3 114.9c7.6 7.6 20.5 2.2 20.5-8.5V300h116c6.6 0 12-5.4 12-12v-64c0-6.6-5.4-12-12-12z" fill="#626262"/></svg>
+            </div-->
+            <!--h5 id="modal-title">
+            </h5-->
+            
+        </div>
+        
       
     </div>
 </div>
-        
-    </div>
 <!-- =========================
         NAV BAR
     ============================== -->
@@ -630,6 +679,12 @@ $('#am-container').on('shown',function(){
 
 $(document).on('click', '#reservation', function(){     
     $('#modal-reservation').addClass('modal-open');   
+    $(document.body).css('overflow-y','hidden');
+});
+
+$(document).on('click', '#btn-size-info', function(){     
+    $('#modal-reservation').addClass('modal-open'); 
+    $('#btn-tab-size-info').click();
     $(document.body).css('overflow-y','hidden');
 });
 

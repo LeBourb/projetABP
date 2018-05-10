@@ -723,6 +723,13 @@ function atelierbourgeons_update_shopping_guide() {
     }
 }
 
+add_filter( 'woocommerce_account_menu_items', 'atelierbourgeons_account_menu_items', 10, 1 );
+function atelierbourgeons_account_menu_items($items) {
+    $items['orders'] = 'ご注文履歴';
+    $items['edit-account'] = 'アカウント詳細・パスワードの変更';
+    return $items;
+}
+
 add_action( 'woocommerce_update_options' , 'atelierbourgeons_update_consumer_notice' );
 function atelierbourgeons_update_consumer_notice() {
     if(isset($_POST['woocommerce_consumer_notice_page_id'])) {
@@ -742,6 +749,16 @@ function atelierbourgeons_update_contact_form() {
     if(isset($_POST['woocommerce_contact_form_page_id'])) {
         update_option('woocommerce_contact_form_page_id', $_POST['woocommerce_contact_form_page_id'] );
     }
+}
+
+add_filter( 'wc_stripe_description', 'atelierbourgeons_stripe_description', 10, 2);
+//wpautop( wp_kses_post( $description ) ), $this->id );
+function atelierbourgeons_stripe_description($description , $id) {
+    if(!strpos($description, 'TEST MODE ENABLED' )) {
+        $description = '<p>※ クレジットカードの決済は、<a target="_blank" href="https://stripe.com/jp/payments">Stripe</a>という決済システムを経由して行われます。</p>
+                    <p>※ カードコード（CVC）とは、デビットもしくはクレジットカードの裏面に記載されている暗証番号です。 ほとんどの場合、カード裏面の署名欄に記載された番号の最後の3桁がこれに当たります。</p>';
+    }
+    return $description;
 }
 
 function atelierbourgeons_new_user_approved( $user ) {
@@ -1138,8 +1155,8 @@ function custom_postimage_meta_box(){
 add_action( 'wp_ajax_woocommerce_add_awesome_description', 'WC_Meta_Box_Product_Awesome_Description::add' );
 add_action( 'wp_ajax_woocommerce_remove_awesome_description', 'WC_Meta_Box_Product_Awesome_Description::remove' );
 add_action( 'wp_ajax_woocommerce_save_awesome_description', 'WC_Meta_Box_Product_Awesome_Description::save' );
-add_action( 'save_post_shop_product', 'WC_Meta_Box_Product_Size_Details::save' );
-add_action( 'save_post_shop_product', 'WC_Meta_Box_Product_Size_Guide::save' );
+add_action( 'save_post_product', 'WC_Meta_Box_Product_Size_Details::save' );
+add_action( 'save_post_product', 'WC_Meta_Box_Product_Size_Guide::save' );
     
 function custom_postimage_meta_box_func($post){
 

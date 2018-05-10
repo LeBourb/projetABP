@@ -43,10 +43,26 @@
             ?>;
         }
         
-        .awesome_<?php echo $key;?> p {
+        .awesome_<?php echo $key;?> p , 
+        .awesome_<?php echo $key;?> h1,
+        .awesome_<?php echo $key;?> h2,
+        .awesome_<?php echo $key;?> h3,
+        .awesome_<?php echo $key;?> h4 {
             color: <?php if($text_color=="white") echo "white"; else echo "black"; ?>
         }
+                
+        .awesome_<?php echo $key;?> h1 {
+            font-size: 20px;
+        }
         
+        .awesome_<?php echo $key;?> h2 {
+            font-size: 18px;
+        }
+                
+        .awesome_<?php echo $key;?> p {
+            font-size: 16px;
+        }
+                
         @media (max-width: 768px) {
             .awesome_<?php echo $key;?> .container {
                 background-color: white;
@@ -54,22 +70,50 @@
                 opacity: 0.7;
                 padding: 2em;
             }
-            .awesome_<?php echo $key;?> .container p {
+            .awesome_<?php echo $key;?> .container p ,
+            .awesome_<?php echo $key;?> .container h1 ,
+            .awesome_<?php echo $key;?> .container h2 {
                 color: black;
             }
+            
+            .awesome_<?php echo $key;?> .container h1 {
+                font-size: 16px;
+            }
+            
+            .awesome_<?php echo $key;?> .container h2 {
+                font-size: 14px;
+            }
+            
+            .awesome_<?php echo $key;?> .container p {
+                font-size: 12px;
+            }
         }
+        
+         @media (max-width: 400px) {
+            .awesome_<?php echo $key;?> .container h1 {
+                font-size: 13px;
+            }
+            
+            .awesome_<?php echo $key;?> .container h2 {
+                font-size: 12px;
+            }
+            
+            .awesome_<?php echo $key;?> .container p {
+                font-size: 11px;
+            }
+         }
 </style>
 <section id="<?php echo strtolower(str_replace(' ', '', $title));?>" class="parallax-section <?php echo 'awesome_' .  $key; ?> img-lazy-load" data-full-src="<?php echo wp_get_attachment_image_src( $item['media_id'], 'large')[0];?>">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-4 <?php 
+            <div class="col-lg-5 col-md-6 <?php 
             if($text_pos=="left") {
                 echo " col-md-offset-1 "; 
                 echo " col-lg-offset-1 "; 
             }
             else {
-                echo " col-md-offset-7 ";
-                echo " col-lg-offset-7 "; 
+                echo " col-md-offset-6 ";
+                echo " col-lg-offset-6 "; 
             }?>">            
                 <?php echo $item['text'];?>
             </div>
