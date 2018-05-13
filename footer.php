@@ -188,6 +188,11 @@ footer .fa:before {
                     <li>
                         <a href="<?php echo get_permalink(get_option('woocommerce_privacy_policy_page_id')); ?>"><?php echo get_the_title(get_option('woocommerce_privacy_policy_page_id'));?></a>
                     </li>
+                    <li>                        
+                        <a href="https://stripe.com/jp/payments">安心・安全な決済システム</a>
+                        <a href="https://stripe.com/jp/payments"><img style="width: 124px;float: right;margin-top: 6px;margin-bottom: 20px;" src="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/icon/powered_by_stripe.png" /></a>
+                        
+                    </li>
                 </ul>
             </div>
  

@@ -328,7 +328,7 @@ $storefront_version = $theme['Version'];
     wp_enqueue_script( 'owl-carousel-script', get_template_directory_uri() . '/assets/js/owl.carousel.min.js', array(), $storefront_version );
     wp_enqueue_script( 'smoothscroll-script', get_template_directory_uri() . '/assets/js/smoothscroll.min.js', array(), $storefront_version );
     wp_enqueue_script( 'wow-script', get_template_directory_uri() . '/assets/js/wow.min.js', array(), $storefront_version );
-    wp_enqueue_script( 'custom-script', get_template_directory_uri() . '/assets/js/custom.min.js', array(), $storefront_version );
+    wp_enqueue_script( 'custom-script', get_template_directory_uri() . '/assets/js/custom.min.js', array(), '2.2.6.3' );
     //wp_enqueue_script( 'easy-pie-chart-script', get_template_directory_uri() . '/assets/js/easy-pie-chart.min.js', array(), 'v1.2' );
     wp_enqueue_script( 'canvas-script', get_template_directory_uri() . '/assets/js/canvas.min.js', array(), $storefront_version );
     //wp_enqueue_script( 'sly-script', get_template_directory_uri() . '/assets/js/sly.min.js', array(), 'v1.2' );
@@ -755,10 +755,20 @@ add_filter( 'wc_stripe_description', 'atelierbourgeons_stripe_description', 10, 
 //wpautop( wp_kses_post( $description ) ), $this->id );
 function atelierbourgeons_stripe_description($description , $id) {
     if(!strpos($description, 'TEST MODE ENABLED' )) {
-        $description = '<p>※ クレジットカードの決済は、<a target="_blank" href="https://stripe.com/jp/payments">Stripe</a>という決済システムを経由して行われます。</p>
-                    <p>※ カードコード（CVC）とは、デビットもしくはクレジットカードの裏面に記載されている暗証番号です。 ほとんどの場合、カード裏面の署名欄に記載された番号の最後の3桁がこれに当たります。</p>';
+        $description = '<p>※ カード決済で使用するシステム「Stripe」は、PayPalに並び世界で最も高い支持を得る決済サービスです（日本では2016年に導入開始）。その高度な安全性は多くの企業から信頼を置かれ、現在１０万社以上の商取引に利用されています。《<a href="https://stripe.com/jp/customers">導入企業一覧</a>》《<a href="https://stripe.com/jp/payments">Stripe会社情報</a>》</p>
+                    <p>※ カードコード（CVC）とは、カード裏面に記載されている暗証番号です。 通常、カード裏面の署名欄に記載された番号の下3桁がそれに値します。</p>';
     }
     return $description;
+}
+
+add_filter( 'woocommerce_gateway_icon', 'atelierbourgeons_gateway_icon' , 10 ,2  );
+function atelierbourgeons_gateway_icon($icons_str, $id) {    
+    if($id=="stripe") {
+        $icons_str .= ' <img src="' . WC_STRIPE_PLUGIN_URL . '/assets/images/jcb.svg" class="stripe-jcb-icon stripe-icon" alt="JCB" /> ';
+        $icons_str .= ' <img src="' . WC_STRIPE_PLUGIN_URL . '/assets/images/diners.svg" class="stripe-diners-icon stripe-icon" alt="Diners" /> ';
+        $icons_str = '<div id="' . $id .'">' . $icons_str . '</div>';
+    }
+    return $icons_str;
 }
 
 function atelierbourgeons_new_user_approved( $user ) {

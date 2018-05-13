@@ -127,6 +127,13 @@ $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 
 #intro h3#homepage-catch-phrase {
     line-height: 40px;
+    background-color: rgba(255, 255, 255, 0.34);
+    color: black;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    
 }
 
 @media screen and (max-width:768px) {
@@ -256,8 +263,10 @@ foreach($images as $image) {
                    $('#homepage-catch-phrase').append(description);
                    $('#homepage-catch-phrase').removeClass('animated');
                    $('#homepage-catch-phrase').removeClass('fadeOutDown');
-                   $('#homepage-catch-phrase').addClass('fadeInUp');
-                   $('#homepage-catch-phrase').fadeIn(1000);
+                   if(description.length > 0) {
+                    $('#homepage-catch-phrase').addClass('fadeInUp');
+                    $('#homepage-catch-phrase').fadeIn(1000);
+                    }
 
                    //.animate({"opacity": 1}, 500, function(){                    
                        if (++i >= bgimgs.length) { i = 0; } 
@@ -320,7 +329,7 @@ foreach($images as $image) {
  */?>
  
 
-	<div class="container">
+	<div class="container" style="padding:  0;margin:  0;width:  100%;">
 		<div class="row">
 
 			<div class="col-md-12 col-sm-12">

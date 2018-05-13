@@ -187,15 +187,21 @@ $( document ).scroll(function() {
 
     if (scrollPosition === 0) {
       $('.navbar').show();
+      $('.navbar-hide-top').hide();
       return;
     }
     if (scrollDirection === 'DOWN' && scrollPosition < 400) {
-      $('.navbar').show();
-    } else if (scrollDirection === 'UP' && scrollPosition > 0) {
+      $('.navbar').show();      
+    } 
+    else if (scrollDirection === 'UP' && scrollPosition > 0) {
       $('.navbar').show();
     } else {
       $('.navbar').hide();
+      $('.navbar-hide-top').show();
     }
+    if (scrollPosition < 400) {
+      $('.navbar-hide-top').hide();
+    } 
   }
 
 }(jQuery));

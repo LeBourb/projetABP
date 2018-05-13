@@ -193,6 +193,13 @@ if(isset($attachment_ids[1]))
             width: 100%;
         }
         
+        .nav.modal-header > li > a.marker-narrow {
+            display:none;
+        }
+        .nav.modal-header > li > a {
+            margin:0;
+        }
+        
         @media screen and (min-width: 1024px) {
             div.modal-product-details.product .woocommerce-product-gallery__image {
                 width:50%;
@@ -212,6 +219,41 @@ if(isset($attachment_ids[1]))
             #modal-reservation .product-description small {
                 font-size: 70%;
             }
+            
+            .nav.modal-header {
+                margin: 0;
+                display: flex;
+                justify-content: space-between;
+            }
+            
+            .nav.modal-header > li {
+                font-size: 0.9em;
+                text-align: center;
+            }
+            
+            .nav.modal-header > li > a {
+                padding: 11px;
+            }
+        }
+        
+        @media screen and (max-width: 450px) {
+            .nav.modal-header > li {
+                font-size: 0.8em;            
+            }
+            
+            .nav.modal-header > li > a {
+                padding: 9px;
+                height: 5em;
+            }
+            
+            .nav.modal-header > li > a.marker-narrow {
+                display:block;
+                padding: 5px;
+            }
+            .nav.modal-header > li > a.marker-large {
+                display:none;
+            }              
+                
         }
         
         #price-field .woocommerce-Price-amount.amount ,
@@ -249,8 +291,7 @@ if(isset($attachment_ids[1]))
 	</div>
 </section>
 <section id="product-in-short" class="">
-    <h4 style="margin:2em;" ><?php echo $product->get_data()['short_description']; ?></h4>
-    <a id="btn-size-info">Button Size Info</a>
+    <h4 style="margin:2em;" ><?php echo $product->get_data()['short_description']; ?></h4>    
 </section>
     <div class="refills-components">
         
@@ -265,9 +306,18 @@ if(isset($attachment_ids[1]))
         <!--div class="modal-header">  </div-->  
             <!-- Nav tabs -->
             <ul class="nav modal-header nav-pills nav-justified" role="tablist" style="margin:0;">
-              <li role="presentation" class="active"><a id="btn-tab-product-details" href="#wc-product-details" aria-controls="wc-product-details" role="tab" data-toggle="tab">アイテム詳細・購入</a></li>
-              <li role="presentation"><a id="btn-tab-size-info" href="#wc-size-info" aria-controls="wc-size-info" role="tab" data-toggle="tab">サイズ・素材</a></li>
-              <li role="presentation"><a id="btn-tab-size-guide" href="#wc-size-guide" aria-controls="wc-size-guide" role="tab" data-toggle="tab">サイズガイド</a></li>    
+              <li role="presentation" class="active">
+                  <a id="btn-tab-product-details" class="marker-narrow" href="#wc-product-details" aria-controls="wc-product-details" role="tab" data-toggle="tab">商品詳細<br>・<br>購入</a>
+                  <a id="btn-tab-product-details" class="marker-large" href="#wc-product-details" aria-controls="wc-product-details" role="tab" data-toggle="tab">商品詳細・購入</a>
+              </li>
+              <li role="presentation">
+                  <a id="btn-tab-size-info" class="marker-narrow" href="#wc-size-info" aria-controls="wc-size-info" role="tab" data-toggle="tab">サイズ<br>・<br>素材</a>
+                  <a id="btn-tab-size-info" class="marker-large" href="#wc-size-info" aria-controls="wc-size-info" role="tab" data-toggle="tab">サイズ・素材</a>
+              </li>
+              <li role="presentation">
+                  <a id="btn-tab-size-guide" class="marker-narrow" href="#wc-size-guide" aria-controls="wc-size-guide" role="tab" data-toggle="tab">サイズ<br>ガイド</a>
+                  <a id="btn-tab-size-guide" class="marker-large" href="#wc-size-guide" aria-controls="wc-size-guide" role="tab" data-toggle="tab">サイズガイド</a>                  
+              </li>    
             </ul>
             
         
@@ -372,6 +422,15 @@ if(isset($attachment_ids[1]))
         </div><!-- react-text: 99 --><!-- /react-text -->
         <div id="reservation" class="container-15-202" >            
             <a class="btn btn-lg btn-danger btn-reservation" >Price & Details<br>購入ページ</a>            
+        </div> 
+    </div>
+</div>
+
+<div class="container-11-190 navbar navbar-hide-top navbar-fixed-bottom" data-reactid="90" style="display:none;">
+    <div class="limitWidth-11-192" data-reactid="91">
+        <!-- react-text: 99 --><!-- /react-text -->
+        <div id="reservation" class="container-15-202">            
+            <a class="btn btn-lg btn-danger btn-reservation" style="">購入ページ</a>            
         </div> 
     </div>
 </div>
@@ -642,9 +701,9 @@ if(isset($attachment_ids[1]))
 
 
     <!-- Back top -->
-    <a href="#back-top" class="go-top">
+    <!--a href="#back-top" class="go-top navbar">
         <svg width="40px" height="40px" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1395 1184q0 13-10 23l-50 50q-10 10-23 10t-23-10l-393-393-393 393q-10 10-23 10t-23-10l-50-50q-10-10-10-23t10-23l466-466q10-10 23-10t23 10l466 466q10 10 10 23z"/></svg>
-    </a>
+    </a-->
 <!--/div-->
 <script>
     (function($) {
@@ -712,6 +771,16 @@ $(document).on('click','#modal-reservation .modal-close' ,function(){
             display: none;
     }
     
+    .container-11-190 {
+        width: 100%;
+        color: white;
+        z-index: 50;    
+        font-size: 1.3em;
+        background-color: black;
+        position: fixed;
+        bottom: 0;
+    }
+    
     .container {
         width: 100%;
     }
@@ -750,6 +819,11 @@ $(document).on('click','#modal-reservation .modal-close' ,function(){
             bottom: 0;
             display:block;
         }
+        .container-11-190 {
+            position: fixed;
+            bottom: 0;
+            display:none!important;
+        }
         .limitWidth-11-191 {
             display: flex;
         }
@@ -787,6 +861,14 @@ $(document).on('click','#modal-reservation .modal-close' ,function(){
         margin: auto;
         padding: 20px;
         max-width: 1596px;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .limitWidth-11-192 {
+        width: 100%;
+        margin: auto;
+        padding: 5px;        
         align-items: center;
         justify-content: space-between;
     }
