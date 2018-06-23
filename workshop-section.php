@@ -9,14 +9,14 @@
 <section id="workshop" class="parallax-section">
    <div class="wow bounceIn" style="visibility: visible; animation-name: bounceIn;">
 				<div class="section-title" style="text-align: center;">
-					<h2><?php echo get_post_meta( $post->ID, 'Workshop Title', true); ?></h2>
-					<p><?php echo get_post_meta( $post->ID, 'Workshop Sub Title', true);?></p>				</div>
+					<h2>ものづくりは、ものがたり。</h2>					
 			</div>
     <div class="scrollbar">
         <div class="handle"><div class="mousearea"></div></div>
 </div>
+    
     <div id="frame" class="frame">
-    <ul id="workshop-items" class="slidee" data-wow-delay="1.7s">
+    <ul id="workshop-items" class="slidee owl-carousel" data-wow-delay="1.7s">
     <?php 
         $args = array( 'post_type' => 'shop_workshop' );
         $workshops = get_posts( $args ); 
@@ -25,42 +25,70 @@
             $image = wp_get_attachment_image_src( $image_meta_val, 'large');
             
     ?>
-    <li class="my-2 mx-auto p-relative bg-white shadow-1 blue-hover" style="width: 360px; overflow: hidden; border-radius: 1px; position: relative;">
-        <img src="<?php echo $image[0]; ?>" alt="Man with backpack"    
-            class="d-block w-full"
-            style="max-height: 175px;
-    min-width: 100%;
-    width: auto;
-    max-width: none;
-">
-        <div class="px-2 py-2">
-          <p class="mb-0 small font-weight-medium text-uppercase mb-1 text-muted lts-2px">
+    <li class="my-2 mx-auto p-relative bg-white item" style="width: 360px; overflow: hidden; border-radius: 1px; position: relative;">
+         <a href="<?php echo get_permalink($workshop); ?>" style="color: black;" >
+        <div style="position:relative;width:100%;height: 18em;">
+            <div class="" style="position:absolute;background-color: white; top:0;left:0;padding: 0.4em;">
             <?php echo get_post_meta( $workshop->ID, 'workshop_function', true); ?>
-          </p>
+            </div>
+            <div style="position:absolute;text-align: center; vertical-align: middle; top:0; bottom:0; right:0; left:0;">
+                <div class="read-more" style="">
+                READ MORE
+                </div>
+            </div>
+            <?php //echo $image[0]; 
+            //print_r($image); ?>
+            <div class="background-tile-img" style="background:linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) ), url(<?php echo $image[0]; ?>) no-repeat center bottom / cover;
+                 height: 100%;
+    width: 100%;">
+                <?php //echo $image[0]; ?>
+            </div>
+            
+        </div>
+        
+        <div class="">
+          
 
-          <h1 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
+          <h5 class="" style="line-height: 1.25;">
             <?php echo get_the_title($workshop); ?>
-          </h1>
+          </h5>
 
-          <p class="mb-1">
+          <p class="">
             <?php echo get_the_excerpt($workshop);  ?>            
           </p>
 
         </div>
-
-        <a href="<?php echo get_permalink($workshop); ?>" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link" style="position:absolute;bottom:0;margin-bottom:0;">
-          <?php _e('Read More','atelierbourgeons'); ?>
         </a>
     </li>
     <?php 
         }        
     ?>  </ul>
         </div>
+     <script>
+      /*var owl = jQuery('.owl-carousel');
+      owl.owlCarousel({
+        margin: 10,
+        loop: true,
+        responsive: {
+          0: {
+            items: 1
+          },
+          600: {
+            items: 2
+          },
+          1000: {
+            items: 3
+          }
+        }
+      })*/
+    </script>
     <ul class="pages"></ul>
     
 </section>
 <script>
-    var $frame  = $('#workshop #frame');
+     jQuery( function( $ ) {
+              
+        var $frame  = $('#workshop #frame');
 		var $slidee = $frame.children('ul').eq(0);
 		var $wrap   = $frame.parent();
 
@@ -86,6 +114,6 @@
 
 		});
 
-		
+	});	
     //$('#workshop #frame').sly(options);
 </script>

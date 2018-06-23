@@ -544,14 +544,18 @@ foreach($images as $image) {
 <!-- =========================
     PRODUCTS SECTION       
 ============================== -->
-<?php include('product-section.php') ?>
+<?php include('product-section.php'); ?>
 <!-- =========================
     WORKSHOP SECTION   
-//include('workshop-section.php') 
 ============================== -->
+<?php 
+$user = wp_get_current_user();
+$allowed_roles = array('administrator');
+if( array_intersect($allowed_roles, $user->roles ) )  
+include('workshop-section.php'); ?>
 <!-- =========================
     MATERIALS SECTION   
-//include('materials-section.php') 
+include('materials-section.php') 
 ============================== --> 
 <!-- =========================
    Map of resellers

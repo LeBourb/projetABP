@@ -639,7 +639,7 @@ footer {
 
 #workshop .frame { width: 100%; }
 #workshop .frame .slidee {  height: 100%; list-style: none; display:flex; margin:0;}
-#workshop .frame .slidee li { min-width: 360px; margin-right:1.5em; margin-left:1.5em; }
+#workshop .frame .slidee li { min-width: 28em;     min-height: 20em; margin-right:1.5em; margin-left:1.5em; }
 #workshop .scrollbar {    margin: 0 0 1em 0;    height: 2px;    background: #ccc;    line-height: 0;}
 #workshop .scrollbar .handle .mousearea {  position: absolute;    top: -2px;    left: 0;    width: 100%;    height: 5px;  background-color: black }
 #workshop .bg-white {   background-color: #fff; }
@@ -647,7 +647,15 @@ footer {
 #workshop .pages li {      display: inline-block;    width: 14px;     height: 14px;     margin: 0 4px;     text-indent: -999px;    border-radius: 10px;     cursor: pointer;   overflow: hidden;   background: #fff;    box-shadow: inset 0 0 0 1px rgba(0,0,0,.2); }
 #workshop .pages li.active {      background: #666; }
 #workshop .pages li:hover {    background: #aaa; }
-
+#workshop .read-more { display : flex;
+    height: 100%;      
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: black;
+    transition: visibility 0s, opacity 0.5s linear;
+    opacity: 0;}
+#workshop li:hover .read-more { opacity: 0.6; }
 #workshop .small {
   font-size: 0.75rem;
 }

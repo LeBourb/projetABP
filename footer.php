@@ -144,7 +144,7 @@ footer .fa:before {
 
 
         </style>
-<footer class="clearfix" style="padding:0;">
+<footer class="clearfix" style="padding:0; padding-top: 2em;">
     <div class="container">
         
        
