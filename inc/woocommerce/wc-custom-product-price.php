@@ -46,17 +46,17 @@ if ( empty( $prices['price'] ) ) {
     $user = wp_get_current_user(); 
     $role = ( array ) $user->roles;
     if(in_array( 'customer-pro', $role )) {
-        return '<b id="price-field" class="price crowdfunding" itemprop="offers" itemscope="" itemtype="//schema.org/Offer">'
-            . '<span class="priv-sale"><small>卸価格: </small>' . $priv_sale_price . '</span>'            
-            . '<span class="pre-sale" style="font-size:0.7em;margin-left:1em;"><small>先行予約価格: </small><del>' . $pre_sale_price . '</del></span>'
-            . '<span class="regular" style="font-size:0.7em;margin-left:1em;"><small>通常価格: </small><del>' . $regular_price .'</del></span>'
-            . '</b>';
+        return '<div id="price-field" class="price crowdfunding" itemprop="offers" itemscope="" itemtype="//schema.org/Offer">'
+            . '<div class="priv-sale" style="flex-grow:1"><small>卸価格: </small>' . $priv_sale_price . '</div>'            
+            . '<div class="pre-sale" style="font-size:0.7em;margin-left:1em; flex-grow: 2;"><small>先行予約価格: </small><del>' . $pre_sale_price . '</del></div>'
+            . '<div class="regular" style="font-size:0.7em;margin-left:1em; flex-grow: 2;"><small>通常価格: </small><del>' . $regular_price .'</del></div>'
+            . '</div>';
     }
     
-    return '<b id="price-field" class="price crowdfunding" itemprop="offers" itemscope="" itemtype="//schema.org/Offer">'
-            . '<span class="pre-sale"><small>先行予約価格: </small>' . $pre_sale_price . '</span>'            
-            . '<span class="regular" style="font-size:0.7em;margin-left:1em;"><small>通常価格: </small><del>' . $regular_price .'</del></span> '
-            . '</b>';
+    return '<div id="price-field" class="price crowdfunding" itemprop="offers" itemscope="" itemtype="//schema.org/Offer">'
+            . '<div class="pre-sale" style="flex-grow: 1;"><small>先行予約価格: </small>' . $pre_sale_price . '</div>'            
+            . '<div class="regular" style="    flex-grow: 3;font-size:0.7em;margin-left:1em;"><small>通常価格: </small><del>' . $regular_price .'</del></div> '
+            . '</div>';
     //wc_price($that->get_regular_price())
     //. '<span class="pre-sale"><del>' . $pre_sale_price . '</del><small>Pre-Sale</small></span>'
 }

@@ -256,6 +256,10 @@ if(isset($attachment_ids[1]))
                 
         }
         
+        #price-field {
+            display: flex;
+            font-weight: 700;
+        }
         #price-field .woocommerce-Price-amount.amount ,
         #price-field small
         {

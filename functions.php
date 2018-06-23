@@ -383,7 +383,40 @@ function my_custom_submenu_page_callback() {
 
 add_action( 'manage_prod_posts_custom_column', 'render_prod_columns' );
 
-
+add_filter( 'woocommerce_order_item_meta_start', 'atelierbourgeons_order_item_production_status' , 10, 2 );
+function atelierbourgeons_order_item_production_status( $item_name, $item ) {
+         $production_id = $item->get_meta('_production_id',true);
+         $html = '<p>生産状況: ';
+         if($production_id == '') {
+             $html .= '生産前（予約注文受付期間）';
+         }
+         else {
+             $status = get_post_status($production_id);
+             switch($status) {
+                case 'wc-not-started':
+                    $html .= '注文受付中';
+                    break;
+                case 'wc-supplies-ordered':
+                    $html .= '生産用生地・資材の手配中';
+                    break;
+                case 'wc-supp-delivered':
+                    $html .= '生地・資材を工場に発送完了';
+                    break;
+                case 'wc-in-production':
+                    $html .= '生産中';
+                    break;
+                case 'wc-in-production':
+                    $html .= '生産完了';
+                    break;                       
+                default:
+                    $html .= $status;
+                    break;
+             }
+             
+         }
+         $html .= '</p>';
+         print($html);
+ }
 
 
 function add_attachment_field_position_x( $form_fields, $post ) {
