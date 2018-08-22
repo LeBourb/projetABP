@@ -314,34 +314,38 @@ $storefront_version = $theme['Version'];
     
     //wp_enqueue_style( 'fa-solid-style', get_template_directory_uri() . '/assets/css/fa-solid.min.css' , array(), 'v1.3');
     //wp_enqueue_style( 'font-awesome-style', get_template_directory_uri() . '/assets/css/font-awesome.min.css' , array(), 'v1.2');
-    wp_enqueue_style( 'owl-theme-style', get_template_directory_uri() . '/assets/css/owl.theme.min.css' , array(), 'v1.2');
-    wp_enqueue_style( 'owl-carousel-style', get_template_directory_uri() . '/assets/css/owl.carousel.min.css' , array(), 'v.1.2');
+    //wp_enqueue_style( 'owl-theme-style', get_template_directory_uri() . '/assets/css/owl.theme.min.css' , array(), 'v1.2');
+    wp_enqueue_style( 'owl-carousel-style', get_template_directory_uri() . '/assets/css/owl.carousel.min.css' , array(), 'v.2.3.4');
+    wp_enqueue_style( 'owl-theme-style', get_template_directory_uri() . '/assets/css/owl.theme.default.min.css' , array());
     //wp_enqueue_style( 'homepage-style', get_template_directory_uri() . '/assets/css/homepage.min.css' , array(), filemtime( getcwd() .  '/wp-content/themes/atelierbourgeonspro/assets/css/homepage.css' ));
     wp_enqueue_style( 'timeline-style', get_template_directory_uri() . '/assets/css/timeline.min.css' , array(), 'v1.2');
     wp_enqueue_style( 'project-gmap-style', get_template_directory_uri() . '/assets/css/project-gmap.min.css' , array(), 'v1.2');
     wp_enqueue_style( 'main-style', get_template_directory_uri() . '/assets/css/style.min.css' , array(), filemtime( getcwd() .  '/wp-content/themes/atelierbourgeonspro/assets/css/style.min.css' ));
     wp_enqueue_style( 'viewer-style', get_template_directory_uri() . '/assets/css/viewer.min.css' , array(), 'v1.2');
     wp_enqueue_style( 'popup-style', get_template_directory_uri() . '/assets/css/popup.min.css' , array(), 'v1.2');
+    wp_enqueue_style( 'jquery-ui-style', get_template_directory_uri() . '/assets/css/jquery-ui.css' , array());
     
     //test
     wp_enqueue_style( 'workshop-style', get_template_directory_uri() . '/assets/css/workshop.css' , array(), filemtime( getcwd() .  '/wp-content/themes/atelierbourgeonspro/assets/css/workshop.css' ));
+    wp_enqueue_style( 'customSelect-style', get_template_directory_uri() . '/assets/css/jquery.customSelect.css' , array());
     
     
-    //wp_enqueue_script( 'jquery-script', get_template_directory_uri() . '/assets/js/jquery.min.js', array(), 'v1.2' );
+    wp_enqueue_script( 'jquery-ui-script', get_template_directory_uri() . '/assets/js/jquery-ui.js', array() );
     wp_enqueue_script( 'jquery-form-script', get_template_directory_uri() . '/assets/js/jquery.form.min.js', array(), $storefront_version );
     wp_enqueue_script( 'jquery-validate-script', get_template_directory_uri() . '/assets/js/jquery.validate.min.js', array(), $storefront_version);
     wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array(), $storefront_version );
     wp_enqueue_script( 'jquery-parallax-script', get_template_directory_uri() . '/assets/js/jquery.parallax.min.js', array(), $storefront_version );
-    wp_enqueue_script( 'owl-carousel-script', get_template_directory_uri() . '/assets/js/owl.carousel.min.js', array(), $storefront_version );
+    wp_enqueue_script( 'owl-carousel-script', get_template_directory_uri() . '/assets/js/owl.carousel.js', array(), 'v.3.4' );
     wp_enqueue_script( 'smoothscroll-script', get_template_directory_uri() . '/assets/js/smoothscroll.min.js', array(), $storefront_version );
     wp_enqueue_script( 'wow-script', get_template_directory_uri() . '/assets/js/wow.min.js', array(), $storefront_version );
-    wp_enqueue_script( 'custom-script', get_template_directory_uri() . '/assets/js/custom.min.js', array(), '2.2.6.3' );
+    wp_enqueue_script( 'custom-script', get_template_directory_uri() . '/assets/js/custom.min.js', array(), '2.2.6.7' );
     //wp_enqueue_script( 'easy-pie-chart-script', get_template_directory_uri() . '/assets/js/easy-pie-chart.min.js', array(), 'v1.2' );
     wp_enqueue_script( 'canvas-script', get_template_directory_uri() . '/assets/js/canvas.min.js', array(), $storefront_version );
     wp_enqueue_script( 'sly-script', get_template_directory_uri() . '/assets/js/sly.min.js', array(), 'v1.2' );
     wp_enqueue_script( 'viewer-script', get_template_directory_uri() . '/assets/js/viewer.min.js', array(), $storefront_version );
     wp_enqueue_script( 'popup-script', get_template_directory_uri() . '/assets/js/simplepopup.min.js', array(), $storefront_version );
     wp_enqueue_script( 'img-lazy-load-script', get_template_directory_uri() . '/assets/js/img-lazy-loading.min.js', array(), $storefront_version );
+    wp_enqueue_script( 'customSelect-script', get_template_directory_uri() . '/assets/js/jquery.customSelect.js', array(), 'v.3.2' );
     //wp_enqueue_script( 'project-gmap-infobox-script', get_template_directory_uri() . '/assets/js/project-gmap-infobox.min.js', array(), 'v1.2' );
     //wp_enqueue_script( 'project-gmap-script', get_template_directory_uri() . '/assets/js/project-gmap.min.js', array(), 'v1.2' );
     
@@ -701,6 +705,18 @@ function atelierbourgeons_pro_terms_conditions( $array ) {
             'desc_tip' => true,
             'autoload' => false,
     );
+     $array[] = array(
+            'title'    => __( 'Atelier', 'woocommerce' ),
+            'desc'     => __( 'This is l\'Atelier', 'woocommerce' ),
+            'id'       => 'woocommerce_atelier_page_id',
+            'default'  => '',
+            'class'    => 'wc-enhanced-select-nostd',
+            'css'      => 'min-width:300px;',
+            'type'     => 'single_select_page',
+            'args'     => array(  ),
+            'desc_tip' => true,
+            'autoload' => false,
+    );
     return $array;    
 }
 
@@ -770,24 +786,19 @@ function atelierbourgeons_account_menu_items($items) {
     return $items;
 }
 
-add_action( 'woocommerce_update_options' , 'atelierbourgeons_update_consumer_notice' );
-function atelierbourgeons_update_consumer_notice() {
+add_action( 'woocommerce_update_options' , 'atelierbourgeons_update_options' );
+function atelierbourgeons_update_options() {
     if(isset($_POST['woocommerce_consumer_notice_page_id'])) {
         update_option('woocommerce_consumer_notice_page_id', $_POST['woocommerce_consumer_notice_page_id'] );
     }
-}
-
-add_action( 'woocommerce_update_options' , 'atelierbourgeons_update_privacy_policy' );
-function atelierbourgeons_update_privacy_policy() {
     if(isset($_POST['woocommerce_privacy_policy_page_id'])) {
         update_option('woocommerce_privacy_policy_page_id', $_POST['woocommerce_privacy_policy_page_id'] );
     }
-}
-
-add_action( 'woocommerce_update_options' , 'atelierbourgeons_update_contact_form' );
-function atelierbourgeons_update_contact_form() {
     if(isset($_POST['woocommerce_contact_form_page_id'])) {
         update_option('woocommerce_contact_form_page_id', $_POST['woocommerce_contact_form_page_id'] );
+    }
+    if(isset($_POST['woocommerce_atelier_page_id'])) {
+        update_option('woocommerce_atelier_page_id', $_POST['woocommerce_atelier_page_id'] );
     }
 }
 
@@ -1295,6 +1306,25 @@ function custom_postimage_meta_box_save($post_id){
         }
     }
 }
+
+add_filter( 'woocommerce_get_breadcrumb', 'atelierbourgeons_get_breadcrumb' ,10, 2);
+function atelierbourgeons_get_breadcrumb($crumbs, $item) {
+//    throw new Exception('heeeelloo :' . $crumbs);
+  //  var_dump( $crumbs );
+        global $post;
+        $new_production_id = wc_get_not_stated_production_item($post->ID);        
+        if( $new_production_id  !== '' ) {
+            $atelier_id = get_option('woocommerce_atelier_page_id');
+            $crumbs = array( array( get_the_title( $atelier_id ) , get_permalink($atelier_id) ) , 
+                array( get_the_title( ) ) );
+        }else if (is_product($new_production_id)) {
+            $shop_id = wc_get_page_id ( 'shop' );
+            $crumbs[0] = array( get_the_title($shop_id)  ,get_permalink( $shop_id));
+        }
+        return $crumbs;
+}
+
+
 
 /*add_action('woocommerce_view_order','display_bank_details_and_timeline_order');
  

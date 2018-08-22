@@ -151,7 +151,7 @@ footer .fa:before {
         <div class="footer_links">
  
             <!-- Social Media Links  -->
-            <div class="sm columns animated wow fadeInRight" data-wow-delay=".2s">                
+            <div class="sm columns" data-wow-delay=".2s">                
                 <ul style="">
                     <li style="text-align: right;">
                         <a class="" style="" href="https://www.facebook.com/atelierbourgeons/">
@@ -177,7 +177,7 @@ footer .fa:before {
             </div>
  
             <!-- About Links  -->
-            <div class="about columns animated wow fadeInRight" data-wow-delay=".3s">                
+            <div class="about columns" data-wow-delay=".3s">                
                 <ul style="margin-left:0;">
                     <li>
                         <a href="<?php echo get_permalink(get_option('woocommerce_consumer_notice_page_id')); ?>"><?php echo get_the_title(get_option('woocommerce_consumer_notice_page_id'));?></a>
@@ -197,7 +197,7 @@ footer .fa:before {
             </div>
  
             <!-- Address  -->
-            <div class="address columns animated wow fadeInRight" data-wow-delay=".4s">                
+            <div class="address columns" data-wow-delay=".4s">                
                 <p>Japan office:</p>
                 <p>〒500-8435</p>
                 <p>岐阜県岐阜市宮北町5-3</p>

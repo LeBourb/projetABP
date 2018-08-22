@@ -25,6 +25,12 @@ if ( ! class_exists( 'Storefront_Admin' ) ) :
 		public function __construct() {
 			add_action( 'admin_menu', 				array( $this, 'welcome_register_menu' ) );
 			add_action( 'admin_enqueue_scripts', 	array( $this, 'welcome_style' ) );
+                        
+                        // category
+                        add_action( 'product_cat_add_form_fields', array( $this, 'add_category_fields' ) );
+                        add_action( 'product_cat_edit_form_fields', array( $this, 'edit_category_fields' ), 10 );
+                        add_action( 'created_term', array( $this, 'save_category_fields' ), 10, 3 );
+                        add_action( 'edit_term', array( $this, 'save_category_fields' ), 10, 3 );
 		}
 
 		/**
@@ -307,6 +313,53 @@ if ( ! class_exists( 'Storefront_Admin' ) ) :
 
 			return $products;
 		}
+                
+                /**
+                * Category thumbnail fields.
+                */
+               public function add_category_fields() {
+                       ?>
+                       <div class="form-field term-is-atelier-wrap">
+                               <label for="is_atelier"><?php _e( 'Is Atelier', 'woocommerce' ); ?></label>
+                               <input type="checkbox" id="scales" name="is_atelier" value="" />
+                       </div>
+                       <?php
+               }
+
+               /**
+                * Edit category thumbnail field.
+                *
+                * @param mixed $term Term (category) being edited
+                */
+               public function edit_category_fields( $term ) {
+
+                       $is_atelier = get_woocommerce_term_meta( $term->term_id, 'is_atelier', true );
+                       echo $is_atelier;
+                       ?>
+                       <tr class="form-field">
+                               <th scope="row" valign="top"><label><?php _e( 'Is Atelier ?', 'woocommerce' ); ?></label></th>
+                               <td>
+                                   <input type="checkbox" id="scales" name="is_atelier" <?php if($is_atelier) echo "checked"; ?> />
+                               </td>
+                       </tr>
+                       <?php
+               }
+
+               /**
+                * save_category_fields function.
+                *
+                * @param mixed $term_id Term ID being saved
+                * @param mixed $tt_id
+                * @param string $taxonomy
+                */
+               public function save_category_fields( $term_id, $tt_id = '', $taxonomy = '' ) {
+                       if ( isset( $_POST['is_atelier'] ) && 'product_cat' === $taxonomy ) {
+                               update_woocommerce_term_meta( $term_id, 'is_atelier', esc_attr( $_POST['is_atelier'] ) );
+                       }else if ( 'product_cat' === $taxonomy ) {
+                           update_woocommerce_term_meta( $term_id, 'is_atelier', ''  );
+                       }
+               }
+
 	}
 
 endif;

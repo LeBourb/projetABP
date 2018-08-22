@@ -242,12 +242,32 @@ footer {
     background-color: white;
 }
 
+.product-nav.custom-navbar.navbar-fixed-top.active {
+    background-color: transparent;
+    position: relative;
+}
+
+.product-nav.custom-navbar.navbar-fixed-top.active.top-nav-collapse {
+    position: fixed;
+    background-color: white;
+}
+
+.breadcrumb-nav .prev_next_buttons ,
+.breadcrumb-nav .woocommerce-breadcrumb {
+    display: inline-block;
+}
+
+.breadcrumb-nav .prev_next_buttons {
+    float:right;
+}
+
 .custom-navbar .container {
     width: 100%;
 }
 
 .custom-navbar.top-nav-collapse {
     height: 5em;
+    position: fixed;
 }
 
 .custom-navbar .container {
@@ -486,6 +506,10 @@ footer {
     #products .linkWrapper {
         width:  50%;
     }
+    
+    .breadcrumb-nav {
+        display: none;
+    }
 
 }
 
@@ -528,8 +552,6 @@ footer {
     height:100%;
 }
 
-
-
 #products .parallaxWrapper .parallax-background-children{
     transform: translate3d(-50%, -11.9363px, 0px);
     position: absolute;
@@ -548,6 +570,11 @@ footer {
     height: 100%;    
 }
 
+.navbar.navbar-fixed-top .container .cart-button ,
+.navbar.navbar-fixed-top .container .arrow {
+    display: none;
+}
+
 @media (max-width: 768px) {
  #products .items-container {
     height: 50%;
@@ -564,9 +591,38 @@ footer {
     .custom-navbar .nav li a { 
         color:#444;
     }
+    
     .navbar.navbar-fixed-top .container {
-        background-color: white;        
+        background-color: white;
     }
+    
+    .product-nav.navbar-fixed-top .container {
+        background-color: transparent;
+    }
+    
+    .navbar.navbar-fixed-top .container .cart-button ,
+    .product-nav.navbar.navbar-fixed-top .container .arrow {
+        display: block;
+    }
+    
+    .product-nav.custom-navbar.navbar-fixed-top.active {
+        position: absolute;        
+    }
+    
+    .custom-navbar.navbar-fixed-top.active {
+        border-bottom: 1px solid rgb(225, 225, 225);
+        box-shadow: rgb(187, 187, 187) 1px 1px 10px;
+    }
+    
+    .navbar .container > .navbar-header {
+        margin-right: 0;
+        margin-left: 0;            
+    }
+    
+    .navbar .container > .navbar-header:before, 
+    .navbar .container > .navbar-header:after {
+        content: none;
+    } 
     
     .navbar.navbar-fixed-top .container .site-logo svg {
         fill: #444;

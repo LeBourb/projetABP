@@ -8,26 +8,6 @@
 
 
 
-add_action( 'woocommerce_before_add_to_cart_form', 'wc_before_add_to_cart_shipping_estimate', 10 );
- 
-function wc_before_add_to_cart_shipping_estimate() {
-    global $post;
-    $production_id = wc_get_not_stated_production_item($post->ID);
-    if($production_id == '') {
-        echo '<span>NO PRODUCTION PLANNED !</span>';
-    }else {
-        $production = wc_get_prod($production_id);
-        $start = $production->get_estimated_shipping_start();
-        $start = strtotime($start); 
-        $start = date("y/m/d",$start);
-        $end = $production->get_estimated_shipping_end();
-        $end = strtotime($end);
-        $end = date("m/d",$end);
-        echo '<div class="estimated-ship-date" style="margin-top: 1em;">
-            【お届け予定: ' . $start  . '〜' . $end . '】</div>';
-    }
-}
-
 //add_action( 'woocommerce_before_add_to_cart_form', 'wc_before_add_to_cart_size_details', 20 );
  
 function wc_before_add_to_cart_size_details() {
@@ -108,9 +88,7 @@ function wc_before_add_to_cart_funding() {
     global $post;
     $production_id = wc_get_not_stated_production_item($post->ID);
     $min_order = wc_get_prod_min_order($production_id);
-    if($production_id == '') {
-        echo '<span>NO PRODUCTION PLANNED !</span>';
-    }else if ($min_order > 0) {
+    if ($production_id !== '' && $min_order > 0) {
         $production = wc_get_prod($production_id);
         $qty = wc_get_prod_total_ordered_item($production_id);
         
@@ -157,6 +135,7 @@ function wc_before_add_to_cart_funding() {
             display: flex;
             flex-flow: row nowrap;
             justify-content: center;
+            padding: 0 1em 0 1em;
         }
         #price-field >* {
             flex-basis: 49%;
@@ -183,28 +162,7 @@ function wc_before_add_to_cart_funding() {
         <span class="progress-text">目標達成度: <?php echo $percent;?>%</span>
         <script>
             (function($) {
-            var strdate = $('.tricky-countdown').data( 'funding-end' );
-            var countDownDate = new Date(strdate).getTime();
-            window.setInterval(function() {
-                var now = new Date().getTime();
-                // Find the distance between now an the count down date
-                var distance = countDownDate - now;
-                // Time calculations for days, hours, minutes and seconds
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                // Display the result in the element with id="demo"
-                
-
-                // If the count down is finished, write some text 
-                if (distance < 0) {
-                  $('.tricky-countdown').html("EXPIRED");
-                }else {
-                    $('.tricky-countdown').html(days + "日 " + hours + "時間 " + minutes + "分 " + seconds + "秒 ");
-                }
-                
-            },1000);            
+                     
             $(document).ready(function () {
                 $(".btn-reservation").click(function() { 
                     setTimeout(function(){
@@ -229,8 +187,6 @@ function wc_before_add_to_cart_funding() {
             <red style="color:red;">【お買い物前にご一読ください】<a href="<?php echo get_permalink(get_option('woocommerce_shopping_guide_page_id')); ?>">ご利用ガイド</a></red>
         </div>
             <?php
-    } else {
-        echo '<span>NO MINIMUM ORDER SET !</span>';
     }
 }
 

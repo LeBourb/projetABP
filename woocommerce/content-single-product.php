@@ -124,34 +124,8 @@ if(isset($attachment_ids[1]))
         }
         #product-intro  {
             width: 100%;            
-            background: url(<?php echo $product_image[0] ?  $product_image[0] : ''; ?>) 50% 0 repeat-y fixed;
-            background-size: fixed;
-            background-position-y: <?php 
-                $image_metas_y = get_post_meta( $main_image, 'focus_position_y', true );
-                if($image_metas_y != "") {
-                    echo "$image_metas_y%";
-                }
-                else {
-                    echo 'center';
-                }
-            ?>;
-            background-position-x: <?php
-                $image_metas_x = get_post_meta( $main_image, 'focus_position_x', true );
-                if($image_metas_x != "") {
-                    echo "$image_metas_x%";
-                }
-                else {
-                    echo 'center';
-                }
-            ?>;
             color: #ffffff;
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -ms-flexbox;
             display: flex;
-            -webkit-box-align: center;
-            -webkit-align-items: center;
-            -ms-flex-align: center;
             align-items: center;
             height: 100vh;            
             text-align: center;
@@ -274,103 +248,289 @@ if(isset($attachment_ids[1]))
             border-color: transparent;
         }
         
+        #featured {
+            flex-basis: 49.9%;
+            width: 50%;            
+        }
+        
+        #variante {
+            width: 50%;
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+        
+        
+        .variante-container {
+            max-width: 29rem;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            flex-flow: column nowrap;
+        }
+        
+        .product-title .tinv-wraper.tinv-wishlist {
+            position: absolute;
+            right: 0;
+        }
+        
+        acticle.product {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        #product-carousel {
+            height: 87vh;
+        }
+         
+        #product-carousel .owl-dots {
+            position:absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #product-carousel .owl-stage-outer {
+            height:100%;
+        }
+
+        #product-carousel.owl-carousel .owl-stage {
+            height:100%;
+        }
+
+        #product-carousel.owl-carousel .owl-item {
+            height: 100%;
+        }
+        #product-carousel.owl-carousel .owl-item img {
+            height:100%;
+        }
+                
+        @media screen and (max-width: 768px) {        
+            
+            #featured {                
+                width: 100%;            
+            }
+            #variante {
+                width: 100%;
+            }
+            
+        }
+        
+        .icon-sizing {
+            background-image: url(<?php echo get_site_url() . '/wp-content/themes/atelierbourgeonspro/assets/images/sizing.svg'; ?>);
+        }
+        
+        .icon-sizing-guide {
+            background-image: url(<?php echo get_site_url() . '/wp-content/themes/atelierbourgeonspro/assets/images/help.svg'; ?>);
+        }
+        
+        #icon-suite .icon-click {
+            background-repeat: no-repeat;
+            background-position: top center;
+            background-size: 29px;
+            cursor: pointer;
+            display: inline-block;
+        }
+        
+        #icon-suite .icon-click span {
+            display: inline-block;
+        }
+        
+        
+        #icon-suite .icon-container {
+            padding: 4em 1.5em 0;
+            text-align: center;
+            text-transform: uppercase;
+            color: #363636;
+            font-size: 1rem;
+            font-family: "Avenir Next",Avenir,"HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            letter-spacing: 0.08em;
+        }
+        
+        .product-title {
+            text-align: center;
+            margin-bottom: 2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .product-price {
+            display: flex;
+            justify-content: center;            
+            font-size: 2rem;
+        }
+        
+        .product-price p {
+            font-size: 2rem;
+        }
+        
+        .product-price > div {
+            display: flex;
+            flex-direction: column;            
+        }
+        
+        .product-price .regular {
+            margin-left: 2rem;
+        }
+
+        
+        .product-ctx-nav {
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        @media (min-width: 768px) {
+            .product-ctx-nav { 
+                display: flex;
+            }
+        }
+        
+        .product-ctx-nav .woocommerce-breadcrumb {
+            margin: 0;
+            padding: 2rem;
+        }
+        
+        .product-ctx-nav .prev_next_buttons {
+            padding-right: 2.618rem;
+        }
+        
+        
+        .alert_container {
+            display: block;
+            text-align: center;
+        }
+        
+        .alert_container input {
+            border: 3px solid #0f2130;
+            margin: 0;
+            display: block;
+            width: 100%;
+            
+        }
+ 
+        
+        .alert_container button {
+            width: 250px;
+            background-color: #0f2130;
+            color: white;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            height: 5rem;
+        }
+        
+        .product-add-to-cart .woocommerce-variation-add-to-cart ,
+        .product-add-to-cart table tbody td {
+            padding: 0;
+        }
+        
     </style>
     <!-- =========================
     INTRO SECTION   
 ============================== -->
-<section id="product-intro" class="parallax-section img-lazy-load" data-full-src="<?php echo wp_get_attachment_image_src( $main_image, 'full')[0];?>">
-	<div class="container">
-		<div class="row">
+    <nav class="product-ctx-nav">
+    <?php //do_action( 'woocommerce_before_main_content' );
+        woocommerce_breadcrumb();
+        $new_production_id = wc_get_not_stated_production_item($post->ID);        
+        if( $new_production_id  == null ) {        
+            echo '<div class="prev_next_buttons">';
+                // 'product_cat' will make sure to return next/prev from current category
+                    $previous = next_post_link('%link', '&larr; PREVIOUS', TRUE, ' ', 'product_cat');
+                $next = previous_post_link('%link', 'NEXT &rarr;', TRUE, ' ', 'product_cat');
 
-			<div class="col-md-12 col-sm-12">
-				<h3 class="wow bounceIn" data-wow-delay="0.9s"><?php echo $product->get_title(); ?></h3>				
-                                <a href="#gallery" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">Photo Gallery<br>ギャラリー</a>
-				<a href="#story" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">Story<br>この服のおはなし</a>                                
-                                <a id="reservation" class="btn btn-lg btn-danger smoothScroll wow fadeInUp btn-reservation" data-wow-delay="2.3s">Price & Details<br>購入ページ</a>
-                                
-			</div>
+                echo $previous;
+                echo $next;
+                
 
+            echo '</div>';
+        }
 
-		</div>
-	</div>
-</section>
-<section id="product-in-short" class="">
-    <h4 style="margin:2em;" ><?php echo $product->get_data()['short_description']; ?></h4>    
-</section>
-    <div class="refills-components">
-        
-<div id="modal-reservation" class="modal">
-    <input class="modal-state" id="modal-1" type="checkbox" />
-    
-    <div class="modal-fade-screen">
-        <div class="modal-inner">
-            <div style="position:relative;">
-        <div class="modal-close" for="modal-1" style="top:0;right:0;"></div> 
-        </div>
-        <!--div class="modal-header">  </div-->  
-            <!-- Nav tabs -->
-            <ul class="nav modal-header nav-pills nav-justified" role="tablist" style="margin:0;">
-              <li role="presentation" class="active">
-                  <a id="btn-tab-product-details" class="marker-narrow" href="#wc-product-details" aria-controls="wc-product-details" role="tab" data-toggle="tab">商品詳細<br>・<br>購入</a>
-                  <a id="btn-tab-product-details" class="marker-large" href="#wc-product-details" aria-controls="wc-product-details" role="tab" data-toggle="tab">商品詳細・購入</a>
-              </li>
-              <li role="presentation">
-                  <a id="btn-tab-size-info" class="marker-narrow" href="#wc-size-info" aria-controls="wc-size-info" role="tab" data-toggle="tab">サイズ<br>・<br>素材</a>
-                  <a id="btn-tab-size-info" class="marker-large" href="#wc-size-info" aria-controls="wc-size-info" role="tab" data-toggle="tab">サイズ・素材</a>
-              </li>
-              <li role="presentation">
-                  <a id="btn-tab-size-guide" class="marker-narrow" href="#wc-size-guide" aria-controls="wc-size-guide" role="tab" data-toggle="tab">サイズ<br>ガイド</a>
-                  <a id="btn-tab-size-guide" class="marker-large" href="#wc-size-guide" aria-controls="wc-size-guide" role="tab" data-toggle="tab">サイズガイド</a>                  
-              </li>    
-            </ul>
-            
-        
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="wc-product-details">
-                <div class="modal-product-details product">
-                  <div class="images" style="display:flex;flex-wrap: wrap;width: 100%;">
-                      <div class="woocommerce-product-gallery__image" style="">
-                          <!--img class="wp-post-image"></img-->
-
-                               <div id="product-carousel" class="fadeOut owl-carousel owl-theme">
+    ?>
+    </nav>
+<acticle class="product">
+	<section id="featured">
+                           <div id="product-carousel" class="fadeOut owl-carousel owl-theme">
                                    <?php 
                                       $attachment_ids = $product->get_gallery_image_ids();
+                                      $i=0;
                                       foreach($attachment_ids as $attachment_id) {
-
                                           $image_attachment = wp_get_attachment_image_src( $attachment_id , 'medium');  
                                           $image_full_attachment = wp_get_attachment_image_src( $attachment_id , 'large');  
-                                          echo '<div class="item">
-                                                  <img class="img-lazy-load" data-full-src="'. $image_full_attachment[0] . '" src="'. $image_attachment[0] . '" />
+                                          //
+                                          //<div  style="width:100%;height:100%;background: url(' . $image_attachment[0] . ') no-repeat center bottom / cover;" src="' . $image_attachment[0] . '" />
+                                          echo '<div class="item" style="width:100%;height:100%;">
+                                                  <div class="img-lazy-load" data-full-src="'. $image_full_attachment[0] . '"  style="width:100%;height:100%;background: url(' . $image_attachment[0] . ') no-repeat center bottom / cover;"></div>
                                               </div>';
                                       }                                    
                                    ?>
 
                       </div>
                            <script>
-
-                              jQuery('#product-carousel').owlCarousel({
-                                  animateOut: 'slideOutDown',
-                                  animateIn: 'flipInX',
+                               jQuery(document).ready(function(){
+                            jQuery('#product-carousel').owlCarousel({
                                   items:1,
-                                  margin:30,
-                                  stagePadding:30,
                                   smartSpeed:450,
                                   loop:true,
                                   autoplay:true,
-                                  autoplayTimeout:1000,
+                                  autoplayTimeout:4000,
                                   autoplayHoverPause:true
                               });
+   
+});
+                      </script>                 
 
-                      </script>
-                  </div>
-                  <div class="product-description">
-                      <?php do_action( 'woocommerce_single_product_summary' ); ?>
-                  </div>
-              </div>
-          </div>
+             </section>
+            <section id="variante">   
+                <div class="variante-container">                    
+                    <div class="product-title">
+                        <?php 
+                            woocommerce_template_single_title();                                                    
+                            if ( method_exists('TInvWL_Public_AddToWishlist', 'instance' ) ) {
+                                echo TInvWL_Public_AddToWishlist::instance()->shortcode();
+                            }
+                        ?>
+                    </div>
+                    <div class="product-price">
+                        <?php                 
+                            woocommerce_template_single_price();
+                        ?>
+                    </div>
+                    <div class="product-add-to-cart">
+                        <?php
+                            woocommerce_template_single_add_to_cart();
+                        ?>
+                    </div>
+                    <?php
+                        global $WOO_Product_Stock_Alert;
+                        $WOO_Product_Stock_Alert->frontend->get_alert_form();
+                    ?>
+                    <div id="icon-suite">
+                       <div class="icon-container">
+                            <div class="icon-click icon-sizing" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing</span></div>
+                            <div class="icon-click icon-sizing-guide" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing Guide</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+ 
+<section id="product-in-short" class="">
+    <h4 style="margin:2em;" ><?php echo $product->get_data()['short_description']; ?></h4>    
+</section>
+    <div class="refills-components">
+        
+    <div id="modal-size" class="modal">
+        <input class="modal-state" id="modal-1" type="checkbox" />    
+        <div class="modal-fade-screen">
+        <div class="modal-inner">
+            <div style="position:relative;">
+                <div class="modal-close" for="modal-1" style="top:0;right:0;"></div> 
             </div>
-            <div role="tabpanel" class="tab-pane" id="wc-size-info">
             <?php    
             global $post;
                 $text = get_post_meta(  $post->ID, 'wc_size_details', true);
@@ -383,9 +543,19 @@ if(isset($attachment_ids[1]))
                 </div>
             <?php 
             }
-            ?>
+            ?>            
+        </div>
+
+      </div>
+    </div>
+        
+    <div id="modal-size-guide" class="modal">
+        <input class="modal-state" id="modal-1" type="checkbox" />    
+        <div class="modal-fade-screen">
+        <div class="modal-inner">
+            <div style="position:relative;">
+                <div class="modal-close" for="modal-1" style="top:0;right:0;"></div> 
             </div>
-            <div role="tabpanel" class="tab-pane" id="wc-size-guide">
               <?php  
                 $text = get_post_meta(  $post->ID, 'wc_size_guide', true);
                 if( $text && $text != "" ) {                    
@@ -395,172 +565,15 @@ if(isset($attachment_ids[1]))
                         margin-right: auto;"> <?php echo $text; ?> </div>
                 <?php }
                 ?>
-            </div>
-        </div>
-
-      </div>
-            <!--div class="" id="btn-modal-back" style="display:none;">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" width="15px" height="15px" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512"><path d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm116-292H256v-70.9c0-10.7-13-16.1-20.5-8.5L121.2 247.5c-4.7 4.7-4.7 12.2 0 16.9l114.3 114.9c7.6 7.6 20.5 2.2 20.5-8.5V300h116c6.6 0 12-5.4 12-12v-64c0-6.6-5.4-12-12-12z" fill="#626262"/></svg>
-            </div-->
-            <!--h5 id="modal-title">
-            </h5-->
             
         </div>
+        </div>
+    </div>
         
       
     </div>
 </div>
-<!-- =========================
-        NAV BAR
-    ============================== -->
-<div class="container-11-189" data-reactid="90">
-    <div class="limitWidth-11-191" data-reactid="91">
-        <div class="leftContent-11-193" data-reactid="92">
-            <div class="title-11-192" data-reactid="93"><?php 
-            global $product;
-            echo str_replace("|","<br>",$product->get_title());?></div>
-            <div class="linkContainer-11-195">
-                <a class="sectionLink-11-196" href="#gallery">Photo Gallery<br>ギャラリー</a>
-                <a class="sectionLink-11-196" href="#story">Story<br>この服のおはなし</a>                
-            </div>                  
-        </div><!-- react-text: 99 --><!-- /react-text -->
-        <div id="reservation" class="container-15-202" >            
-            <a class="btn btn-lg btn-danger btn-reservation" >Price & Details<br>購入ページ</a>            
-        </div> 
-    </div>
-</div>
 
-<div class="container-11-190 navbar navbar-hide-top navbar-fixed-bottom" data-reactid="90" style="display:none;">
-    <div class="limitWidth-11-192" data-reactid="91">
-        <!-- react-text: 99 --><!-- /react-text -->
-        <div id="reservation" class="container-15-202">            
-            <a class="btn btn-lg btn-danger btn-reservation" style="">購入ページ</a>            
-        </div> 
-    </div>
-</div>
-    <!-- =========================
-        IMAGE SECTION   
-    ============================== -->
-    <section id="gallery" class="parallax-section">
-            <div class="container">
-                    <div class="row" id="parent-am-container-img">
-                        <div id="am-container" class="">
-                            <?php
-                                $attachment_ids = $product->get_gallery_image_ids();
-                                $idx=0;
-                                $buffer_cell = array();
-                                $lg_used_col = 0;
-                                $md_used_col = 0;
-                                $sm_used_col = 0;
-                                $idx=0;
-                                
-                                while ( count($attachment_ids) || count($buffer_cell)) {
-                                    $attachment_id = null;
-                                    $image_attachment_url = null;
-                                    $image_full_attachment_src = null;
-                                    $width = 0;
-                                    $height = 0;
-                                    if(count($attachment_ids)) {
-                                        $attachment_id = array_shift($attachment_ids);     
-                                        $image_meta = wp_get_attachment_image_src($attachment_id,'large');
-                                        $width = $image_meta[1];
-                                        $height = $image_meta[2];
-                                        $image_attachment_url = $image_meta[0];
-                                        $image_full_attachment_src = wp_get_attachment_image_src($attachment_id,'full');
-                                    } 
-                                    
-                                    if( ( $width > $height || count($buffer_cell) ) && $lg_used_col <= 6 && $md_used_col <= 4 && $sm_used_col <= 0)  {                                        
-                                        if(!count($buffer_cell) && $width > $height) {
-                                            echo '<div href="'. $image_full_attachment_src[0] .'" class="wow fadeInUp col-lg-6 col-md-8 col-sm-12 col-xs-12" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
-                                                <img data-parent-id="parent-am-container-img" data-full-src="'. $image_full_attachment_src[0] . '"  src="' . $image_attachment_url . '" class="img-responsive img-lazy-load" alt="sponsors">	
-                                                <div class="overlay" style="opacity: 0.9; display:none;"></div>
-                                                </div>';
-                                            $lg_used_col += 6;
-                                            $md_used_col += 8;
-                                            $sm_used_col += 12;
-                                        }else if(count($buffer_cell)) {
-                                            $cell = array_shift ( $buffer_cell );
-                                            echo $cell;
-                                            $lg_used_col += 6;
-                                            $md_used_col += 8;
-                                            $sm_used_col += 12;
-                                        }                            
-                                        else if ($width > $height) {
-                                            $buffer_cell[] = '<div href="'. $image_full_attachment_src[0] .'" class="wow fadeInUp col-lg-6 col-md-8 col-sm-12 col-xs-12" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
-                                            <img data-parent-id="parent-am-container-img" data-full-src="'. $image_full_attachment_src[0] . '" src="' . $image_attachment_url . '" class="img-responsive img-lazy-load" alt="sponsors">	
-                                                <div class="overlay" style="opacity: 0.9; display:none;"></div>
-                                                </div>';                                            
-                                        }
-                                        
-                                    }
-                                    else if ($width > $height && $image_attachment_url != null) {
-                                        $buffer_cell[] = '<div href="'. $image_full_attachment_src[0] .'" class="wow fadeInUp col-lg-6 col-md-8 col-sm-12 col-xs-12" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
-                                        <img data-parent-id="parent-am-container-img" data-full-src="'. $image_full_attachment_src[0] . '" src="' . $image_attachment_url . '" class="img-responsive img-lazy-load" alt="sponsors">	
-                                            <div class="overlay" style="opacity: 0.9; display:none;"></div>
-                                            </div>';                                  
-                                    }
-                                    //$image_url = wp_get_attachment_image_src( $image_attachment_id );
-                                    else if ($width <= $height){
-                                        echo '<div href="'. $image_full_attachment_src[0] .'" class="wow fadeInUp col-lg-3 col-md-4 col-sm-6 col-xs-6" data-wow-delay="0.3s" data-lightbox="roadtrip" style="cursor:pointer;">
-                                        <img data-parent-id="parent-am-container-img" data-full-src="'. $image_full_attachment_src[0] . '" src="' . $image_attachment_url . '" class="img-responsive img-lazy-load" alt="sponsors">	
-                                            <div class="overlay" style="opacity: 0.9; display:none;"></div>				   
-                                        </div>';
-                                        $lg_used_col += 3;
-                                        $md_used_col += 4;
-                                        $sm_used_col += 6;
-                                    }
-                                    if(!count($attachment_ids) && ($lg_used_col >= 9 ) ) {
-                                       $lg_used_col = 12;
-                                    }
-                                    if(!count($attachment_ids) && ($md_used_col >= 8 ) ) {
-                                       $md_used_col = 12;
-                                    }
-                                    if(!count($attachment_ids) && ($sm_used_col >= 6 ) ) {
-                                       $sm_used_col = 12;
-                                    }
-                                    
-                                    /*echo '$attachment_ids: ' . count($attachment_ids);
-                                    echo '$buffer_cell: ' . count($buffer_cell);
-                                    echo '$lg_used_col: ' . $lg_used_col;
-                                    echo '$md_used_col: ' . $md_used_col;
-                                    echo '$sm_used_col: ' . $sm_used_col;*/
-                                    
-                                        
-                                    if($lg_used_col >= 12) {
-                                        echo '<div class="clearfix visible-lg"></div>';                                        
-                                        $lg_used_col = 0;
-                                    }
-                                    if($md_used_col >= 12) {
-                                        echo '<div class="clearfix visible-md"></div>';       
-                                        $md_used_col = 0;
-                                    }
-                                    if($sm_used_col >= 12) {
-                                        echo '<div class="clearfix visible-xs"></div>';
-                                        echo '<div class="clearfix visible-sm"></div>';
-                                        $sm_used_col = 0;
-                                    }
-                                                                            
-                                    //break;
-                                }
-                            ?>
-                            </div>
-                            
-
-                            <!--div class="wow fadeInUp col-md-3 col-sm-6 col-xs-6" data-wow-delay="0.6s">
-                                    <img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/sponsor-img2.jpg" class="img-responsive" alt="sponsors">	
-                            </div>
-
-                            <div class="wow fadeInUp col-md-3 col-sm-6 col-xs-6" data-wow-delay="0.9s">
-                                    <img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/sponsor-img3.jpg" class="img-responsive" alt="sponsors">	
-                            </div>
-
-                            <div class="wow fadeInUp col-md-3 col-sm-6 col-xs-6" data-wow-delay="1s">
-                                    <img src="wp-content/themes/atelierbourgeonspro/assets/images/testhomepage/sponsor-img4.jpg" class="img-responsive" alt="sponsors">	
-                            </div-->
-
-                    </div>
-            </div>
-    </section>
     <!-- =========================
         Awesome SECTIONS   
     ============================== -->
@@ -591,127 +604,9 @@ if(isset($attachment_ids[1]))
     }
     ?>
     
-    <!-- =========================
-        Details SECTION   
-    ============================== -->
-    <!--section id="overview" class="parallax-section">
-            <div class="container">
-                    <div class="row">
-
-                            <div class="wow bounceIn col-md-12 col-sm-12">
-                                <div class="section-title">
-                                    <h2>Details</h2>
-                                </div>
-                            </div>
-                            <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.6s">
-                                    
-                                    <?php
-                                    //<h3>New Event is a fully responsive one-page template for events, conferences or workshops.</h3>
-                                    //$postid = the_ID();
-                                    //get_the_title($workshop_id);
-                                    //print_r($product->get_data()['description']);
-                                     //$product_details;;
-                                    ?>
-                                    
-                            </div>
-                            <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.6s">
-                                    
-                                    <?php
-                                    // DISPLAY STAMP
-                                    //<h3>New Event is a fully responsive one-page template for events, conferences or workshops.</h3>
-                                    //$postid = the_ID();
-                                    //get_the_title($workshop_id);
-                                    //include 'wc-stamps-single-product.php';
-                                     //$product_details;;
-                                    ?>
-                                    
-                            </div>
-
-
-                    </div>
-            </div>
-    </section-->
-    <!-- =========================
-        WORKSHOP SECTION   
-    ============================== -->
-    <!--section id="sect-workshop" class="parallax-section">
-            <div class="container">
-                    <div class="row">
-
-                            <div class="wow bounceIn col-md-12 col-sm-12">
-                                <div class="section-title">
-                                    <h2>Workshop</h2>
-                                </div>
-                            </div>
-                            <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.6s">
-                                    
-                                    <?php
-                                    //<h3>New Event is a fully responsive one-page template for events, conferences or workshops.</h3>
-                                    //$postid = the_ID();
-                                    //get_the_title($workshop_id);
-                              
-                                    /*$workshop_post = get_post($workshop_id);
-                                    echo '<h3>' . $workshop_post->post_title . '</h3>';
-                                    echo '<p>' . $workshop_post->post_content . '</p>';
-                                    $wallpaper = get_post_meta( $workshop_id, 'second_featured_image',true);
-                                    $mainfeatureimage = get_post_meta( $workshop_id, 'third_featured_image', true);
-                                    
-                                    $wallpaper_url = wp_get_attachment_image_src( $wallpaper , 'large');
-                                    $image_url = wp_get_attachment_image_src( $mainfeatureimage , 'large');
-                                    
-                                    $data = get_post_meta( $workshop_id, 'gmp_arr', true );
-                                    $title = get_the_title($workshop_id);
-                                    $address1 = $data['gmp_address1'];
-                                    $city = $data['gmp_city'];
-                                    $state = $data['gmp_state'];
-                                    $zip = $data['gmp_zip'];
-
-
-                                    $address = '';
-                                    $address .=  $title;
-                                    $address .= "<br>";
-                                    $address .=  $address1;
-                                    $address .= " ";
-                                    $address .=  $city;
-                                    $address .= "<br>";
-                                    $address .=  $state;
-                                    $address .= "<br>";
-                                    $address .=  $zip;
-                                    $address .= "<br>";
-                                    echo '<p>' . $address . '</p>';
-                                    
-                                    //print_r($post);
-                                    //$workshop_id = get_post_meta( $product->get_id(), 'product_workshop_id' , true);
-                                    //echo $workshop_id;
-                                    //$title = get_the_title($workshop_id);
-                                    //<p>This is a Bootstrap v3.3.6 layout that is responsive and mobile friendly. You may download and modify this template for your website. Please tell your friends about templatemo.</p>
-                                    //<p>Quisque facilisis scelerisque venenatis. Nam vulputate ultricies luctus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</p>
-                                   */ ?>
-                                    
-                            </div>
-
-                            <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.9s">
-                                    <img src="<?php //echo $image_url[0]?>" class="img-responsive" alt="Overview">
-                            </div>
-
-                    </div>
-            </div>
-    </section!-->
-    
-    <!-- =========================
-    PRODUCTS SECTION   
-============================== -->
-    <?php //include('single-product/view/fabrics.php'); ?>
-
-
-    <!-- Back top -->
-    <!--a href="#back-top" class="go-top navbar">
-        <svg width="40px" height="40px" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1395 1184q0 13-10 23l-50 50q-10 10-23 10t-23-10l-393-393-393 393q-10 10-23 10t-23-10l-50-50q-10-10-10-23t10-23l466-466q10-10 23-10t23 10l466 466q10 10 10 23z"/></svg>
-    </a-->
-<!--/div-->
 <script>
     (function($) {
-
+/*
 var viewer = new Viewer(document.getElementById('am-container'), {toolbar:false, title:false});
 // leave preview if click outside box: 
 var RectContains = function (Ax,w,Ay,h,x, y) {
@@ -740,19 +635,21 @@ $('#am-container').on('shown',function(){
     })
 });
 
-$(document).on('click', '#reservation', function(){     
-    $('#modal-reservation').addClass('modal-open');   
+$('.icon-sizing').click(function(){alert('hello')})
+$('.icon-sizing-guide').click(function(){alert('hello')})
+*/
+$(document).on('click', '.icon-sizing', function(){     
+    $('#modal-size').addClass('modal-open');   
     $(document.body).css('overflow-y','hidden');
 });
 
-$(document).on('click', '#btn-size-info', function(){     
-    $('#modal-reservation').addClass('modal-open'); 
-    $('#btn-tab-size-info').click();
+$(document).on('click', '.icon-sizing-guide', function(){     
+    $('#modal-size-guide').addClass('modal-open');   
     $(document.body).css('overflow-y','hidden');
 });
 
-$(document).on('click','#modal-reservation .modal-close' ,function(){ 
- $('#modal-reservation').removeClass('modal-open'); 
+$(document).on('click','.modal-close' ,function(){  
+ $(this).parent().parent().parent().parent().removeClass('modal-open')
  $(document.body).css('overflow-y','scroll');
 });
 
@@ -919,5 +816,5 @@ div#reservation .btn {
     margin-right: auto;
 }
 </style>
-
+</article>
 <?php //do_action( 'woocommerce_after_single_product' ); ?>

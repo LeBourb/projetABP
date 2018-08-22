@@ -1080,3 +1080,51 @@ function wc_create_prod_note( $prod_id, $note, $is_customer_note = false, $added
 function wc_delete_prod_note( $note_id ) {
 	return wp_delete_comment( $note_id, true );
 }
+
+if ( ! function_exists( 'woocommerce_production_loop_start' ) ) {
+
+	/**
+	 * Output the start of a product loop. By default this is a UL.
+	 *
+	 * @param bool $echo Should echo?.
+	 * @return string
+	 */
+	function woocommerce_production_loop_start( $echo = true ) {
+		ob_start();
+
+		wc_set_loop_prop( 'loop', 0 );
+
+		wc_get_template( 'loop/loop-start.php' );
+
+		$loop_start = apply_filters( 'woocommerce_product_loop_start', ob_get_clean() );
+
+		if ( $echo ) {
+			echo $loop_start; // WPCS: XSS ok.
+		} else {
+			return $loop_start;
+		}
+	}
+}
+
+if ( ! function_exists( 'woocommerce_production_loop_end' ) ) {
+
+	/**
+	 * Output the end of a product loop. By default this is a UL.
+	 *
+	 * @param bool $echo Should echo?.
+	 * @return string
+	 */
+	function woocommerce_production_loop_end( $echo = true ) {
+		ob_start();
+
+		wc_get_template( 'loop/loop-end.php' );
+
+		$loop_end = apply_filters( 'woocommerce_product_loop_end', ob_get_clean() );
+
+		if ( $echo ) {
+			echo $loop_end; // WPCS: XSS ok.
+		} else {
+			return $loop_end;
+		}
+	}
+}

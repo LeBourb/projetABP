@@ -43,26 +43,33 @@ if ( empty( $prices['price'] ) ) {
         $priv_sale_price = wc_price(get_post_meta($that->get_id(),'priv_sale_price',true));
         $regular_price = wc_price($that->get_regular_price());        
     }
-    $user = wp_get_current_user(); 
-    $role = ( array ) $user->roles;
-    if(in_array( 'customer-pro', $role )) {
-        return '<div id="price-field" class="price crowdfunding" itemprop="offers" itemscope="" itemtype="//schema.org/Offer">'
-            . '<div class="priv-sale" style="flex-grow:1"><small>卸価格: </small>' . $priv_sale_price . '</div>'            
-            . '<div class="pre-sale" style="font-size:0.7em;margin-left:1em; flex-grow: 2;"><small>先行予約価格: </small><del>' . $pre_sale_price . '</del></div>'
-            . '<div class="regular" style="font-size:0.7em;margin-left:1em; flex-grow: 2;"><small>通常価格: </small><del>' . $regular_price .'</del></div>'
-            . '</div>';
+    global $post;
+    $new_production_id = wc_get_not_stated_production_item($post->ID);   
+    if($new_production_id) {
+        $user = wp_get_current_user(); 
+        $role = ( array ) $user->roles;
+        if(in_array( 'customer-pro', $role )) {
+            return '<div class="priv-sale"><small>卸価格: </small>' . $priv_sale_price . '</div>'            
+                . '<div class="pre-sale"><small>先行予約価格: </small><del>' . $pre_sale_price . '</del></div>'
+                . '<div class="regular"><small>通常価格: </small><del>' . $regular_price .'</del></div>';            
+        }
+
+        return '<div class="pre-sale"><small>先行予約価格: </small>' . $pre_sale_price . '</div>'            
+                . '<div class="regular"><small>通常価格: </small><del>' . $regular_price .'</del></div> ';
     }
-    
-    return '<div id="price-field" class="price crowdfunding" itemprop="offers" itemscope="" itemtype="//schema.org/Offer">'
-            . '<div class="pre-sale" style="flex-grow: 1;"><small>先行予約価格: </small>' . $pre_sale_price . '</div>'            
-            . '<div class="regular" style="    flex-grow: 3;font-size:0.7em;margin-left:1em;"><small>通常価格: </small><del>' . $regular_price .'</del></div> '
-            . '</div>';
+    return $price;
     //wc_price($that->get_regular_price())
     //. '<span class="pre-sale"><del>' . $pre_sale_price . '</del><small>Pre-Sale</small></span>'
 }
 
 
 add_filter( 'woocommerce_get_price_html', 'wc_custom_product_price', 20 , 2 );
+
+
+function wc_custom_product_get_stock_html( $html, $product) {
+    return '';
+}
+add_filter( 'woocommerce_get_stock_html', 'wc_custom_product_get_stock_html', 10 ,2);
 
 
 //add_filter( 'woocommerce_variable_price_html' , 'wc_custom_variable_product_price', 20 , 3 );
