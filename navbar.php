@@ -19,10 +19,7 @@
 <!-- =========================
      SCRIPTS    
 ============================== -->
-<!--script type='text/javascript' src='//maps.google.com/maps/api/js?ver=4.7.3<?php 
-            if (file_exists(get_template_directory() . "/gmap-key.txt" )) {
-                //echo '&key=' . file_get_contents(get_template_directory() . "/gmap-key.txt") ;
-            }?>'></script-->
+<head>
 
         <style>
             .site-logo svg {
@@ -58,22 +55,16 @@
                 counter-increment: prd_number;
             }
             
-              
-            @media screen and ( min-width: 768px ) {        
-                .navbar nav.categories ul.categories {
-                    display: flex;
-                    justify-content: space-evenly;
-                    flex-flow: row;
-                    margin: 3rem;
-                }
-            }
-            
             .navbar nav.categories ul.categories {
                 display: flex;
                 flex-flow: column;
                 list-style-type: none;
                 text-align: center;
                 margin: 0;
+            }
+            
+            .navbar nav.categories ul.categories li.sub-category-elem.current {
+                display: none;
             }
 
             .navbar nav.categories ul.categories li.sub-category-elem , 
@@ -112,6 +103,39 @@
                 display: flex;
                 align-items: center ;
             }
+              
+            @media screen and ( min-width: 768px ) {        
+                .navbar nav.categories ul.categories.cd-tabs-navigation {
+                    display: flex!important;
+                    justify-content: space-evenly;
+                    flex-flow: row;
+                }
+                
+                .navbar nav.categories .selected {
+                    display: none;
+                }
+                
+                .navbar nav.categories ul.categories li.sub-category-elem.current {
+                    display: block;
+                    background-color: black;
+                    color: white;
+                }
+                
+                .navbar nav.categories ul.categories li.sub-category-elem {
+                    color: black;
+                }
+                
+                .categories.cd-tabs-navigation a {
+                     line-height: 0px;
+                    margin-top: 0;
+                    margin-bottom: 0;
+                    width: 25%;
+                    text-align: center;
+                }
+    
+            }
+            
+            
             
         </style>
 
@@ -159,34 +183,32 @@
                             $link_url = get_permalink(get_option('woocommerce_atelier_page_id'));
                         }
                     ?>
-                       <a class="arrow" style="position: relative;
-    width: 1.7rem;
-    height: 2.3rem;" href="<?php echo $link_url;?>">
-        <span>
-<svg id="arrow" viewBox="0 0 33.969 23.844" width="100%" height="100%">
-                            <use xlink:href="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/sprite.svg#arrow"></use>
+                       <a class="arrow" style="position: relative;width: 1.7rem; height: 2.3rem;" href="<?php echo $link_url;?>">
+                        <span>
+                        <svg id="arrow" viewBox="0 0 33.969 23.844" width="100%" height="100%">
+                                <use xlink:href="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/sprite.svg#arrow"></use>
                         </svg>
-        </span>
-            </a>
+                        </span>
+                        </a>
                     <?php
                     }
                     ?>
-			<div class="site-logo" onclick="gotohome()">
-                                   <!--<img src=""></div> -->
-                            <svg viewBox="0 0 650 177" height="177px" width="650px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" xml:space="preserve">
-                                 <use xlink:href="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/sprite.svg#logo-abourgeons"></use>
-                            </svg>    
-                        </div>
+                    <div class="site-logo" onclick="gotohome()">
+                               <!--<img src=""></div> -->
+                        <svg viewBox="0 0 650 177" height="177px" width="650px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" xml:space="preserve">
+                             <use xlink:href="<?php echo get_site_url()?>/wp-content/themes/atelierbourgeonspro/assets/images/sprite.svg#logo-abourgeons"></use>
+                        </svg>    
+                    </div>
                     
                     <div class="cart-button">
                         <a style="display: block;    position: relative;    width: 1.7rem;    height: 2.3rem;"  href="<?php echo wc_get_page_permalink( 'cart' ); ?>">
-        <span><svg id="cart" viewBox="0 0 33 40" width="100%" height="100%">
-    <path d="m685.5 36c-3.9 0-6.5 2.048-6.5 6v1h-9c-.651 0-1 .09-1 .75v31.06a1.187 1.187 0 0 0 1.179 1.194h30.642a1.187 1.187 0 0 0 1.179 -1.194v-31.06c0-.66-.349-.75-1-.75h-9v-1c0-3.952-2.6-6-6.5-6m-4.5 6c0-2.634 1.4-4 4-4s5 1.366 5 4v1h-9v-1m19 3v29h-29v-29h8v4a.9 .9 0 0 0 1 1 .809 .809 0 0 0 1 -1c-.124-.114 0-4 0-4h9v4a1 1 0 1 0 2 0v-4h8" transform="translate(-669-36)"/>
-</svg>
-        </span>
-            <span id="labPanier" style="position: absolute;bottom: .5rem;left: 0;right: 0;color: #0d0d0d;font-size: .9rem;line-height: .9rem;text-align: center;"><span class="nbr">0</span></span>
-            </a>
-                        </div>
+                            <span><svg id="cart" viewBox="0 0 33 40" width="100%" height="100%">
+                                <path d="m685.5 36c-3.9 0-6.5 2.048-6.5 6v1h-9c-.651 0-1 .09-1 .75v31.06a1.187 1.187 0 0 0 1.179 1.194h30.642a1.187 1.187 0 0 0 1.179 -1.194v-31.06c0-.66-.349-.75-1-.75h-9v-1c0-3.952-2.6-6-6.5-6m-4.5 6c0-2.634 1.4-4 4-4s5 1.366 5 4v1h-9v-1m19 3v29h-29v-29h8v4a.9 .9 0 0 0 1 1 .809 .809 0 0 0 1 -1c-.124-.114 0-4 0-4h9v4a1 1 0 1 0 2 0v-4h8" transform="translate(-669-36)"/>
+                            </svg>
+                            </span>
+                            <span id="labPanier" style="position: absolute;bottom: .5rem;left: 0;right: 0;color: #0d0d0d;font-size: .9rem;line-height: .9rem;text-align: center;"><span class="nbr">0</span></span>
+                        </a>
+                    </div>
                          
 		</div>
 
@@ -275,9 +297,6 @@
                                         . '</li>';
                                 ?>
                             
-                                
-                                
-                                
 			</ul>
 
 		</div>
@@ -286,12 +305,29 @@
 
 	</div>
         <?php
-        if(is_shop()) {
-                echo '<nav class="categories">';
-                echo '<div class="selected">SHOP<span class="downArrow"></span></div>';
-                echo '<ul class="categories cd-tabs-navigation" style="display:none;">';
-                
-                    $args = array(
+        global $post;
+        $is_atelier = get_option("woocommerce_atelier_page_id") == $post->ID ? true : false;
+        $is_production = get_option("woocommerce_production_page_id") == $post->ID ? true : false;
+        $atelier_id = get_option("woocommerce_atelier_page_id");
+        $production_id = get_option("woocommerce_production_page_id");
+        $shop_id = wc_get_page_id("shop");
+        if(is_shop() || $is_production  || $is_atelier ) {
+                ?>
+                <nav class="categories">
+                <div class="selected"><?php 
+                if(is_shop())
+                    echo get_the_title($shop_id);
+                else if($is_production)
+                    echo get_the_title($production_id); 
+                else if($is_atelier)
+                    echo get_the_title($atelier_id); 
+                ?><span class="downArrow"></span></div>
+                <ul class="categories cd-tabs-navigation" style="display:none;">
+                    
+                  <a href="<?php echo get_permalink($atelier_id);?>"><li class="sub-category-elem <?php if($is_atelier) echo "current"; ?>"><?php echo get_the_title($atelier_id); ?></li></a>
+                  <a href="<?php echo get_permalink($shop_id); ?>"><li class="sub-category-elem <?php if(is_shop()) echo "current"; ?>"><?php echo get_the_title($shop_id); ?></li></a>
+                  <a href="<?php echo get_permalink($production_id) ?>"><li class="sub-category-elem <?php if($is_production) echo "current"; ?>"><?php echo get_the_title($production_id); ?></li></a>
+                  <?php /* $args = array(
                        'hierarchical' => 1,
                        'show_option_none' => '',
                        'hide_empty' => 0,
@@ -310,11 +346,13 @@
                             $image = wp_get_attachment_image_url( $thumbnail_id , 'large' );
                         }
                         echo '<li class="sub-category-elem ' . ($sc->term_id == $current_cat_id ? 'selected ' : '' ) . '" thumbnail-url="'. $image . '" ><a href="'. $link .'" >' . $sc->name . '</a></li>';
-                    }
-                echo '</ul>';
-                echo '</nav>';
-        }
-                ?>
+                    }*/
+                    ?>
+                </ul>
+                </nav>
+        <?php 
+                }
+        ?>
 </div>
  <script>
     (function($) {
@@ -334,10 +372,8 @@
             $('nav.categories .categories.cd-tabs-navigation').toggle();
         });
     }(jQuery));
-    </script>
-<?php
+</script>
 
-?>
 <!--div class="navbar-fixed-top" role="navigation" style="height:auto;position:absolute">
     <div style="display:flex; align-items: center;
     height: 5.9rem;

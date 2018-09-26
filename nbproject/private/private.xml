@@ -3,72 +3,28 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/content-single-product-timeline.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/functions.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/class-wc-meta-box-product-size-details.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/admin/admin.js</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/style.css</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/footer.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/class-wc-meta-box-product-awesome-description.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-workshop.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/views/html-product-workshop.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/view/html-page-awesome-paragraph-image.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/views/html-product-supply.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/view/html-page-workshop-product-content.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/woocommerce/checkout.js</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/class-wc-meta-box-production-actions.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-product-price.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/wc-timeline-single-product.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/gateways/class-wc-gateway-bacs-jp.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/class-wc-meta-box-product-size-guide.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/classes/class-dc-checkout-terms-conditions-popup-frontend.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/jquery.customSelect.js</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-prod-admin-variable-pre-sale.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/custom.js</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/img-lazy-loading.js</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/images/drop-arrow.svg</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-homepage.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/single-product/view/parallax.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/css/workshop.css</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/class-wc-meta-box-page-product-workshop-partnership.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/class-storefront-woocommerce.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-prod-item-functions.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/class-wc-meta-box-page-workshop-metadata.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/canvas.min.js</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/css/jquery.customSelect.css</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/woocommerce/header-cart.js</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/single-product/view/two-pans.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/view/html-page-awesome-paragraph.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-admin-workshop.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/views/html-product-stamps.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/global/quantity-input.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/css/style.css</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-prod-functions.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/canvas.js</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/img-lazy-loading.min.js</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/functions.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-production.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-atelier.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/style.scss</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/img-lazy-loading.js</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/comments.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/style.css</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/single-product/add-to-cart/variable.footer.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-prod-item-functions.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-add-to-cart.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-product-attribute-productions.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/bootstrap.min.js</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/admin/customizer.js</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/header.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/atelier-product-tile.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/owl.carousel.js</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/content-product.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/navbar.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-help.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/content-homepage.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-login.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/class-storefront.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/single-product/add-to-cart/variable.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/views/html-product-fabrics.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/workshop-section.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/class-wc-meta-box-page-awesome-paragraph.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/view/html-product-awesome-description.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/view/html-product-awesome-parallax.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/customizer/class-storefront-customizer.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/view/html-page-workshop-metadata.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/view/html-product-awesome-two-pans.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/customizer/class-storefront-customizer-control-radio-image.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/images/close.png</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/images/sprite.svg</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/admin/view/html-workshop-product-partnership.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/single-product/add-to-cart/variable.no.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/wc-stamps-single-product.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/single-shop_workshop.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/archive-product.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/content-homepage.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-product-price.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/content-single-product.php</file>
         </group>
     </open-files>

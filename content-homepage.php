@@ -208,25 +208,6 @@ section.full-page {
     
     </a>
 </section>
-<!-- =========================
-    OVERVIEW SECTION   
-============================== -->
-<section id="overview" class="">
-	<div class="container">
-		<div class="row" style="">
-
-			<div class="wow fadeInUp col-md-offset-0 col-sm-offset-1 col-xs-offset-1 col-md-6 col-sm-10 col-xs-10 col-lg-6" data-wow-delay="0.6s" style="text-align: center;">                            
-                            
-                        </p>
-			</div>
-					
-			
-
-		</div>
-            
-            
-	</div>
-</section>
 
 
 <!-- =========================

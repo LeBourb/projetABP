@@ -35,16 +35,18 @@ if ( empty( $prices['price'] ) ) {
     
     if(!is_a($that, 'WC_Product_Variation') && !is_a($that, 'WC_Product_Simple') && !empty($that->get_available_variations( ))) {
         $variations = $that->get_available_variations( );
-        $pre_sale_price = wc_price(get_post_meta($variations[0]['variation_id'],'pre_sale_price',true));
-        $priv_sale_price = wc_price(get_post_meta($variations[0]['variation_id'],'priv_sale_price',true));
+        if($variations[0]['variation_id']) {
+            $pre_sale_price = wc_price(get_post_meta($variations[0]['variation_id'],'pre_sale_price',true));
+            $priv_sale_price = wc_price(get_post_meta($variations[0]['variation_id'],'priv_sale_price',true));
+        }
         $regular_price = wc_price($variations[0]['display_regular_price']);        
-    }else {
+    }else {        
         $pre_sale_price = wc_price(get_post_meta($that->get_id(),'pre_sale_price',true));
         $priv_sale_price = wc_price(get_post_meta($that->get_id(),'priv_sale_price',true));
         $regular_price = wc_price($that->get_regular_price());        
     }
     global $post;
-    $new_production_id = wc_get_not_stated_production_item($post->ID);   
+    $new_production_id = wc_get_not_stated_production_item($that->get_id());   
     if($new_production_id) {
         $user = wp_get_current_user(); 
         $role = ( array ) $user->roles;

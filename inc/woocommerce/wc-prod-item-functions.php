@@ -120,6 +120,19 @@ function wc_get_not_stated_production_item ($product_id) {
     return '';
 }
 
+function wc_get_in_production_item ($product_id) {
+    $production_ids = get_post_ids_by_meta_key_and_value('_product_id', $product_id);
+    if(!is_array($production_ids)) {        
+        return '';
+    }    
+    foreach($production_ids as $production_id) {        
+        if (in_array(get_post_status($production_id), array('wc-supplies-ordered','wc-supp-delivered','wc-in-production' ))) {
+            return $production_id;            
+        }
+    }
+    return '';
+}
+
 function wc_get_count_production_items( $product_id ) {
     $production_ids = get_post_ids_by_meta_key_and_value('_product_id', $product_id);
     return count($production_ids);

@@ -15,7 +15,8 @@
 <LINK REL="SHORTCUT ICON" href="<?php echo get_site_url (); ?>/wp-content/themes/atelierbourgeonspro/ico/logo_seul.ico">
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-
+<script>window.wp_json_url="<?php echo get_site_url() . '/wp-json/wp/v2/'; ?>";
+    </script>
 <?php wp_head(); ?>
 </head>
 

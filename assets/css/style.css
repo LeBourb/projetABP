@@ -101,6 +101,14 @@ a {
 }
 
 
+.img-lazy-load-rest:not(.img-loaded) {            
+    background: url('../images/camera.svg') no-repeat;
+    background-color: #d8d8d8;
+    background-position: center;
+    background-size: auto!important;    
+}
+
+
 /*---------------------------------------
     General               
 -----------------------------------------*/
@@ -575,6 +583,104 @@ footer {
     display: none;
 }
 
+ul.custom-products .product-over-details {
+    right: 2rem;
+    bottom: 2rem;
+    width: 20rem;
+    height: 35rem;
+    padding: 3.5rem 3rem 3rem;
+    background: #fff;
+    color: #000;
+    z-index: 1;
+    display:none;
+    position: absolute;
+}
+
+ul.custom-products  .product-over-details .product-variation {
+    display: flex;
+    justify-content: space-evenly;
+    text-transform: uppercase;
+}
+
+.woocommerce-loop-product__title {
+    position: absolute;
+    width: 100%;
+    font-size: 3rem;
+    letter-spacing: .1rem;
+    text-align: left;
+    text-transform: uppercase;
+    z-index: 1;
+    top: 34%;
+    left: 6%;
+    color: white;
+}
+
+
+#page {
+    margin-top: 8rem;
+}
+
+.thumb-img-back {
+    right: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+ul.custom-products {
+    list-style-type: none;
+    margin: 0;
+}
+
+ul.custom-products li {        
+    position: relative;
+    display: block;        
+}
+
+ul.custom-products li > a {
+    position: relative;
+    height: 43rem;
+    width: 100%;
+    display: block;
+}
+
+ul.custom-products li .product-tile-footer {
+    display: flex;
+    justify-content: flex-end;
+}        
+
+.woocommerce-products-header {
+    padding-bottom: 4rem;
+}
+
+.header-eshop {
+    display: flex;
+    padding-bottom: 4.5rem;
+    border-bottom: 1px solid #e1e1e1;
+    text-align: center;
+    margin-top: 9rem;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.header-eshop .section {
+    flex-grow: 1;
+}
+
+@media screen and (max-width: 450px) {
+    ul.custom-products li > a {
+        height: 25rem;
+    }
+}
+
+
+@media screen and ( min-width: 768px ) {
+    ul.custom-products li:hover  .product-over-details {
+        display: block;
+    }             
+}
+    
+
 @media (max-width: 768px) {
  #products .items-container {
     height: 50%;
@@ -602,11 +708,13 @@ footer {
     
     .navbar.navbar-fixed-top .container .cart-button ,
     .product-nav.navbar.navbar-fixed-top .container .arrow {
-        display: block;
+        display: block;        
     }
     
     .product-nav.custom-navbar.navbar-fixed-top.active {
         position: absolute;        
+        border-bottom: none;
+        box-shadow: none;
     }
     
     .custom-navbar.navbar-fixed-top.active {

@@ -19,6 +19,10 @@ defined( 'ABSPATH' ) || exit;
 
 global $product;
 
+include 'atelier-product-tile.php';
+return;
+
+
 // Ensure visibility.
 $new_production_id = wc_get_not_stated_production_item($post->ID);                     
 if ( empty( $product ) || ! $product->is_visible() || $new_production_id ) {

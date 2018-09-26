@@ -176,7 +176,8 @@ function wc_before_add_to_cart_funding() {
             }(jQuery));
             
         </script>
-        <div style="background-color:#e8e8e8;margin:1em;padding:1em;margin-top: 4em;">
+        
+        <!--div style="background-color:#e8e8e8;margin:1em;padding:1em;margin-top: 4em;">
             こちらは予約商品のため、<red style="color:red;">注文確定後のキャンセル、返品、交換はできません。</red>
             <br>
             <ul>
@@ -184,8 +185,8 @@ function wc_before_add_to_cart_funding() {
             <li>生産の都合上、お届け時期が予定より前後する場合がございます。</li>
             <li>ご注文後、商品のお届け時期は「MY ORDER」ページより随時ご確認いただけます。</li>
             </ul>
-            <red style="color:red;">【お買い物前にご一読ください】<a href="<?php echo get_permalink(get_option('woocommerce_shopping_guide_page_id')); ?>">ご利用ガイド</a></red>
-        </div>
+            <red style="color:red;">【お買い物前にご一読ください】<a href="<?php //echo get_permalink(get_option('woocommerce_shopping_guide_page_id')); ?>">ご利用ガイド</a></red>
+        </div-->
             <?php
     }
 }

@@ -248,26 +248,21 @@ if(isset($attachment_ids[1]))
             border-color: transparent;
         }
         
-        #featured {
-            flex-basis: 49.9%;
-            width: 50%;            
-        }
-        
         #variante {
-            width: 50%;
             padding-left: 5%;
             padding-right: 5%;
         }
         
         
         .variante-container {
-            max-width: 29rem;
+            /*max-width: 29rem;*/
             margin-left: auto;
             margin-right: auto;
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             height: 100%;
-            flex-flow: column nowrap;
+            /*flex-flow: column nowrap;*/
         }
         
         .product-title .tinv-wraper.tinv-wishlist {
@@ -281,7 +276,7 @@ if(isset($attachment_ids[1]))
         }
         
         #product-carousel {
-            height: 87vh;
+            height: 100%;
         }
          
         #product-carousel .owl-dots {
@@ -289,6 +284,32 @@ if(isset($attachment_ids[1]))
             bottom: 0;
             width: 100%;
         }
+        
+        #product-carousel .owl-nav {
+            position:absolute;
+            bottom: 50%;
+            width: 100%;
+        }
+        
+        #product-carousel .owl-nav .owl-next {
+               float: right;
+        }
+        
+        #product-carousel .owl-nav .owl-prev {
+               float: left;
+        }
+        
+        #product-carousel .owl-nav button {
+            height: 30px;
+            width: 30px;
+            border-radius: 35px;
+            border: 1px solid rgba(0,0,0,0);
+            cursor: pointer;
+         
+            margin-left: 5px;
+            background: rgba(255,255,255,1);
+        }
+        
 
         #product-carousel .owl-stage-outer {
             height:100%;
@@ -307,12 +328,6 @@ if(isset($attachment_ids[1]))
                 
         @media screen and (max-width: 768px) {        
             
-            #featured {                
-                width: 100%;            
-            }
-            #variante {
-                width: 100%;
-            }
             
         }
         
@@ -430,13 +445,30 @@ if(isset($attachment_ids[1]))
             padding: 0;
         }
         
+        #featured {
+            padding: 0;
+        }
+        
+        @media only screen and (min-width: 1024px) {
+            #featured {
+                height: 100vh;
+                overflow: visible;
+            }
+        }
+        
+        @media only screen and (max-width: 1023px) {
+            #featured {
+                height: 78vh;
+                min-height: 78vh;
+            }
+        }
     </style>
     <!-- =========================
     INTRO SECTION   
 ============================== -->
-    <nav class="product-ctx-nav">
+    <!--nav class="product-ctx-nav">
     <?php //do_action( 'woocommerce_before_main_content' );
-        woocommerce_breadcrumb();
+        /*woocommerce_breadcrumb();
         $new_production_id = wc_get_not_stated_production_item($post->ID);        
         if( $new_production_id  == null ) {        
             echo '<div class="prev_next_buttons">';
@@ -449,12 +481,12 @@ if(isset($attachment_ids[1]))
                 
 
             echo '</div>';
-        }
+        }*/
 
     ?>
-    </nav>
+    </nav-->
 <acticle class="product">
-	<section id="featured">
+	<section id="featured" class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="">
                            <div id="product-carousel" class="fadeOut owl-carousel owl-theme">
                                    <?php 
                                       $attachment_ids = $product->get_gallery_image_ids();
@@ -469,51 +501,68 @@ if(isset($attachment_ids[1]))
                                               </div>';
                                       }                                    
                                    ?>
-
+                               <div id="product-carousel-controls">
+                                   
+                               </div>
                       </div>
                            <script>
-                               jQuery(document).ready(function(){
-                            jQuery('#product-carousel').owlCarousel({
-                                  items:1,
-                                  smartSpeed:450,
-                                  loop:true,
-                                  autoplay:true,
-                                  autoplayTimeout:4000,
-                                  autoplayHoverPause:true
-                              });
-   
-});
+                                jQuery(document).ready(function(){
+                                    jQuery('#product-carousel').owlCarousel({
+                                        items:1,
+                                        smartSpeed:450,
+                                        loop:true,
+                                        autoplay:true,
+                                        autoplayTimeout:4000,
+                                        autoplayHoverPause:true,
+                                        nav:true,
+                                        animateIn:'fadeIn',
+                                        animateOut:'fadeOut',
+                                    });
+                                });
                       </script>                 
 
              </section>
-            <section id="variante">   
-                <div class="variante-container">                    
-                    <div class="product-title">
-                        <?php 
-                            woocommerce_template_single_title();                                                    
-                            if ( method_exists('TInvWL_Public_AddToWishlist', 'instance' ) ) {
-                                echo TInvWL_Public_AddToWishlist::instance()->shortcode();
-                            }
-                        ?>
+            <section id="variante" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">   
+                <div class="variante-container">  
+                    <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12" style="display: flex;justify-content: center;" >
+                        <div style="max-width:29rem">
+                            <div class="product-title">
+                                <?php 
+                                    woocommerce_template_single_title();                                                    
+                                    if ( method_exists('TInvWL_Public_AddToWishlist', 'instance' ) ) {
+                                        echo TInvWL_Public_AddToWishlist::instance()->shortcode();
+                                    }
+                                ?>
+                            </div>
+                            <div class="product-price">
+                                <?php                 
+                                    woocommerce_template_single_price();
+                                ?>
+                            </div>
+                            <div class="product-short-description">
+                                <?php
+                                    echo $product->get_short_description();   
+                                ?>
+                            </div>
+                        </div>
                     </div>
-                    <div class="product-price">
-                        <?php                 
-                            woocommerce_template_single_price();
-                        ?>
-                    </div>
-                    <div class="product-add-to-cart">
-                        <?php
-                            woocommerce_template_single_add_to_cart();
-                        ?>
-                    </div>
-                    <?php
-                        global $WOO_Product_Stock_Alert;
-                        $WOO_Product_Stock_Alert->frontend->get_alert_form();
-                    ?>
-                    <div id="icon-suite">
-                       <div class="icon-container">
-                            <div class="icon-click icon-sizing" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing</span></div>
-                            <div class="icon-click icon-sizing-guide" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing Guide</span></div>
+                    <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12" style="display: flex;justify-content: center;" >
+                        <div style="max-width:29rem">
+                            <div class="product-add-to-cart">
+                                <?php
+                                    woocommerce_template_single_add_to_cart();
+                                ?>
+                            </div>
+                            <?php
+                                global $WOO_Product_Stock_Alert;
+                                $WOO_Product_Stock_Alert->frontend->get_alert_form();
+                            ?>
+                            <div id="icon-suite">
+                               <div class="icon-container">
+                                    <div class="icon-click icon-sizing" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing</span></div>
+                                    <div class="icon-click icon-sizing-guide" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing Guide</span></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -577,10 +626,192 @@ if(isset($attachment_ids[1]))
     <!-- =========================
         Awesome SECTIONS   
     ============================== -->
-    <section id="story">
+    <style>
+        section.story .grid__item {
+            box-sizing: border-box;
+            float: left;
+            min-height: 1px;
+            padding-left: 30px;
+            vertical-align: top;
+            width: 100%;
+        }
+        
+        section.story .bloc-img-right .bloc-img {
+            float: right !important;
+        }
+        section.story .grid__item {
+            padding-left: 0;
+        }
+        
+        section.story img {
+            border: none;
+            display: block;
+        }
+        
+        section.story .bloc-text .h3 {
+            font-family: 'examiner', sans-serif;
+            font-size: 24px;
+            letter-spacing: 0px !important;
+            font-weight: 300;
+            text-align: left;
+        }
+        
+        section.story .bloc-text hr {
+            border-top: 2px solid #000;
+            width: 70px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        section.story hr {
+            clear: both;
+            border-top: solid #d9d9d9;
+            border-width: 1px 0 0;
+            margin: 20px 0;
+            height: 0;
+        }
+        
+        section.story .bloc-text p {
+            margin-top: 18px;
+            margin-bottom: 0;
+        }
+        section.story article p {
+            margin-top: 25px;
+            font-size: 16px;
+        }
+        section.story p {
+            font-size: 20px !important;
+            line-height: 28px !important;
+        }
+        
+        section.story .bloc-text .h-310 {
+            height: 310px;
+        }
+
+        section.story .bloc-text .bloc-597 {
+            width: 597px;
+        }
+        section.story .bloc-text .bloc {
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0px 20%;
+        }
+ 
+
+        section.story .bloc-text .bloc-690 {
+            width: 690px;
+        }
+                
+        @media screen and (min-width: 769px) {
+            section.story .bloc-img-right .bloc-img img {
+                float: right;
+            }
+            section.story .bloc-img-right {
+                margin-top: 0;
+            }
+            section.story .large--one-half {
+                width: 50%;
+            }
+            section.story .bloc-img-right .bloc-img {
+                padding-left: 20px;
+            }          
+            
+            section.bloc-type-5 .bloc-img-right.bloc-1 .bloc-text {
+                margin-top: 40px;
+            }
+
+            section.story .bloc-img-right .bloc-text {
+                padding-right: 20px;
+            }
+                        
+            section.story .bloc-img-left {
+                margin-top: 0;
+            }            
+            
+            section.story .bloc-img-left .bloc-img {
+                padding-right: 20px;
+            }
+
+
+            section.story .bloc-img-left .bloc-img {
+                margin-top: -40px;
+            }
+
+
+            .large--one-half {
+                width: 50%;
+            }
+
+            section.story .bloc-597 {
+                margin-left: -67px;
+                margin-top: 40px;
+            }
+            
+            
+            
+            section.story .bloc-690 {
+                margin-left: -160px;
+                margin-top: 40px;
+            }
+
+            
+        }
+        
+        
+
+        
+    </style>
+    <section id="story" class="story">
+        <div class="grid__item bloc-img-right bloc-1" style="display: no;">
+            <div class="grid">
+                <div class="grid__item small--one-whole large--one-half bloc-img">
+                    <img src="//cdn.shopify.com/s/files/1/1683/2271/files/fabrication-chemise-denim-asphalte-metier-japonais-530x389.jpg?1308109616217888368">
+                </div>
+                <div class="grid__item small--one-whole large--one-half bloc-text">
+                    <div class="bloc bloc-610 h-290">
+                        <div class="text">
+                            <h3>Denim made in japan</h3>
+                            <hr>
+                            <p>Le tissu vient de chez Nihon Menpu, un des plus vieux tisseurs de denim du Japon. Ils savent bosser, depuis le temps.</p>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.grid_item -->
+        </div>
+        <div class="grid__item bloc-img-left">
+            <div class="grid">
+                <div class="grid__item small--one-whole large--one-half bloc-img">
+                    <img src="//cdn.shopify.com/s/files/1/1683/2271/files/3-asphalte-chemise-brute-v2-stone.jpg?1308109616217888368">
+                </div>
+                <div class="grid__item small--one-whole large--one-half bloc-text">
+                    <div class="bloc bloc-597 h-310">
+                        <div class="text">
+                            <h3>COUPÉE AU POIL</h3>
+                            <hr>
+                            <p>La coupe est légèrement ajustée pour que la chemise reste près du corps, mais vous laisse une grande liberté de mouvement. Utile pour dégainer rapidement en duel ou juste faire un bras de fer.</p>
+                        </div>
+                    </div>
+                    <div class="bloc bloc-690 h-310">
+                        <div class="text">
+                            <h3>Gorgée d’atouts</h3>
+                            <hr>
+                            <p>On a choisi une gorge américaine pour un rendu brut et on a doublé le tout avec un thermocollant discret pour renforcer les boutonnières.</p>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.grid_item -->
+        </div>
     </section>
         
     <?php
+    
+    global $post;
+    $post = get_post(396);
+    echo $post->post_content;
+    
+    
     $data = get_post_meta( $post->ID, 'wc_awesome_descriptions', true );
     if(is_array($data)) {
         foreach ($data as $key => $item) { 
@@ -604,7 +835,83 @@ if(isset($attachment_ids[1]))
     }
     ?>
     
-<script>
+    
+    <style>
+
+        
+.product-footer-bar.visible {
+    opacity: 1;
+}
+        
+.product-footer-bar {    
+    pointer-events: auto;
+    transition-duration: .6s;
+    transition-delay: .5s;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    height: 40px;
+    background: #fff;
+    z-index: 500;
+    opacity: 0;
+    transition: opacity .8s;
+}
+
+.product-footer-bar .row {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #e7e7e7;
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.product-footer-bar .row .right {
+    display: flex;
+    flex-grow: 1;
+}
+
+.product-footer-bar .row .right form{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.product-footer-bar .row .right form .ui-customSelect {
+    height: 100%;
+}
+    </style>
+    <div class="product-footer-bar visible">
+    		<div class="row">
+    			<div class="left">
+	    			<a href="https://www.etq-amsterdam.com/store/" class="button button--rounded button--rounded--square button--rounded--no-border icon--arrow--hover">
+                                        <div class="icon icon--arrow arrow--left">
+                                    </div>
+					</a>
+		    		<hr>
+		    		<label><?php woocommerce_template_single_title(); ?></label>
+	    		</div>
+	    		<div class="right" data-component="product-form" data-product_id="42414">
+                            <span>               
+                                <span><?php woocommerce_template_single_price(); ?>
+                                </span>
+                            </span>    
+                                <?php  // Get Available variations?
+		$get_variations = count( $product->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product );
+
+		// Load the template.
+		wc_get_template( 'single-product/add-to-cart/variable.footer.php', array(
+			'available_variations' => $get_variations ? $product->get_available_variations() : false,
+			'attributes'           => $product->get_variation_attributes(),
+			'selected_attributes'  => $product->get_default_attributes(),
+		) ); ?>
+                        </div>
+    		</div>
+    	</div>
+    <script>
     (function($) {
 /*
 var viewer = new Viewer(document.getElementById('am-container'), {toolbar:false, title:false});

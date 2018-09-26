@@ -30,74 +30,9 @@ get_header();
 do_action( 'woocommerce_before_main_content' );
 
 ?>
-<style>
-    .site-main .atelier-product li.shop_production {
-        width: 70%;        
-    }
-    
-    .site-main .atelier-product li.shop_production .woocommerce-loop-product__link {
-        height: 60vh;
-        position: relative;
-        display: block;
-    }
-      
-    
-    .site-main .atelier-product li.shop_production .thumb-img-back {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-    }
-    
-    .site-main .atelier-product li.shop_production .woocommerce-loop-product__link span {
-        font-size: 4.2rem;
-        line-height: 1.2em;
-        width: 48%;
-        color: #fff;
-        position: relative;
-        z-index: 1;
-        margin-left: 2rem;
-    }
-    
-    .site-main .atelier-product .item {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        vertical-align: middle;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        text-align: left;
-    }
-    
-    .site-main .atelier-product .prod-item-footer {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin-top: 1rem;
-        padding: 1rem;
-    }
-    
-    #welcome-to-atelier .item {
-        text-align: center;
-    }
-    
-    @media screen and (max-width: 980px) {
-        .site-main .atelier-product li.shop_production {
-            width: 100%;
-        }
-    }
-    
-    @media screen and (min-width: 768px) {
-        #page {
-            margin-top: 3em;
-        }
-    }
-        
-</style>
+
 <header class="woocommerce-products-header">
-	<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
+	<?php if ( 0 && apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
 		<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
 	<?php endif; ?>
 
@@ -220,11 +155,17 @@ do_action( 'woocommerce_before_main_content' );
             global $wp_query;
             //print_r($wp_query->query_vars);
             // The Query
+             global $post;
+            $atelier_id = get_option("woocommerce_atelier_page_id");
+            $production_id = get_option("woocommerce_production_page_id");
+            $shop_id = wc_get_page_id("shop");
             $args = array(
                 'post_type' => 'shop_production',
                 'post_status' => 'wc-not-started'
             );
             $wp_query = new WP_Query( $args );
+            
+            echo '<ul class="custom-products">';
 
 		while ( $wp_query->have_posts() ) {
                     
@@ -239,70 +180,13 @@ do_action( 'woocommerce_before_main_content' );
 
 			include 'woocommerce/atelier-product-tile.php';
 		}
-	
+            echo '</ul>';
 
 	//woocommerce_product_loop_end();
 
 ?>
 </div>
-<h3><i>Currently Funding</i></h3>
-<div class="atelier-product in-production">
-<?php
-//if ( woocommerce_product_loop() ) {
 
-	
-/**
-	 * Hook: woocommerce_before_shop_loop.
-	 *
-	 * @hooked wc_print_notices - 10
-	 * @hooked woocommerce_result_count - 20
-	 * @hooked woocommerce_catalog_ordering - 30
-	 */
-	do_action( 'woocommerce_before_shop_loop' );
-
-	//woocommerce_product_loop_start();
-
-	//if ( wc_get_loop_prop( 'total' ) ) {
-            //print_r($GLOBALS['woocommerce_loop']);
-            global $wp_query;
-            //print_r($wp_query->query_vars);
-            // The Query
-            $args = array(
-                'post_type' => 'shop_production',
-                'post_status' => array('wc-supplies-ordered','wc-supp-delivered','wc-in-production' )
-            );
-            $wp_query = new WP_Query( $args );
-woocommerce_product_loop_start();
-		while ( $wp_query->have_posts() ) {
-                    
-			$wp_query->the_post();                      
-                        global $post,$product,$production;
-                        $production_id = $post->ID;
-                        $production = wc_get_prod($production_id);
-                        $product_id = get_post_meta($production_id, '_product_id', true);
-                        $product = wc_get_product($product_id);
-
-			/**
-			 * Hook: woocommerce_shop_loop.
-			 *
-			 * @hooked WC_Structured_Data::generate_product_data() - 10
-			 */
-			do_action( 'woocommerce_shop_loop' );
-                        wc_get_template_part( 'content', 'product' );
-		}
-		woocommerce_product_loop_end();
-
-	//woocommerce_product_loop_end();
-                
-	/**
-	 * Hook: woocommerce_after_shop_loop.
-	 *
-	 * @hooked woocommerce_pagination - 10
-	 */
-	do_action( 'woocommerce_after_shop_loop' );
-
-?>
-</div>
 <?php
 
 /**

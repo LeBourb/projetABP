@@ -5,7 +5,7 @@
  */
 (function($) {
 // Lazy-loading
-$( window ).load(function() {    
+$( window ).ready(function() {    
     var idx = 0;
     $('.img-lazy-load').each(function(){
         var that = $(this);
@@ -26,6 +26,37 @@ $( window ).load(function() {
             }            
         });
         idx++;
+    });
+    
+    $('.img-lazy-load-rest').each(function(){
+        var that = $(this);
+        if(that.data('media-id') && wp_json_url) {            
+            jQuery.ajax({
+                type: 'GET',
+		url: wp_json_url + 'media/' + that.data('media-id'),
+		dataType: 'json',
+		success: function( response ) {
+                    window.console.log( response );
+                    if( response && response.media_details && response.media_details.sizes) {
+                        var sizes = response.media_details.sizes;
+                        for(key in sizes ){ 
+                            that.data('img-' + key, sizes[key].source_url);
+                            if(key === 'woocommerce_single') {                                
+                                jQuery('<img id="" src="' + sizes[key].source_url + '" style="display:none;">').load(function(){
+                                    console.log(this);
+                                    that.css({
+                                     'background-image' : 'url(' + sizes[key].source_url + ')'                                     
+                                    });
+                                    that.addClass('img-loaded');
+                                });
+                            }
+                        }                        
+                    }
+                }
+            }).fail( function( response ) {
+                window.console.log( response );
+            } );
+        }
     });
 });
 

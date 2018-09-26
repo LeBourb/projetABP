@@ -29,94 +29,9 @@ get_header( 'shop' );
 do_action( 'woocommerce_before_main_content' );
 
 ?>
-<style>
-    ul.custom-products .product-over-details {
-        right: 2rem;
-        bottom: 2rem;
-        left: 2rem;
-        padding: 3.5rem 3rem 3rem;
-        background: #fff;
-        color: #000;
-        z-index: 1;
-        display:none;
-        position: absolute;
-    }
-    
-    ul.custom-products  .product-over-details .product-variation {
-        display: flex;
-        justify-content: space-evenly;
-        text-transform: uppercase;
-    }
-    
-    
-    @media screen and ( min-width: 768px ) {
-        ul.custom-products li:hover  .product-over-details {
-            display: block;
-        }
-        
-        #page {
-            margin-top: 5rem;
-        }
-        
-    }
-    
-    .thumb-img-back {
-        right: 0;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-    }
-    
-    ul.custom-products {
-        list-style-type: none;
-        margin-left: 1rem;
-    }
-    
-    ul.custom-products li {        
-        position: relative;
-        display: block;        
-    }
-    
-    ul.custom-products li > a {
-        position: relative;
-        height: 43rem;
-        width: 100%;
-        display: block;
-    }
-    
-    ul.custom-products li .product-tile-footer {
-        display: flex;
-        justify-content: flex-end;
-    }        
-    
-    .woocommerce-products-header {
-        padding-bottom: 4rem;
-    }
-    
-    .header-eshop {
-        display: flex;
-        padding-bottom: 4.5rem;
-        border-bottom: 1px solid #e1e1e1;
-        text-align: center;
-        margin-top: 9rem;
-        justify-content: space-around;
-        flex-wrap: wrap;
-    }
-    
-    .header-eshop .section {
-        flex-grow: 1;
-    }
-    
-    @media screen and (max-width: 450px) {
-        ul.custom-products li > a {
-            height: 25rem;
-        }
-    }
-        
-    
-</style>
+
 <header class="woocommerce-products-header">
-	<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
+	<?php if ( false && apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
 		<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
 	<?php endif; 
 	
@@ -148,9 +63,9 @@ if ( woocommerce_product_loop() ) {
 	woocommerce_product_loop_start();
 
 	if ( wc_get_loop_prop( 'total' ) ) {
-                $lg_used_col = 0;
+                /*$lg_used_col = 0;
                 $md_used_col = 0;
-                $sm_used_col = 0;
+                $sm_used_col = 0;*/
 		while ( have_posts() ) {
 			the_post();
 
@@ -160,9 +75,17 @@ if ( woocommerce_product_loop() ) {
 			 * @hooked WC_Structured_Data::generate_product_data() - 10
 			 */
 			do_action( 'woocommerce_shop_loop' );
+                        
+                        $funding_production = wc_get_not_stated_production_item($post->ID);
+                        $in_production = wc_get_in_production_item($post->ID);                     
+                        if ( $funding_production || $in_production ) {
+                                continue;
+                        }
 
 			wc_get_template_part( 'content', 'product' );
                         
+                        
+                        /*
                         $lg_used_col += 3;
                         $md_used_col += 4;
                         $sm_used_col += 6;
@@ -189,7 +112,7 @@ if ( woocommerce_product_loop() ) {
                             echo '<div class="clearfix visible-xs"></div>';
                             echo '<div class="clearfix visible-sm"></div>';
                             $sm_used_col = 0;
-                        }
+                        }*/
 		}
 	}
 

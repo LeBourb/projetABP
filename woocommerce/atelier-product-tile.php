@@ -24,9 +24,12 @@ global $post,$product,$production;
 
 $production_id = $post->ID;
 $production = wc_get_prod($production_id);
+$funding_production = wc_get_not_stated_production_item($post->ID);
+$in_production = wc_get_in_production_item($post->ID);                     
 $product_id = get_post_meta($production_id, '_product_id', true);
-$product = wc_get_product($product_id);
-
+if($product_id && $product_id != "") {
+    $product = wc_get_product($product_id);
+}
 // Ensure visibility
 ?>
 <li <?php post_class(); ?>>
@@ -61,11 +64,42 @@ $product = wc_get_product($product_id);
     
                         
                         
-                        echo '<div class="item" style="width:100%;height:100%;">
-                                <span class="woocommerce-loop-product__title">' . get_the_title() . '</span>
-                                <div class="img-lazy-load thumb-img-back" data-full-src="'. $image_full_attachment[0] . '"  style="width:100%;height:100%;background: url(' . $image_attachment[0] . ') no-repeat center bottom / cover;"></div>
-                            </div></a>';
-
+                        ?>
+                            <div class="item" style="width:100%;height:100%;">
+                                <h3 class="woocommerce-loop-product__title"><?php echo get_the_title(); ?></h3>
+                                     <div class="item" style="width:100%;height:100%;">
+                                <div class="product-over-details" data-id="1">
+                                    <h3 class="title"><?php echo get_the_title(); ?></h3>
+                                    <p class="price"><?php echo $product->get_price_html();?></p>                                    
+                                    <?php
+                                        if(!is_a($product, 'WC_Product_Variation') && !is_a($product, 'WC_Product_Simple') && !empty($product->get_available_variations( ))) {
+                                            $variations = $product->get_available_variations( );
+                                            echo '<ul class="product-variation">';
+                                            foreach($variations as $variation) {
+                                                if ($variation['variation_is_active'] && $variation['variation_is_visible']) {
+                                                    //$variation->is_in_stock
+                                                    if(sizeof($variation['attributes']) == 1) {
+                                                        $attrs = $variation['attributes'];
+                                                        reset($attrs);
+                                                        $first_key = key($attrs);
+                                                        if(!$variation['is_in_stock']) {
+                                                            echo '<li class="item"><del>' . $attrs[$first_key] . '</del></li>';                                                            
+                                                        }else {
+                                                            echo '<li class="item">' . $attrs[$first_key] . '</li>';
+                                                        }
+                                                        
+                                                    }
+                                                }
+                                            } 
+                                            echo '</ul>';
+                                        }
+                                    ?>
+                                                                  
+                                </div>
+                                         </div>
+                                <div class="img-lazy-load thumb-img-back" data-full-src="<?php echo $image_full_attachment[0]; ?>"  style="width:100%;height:100%;background: url(<?php echo $image_attachment[0]; ?>) no-repeat center bottom / cover;"></div>
+                            </div></a>
+<?php
 
 	/**
 	 * woocommerce_shop_loop_item_title hook.
@@ -82,13 +116,29 @@ $product = wc_get_product($product_id);
 	 */
                         
         ?>
-        <div class="prod-item-footer">               
-            <div class="funding-countdown">
-                <span class="hear-ye">予約受付終了まであと:</span>
-                <time class="tricky-countdown" data-funding-end="<?php echo $production->get_funding_end(); ?>"></time>
-            </div>
-            <?php echo $product->get_price_html(); ?>
-            <a href="<?php echo esc_url( $link ); ?>" class="button">FUND NOW</a>
+        <div class="prod-item-footer">         
+            <?php 
+            if ( $funding_production) {
+            ?>
+                <div class="funding-countdown">
+                    <span class="hear-ye">予約受付終了まであと:</span>
+                    <time class="tricky-countdown" data-funding-end="<?php echo $production->get_funding_end(); ?>"></time>
+                </div>
+                <?php echo $product->get_price_html(); ?>
+                <a href="<?php echo esc_url( $link ); ?>" class="button">FUND NOW</a>
+            <?php 
+            } else if ($in_production) {                
+                echo $product->get_price_html(); 
+            ?>
+                <a href="<?php echo esc_url( $link ); ?>" class="button">Discover</a>
+            <?php 
+            } else {
+                echo $product->get_price_html(); 
+            ?>
+                <a href="<?php echo esc_url( $link ); ?>" class="button">Buy</a>
+            <?php 
+            }
+            ?>
          </div>
 <?php
 

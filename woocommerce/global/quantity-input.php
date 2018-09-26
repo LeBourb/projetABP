@@ -20,7 +20,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( $max_value && $min_value === $max_value ) {
+$user = wp_get_current_user(); 
+$role = ( array ) $user->roles;    
+if ( ($max_value && $min_value === $max_value) || in_array( 'customer-pro', $role )  ) {
 	?>
 	<div class="quantity hidden">
 		<input type="hidden" id="<?php echo esc_attr( $input_id ); ?>" class="qty" name="<?php echo esc_attr( $input_name ); ?>" value="<?php echo esc_attr( $min_value ); ?>" />
