@@ -884,7 +884,7 @@ if(isset($attachment_ids[1]))
     height: 100%;
 }
     </style>
-    <div class="product-footer-bar visible">
+    <!--div class="product-footer-bar visible">
     		<div class="row">
     			<div class="left">
 	    			<a href="https://www.etq-amsterdam.com/store/" class="button button--rounded button--rounded--square button--rounded--no-border icon--arrow--hover">
@@ -892,25 +892,25 @@ if(isset($attachment_ids[1]))
                                     </div>
 					</a>
 		    		<hr>
-		    		<label><?php woocommerce_template_single_title(); ?></label>
+		    		<label><?php //woocommerce_template_single_title(); ?></label>
 	    		</div>
 	    		<div class="right" data-component="product-form" data-product_id="42414">
                             <span>               
-                                <span><?php woocommerce_template_single_price(); ?>
+                                <span><?php //woocommerce_template_single_price(); ?>
                                 </span>
                             </span>    
                                 <?php  // Get Available variations?
-		$get_variations = count( $product->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product );
+		/*$get_variations = count( $product->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product );
 
 		// Load the template.
 		wc_get_template( 'single-product/add-to-cart/variable.footer.php', array(
 			'available_variations' => $get_variations ? $product->get_available_variations() : false,
 			'attributes'           => $product->get_variation_attributes(),
 			'selected_attributes'  => $product->get_default_attributes(),
-		) ); ?>
+		) ); */?>
                         </div>
     		</div>
-    	</div>
+    	</div-->
     <script>
     (function($) {
 /*
