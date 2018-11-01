@@ -276,7 +276,7 @@ if(isset($attachment_ids[1]))
         }
         
         #product-carousel {
-            height: 100%;
+            height: auto;
         }
          
         #product-carousel .owl-dots {
@@ -312,18 +312,26 @@ if(isset($attachment_ids[1]))
         
 
         #product-carousel .owl-stage-outer {
-            height:100%;
+            height: 100%;
+            width: 100%;
         }
 
         #product-carousel.owl-carousel .owl-stage {
-            height:100%;
+            /*height: 100%;*/
+            width: 100%;
         }
 
         #product-carousel.owl-carousel .owl-item {
-            height: 100%;
+            /*height: 100%;*/
+            width: 100%;
+           
         }
         #product-carousel.owl-carousel .owl-item img {
-            height:100%;
+            /*height: 100%;*/
+            margin-left:auto;
+            margin-right:auto;
+            width: auto;
+            max-height: 100vh;            
         }
                 
         @media screen and (max-width: 768px) {        
@@ -460,6 +468,7 @@ if(isset($attachment_ids[1]))
             #featured {
                 height: 78vh;
                 min-height: 78vh;
+                margin-bottom: 12px;
             }
         }
     </style>
@@ -486,24 +495,22 @@ if(isset($attachment_ids[1]))
     ?>
     </nav-->
 <acticle class="product">
-	<section id="featured" class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="">
+	<section id="featured" class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="">
                            <div id="product-carousel" class="fadeOut owl-carousel owl-theme">
                                    <?php 
                                       $attachment_ids = $product->get_gallery_image_ids();
                                       $i=0;
                                       foreach($attachment_ids as $attachment_id) {
-                                          $image_attachment = wp_get_attachment_image_src( $attachment_id , 'medium');  
-                                          $image_full_attachment = wp_get_attachment_image_src( $attachment_id , 'large');  
-                                          //
+                                          //$image_attachment = wp_get_attachment_image_src( $attachment_id , 'medium');  
+                                          //$image_full_attachment = wp_get_attachment_image_src( $attachment_id , 'large');  
+                                          //// <div class="img-lazy-load" data-full-src="'. $image_full_attachment[0] . '"  style="width:100%;height:100%;background: url(' . $image_attachment[0] . ') no-repeat center bottom / cover;"></div>
                                           //<div  style="width:100%;height:100%;background: url(' . $image_attachment[0] . ') no-repeat center bottom / cover;" src="' . $image_attachment[0] . '" />
-                                          echo '<div class="item" style="width:100%;height:100%;">
-                                                  <div class="img-lazy-load" data-full-src="'. $image_full_attachment[0] . '"  style="width:100%;height:100%;background: url(' . $image_attachment[0] . ') no-repeat center bottom / cover;"></div>
+                                          //
+                                          echo '<div class="item" style="">
+                                                    ' . wp_get_attachment_image( $attachment_id, 1442 , array ( 'woocommerce_gallery_thumbnail', 'woocommerce_thumbnail', 'single_product' ), 0) . '                                                   
                                               </div>';
                                       }                                    
                                    ?>
-                               <div id="product-carousel-controls">
-                                   
-                               </div>
                       </div>
                            <script>
                                 jQuery(document).ready(function(){
@@ -522,10 +529,10 @@ if(isset($attachment_ids[1]))
                       </script>                 
 
              </section>
-            <section id="variante" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">   
+            <section id="variante" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">   
                 <div class="variante-container">  
                     <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12" style="display: flex;justify-content: center;" >
-                        <div style="max-width:29rem">
+                        <div style="">
                             <div class="product-title">
                                 <?php 
                                     woocommerce_template_single_title();                                                    
@@ -547,7 +554,7 @@ if(isset($attachment_ids[1]))
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12" style="display: flex;justify-content: center;" >
-                        <div style="max-width:29rem">
+                        <div style="max-width:29rem; margin-top: 19px;">
                             <div class="product-add-to-cart">
                                 <?php
                                     woocommerce_template_single_add_to_cart();
@@ -618,200 +625,19 @@ if(isset($attachment_ids[1]))
         </div>
         </div>
     </div>
-        
-      
-    </div>
-</div>
-
-    <!-- =========================
-        Awesome SECTIONS   
-    ============================== -->
-    <style>
-        section.story .grid__item {
-            box-sizing: border-box;
-            float: left;
-            min-height: 1px;
-            padding-left: 30px;
-            vertical-align: top;
-            width: 100%;
-        }
-        
-        section.story .bloc-img-right .bloc-img {
-            float: right !important;
-        }
-        section.story .grid__item {
-            padding-left: 0;
-        }
-        
-        section.story img {
-            border: none;
-            display: block;
-        }
-        
-        section.story .bloc-text .h3 {
-            font-family: 'examiner', sans-serif;
-            font-size: 24px;
-            letter-spacing: 0px !important;
-            font-weight: 300;
-            text-align: left;
-        }
-        
-        section.story .bloc-text hr {
-            border-top: 2px solid #000;
-            width: 70px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-
-        section.story hr {
-            clear: both;
-            border-top: solid #d9d9d9;
-            border-width: 1px 0 0;
-            margin: 20px 0;
-            height: 0;
-        }
-        
-        section.story .bloc-text p {
-            margin-top: 18px;
-            margin-bottom: 0;
-        }
-        section.story article p {
-            margin-top: 25px;
-            font-size: 16px;
-        }
-        section.story p {
-            font-size: 20px !important;
-            line-height: 28px !important;
-        }
-        
-        section.story .bloc-text .h-310 {
-            height: 310px;
-        }
-
-        section.story .bloc-text .bloc-597 {
-            width: 597px;
-        }
-        section.story .bloc-text .bloc {
-            background-color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0px 20%;
-        }
- 
-
-        section.story .bloc-text .bloc-690 {
-            width: 690px;
-        }
-                
-        @media screen and (min-width: 769px) {
-            section.story .bloc-img-right .bloc-img img {
-                float: right;
-            }
-            section.story .bloc-img-right {
-                margin-top: 0;
-            }
-            section.story .large--one-half {
-                width: 50%;
-            }
-            section.story .bloc-img-right .bloc-img {
-                padding-left: 20px;
-            }          
-            
-            section.bloc-type-5 .bloc-img-right.bloc-1 .bloc-text {
-                margin-top: 40px;
-            }
-
-            section.story .bloc-img-right .bloc-text {
-                padding-right: 20px;
-            }
-                        
-            section.story .bloc-img-left {
-                margin-top: 0;
-            }            
-            
-            section.story .bloc-img-left .bloc-img {
-                padding-right: 20px;
-            }
-
-
-            section.story .bloc-img-left .bloc-img {
-                margin-top: -40px;
-            }
-
-
-            .large--one-half {
-                width: 50%;
-            }
-
-            section.story .bloc-597 {
-                margin-left: -67px;
-                margin-top: 40px;
-            }
-            
-            
-            
-            section.story .bloc-690 {
-                margin-left: -160px;
-                margin-top: 40px;
-            }
-
-            
-        }
-        
-        
-
-        
-    </style>
-    <section id="story" class="story">
-        <div class="grid__item bloc-img-right bloc-1" style="display: no;">
-            <div class="grid">
-                <div class="grid__item small--one-whole large--one-half bloc-img">
-                    <img src="//cdn.shopify.com/s/files/1/1683/2271/files/fabrication-chemise-denim-asphalte-metier-japonais-530x389.jpg?1308109616217888368">
-                </div>
-                <div class="grid__item small--one-whole large--one-half bloc-text">
-                    <div class="bloc bloc-610 h-290">
-                        <div class="text">
-                            <h3>Denim made in japan</h3>
-                            <hr>
-                            <p>Le tissu vient de chez Nihon Menpu, un des plus vieux tisseurs de denim du Japon. Ils savent bosser, depuis le temps.</p>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /.grid_item -->
-        </div>
-        <div class="grid__item bloc-img-left">
-            <div class="grid">
-                <div class="grid__item small--one-whole large--one-half bloc-img">
-                    <img src="//cdn.shopify.com/s/files/1/1683/2271/files/3-asphalte-chemise-brute-v2-stone.jpg?1308109616217888368">
-                </div>
-                <div class="grid__item small--one-whole large--one-half bloc-text">
-                    <div class="bloc bloc-597 h-310">
-                        <div class="text">
-                            <h3>COUPÉE AU POIL</h3>
-                            <hr>
-                            <p>La coupe est légèrement ajustée pour que la chemise reste près du corps, mais vous laisse une grande liberté de mouvement. Utile pour dégainer rapidement en duel ou juste faire un bras de fer.</p>
-                        </div>
-                    </div>
-                    <div class="bloc bloc-690 h-310">
-                        <div class="text">
-                            <h3>Gorgée d’atouts</h3>
-                            <hr>
-                            <p>On a choisi une gorge américaine pour un rendu brut et on a doublé le tout avec un thermocollant discret pour renforcer les boutonnières.</p>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /.grid_item -->
-        </div>
-    </section>
-        
+      </div>  
+    
     <?php
-    
+    echo '<div class="following-description" style="width:100%" >';
     global $post;
-    $post = get_post(396);
-    echo $post->post_content;
-    
-    
+    $page_description_id = get_post_meta( $post->ID, 'product_page_description_id', true );    
+    $current_post = $post;
+    $post = get_post($page_description_id);
+    echo apply_filters( 'the_content', $post->post_content ); // BEFORE do_shortcode().
+    //get_template_part( 'content', 'page' );
+    $post = $current_post;
+    echo '</div>';
+    /*
     $data = get_post_meta( $post->ID, 'wc_awesome_descriptions', true );
     if(is_array($data)) {
         foreach ($data as $key => $item) { 
@@ -832,7 +658,7 @@ if(isset($attachment_ids[1]))
                 include('single-product/view/parallax.php');
             }        
         }
-    }
+    }*/
     ?>
     
     
