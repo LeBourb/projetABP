@@ -234,22 +234,16 @@
                                             . '</div>'
                                         . '</li>';                
 
-                                //echo '<li><a href="' . get_permalink( wc_get_page_id ( 'shop' )) . '" >Shop</a></li>';                                            
+                                /*echo '<li><a href="' . get_permalink( wc_get_page_id ( 'shop' )) . '" >Shop</a></li>';                                            
                                 $query = new WC_Product_Query( array(
                                     'limit' => 10,
                                     'orderby' => 'date',
                                     'order' => 'DESC',
                                     'return' => 'ids',
                                     'status' => 'publish',
-                                ) );                                    
-                                echo '<li><a href="' . (!is_front_page() ? get_home_url() . '/' : '') . '/#products">Products</a>';
-                                $product_ids = $query->get_products();    
-                                echo '<div id="product-menu" class="subnavContainer" style="">';
-                                foreach($product_ids as $product_id) {
-                                    $product = wc_get_product($product_id);
-                                    echo '<a class="subnav product" href="' . get_permalink( $product_id ) . '" >No. ' . '<div style="display:inline-block;" class="nb-product"></div> | ' . $product->get_title() . '</a>';                                      
-                                }
-                                echo '</div>';
+                                ) );   */                                 
+                                echo '<li><a href="' . get_permalink(wc_get_page_id('shop')) . '">E-Shop</a>';
+                                //$product_ids = $query->get_products();                                    
                                 echo '</li>';
                                 echo '<li id="btob-nav"><a href="' . (!is_front_page() ? get_home_url() . '/' : '') . '#pro">B to B SALES</a>'
                                         . '<div class="subnavContainer" style="">'
