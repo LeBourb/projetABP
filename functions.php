@@ -706,6 +706,18 @@ function atelierbourgeons_pro_terms_conditions( $array ) {
             'desc_tip' => true,
             'autoload' => false,
     );
+    $array[] = array(
+            'title'    => __( 'Collection', 'woocommerce' ),
+            'desc'     => __( 'La collection', 'woocommerce' ),
+            'id'       => 'woocommerce_collection_page_id',
+            'default'  => '',
+            'class'    => 'wc-enhanced-select-nostd',
+            'css'      => 'min-width:300px;',
+            'type'     => 'single_select_page',
+            'args'     => array(  ),
+            'desc_tip' => true,
+            'autoload' => false,
+    );
      $array[] = array(
             'title'    => __( 'Atelier', 'woocommerce' ),
             'desc'     => __( 'This is l\'Atelier', 'woocommerce' ),
@@ -813,6 +825,9 @@ function atelierbourgeons_update_options() {
     }
     if(isset($_POST['woocommerce_atelier_page_id'])) {
         update_option('woocommerce_atelier_page_id', $_POST['woocommerce_atelier_page_id'] );
+    }
+    if(isset($_POST['woocommerce_collection_page_id'])) {
+        update_option('woocommerce_collection_page_id', $_POST['woocommerce_collection_page_id'] );
     }
 }
 
@@ -1332,7 +1347,7 @@ function atelierbourgeons_get_breadcrumb($crumbs, $item) {
             $crumbs = array( array( get_the_title( $atelier_id ) , get_permalink($atelier_id) ) , 
                 array( get_the_title( ) ) );
         }else if (is_product($new_production_id)) {
-            $shop_id = wc_get_page_id ( 'shop' );
+            $shop_id = get_option('woocommerce_collection_page_id');
             $crumbs[0] = array( get_the_title($shop_id)  ,get_permalink( $shop_id));
         }
         return $crumbs;

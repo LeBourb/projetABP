@@ -8,6 +8,7 @@
 
 
     ?>
+
 <meta name="description" content="">
 <meta name="author" content="">
 <meta charset="UTF-8">
@@ -191,7 +192,7 @@
                         </span>
                         </a>
                     <?php
-                    }
+                    }                    
                     ?>
                     <div class="site-logo" onclick="gotohome()">
                                <!--<img src=""></div> -->
@@ -242,7 +243,7 @@
                                     'return' => 'ids',
                                     'status' => 'publish',
                                 ) );   */                                 
-                                echo '<li><a href="' . get_permalink(wc_get_page_id('shop')) . '">E-Shop</a>';
+                                echo '<li><a href="' . get_permalink(get_option('woocommerce_collection_page_id')) . '">E-Shop</a>';
                                 //$product_ids = $query->get_products();                                    
                                 echo '</li>';
                                 echo '<li id="btob-nav"><a href="' . (!is_front_page() ? get_home_url() . '/' : '') . '#pro">B to B SALES</a>'
@@ -263,6 +264,7 @@
                                         . '<a href="' . get_permalink( wc_get_page_id ( 'cart' )) . '" >カート</a>'                                        
                                         . '</div>'
                                         .'</li>'; 
+                                
                                 if(is_user_logged_in()) {                                    
                                     echo '<li><a href="' . get_permalink( wc_get_page_id ( 'myaccount' )) . '" >My Account</a>'
                                             . '<div class="subnavContainer" style="">'
@@ -272,7 +274,7 @@
                                             . '</li>';
                                 }
                                 else {
-                                    echo '<li><a href="' . Theme_My_Login::get_page_link( 'login' ) . '" >Login</a>'
+                                   echo '<li><a href="' . Theme_My_Login::get_page_link( 'login' ) . '" >Login</a>'
                                         . '<div class="subnavContainer" style="">'
                                         . '<a class="subnav" href="' .  Theme_My_Login::get_page_link( 'login' ) . '">ログイン</a>'
                                         . '</div>'
@@ -299,18 +301,20 @@
 
 	</div>
         <?php
+        
         global $post;
         $is_atelier = get_option("woocommerce_atelier_page_id") == $post->ID ? true : false;
         $is_production = get_option("woocommerce_production_page_id") == $post->ID ? true : false;
+        $is_collection = get_option("woocommerce_collection_page_id") == $post->ID ? true : false;
         $atelier_id = get_option("woocommerce_atelier_page_id");
         $production_id = get_option("woocommerce_production_page_id");
-        $shop_id = wc_get_page_id("shop");
-        if(is_shop() || $is_production  || $is_atelier ) {
+        $collection_id = get_option("woocommerce_production_page_id");
+        if($is_collection || $is_production  || $is_atelier ) {
                 ?>
                 <nav class="categories">
                 <div class="selected"><?php 
-                if(is_shop())
-                    echo get_the_title($shop_id);
+                if($is_collection)
+                    echo get_the_title($collection_id);
                 else if($is_production)
                     echo get_the_title($production_id); 
                 else if($is_atelier)
@@ -319,7 +323,7 @@
                 <ul class="categories cd-tabs-navigation" style="display:none;">
                     
                   <a href="<?php echo get_permalink($atelier_id);?>"><li class="sub-category-elem <?php if($is_atelier) echo "current"; ?>"><?php echo get_the_title($atelier_id); ?></li></a>
-                  <a href="<?php echo get_permalink($shop_id); ?>"><li class="sub-category-elem <?php if(is_shop()) echo "current"; ?>"><?php echo get_the_title($shop_id); ?></li></a>
+                  <a href="<?php echo get_permalink($collection_id); ?>"><li class="sub-category-elem <?php if($is_collection) echo "current"; ?>"><?php echo get_the_title($collection_id); ?></li></a>
                   <a href="<?php echo get_permalink($production_id) ?>"><li class="sub-category-elem <?php if($is_production) echo "current"; ?>"><?php echo get_the_title($production_id); ?></li></a>
                   <?php /* $args = array(
                        'hierarchical' => 1,

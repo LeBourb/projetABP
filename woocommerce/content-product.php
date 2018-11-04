@@ -25,7 +25,7 @@ return;
 
 // Ensure visibility.
 $new_production_id = wc_get_not_stated_production_item($post->ID);                     
-if ( empty( $product ) || ! $product->is_visible() || $new_production_id ) {
+if ( !$product || empty( $product ) || ! $product->is_visible() || $new_production_id ) {
 	return;
 }
 ?>

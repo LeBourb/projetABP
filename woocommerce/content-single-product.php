@@ -466,7 +466,6 @@ if(isset($attachment_ids[1]))
         
         @media only screen and (max-width: 1023px) {
             #featured {
-                height: 78vh;
                 min-height: 78vh;
                 margin-bottom: 12px;
             }
