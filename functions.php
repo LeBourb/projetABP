@@ -730,10 +730,22 @@ function atelierbourgeons_pro_terms_conditions( $array ) {
             'desc_tip' => true,
             'autoload' => false,
     );
-     $array[] = array(
+    $array[] = array(
             'title'    => __( 'In Production', 'woocommerce' ),
             'desc'     => __( 'In Production eshop page', 'woocommerce' ),
             'id'       => 'woocommerce_production_page_id',
+            'default'  => '',
+            'class'    => 'wc-enhanced-select-nostd',
+            'css'      => 'min-width:300px;',
+            'type'     => 'single_select_page',
+            'args'     => array(  ),
+            'desc_tip' => true,
+            'autoload' => false,
+    );
+    $array[] = array(
+            'title'    => __( 'B to B Page', 'woocommerce' ),
+            'desc'     => __( 'B to B Page', 'woocommerce' ),
+            'id'       => 'woocommerce_btob_page_id',
             'default'  => '',
             'class'    => 'wc-enhanced-select-nostd',
             'css'      => 'min-width:300px;',
@@ -825,6 +837,9 @@ function atelierbourgeons_update_options() {
     }
     if(isset($_POST['woocommerce_atelier_page_id'])) {
         update_option('woocommerce_atelier_page_id', $_POST['woocommerce_atelier_page_id'] );
+    }
+    if(isset($_POST['woocommerce_btob_page_id'])) {
+        update_option('woocommerce_btob_page_id', $_POST['woocommerce_btob_page_id'] );
     }
     if(isset($_POST['woocommerce_collection_page_id'])) {
         update_option('woocommerce_collection_page_id', $_POST['woocommerce_collection_page_id'] );

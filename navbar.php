@@ -6,7 +6,15 @@
  * and open the template in the editor.
  */
 
-
+    
+        global $post;
+        $is_atelier = get_option("woocommerce_atelier_page_id") == $post->ID ? true : false;
+        $is_production = get_option("woocommerce_production_page_id") == $post->ID ? true : false;
+        $is_collection = get_option("woocommerce_collection_page_id") == $post->ID ? true : false;
+        $atelier_id = get_option("woocommerce_atelier_page_id");
+        $production_id = get_option("woocommerce_production_page_id");
+        $collection_id = get_option("woocommerce_production_page_id");
+        
     ?>
 
 <meta name="description" content="">
@@ -80,6 +88,7 @@
                 background-color: white;
                 border-top: 1px solid #e1e1e1;
                 border-bottom: 1px solid #e1e1e1;
+                display: none;
             }
             
             .navbar nav.categories .selected {
@@ -146,6 +155,9 @@
 <!-- =========================
      PRE LOADER       
 ============================== -->
+<?php 
+    if(is_front_page()) {
+?>
 <div class="preloader">
 
 	<!--div class="sk-rotating-plane"></div-->
@@ -155,7 +167,9 @@
     </div>
 
 </div>
-
+<?php 
+    }
+?>
 
 <!-- =========================
      NAVIGATION LINKS     
@@ -177,12 +191,12 @@
 			</button>
                     <?php
                     }else {
-                        global $post;
+                        /*global $post;
                         $new_production_id = wc_get_not_stated_production_item($post->ID);
                         $link_url = '';
-                        if( $new_production_id  !== null ) {
-                            $link_url = get_permalink(get_option('woocommerce_atelier_page_id'));
-                        }
+                        if( $new_production_id  !== null ) {*/
+                            $link_url = get_permalink(get_option('woocommerce_collection_page_id'));
+                        //}
                     ?>
                        <a class="arrow" style="position: relative;width: 1.7rem; height: 2.3rem;" href="<?php echo $link_url;?>">
                         <span>
@@ -207,7 +221,7 @@
                                 <path d="m685.5 36c-3.9 0-6.5 2.048-6.5 6v1h-9c-.651 0-1 .09-1 .75v31.06a1.187 1.187 0 0 0 1.179 1.194h30.642a1.187 1.187 0 0 0 1.179 -1.194v-31.06c0-.66-.349-.75-1-.75h-9v-1c0-3.952-2.6-6-6.5-6m-4.5 6c0-2.634 1.4-4 4-4s5 1.366 5 4v1h-9v-1m19 3v29h-29v-29h8v4a.9 .9 0 0 0 1 1 .809 .809 0 0 0 1 -1c-.124-.114 0-4 0-4h9v4a1 1 0 1 0 2 0v-4h8" transform="translate(-669-36)"/>
                             </svg>
                             </span>
-                            <span id="labPanier" style="position: absolute;bottom: .5rem;left: 0;right: 0;color: #0d0d0d;font-size: .9rem;line-height: .9rem;text-align: center;"><span class="nbr">0</span></span>
+                            <span id="labPanier" style="position: absolute;bottom: .5rem;left: 0;right: 0;color: #0d0d0d;font-size: .9rem;line-height: .9rem;text-align: center;"><span class="nbr"><?php  echo sizeof(WC()->cart->get_cart()); ?></span></span>
                         </a>
                     </div>
                          
@@ -246,24 +260,10 @@
                                 echo '<li><a href="' . get_permalink(get_option('woocommerce_collection_page_id')) . '">E-Shop</a>';
                                 //$product_ids = $query->get_products();                                    
                                 echo '</li>';
-                                echo '<li id="btob-nav"><a href="' . (!is_front_page() ? get_home_url() . '/' : '') . '#pro">B to B SALES</a>'
-                                        . '<div class="subnavContainer" style="">'
-                                        . '<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '') . '#pro">卸販売のご案内</a>'
-                                        . '</div>'
-                                        . '</li> ';
-                                echo '<li><a class="separator">|</a></li>';
-                                                                  
-                                echo '<li><a href="' . get_permalink(get_option('woocommerce_shopping_guide_page_id')) . '" >' . 'Help' . '</a>'
-                                        . '<div class="subnavContainer" style="">'
-                                        . '<a class="subnav" href="' .  get_permalink(get_option('woocommerce_shopping_guide_page_id')) . '">ご利用ガイド</a>'
-                                        . '</div>'
-                                        . '</li>';
-                                
-                                echo '<li><a href="' . get_permalink( wc_get_page_id ( 'cart' )) . '" >Cart</a>'
-                                        . '<div class="subnavContainer" style="">'
-                                        . '<a href="' . get_permalink( wc_get_page_id ( 'cart' )) . '" >カート</a>'                                        
-                                        . '</div>'
-                                        .'</li>'; 
+                                echo '<li id="btob-nav"><a href="' . get_permalink(get_option('woocommerce_btob_page_id')) . '">B to B SALES</a></li>';
+                                echo '<li><a class="separator">|</a></li>';                                                                  
+                                echo '<li><a href="' . get_permalink(get_option('woocommerce_shopping_guide_page_id')) . '" >' . 'Help' . '</a></li>';                                
+                                echo '<li><a href="' . get_permalink( wc_get_page_id ( 'cart' )) . '" >Cart</a></li>'; 
                                 
                                 if(is_user_logged_in()) {                                    
                                     echo '<li><a href="' . get_permalink( wc_get_page_id ( 'myaccount' )) . '" >My Account</a>'
@@ -301,14 +301,7 @@
 
 	</div>
         <?php
-        
-        global $post;
-        $is_atelier = get_option("woocommerce_atelier_page_id") == $post->ID ? true : false;
-        $is_production = get_option("woocommerce_production_page_id") == $post->ID ? true : false;
-        $is_collection = get_option("woocommerce_collection_page_id") == $post->ID ? true : false;
-        $atelier_id = get_option("woocommerce_atelier_page_id");
-        $production_id = get_option("woocommerce_production_page_id");
-        $collection_id = get_option("woocommerce_production_page_id");
+    
         if($is_collection || $is_production  || $is_atelier ) {
                 ?>
                 <nav class="categories">

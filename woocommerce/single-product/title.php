@@ -20,4 +20,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-echo '<h3 class="product_title">' . str_replace("|","<br>",get_the_title()) . '</h3>';
+echo '<h3 class="product_title" style="line-height:unset;">' . str_replace("|","<br>",get_the_title()) . '</h3>';

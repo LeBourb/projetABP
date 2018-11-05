@@ -7,10 +7,36 @@
  * @package storefront
  */
 ?>
-
-		</div><!-- .col-full -->
+	</div><!-- .col-full -->
 	</div><!-- #content -->
 
+        <div class="header-eshop">                    
+            <div class="section col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <p class="title">                        
+                    Livraison offerte
+                </p>
+                <p class="text">
+                    dès 200€ d'achat en France métropolitaine
+                 </p>
+            </div>
+            <div class="section col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <p class="title">                        
+                    Retours gratuits
+                </p>
+                <p class="text">
+                    France métropolitaine, Belgique, Allemagne, UK, Italie, Espagne, Pays-Bas, Portugal, Finlande, Suède, Danemark et Luxembourg
+                 </p>
+            </div>
+            <div class="section col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <p class="title">                        
+                    Paiement sécurisé
+                </p>
+                <p class="text">
+                    Visa, Mastercard, Amex, Paypal, Maestro, Sofort, iDEAL
+                 </p>
+            </div>
+        </div>
+        
         <!-- Footer Section -->
         <style>
   
@@ -144,10 +170,10 @@ footer .fa:before {
 
 
         </style>
+        
 <footer class="clearfix" style="padding:0; padding-top: 2em;">
     <div class="container">
-        
-       
+               
         <div class="footer_links">
  
             <!-- Social Media Links  -->

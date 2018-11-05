@@ -148,32 +148,6 @@ do_action( 'woocommerce_after_main_content' );
 do_action( 'woocommerce_sidebar' );
 ?>
 
-<div class="header-eshop">                    
-                    <div class="section">
-                        <p class="title">                        
-                            Livraison offerte
-                        </p>
-                        <p class="text">
-                            dès 200€ d'achat en France métropolitaine
-                         </p>
-                    </div>
-                    <div class="section">
-                        <p class="title">                        
-                            Retours gratuits
-                        </p>
-                        <p class="text">
-                            France métropolitaine, Belgique, Allemagne, UK, Italie, Espagne, Pays-Bas, Portugal, Finlande, Suède, Danemark et Luxembourg
-                         </p>
-                    </div>
-                    <div class="section">
-                        <p class="title">                        
-                            Paiement sécurisé
-                        </p>
-                        <p class="text">
-                            Visa, Mastercard, Amex, Paypal, Maestro, Sofort, iDEAL
-                         </p>
-                    </div>
-                </div>
                 <?php
 
 get_footer( 'shop' );

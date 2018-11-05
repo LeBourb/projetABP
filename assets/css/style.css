@@ -651,10 +651,10 @@ ul.custom-products li .product-tile-footer {
 
 .header-eshop {
     display: flex;
-    padding-bottom: 4.5rem;
+    padding-bottom: 4rem;
     border-bottom: 1px solid #e1e1e1;
     text-align: center;
-    margin-top: 9rem;
+    margin-top: 4rem;
     justify-content: space-around;
     flex-wrap: wrap;
 }
