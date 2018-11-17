@@ -13,13 +13,20 @@
  */
 
 get_header();
+global $post;
 ?>
 
 
 <div style="width: 80%;margin-left: auto;margin-right: auto;padding-top: 5em;">
+    <header class="entry-header">
+        <h1 class="entry-title">
+            <?php 
+                echo get_the_title($post);    
+            ?>
+        </h1>		
+    </header>
 <?php 
 //get_template_part('content','none');
-global $post;
 echo apply_filters('the_content',$post->post_content);
 ?>    
 </div>
