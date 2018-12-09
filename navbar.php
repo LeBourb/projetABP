@@ -256,10 +256,16 @@
                                     'order' => 'DESC',
                                     'return' => 'ids',
                                     'status' => 'publish',
-                                ) );   */                                 
-                                echo '<li><a href="' . get_permalink(get_option('woocommerce_collection_page_id')) . '">E-Shop</a>';
-                                //$product_ids = $query->get_products();                                    
-                                echo '</li>';
+                                ) );   */     
+                                $backgroundlowImageURL = get_the_post_thumbnail( get_option('woocommerce_collection_page_id') , 'woocommerce_single');
+                                print_r(get_the_post_thumbnail('woocommerce_collection_page_id'));
+                                echo '<li><a href="' . get_permalink(get_option('woocommerce_collection_page_id')) . '">E-Shop</a>'
+                                        . '<div class="subnavContainer" style="">'
+                                        . '<a class="subnav menu-img" href="' . (!is_front_page() ? get_home_url() . '/' : '') . '#overview">CONCEPT｜コンセプト'
+                                        . '<div style="background-image:url(' . $backgroundlowImageURL . ');"><div>'
+                                        . '</a>'
+                                        . '</div>'
+                                    . '</li>';                                
                                 echo '<li id="btob-nav"><a href="' . get_permalink(get_option('woocommerce_btob_page_id')) . '">B to B SALES</a></li>';
                                 echo '<li><a class="separator">|</a></li>';                                                                  
                                 echo '<li><a href="' . get_permalink(get_option('woocommerce_shopping_guide_page_id')) . '" >' . 'Help' . '</a></li>';                                

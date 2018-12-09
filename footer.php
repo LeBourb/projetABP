@@ -13,27 +13,27 @@
         <div class="header-eshop">                    
             <div class="section col-xs-12 col-sm-6 col-md-4 col-lg-3">
                 <p class="title">                        
-                    Livraison offerte
+                    送料無料
                 </p>
                 <p class="text">
-                    dès 200€ d'achat en France métropolitaine
+                    ※3万円以上のご購入で、送料が無料になります（３万円以内の場合はは、全国一律500円）。
                  </p>
             </div>
             <div class="section col-xs-12 col-sm-6 col-md-4 col-lg-3">
                 <p class="title">                        
-                    Retours gratuits
+                    無料で返品・交換
                 </p>
                 <p class="text">
-                    France métropolitaine, Belgique, Allemagne, UK, Italie, Espagne, Pays-Bas, Portugal, Finlande, Suède, Danemark et Luxembourg
+                    ※商品到着日から７日間以内であれば、送料無料で返品・交換を承ります（日本国内に限る）。
                  </p>
             </div>
             <div class="section col-xs-12 col-sm-6 col-md-4 col-lg-3">
                 <p class="title">                        
-                    Paiement sécurisé
+                    安心・安全なカード決済システム
                 </p>
                 <p class="text">
                     Visa, Mastercard, Amex, Paypal, Maestro, Sofort, iDEAL
-                 </p>
+                </p>
             </div>
         </div>
         

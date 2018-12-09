@@ -337,40 +337,7 @@ if(isset($attachment_ids[1]))
         @media screen and (max-width: 768px) {        
             
             
-        }
-        
-        .icon-sizing {
-            background-image: url(<?php echo get_site_url() . '/wp-content/themes/atelierbourgeonspro/assets/images/sizing.svg'; ?>);
-        }
-        
-        .icon-sizing-guide {
-            background-image: url(<?php echo get_site_url() . '/wp-content/themes/atelierbourgeonspro/assets/images/help.svg'; ?>);
-        }
-        
-        #icon-suite .icon-click {
-            background-repeat: no-repeat;
-            background-position: top center;
-            background-size: 29px;
-            cursor: pointer;
-            display: inline-block;
-        }
-        
-        #icon-suite .icon-click span {
-            display: inline-block;
-        }
-        
-        
-        #icon-suite .icon-container {
-            padding: 4em 1.5em 0;
-            text-align: center;
-            text-transform: uppercase;
-            color: #363636;
-            font-size: 1rem;
-            font-family: "Avenir Next",Avenir,"HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
-            font-weight: 400;
-            font-style: normal;
-            letter-spacing: 0.08em;
-        }
+        }      
         
         .product-title {
             text-align: center;
@@ -470,6 +437,27 @@ if(isset($attachment_ids[1]))
                 margin-bottom: 12px;
             }
         }
+        
+        @media only screen and (max-width: 768px) {
+            #featured {
+                min-height: unset;
+            }
+        }
+        
+        acticle.product .following-description p ,
+        acticle.product .following-description h1 ,
+        acticle.product .following-description h2 ,
+        acticle.product .following-description h3 ,
+        acticle.product .following-description h4 ,
+        acticle.product .following-description h5 
+        {
+            padding: 0 5%;
+        }
+        
+        .price del+ins {
+            margin-left: 1rem;
+        }
+        
     </style>
     <!-- =========================
     INTRO SECTION   
@@ -562,13 +550,7 @@ if(isset($attachment_ids[1]))
                             <?php
                                 global $WOO_Product_Stock_Alert;
                                 $WOO_Product_Stock_Alert->frontend->get_alert_form();
-                            ?>
-                            <div id="icon-suite">
-                               <div class="icon-container">
-                                    <div class="icon-click icon-sizing" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing</span></div>
-                                    <div class="icon-click icon-sizing-guide" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing Guide</span></div>
-                                </div>
-                            </div>
+                            ?>                            
                         </div>
                     </div>
                 </div>

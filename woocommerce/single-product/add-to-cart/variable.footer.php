@@ -40,6 +40,40 @@ if( !function_exists('get_variation_from_term_slug') ) {
 .variations_form.row.cart .ui-customSelect-dropdown {
     bottom: 46px;
 }
+
+.icon-sizing {
+    background-image: url(<?php echo get_site_url() . '/wp-content/themes/atelierbourgeonspro/assets/images/sizing.svg'; ?>);
+}
+
+.icon-sizing-guide {
+    background-image: url(<?php echo get_site_url() . '/wp-content/themes/atelierbourgeonspro/assets/images/help.svg'; ?>);
+}
+
+#icon-suite .icon-click {
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 29px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+#icon-suite .icon-click span {
+    display: inline-block;
+}
+
+
+#icon-suite .icon-container {
+    padding: 4em 1.5em 0;
+    text-align: center;
+    text-transform: uppercase;
+    color: #363636;
+    font-size: 1rem;
+    font-family: "Avenir Next",Avenir,"HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0.08em;
+}
+
 </style>
 
 
@@ -141,7 +175,13 @@ if( !function_exists('get_variation_from_term_slug') ) {
 			'input_value' => isset( $_POST['quantity'] ) ? wc_stock_amount( $_POST['quantity'] ) : $product->get_min_purchase_quantity(),
 		) );
 ?>
-	<button type="submit" class="single_add_to_cart_button button alt"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
+	<div id="icon-suite">
+            <div class="icon-container">
+                <div class="icon-click icon-sizing" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing</span></div>
+                <div class="icon-click icon-sizing-guide" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing Guide</span></div>
+            </div>
+        </div>
+        <button type="submit" class="single_add_to_cart_button button alt"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
 	<input type="hidden" name="add-to-cart" value="<?php echo absint( $product->get_id() ); ?>" />
 	<input type="hidden" name="product_id" value="<?php echo absint( $product->get_id() ); ?>" />
 	<input type="hidden" name="variation_id" class="variation_id" value="0" />

@@ -615,6 +615,15 @@ ul.custom-products  .product-over-details .product-variation {
     color: white;
 }
 
+.wp-block-column {
+   margin: 0!important;
+}
+
+@media (max-width: 768px) {
+    .wp-block-media-text {
+        display: block;
+    }
+}
 
 .thumb-img-back {
     right: 0;
