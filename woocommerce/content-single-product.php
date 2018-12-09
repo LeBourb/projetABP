@@ -266,8 +266,7 @@ if(isset($attachment_ids[1]))
         }
         
         .product-title .tinv-wraper.tinv-wishlist {
-            position: absolute;
-            right: 0;
+            float: left;
         }
         
         acticle.product {
@@ -337,7 +336,40 @@ if(isset($attachment_ids[1]))
         @media screen and (max-width: 768px) {        
             
             
-        }      
+        }
+        
+        .icon-sizing {
+            background-image: url(<?php echo get_site_url() . '/wp-content/themes/atelierbourgeonspro/assets/images/sizing.svg'; ?>);
+        }
+        
+        .icon-sizing-guide {
+            background-image: url(<?php echo get_site_url() . '/wp-content/themes/atelierbourgeonspro/assets/images/help.svg'; ?>);
+        }
+        
+        #icon-suite .icon-click {
+            background-repeat: no-repeat;
+            background-position: top center;
+            background-size: 29px;
+            cursor: pointer;
+            display: inline-block;
+        }
+        
+        #icon-suite .icon-click span {
+            display: inline-block;
+        }
+        
+        
+        #icon-suite .icon-container {
+            padding: 4em 1.5em 0;
+            text-align: center;
+            text-transform: uppercase;
+            color: #363636;
+            font-size: 1rem;
+            font-family: "Avenir Next",Avenir,"HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            letter-spacing: 0.08em;
+        }
         
         .product-title {
             text-align: center;
@@ -418,6 +450,20 @@ if(isset($attachment_ids[1]))
         .product-add-to-cart .woocommerce-variation-add-to-cart ,
         .product-add-to-cart table tbody td {
             padding: 0;
+        }
+        
+        .container-product-add-to-cart {
+            margin-top: 19px;
+            display: flex;
+            flex-wrap: wrap;
+            vertical-align: top;
+        }
+        
+        .product-add-to-cart {
+            padding: 0em 1em 0em 1em;
+            align-self: center;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         #featured {
@@ -522,10 +568,7 @@ if(isset($attachment_ids[1]))
                         <div style="">
                             <div class="product-title">
                                 <?php 
-                                    woocommerce_template_single_title();                                                    
-                                    if ( method_exists('TInvWL_Public_AddToWishlist', 'instance' ) ) {
-                                        echo TInvWL_Public_AddToWishlist::instance()->shortcode();
-                                    }
+                                    woocommerce_template_single_title();                                                                                        
                                 ?>
                             </div>
                             <div class="product-price">
@@ -541,24 +584,30 @@ if(isset($attachment_ids[1]))
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12" style="display: flex;justify-content: center;" >
-                        <div style="max-width:29rem; margin-top: 19px;">
+                        <div class="container-product-add-to-cart" style="margin-top: 19px;">
                             <div class="product-add-to-cart">
                                 <?php
                                     woocommerce_template_single_add_to_cart();
                                 ?>
                             </div>
-                            <?php
-                                global $WOO_Product_Stock_Alert;
-                                $WOO_Product_Stock_Alert->frontend->get_alert_form();
-                            ?>                            
+                            <div class="product-add-to-cart">
+                                <?php
+                                    global $WOO_Product_Stock_Alert;
+                                    $WOO_Product_Stock_Alert->frontend->get_alert_form();
+                                ?>
+                                <div id="icon-suite">
+                                   <div class="icon-container">
+                                        <div class="icon-click icon-sizing" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing</span></div>
+                                        <div class="icon-click icon-sizing-guide" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing Guide</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
             </section>
  
-<section id="product-in-short" class="">
-    <h4 style="margin:2em;" ><?php echo $product->get_data()['short_description']; ?></h4>    
-</section>
     <div class="refills-components">
         
     <div id="modal-size" class="modal">

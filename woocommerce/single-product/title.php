@@ -19,5 +19,12 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
-
-echo '<h3 class="product_title" style="line-height:unset;">' . str_replace("|","<br>",get_the_title()) . '</h3>';
+?>
+<h3 class="product_title" style="line-height:unset;">
+<?php
+    if ( method_exists('TInvWL_Public_AddToWishlist', 'instance' ) ) {
+        echo TInvWL_Public_AddToWishlist::instance()->shortcode();
+    }
+    echo str_replace("|","<br>",get_the_title());
+?>
+</h3>

@@ -140,6 +140,53 @@ if ( ! function_exists( 'storefront_upsell_display' ) ) {
 	}
 }
 
+if ( ! function_exists( 'abourgeons_after_add_to_cart_quantity' ) ) { 
+    function abourgeons_after_add_to_cart_quantity() {
+    ?>
+        <style>
+            .icon-sizing {
+                background-image: url(<?php echo get_site_url() . '/wp-content/themes/atelierbourgeonspro/assets/images/sizing.svg'; ?>);
+            }
+
+            .icon-sizing-guide {
+                background-image: url(<?php echo get_site_url() . '/wp-content/themes/atelierbourgeonspro/assets/images/help.svg'; ?>);
+            }
+
+            #icon-suite .icon-click {
+                background-repeat: no-repeat;
+                background-position: top center;
+                background-size: 29px;
+                cursor: pointer;
+                display: inline-block;
+            }
+
+            #icon-suite .icon-click span {
+                display: inline-block;
+            }
+
+
+            #icon-suite .icon-container {
+                padding: 4em 1.5em 0;
+                text-align: center;
+                text-transform: uppercase;
+                color: #363636;
+                font-size: 1rem;            
+                font-weight: 400;
+                font-style: normal;
+                letter-spacing: 0.08em;
+            }
+        </style>
+        <div id="icon-suite">
+            <div class="icon-container">
+                <div class="icon-click icon-sizing" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing</span></div>
+                <div class="icon-click icon-sizing-guide" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing Guide</span></div>
+            </div>
+        </div>
+    <?php
+    }
+}
+
+
 if ( ! function_exists( 'storefront_sorting_wrapper' ) ) {
 	/**
 	 * Sorting wrapper
