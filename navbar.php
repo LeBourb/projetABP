@@ -175,7 +175,7 @@
      NAVIGATION LINKS     
 ============================== -->
 
-<div class="<?php if(is_product()) echo "product-nav"; ?> navbar navbar-fixed-top custom-navbar active" role="navigation" style="height:auto;">
+<div class="<?php if(is_product()) echo "product-nav"; ?> navbar navbar-fixed-top custom-navbar active" role="navigation">
 	<div class="container">
 
 		<!-- navbar header -->
@@ -235,19 +235,7 @@
                                 // if user connected => display orders ! 
                                 //echo wc_get_page_id ( 'view_order' );
                                 
-                                echo '<li id="product-nav"><a href="' . (!is_front_page() ? get_home_url() : '') . '" >Home</a>'
-                                        . '<div class="subnavContainer" style="">
-                                            <a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '') . '#overview">CONCEPT｜コンセプト</a>' 
-                                            //. 
-                                            //'<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '') . '#material">MATERIAL｜素材</a>'                                            
-                                            //. 
-                                            //'<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '' ). '#fabric">FABRIC｜生地</a>'
-                                            //.
-                                            //'<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '' ). '#sawing">SAWING｜縫製</a>' 
-                                            //.
-                                            //'<a class="subnav" href="' . (!is_front_page() ? get_home_url() . '/' : '' ). '#atelier">ATELIER｜アトリエ</a>' 
-                                            . '</div>'
-                                        . '</li>';                
+                                echo '<li id="product-nav"><a href="' . (!is_front_page() ? get_home_url() : '') . '" >Home</a></li>';                
 
                                 /*echo '<li><a href="' . get_permalink( wc_get_page_id ( 'shop' )) . '" >Shop</a></li>';                                            
                                 $query = new WC_Product_Query( array(
@@ -257,15 +245,20 @@
                                     'return' => 'ids',
                                     'status' => 'publish',
                                 ) );   */     
-                                $backgroundlowImageURL = get_the_post_thumbnail( get_option('woocommerce_collection_page_id') , 'woocommerce_single');
-                                print_r(get_the_post_thumbnail('woocommerce_collection_page_id'));
-                                echo '<li><a href="' . get_permalink(get_option('woocommerce_collection_page_id')) . '">E-Shop</a>'
-                                        . '<div class="subnavContainer" style="">'
-                                        . '<a class="subnav menu-img" href="' . (!is_front_page() ? get_home_url() . '/' : '') . '#overview">CONCEPT｜コンセプト'
-                                        . '<div style="background-image:url(' . $backgroundlowImageURL . ');"><div>'
-                                        . '</a>'
-                                        . '</div>'
-                                    . '</li>';                                
+                                $image = array();
+                                $image['media_id'] = array( get_post_thumbnail_id( get_option('woocommerce_collection_page_id')) );
+                                $image['hlink'] = get_permalink(get_option('woocommerce_collection_page_id'));
+                                $image['headline'] = get_the_title(get_option('woocommerce_collection_page_id'));
+                                $image['textColor'] = 'white';
+                                $image['button'] = 'Check Now';
+                                ?>    
+                               <li><a href="<?php echo get_permalink(get_option('woocommerce_collection_page_id')); ?>">E-Shop</a>
+                                    <div class="subnavContainer" style="width: 49rem;">
+                                    <?php echo abourgeons_fall18_render_image_featuring($image, true); 
+                                    ?>
+                                    </div>
+                                </li>
+                               <?php 
                                 echo '<li id="btob-nav"><a href="' . get_permalink(get_option('woocommerce_btob_page_id')) . '">B to B SALES</a></li>';
                                 echo '<li><a class="separator">|</a></li>';                                                                  
                                 echo '<li><a href="' . get_permalink(get_option('woocommerce_shopping_guide_page_id')) . '" >' . 'Help' . '</a></li>';                                
@@ -347,10 +340,11 @@
                     ?>
                 </ul>
                 </nav>
-        <?php 
+            <?php
                 }
         ?>
 </div>
+    
  <script>
     (function($) {
         $('.nav.navbar-nav li').mouseenter(function() {

@@ -372,18 +372,13 @@ if(isset($attachment_ids[1]))
         }
         
         .product-title {
-            text-align: center;
-            margin-bottom: 2em;
             display: flex;
             align-items: center;
-            justify-content: center;
-            position: relative;
+            justify-content: start;
         }
         
-        .product-price {
-            display: flex;
-            justify-content: center;            
-            font-size: 2rem;
+        .product-price {            
+            font-size: 2rem;            
         }
         
         .product-price p {
@@ -397,6 +392,10 @@ if(isset($attachment_ids[1]))
         
         .product-price .regular {
             margin-left: 2rem;
+        }
+        
+        .product-short-description {
+            padding-top: 1rem;
         }
 
         
@@ -466,6 +465,11 @@ if(isset($attachment_ids[1]))
             margin-right: auto;
         }
         
+        .product-add-to-cart form {
+            min-width: 22rem;
+            margin-top: 2rem;
+        }
+        
         #featured {
             padding: 0;
         }
@@ -503,6 +507,25 @@ if(isset($attachment_ids[1]))
         .price del+ins {
             margin-left: 1rem;
         }
+        
+        .product-title h3.product_title {            
+            
+        }
+        
+        form.cart .single_add_to_cart_button.button {
+            width: 100%;
+        }
+
+
+        form.cart .quantity {
+            text-align: center;
+            margin-bottom: 2em;
+        }
+
+        form.cart .quantity input {
+            width: 23%;
+        }
+
         
     </style>
     <!-- =========================

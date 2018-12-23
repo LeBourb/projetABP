@@ -94,14 +94,9 @@ if( !function_exists('get_variation_from_term_slug') ) {
         display: flex;
         margin: 0;
     }    
-    
-    
-    .single_variation_wrap .single_add_to_cart_button.button {
-        width: 100%;
-    }
-    
+        
     .woocommerce-variation-add-to-cart {
-            padding: 1em 1.41575em;
+        padding: 1em 1.41575em;
     }
     
     .product-title-price {
@@ -112,19 +107,10 @@ if( !function_exists('get_variation_from_term_slug') ) {
     .product-title-price > div {
         flex-grow: 1;
     }
-    
-    .single_variation_wrap .quantity {
-        text-align: center;
-        margin-bottom: 2em;
-    }
-    
-    .single_variation_wrap .quantity input {
-        width: 23%;
-    }
-    
+        
     .ui-customSelect label.not-in-stock {
         text-decoration: line-through;
-        color: red;
+        color: #bcbcbc;
     }
     
 </style>

@@ -12,25 +12,25 @@
 
         <div class="header-eshop">                    
             <div class="section col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                <p class="title">                        
+                <h5 class="title">                        
                     送料無料
-                </p>
+                </h5>
                 <p class="text">
                     ※3万円以上のご購入で、送料が無料になります（３万円以内の場合はは、全国一律500円）。
                  </p>
             </div>
             <div class="section col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                <p class="title">                        
+                <h5 class="title">                        
                     無料で返品・交換
-                </p>
+                </h5>
                 <p class="text">
-                    ※商品到着日から７日間以内であれば、送料無料で返品・交換を承ります（日本国内に限る）。
+                    ※商品到着日から７日間以内であれば、送料無料で返品・交換を承ります （日本国内のみ）。
                  </p>
             </div>
             <div class="section col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                <p class="title">                        
+                <h5 class="title">                        
                     安心・安全なカード決済システム
-                </p>
+                </h5>
                 <p class="text">
                     Visa, Mastercard, Amex, Paypal, Maestro, Sofort, iDEAL
                 </p>

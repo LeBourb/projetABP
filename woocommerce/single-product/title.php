@@ -21,10 +21,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <h3 class="product_title" style="line-height:unset;">
-<?php
-    if ( method_exists('TInvWL_Public_AddToWishlist', 'instance' ) ) {
-        echo TInvWL_Public_AddToWishlist::instance()->shortcode();
-    }
+<?php    
     echo str_replace("|","<br>",get_the_title());
 ?>
 </h3>
+<?php
+if ( method_exists('TInvWL_Public_AddToWishlist', 'instance' ) ) {
+        echo TInvWL_Public_AddToWishlist::instance()->shortcode();
+    }

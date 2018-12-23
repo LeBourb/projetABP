@@ -8,10 +8,12 @@ http://www.templatemo.com/tm-486-new-event
 
 body {
     background: #ffffff;
-    font-family: 'times new roman', times, serif;
+    font: 13px "游明朝" , "Yu Mincho" , "游明朝体" , "YuMincho" , "ヒラギノ明朝 Pro W3" , "Hiragino Mincho Pro" , "HiraMinProN-W3" , "HGS明朝E" , "ＭＳ Ｐ明朝" , "MS PMincho" , serif;
     font-style: normal;
     font-weight: 400;
 }
+
+
 
 /*---------------------------------------
     Margin 
@@ -371,8 +373,7 @@ footer {
 @media(min-width:768px) {
     .custom-navbar {
         padding-top: 20px;
-        border-bottom: 0;               
-        opacity: 0.6;
+        border-bottom: 0;
     }
     
     .custom-navbar.active {
@@ -670,6 +671,7 @@ ul.custom-products li .product-tile-footer {
 
 .header-eshop .section {
     flex-grow: 1;
+    margin-bottom: 3rem;
 }
 
 @media screen and (max-width: 450px) {
@@ -725,6 +727,11 @@ ul.custom-products li .product-tile-footer {
     .custom-navbar.navbar-fixed-top.active {
         border-bottom: 1px solid rgb(225, 225, 225);
         box-shadow: rgb(187, 187, 187) 1px 1px 10px;
+        height:auto;
+    }
+    
+    .custom-navbar.active  .nav li  .subnavContainer {
+        display: none!important;
     }
     
     .navbar .container > .navbar-header {
@@ -1492,7 +1499,8 @@ footer {
   }
 
   h3 {
-    line-height: 8px;
+    line-height: 28px;
+    font-size: large;
   }
 
   h5 {

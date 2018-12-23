@@ -59,7 +59,7 @@ if ( empty( $prices['price'] ) ) {
         return '<div class="pre-sale"><small>先行予約価格: </small>' . $pre_sale_price . '</div>'            
                 . '<div class="regular"><small>通常価格: </small><del>' . $regular_price .'</del></div> ';
     }
-    return $price;
+    return '<div class="price">' . wc_price($that->get_price()) . '</div>';
     //wc_price($that->get_regular_price())
     //. '<span class="pre-sale"><del>' . $pre_sale_price . '</del><small>Pre-Sale</small></span>'
 }

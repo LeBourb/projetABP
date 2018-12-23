@@ -9,7 +9,7 @@
  * Assign the Storefront version to a var
  */
 $theme              = wp_get_theme( 'storefront' );
-$storefront_version = $theme['Version'];
+$storefront_version = '5.0.5';
 
 /**
  * Set the content width based on the theme's design and stylesheet.
@@ -807,7 +807,7 @@ add_filter( 'woocommerce_coupons_enabled', 'atelierbourgeons_woocommerce_coupons
 add_filter( 'woocommerce_shipping_package_name', 'atelierbourgeons_shipping_package_name' , 10 , 3) ;
 
 function atelierbourgeons_shipping_package_name($arg1, $arg2, $arg3) {
-    return '配送';
+    return '配送<small>(￥30000以上で送料無料)</small>';
 }
 
 add_action( 'woocommerce_update_options' , 'atelierbourgeons_update_shopping_guide' );
@@ -850,8 +850,12 @@ add_filter( 'wc_stripe_description', 'atelierbourgeons_stripe_description', 10, 
 //wpautop( wp_kses_post( $description ) ), $this->id );
 function atelierbourgeons_stripe_description($description , $id) {
     if(!strpos($description, 'TEST MODE ENABLED' )) {
-        $description = '<p>※ カード決済で使用するシステム「Stripe」は、PayPalに並び世界で最も高い支持を得る決済サービスです（日本では2016年に導入開始）。その高度な安全性は多くの企業から信頼を置かれ、現在１０万社以上の商取引に利用されています。《<a href="https://stripe.com/jp/customers">導入企業一覧</a>》《<a href="https://stripe.com/jp/payments">Stripe会社情報</a>》</p>
+        /*$description = '<p>※ カード決済で使用するシステム「Stripe」は、PayPalに並び世界で最も高い支持を得る決済サービスです（日本では2016年に導入開始）。その高度な安全性は多くの企業から信頼を置かれ、現在１０万社以上の商取引に利用されています。《<a href="https://stripe.com/jp/customers">導入企業一覧</a>》《<a href="https://stripe.com/jp/payments">Stripe会社情報</a>》</p>
                     <p>※ カードコード（CVC）とは、カード裏面に記載されている暗証番号です。 通常、カード裏面の署名欄に記載された番号の下3桁がそれに値します。</p>';
+         * 
+         */
+        $description = '<p>※ 当サイト利用の決済サービス「<a href="https://stripe.com/jp/">Stripe</a>」は、カード業界の国際基準 (PCI DSS) で最も安全な Level 1 を取得し、世界で１０万社以上の商取引に利用されています。安心してお買い物をお楽しみください。《<a href="https://stripe.com/jp/customers">導入企業一覧</a>》</p>';
+
     }
     return $description;
 }

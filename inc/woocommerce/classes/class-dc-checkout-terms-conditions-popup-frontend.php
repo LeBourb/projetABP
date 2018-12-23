@@ -91,8 +91,8 @@ class DC_Checkout_Terms_Conditions_Popup_Frontend {
 			if($link_text == "") {
 				$link_text = "利用規約";					
 			}
-			$line = "<a class='simple_popup_show' href='Javascript:void(0);' title=''>".$link_text."</a>" . $pre_text; 
-			
+			//$line = "<a class='simple_popup_show' href='Javascript:void(0);' title=''>".$link_text."</a>" . $pre_text; 
+			$line = "サイトの<a href='Javascript:void(0);' title='' class='simple_popup_show'>利用規約</a>を読み、同意しました。";
 			$pop_up_button_text = "Agree";
 			$pop_up_width = "80%";
 			$pop_up_height = "400px";

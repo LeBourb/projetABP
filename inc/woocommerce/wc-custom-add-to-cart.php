@@ -148,18 +148,25 @@ function wc_before_add_to_cart_funding() {
         }
         </style>
         
-        <div id="progress-bg">
+        <!--div id="progress-bg">
             <div id="progress">
                 <div class="goalProgress almost-full">
-                    <div class="progressBar" data-percent="<?php echo $percent; ?>%" style="width:0%;"></div>
+                    <div class="progressBar" data-percent="<?php //echo $percent; ?>%" style="width:0%;"></div>
                 </div>
             </div>
-        </div>
-        <p id="days">
-            <span class="hear-ye">予約受付終了まであと:</span>
-            <time class="tricky-countdown" data-funding-end="<?php echo $production->get_funding_end(); ?>"></time>
-        </p>
         <span class="progress-text">目標達成度: <?php echo $percent;?>%</span>
+        </div-->
+        <div style="background-color: lightgray;
+    border-radius: 1em;
+    padding: 2rem;">
+            <p>このアイテムは予約商品です。　お届け予定：<time class="tricky-countdown" data-funding-end="<?php echo $production->get_funding_end(); ?>"></time>
+            </p>
+            <ul>
+                <li>※実際にお届けする商品は、見た目に変化が無い範囲で仕様やサイズが異なる場合がございます。</li>
+                <li>※受注生産の都合上、お届け時期が予定より前後する場合がございます。</li>
+            </ul>
+            <a>予約商品について（ご利用ガイド）</a>        
+        </div>
         <script>
             (function($) {
                      
