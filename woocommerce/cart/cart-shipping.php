@@ -13,14 +13,17 @@
  * the readme will list any important changes.
  *
  * @see 	    https://docs.woocommerce.com/document/template-structure/
- * @author 		WooThemes
  * @package 	WooCommerce/Templates
- * @version     3.2.0
+ * @version     3.5.0
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+$formatted_destination    = isset( $formatted_destination ) ? $formatted_destination : WC()->countries->get_formatted_address( $package['destination'], ', ' );
+$has_calculated_shipping  = ! empty( $has_calculated_shipping );
+$show_shipping_calculator = ! empty( $show_shipping_calculator );
+$calculator_text          = '';
 
 $free_shipping = null;
 foreach($available_methods as $available_method) {
@@ -44,11 +47,11 @@ if($free_shipping) {
 
 
 ?>
-<tr class="shipping">
+<tr class="woocommerce-shipping-totals shipping">
 	<th><?php echo wp_kses_post( $package_name ); ?></th>
 	<td data-title="<?php echo esc_attr( $package_name ); ?>">
 		<?php if ( 1 < count( $available_methods ) ) : ?>
-			<ul id="shipping_method">
+			<ul id="shipping_method" class="woocommerce-shipping-methods">
 				<?php 
                                 
                                         
@@ -66,6 +69,19 @@ if($free_shipping) {
 					</li>
 				<?php endforeach; ?>
 			</ul>
+			<?php if ( is_cart() ) : ?>
+				<p class="woocommerce-shipping-destination">
+					<?php
+					if ( $formatted_destination ) {
+						// Translators: $s shipping destination.
+						printf( esc_html__( 'Estimate for %s.', 'woocommerce' ) . ' ', '<strong>' . esc_html( $formatted_destination ) . '</strong>' );
+						$calculator_text = __( 'Change address', 'woocommerce' );
+					} else {
+						echo esc_html__( 'This is only an estimate. Prices will be updated during checkout.', 'woocommerce' );
+					}
+					?>
+				</p>
+			<?php endif; ?>
 		<?php elseif ( 1 === count( $available_methods ) ) :  ?>
 			<?php
 				$method = current( $available_methods );
@@ -83,7 +99,7 @@ if($free_shipping) {
 		<?php endif; ?>
 
 		<?php if ( ! empty( $show_shipping_calculator ) ) : ?>
-			<?php woocommerce_shipping_calculator(); ?>
+			<?php woocommerce_shipping_calculator( $calculator_text ); ?>
 		<?php endif; ?>
 	</td>
 </tr>

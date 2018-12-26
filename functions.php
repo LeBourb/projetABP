@@ -31,7 +31,6 @@ $storefront = (object) array(
 require 'inc/storefront-functions.php';
 require 'inc/storefront-template-hooks.php';
 require 'inc/storefront-template-functions.php';
-
 require 'inc/customize/home-first-section.php';
 
 if ( class_exists( 'Jetpack' ) ) {
@@ -60,13 +59,14 @@ if ( storefront_is_woocommerce_activated() ) {
         require 'inc/woocommerce/wc-custom-product-price.php';
         require 'inc/woocommerce/gateways/class-wc-gateway-bacs-jp.php';
         require 'inc/woocommerce/wc-custom-product-supplies-tab.php';
-        require 'inc/woocommerce/wc-checkout_terms_conditions_popup.php';
+        require 'inc/woocommerce/wc-checkout_terms_conditions_popup.php';        
         require 'inc/admin/class-wc-meta-box-product-awesome-description.php';
         require 'inc/admin/class-wc-meta-box-page-awesome-paragraph.php';
         require 'inc/admin/class-wc-meta-box-page-product-workshop-partnership.php';
         require 'inc/admin/class-wc-meta-box-page-workshop-metadata.php';
         require 'inc/admin/class-wc-meta-box-product-size-details.php';
         require 'inc/admin/class-wc-meta-box-product-size-guide.php';
+        
         //require 'inc/woocommerce/wc-custom-product-workshop-tab.php';
         //require 'inc/woocommerce/wc-custom-product-fabrics-tab.php';
 }
@@ -309,7 +309,8 @@ add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
     
 function theme_enqueue_styles() {   
     $theme              = wp_get_theme( 'storefront' );
-$storefront_version = $theme['Version'];
+    $storefront_version = $theme['Version'];
+    
     wp_enqueue_style( 'bootstrap-style', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), 'v1.2' );
     wp_enqueue_style( 'animate-style', get_template_directory_uri() . '/assets/css/animate.min.css', array(), 'v1.2' );
     
@@ -348,7 +349,7 @@ $storefront_version = $theme['Version'];
     wp_enqueue_script( 'img-lazy-load-script', get_template_directory_uri() . '/assets/js/img-lazy-loading.min.js', array(), filemtime( getcwd() .  '/wp-content/themes/atelierbourgeonspro/assets/js/img-lazy-loading.min.js' ) );
     wp_enqueue_script( 'customSelect-script', get_template_directory_uri() . '/assets/js/jquery.customSelect.js', array(), 'v.3.2' );
     //wp_enqueue_script( 'project-gmap-infobox-script', get_template_directory_uri() . '/assets/js/project-gmap-infobox.min.js', array(), 'v1.2' );
-    //wp_enqueue_script( 'project-gmap-script', get_template_directory_uri() . '/assets/js/project-gmap.min.js', array(), 'v1.2' );
+    //wp_enqueue_script( 'project-gmap-script', get_template_directory_uri() . '/assets/js/project-gmap.min.js', array(), 'v1.2' );     
     
 }
 
@@ -933,8 +934,33 @@ function atelierbourgeons_new_user_approved( $user ) {
 }
 add_filter( 'new_user_approve_approve_user_message_default', 'atelierbourgeons_new_user_approved' , 21 ,12);
 
+function abourgeons_woomail_email_types ( $types ) {    
+    $types['customer_registration_approved'] = 'Customer Registration Approved'; 
+    $types['customer_registration_new_user_checking'] = 'Customer Registration New User Checking'; 
+    $types['customer_registration_new_user_checking_pro'] = 'Customer Registration New User Pro Checking'; 
+    //if(class_exists('WC_Email_Customer_Registration_Approved'))
+      //  throw new Exception ('Hello World');
+    return $types;    
+}
+add_filter( 'kadence_woomail_email_types', 'abourgeons_woomail_email_types' , 10 ,1);
 
+function abourgeons_email_classes($classes){
+    $classes['WC_Email_Customer_Registration_Approved'] = include( 'inc/emails/class-wc-email-customer-registration-approved.php' );    
+    $classes['WC_Email_Customer_Registration_New_User_Checking'] = include( 'inc/emails/class-wc-email-customer-registration-new-user-checking.php' );
+    $classes['WC_Email_Customer_Registration_New_User_Checking_Pro'] = include( 'inc/emails/class-wc-email-customer-registration-new-user-checking-pro.php' );
+    //print_r($classes);
+    return $classes;    
+}
+add_filter( 'woocommerce_email_classes', 'abourgeons_email_classes' , 10 ,1);
 
+function abourgeons_woomail_email_type_class_name_array($classes){
+    $classes['customer_registration_approved'] = 'WC_Email_Customer_Registration_Approved'; 
+    $classes['customer_registration_new_user_checking'] = 'WC_Email_Customer_Registration_New_User_Checking'; 
+    $classes['customer_registration_new_user_checking_pro'] = 'WC_Email_Customer_Registration_New_User_Checking_Pro'; 
+    //print_r($classes);
+    return $classes;    
+}
+add_filter( 'kadence_woomail_email_type_class_name_array', 'abourgeons_woomail_email_type_class_name_array', 10 , 1 );
 
 function atelierbourgeons_new_user_approve_subject ( $subject ) {
     return '【ビジネス会員登録の認証が完了しました】/atelier Bourgeons （ｱﾄﾘｴﾌﾞﾙｼﾞｮﾝ）';
