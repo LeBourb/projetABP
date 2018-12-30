@@ -4,20 +4,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if ( ! class_exists( 'WC_Email_Customer_Registration_New_User_Checking', false ) ) :
+if ( ! class_exists( 'WC_Email_Customer_Registration_New_User_Confirm_Email', false ) ) :
 
 /**
  * Customer Reset Password.
  *
  * An email sent to the customer when they reset their password.
  *
- * @class       WC_Email_Customer_Registration_New_User_Checking
+ * @class       WC_Email_Customer_Registration_New_User_Confirm_Email
  * @version     2.3.0
  * @package     WooCommerce/Classes/Emails
  * @author      WooThemes
  * @extends     WC_Email
  */
-class WC_Email_Customer_Registration_New_User_Checking extends WC_Email {
+class WC_Email_Customer_Registration_New_User_Confirm_Email extends WC_Email {
 
 	/**
 	 * User login name.
@@ -45,17 +45,17 @@ class WC_Email_Customer_Registration_New_User_Checking extends WC_Email {
 	 */
 	public function __construct() {
 
-		$this->id               = 'customer_registration_new_user_checking';
+		$this->id               = 'customer_registration_new_user_confirm_email';
 		$this->customer_email   = true;
 
 		$this->title            = __( 'Registration approved', 'woocommerce' );
 		$this->description      = __( 'Customer "reset password" emails are sent when customers reset their passwords.', 'woocommerce' );
 
-		$this->template_html    = 'emails/customer-registration-new-user-checking.php';
-		$this->template_plain   = 'emails/plain/customer-registration-new-user-checking.php';
+		$this->template_html    = 'emails/customer-registration-new-user-confirm-email.php';
+		$this->template_plain   = 'emails/plain/customer-registration-new-user-confirm-email.php';
 
 		// Trigger
-		add_action( 'woocommerce_registration_new_user_checking_notification', array( $this, 'trigger' ), 10, 1 );
+		add_action( 'woocommerce_registration_new_user_confirm_email_notification', array( $this, 'trigger' ), 10, 2 );
 
 		// Call parent constructor
 		parent::__construct();
@@ -87,18 +87,18 @@ class WC_Email_Customer_Registration_New_User_Checking extends WC_Email {
 	 * @param string $user_login
 	 * @param string $reset_key
 	 */
-	public function trigger( $user_login = '' ) {
+	public function trigger( $user_login = '', $activation_url = '' ) {
 		$this->setup_locale();
 
 		if ( $user_login ) {
 			$this->object     = get_user_by( 'login', $user_login );
 			$this->user_login = $user_login;
 			$this->user_email = stripslashes( $this->object->user_email );			
-                        $code = sha1( $this->object->ID . time() ); 
-                        global $wpdb;
-                        $wpdb->update( $wpdb->users, array( 'user_activation_key' => $code ), array( 'ID' => $this->object->ID ) );
+                        //$code = sha1( $this->object->ID . time() ); 
+                        //global $wpdb;
+                        //$wpdb->update( $wpdb->users, array( 'user_activation_key' => $code ), array( 'ID' => $this->object->ID ) );
                         //$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-                        $this->activation_url = add_query_arg( array( 'action' => 'confirm-email', 'key' => $code, 'user' => $this->object->ID), wp_login_url() );
+                        $this->activation_url = $activation_url; //add_query_arg( array( 'action' => 'confirm-email', 'key' => $code, 'user' => $this->object->ID), wp_login_url() );
                         
 		}
 
@@ -156,10 +156,10 @@ class WC_Email_Customer_Registration_New_User_Checking extends WC_Email {
         $message = mail_new_user_confirm_email($user,$activation_url);
     }else {
         $subject = '【会員認証の完了までしばらくお待ちください】/atelier Bourgeons （ｱﾄﾘｴﾌﾞﾙｼﾞｮﾝ）';
-        $message = mail_new_user_checking($user);
+        $message = mail_new_user_confirm_email($user);
     }*/
 }
 
 endif;
 
-return new WC_Email_Customer_Registration_New_User_Checking();
+return new WC_Email_Customer_Registration_New_User_Confirm_Email();

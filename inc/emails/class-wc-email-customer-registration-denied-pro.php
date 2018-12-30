@@ -4,20 +4,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if ( ! class_exists( 'WC_Email_Customer_Registration_Approved', false ) ) :
+if ( ! class_exists( 'WC_Email_Customer_Registration_Denied_Pro', false ) ) :
 
 /**
  * Customer Reset Password.
  *
  * An email sent to the customer when they reset their password.
  *
- * @class       WC_Email_Customer_Registration_Approved
+ * @class       WC_Email_Customer_Registration_Denied_Pro
  * @version     2.3.0
  * @package     WooCommerce/Classes/Emails
  * @author      WooThemes
  * @extends     WC_Email
  */
-class WC_Email_Customer_Registration_Approved extends WC_Email {
+class WC_Email_Customer_Registration_Denied_Pro extends WC_Email {
 
 	/**
 	 * User login name.
@@ -45,17 +45,17 @@ class WC_Email_Customer_Registration_Approved extends WC_Email {
 	 */
 	public function __construct() {
 
-		$this->id               = 'customer_registration_approved';
+		$this->id               = 'customer_registration_denied_pro';
 		$this->customer_email   = true;
 
-		$this->title            = __( 'Registration approved', 'woocommerce' );
+		$this->title            = __( 'Registration denied pro', 'woocommerce' );
 		$this->description      = __( 'Customer "reset password" emails are sent when customers reset their passwords.', 'woocommerce' );
 
-		$this->template_html    = 'emails/customer-registration-approved.php';
-		$this->template_plain   = 'emails/plain/customer-registration-approved.php';
+		$this->template_html    = 'emails/customer-registration-denied-pro.php';
+		$this->template_plain   = 'emails/plain/customer-registration-denied-pro.php';
 
 		// Trigger
-		add_action( 'woocommerce_registration_approved_notification', array( $this, 'trigger' ), 10, 2 );
+		add_action( 'woocommerce_registration_denied_pro_notification', array( $this, 'trigger' ), 10, 2 );
 
 		// Call parent constructor
 		parent::__construct();
@@ -144,4 +144,4 @@ class WC_Email_Customer_Registration_Approved extends WC_Email {
 
 endif;
 
-return new WC_Email_Customer_Registration_Approved();
+return new WC_Email_Customer_Registration_Denied_Pro();

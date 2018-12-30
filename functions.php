@@ -935,8 +935,10 @@ function atelierbourgeons_new_user_approved( $user ) {
 add_filter( 'new_user_approve_approve_user_message_default', 'atelierbourgeons_new_user_approved' , 21 ,12);
 
 function abourgeons_woomail_email_types ( $types ) {    
-    $types['customer_registration_approved'] = 'Customer Registration Approved'; 
-    $types['customer_registration_new_user_checking'] = 'Customer Registration New User Checking'; 
+    $types['customer_registration_approved_pro'] = 'Customer Registration Approved Pro'; 
+    $types['customer_registration_denied_pro'] = 'Customer Registration Denied Pro'; 
+    $types['customer_registration_approval_request_pro'] = 'Customer Registration Approval Request Pro'; 
+    $types['customer_registration_new_user_confirm_email'] = 'Customer Registration New User Confirm Email'; 
     $types['customer_registration_new_user_checking_pro'] = 'Customer Registration New User Pro Checking'; 
     //if(class_exists('WC_Email_Customer_Registration_Approved'))
       //  throw new Exception ('Hello World');
@@ -945,8 +947,10 @@ function abourgeons_woomail_email_types ( $types ) {
 add_filter( 'kadence_woomail_email_types', 'abourgeons_woomail_email_types' , 10 ,1);
 
 function abourgeons_email_classes($classes){
-    $classes['WC_Email_Customer_Registration_Approved'] = include( 'inc/emails/class-wc-email-customer-registration-approved.php' );    
-    $classes['WC_Email_Customer_Registration_New_User_Checking'] = include( 'inc/emails/class-wc-email-customer-registration-new-user-checking.php' );
+    $classes['WC_Email_Customer_Registration_Approved_Pro'] = include( 'inc/emails/class-wc-email-customer-registration-approved-pro.php' );    
+    $classes['WC_Email_Customer_Registration_Denied_Pro'] = include( 'inc/emails/class-wc-email-customer-registration-denied-pro.php' );    
+    $classes['WC_Email_Customer_Registration_Approval_Request_Pro'] = include( 'inc/emails/class-wc-email-customer-registration-approval-request-pro.php' );        
+    $classes['WC_Email_Customer_Registration_New_User_Confirm_Email'] = include( 'inc/emails/class-wc-email-customer-registration-new-user-confirm-email.php' );
     $classes['WC_Email_Customer_Registration_New_User_Checking_Pro'] = include( 'inc/emails/class-wc-email-customer-registration-new-user-checking-pro.php' );
     //print_r($classes);
     return $classes;    
@@ -954,20 +958,23 @@ function abourgeons_email_classes($classes){
 add_filter( 'woocommerce_email_classes', 'abourgeons_email_classes' , 10 ,1);
 
 function abourgeons_woomail_email_type_class_name_array($classes){
-    $classes['customer_registration_approved'] = 'WC_Email_Customer_Registration_Approved'; 
-    $classes['customer_registration_new_user_checking'] = 'WC_Email_Customer_Registration_New_User_Checking'; 
+    $classes['customer_registration_approved_pro'] = 'WC_Email_Customer_Registration_Approved_Pro'; 
+    $classes['customer_registration_denied_pro'] = 'WC_Email_Customer_Registration_Denied_Pro'; 
+    $classes['customer_registration_approval_request_pro'] = 'WC_Email_Customer_Registration_Approval_Request_Pro';
+    $classes['customer_registration_new_user_confirm_email'] = 'WC_Email_Customer_Registration_New_User_Confirm_Email'; 
     $classes['customer_registration_new_user_checking_pro'] = 'WC_Email_Customer_Registration_New_User_Checking_Pro'; 
     //print_r($classes);
     return $classes;    
 }
 add_filter( 'kadence_woomail_email_type_class_name_array', 'abourgeons_woomail_email_type_class_name_array', 10 , 1 );
 
-function atelierbourgeons_new_user_approve_subject ( $subject ) {
+/*function atelierbourgeons_new_user_approve_subject ( $subject ) {
     return '【ビジネス会員登録の認証が完了しました】/atelier Bourgeons （ｱﾄﾘｴﾌﾞﾙｼﾞｮﾝ）';
 }
 
 add_filter( 'new_user_approve_approve_user_subject', 'atelierbourgeons_new_user_approve_subject' , 10 , 1 );
-
+*/
+/*
 function atelierbourgeons_new_user_checking( $status, $user_id ) {
     //if($action == 'login')
     
@@ -1007,17 +1014,17 @@ function atelierbourgeons_new_user_checking( $status, $user_id ) {
         $message = mail_new_user_checking($user);
     }
     
-    /*$message = '--boundary42 \r\n
-Content-type: text/plain; charset=iso-8859-1 \r\n
-' . $txt . '  \r\n
---boundary42 \r\n
-Content-type: text/html; charset=iso-8859-1 \r\n
- ' . $message . '  \r\n '
-            . '--boundary42--';*/
+    //$message = '--boundary42 \r\n
+//Content-type: text/plain; charset=iso-8859-1 \r\n
+//' . $txt . '  \r\n
+//--boundary42 \r\n
+//Content-type: text/html; charset=iso-8859-1 \r\n
+// ' . $message . '  \r\n '
+//            . '--boundary42--';
         
-    /*function wpse27856_set_content_type(){
-        return "multipart/alternative; boundary=boundary42";
-    }*/
+    //function wpse27856_set_content_type(){
+    //    return "multipart/alternative; boundary=boundary42";
+    //}
     //add_filter( 'wp_mail_content_type','wpse27856_set_content_type' );
     wp_mail( $user_email, $subject, $message, $headers);
     //remove_filter( 'wp_mail_content_type', 'wpse27856_set_content_type' );
@@ -1025,7 +1032,7 @@ Content-type: text/html; charset=iso-8859-1 \r\n
     return $status;
 }
 add_filter( 'new_user_approve_default_status', 'atelierbourgeons_new_user_checking' , 21 ,12);
-
+*/
 
 
 /**
