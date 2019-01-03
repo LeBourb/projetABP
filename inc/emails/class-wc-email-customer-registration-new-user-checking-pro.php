@@ -46,10 +46,21 @@ class WC_Email_Customer_Registration_New_User_Checking_Pro extends WC_Email {
 
 		$this->template_html    = 'emails/customer-registration-new-user-checking-pro.php';
 		$this->template_plain   = 'emails/plain/customer-registration-new-user-checking-pro.php';
+                
+                $this->setting = array( 'live_method'   => 'replace',
+                                        'selectors'     => array(
+                                                '#body_checking .more'
+                                        ),
+                                        'active_callback' => array(
+                                                'Kadence_Woomail_Customizer',
+                                                'active_woo_callback'
+                ));
 
 		// Trigger
 		add_action( 'woocommerce_registration_new_user_checking_pro_notification', array( $this, 'trigger' ), 10, 1 );
-
+                add_action( 'customize_register', array( $this, 'customize') );
+                add_action( 'wp_footer', array( $this, 'print_live_preview_scripts' ), 999 );
+                
 		// Call parent constructor
 		parent::__construct();
 	}
@@ -130,6 +141,90 @@ class WC_Email_Customer_Registration_New_User_Checking_Pro extends WC_Email {
 			'email'			=> $this,
 		) );
 	}
+        
+        public function customize($wp_customize) {
+            $wp_customize->add_setting( $this->id . '_more', array(
+                'default'        => 'Default Text For Footer Section',
+            ));
+            $wp_customize->add_control( $this->id .'_more', array(
+                'label'         => __('More Info Text', 'kadence-woocommerce-email-designer'),
+                'type'          => 'textarea',
+                'section'       => 'kt_woomail_mtype',
+                'settings'    	=> $this->id . '_more',
+                'transport' =>   'postMessage',
+                //'capability'    	=> Kadence_Woomail_Designer::get_admin_capability(),
+                'priority'   => 10,
+                'default'       => '',
+                'original'      => ''                
+            ));   
+            
+     
+        }
+        
+        public function print_live_preview_scripts(){
+            
+            $setting = $this->setting;
+            
+            // No live method
+            if ( ! isset( $setting['live_method'] ) ) {
+            //        continue;
+            }
+            
+            // Open container
+			$scripts = '<script type="text/javascript" description="hello_test">'                                                                
+                                . 'jQuery(document).ready(function() {';
+
+            // Iterate over selectors
+            if ( in_array( $setting['live_method'], array( 'css', 'property' ) ) && ! empty( $setting['selectors'] ) ) {
+                    foreach ( $setting['selectors'] as $selector => $properties ) {
+
+                            // Iterate over properties
+                            foreach ( $properties as $property ) {
+
+                                    // CSS value change
+                                    if ( ! isset( $setting['live_method'] ) || $setting['live_method'] === 'css' ) {
+                                            $scripts .= "wp.customize('$this->id', function(value) {
+                                            value.bind(function(newval) {
+                                            newval = newval + (typeof suffixes['$this->id'] !== 'undefined' ? suffixes['$this->id'] : '');
+                                            newval = prepare(newval, '$this->id', '$selector');
+                                            jQuery('$selector').css('$property', '').attr('style', function(i, s) { return (s||'') + '$property: ' + newval + ';' });
+                                            });
+                                            });";
+                                    }
+
+                                    // DOM object property
+                                    if ( $setting['live_method'] === 'property' ) {
+                                            $scripts .= "wp.customize('$this->id', function(value) {
+                                            value.bind(function(newval) {
+                                            newval = newval + (typeof suffixes['$this->id'] !== 'undefined' ? suffixes['$this->id'] : '');
+                                            newval = prepare(newval, '$this->id', '$selector');
+                                            jQuery('$selector').prop('$property', newval);
+                                            });
+                                            });";
+                                    }
+                            }
+                    }
+            }
+
+            // HTML Replace
+            if ( $setting['live_method'] === 'replace' && ! empty( $setting[ 'selectors' ] ) ) {
+                    foreach ( $setting['selectors'] as $selector ) {
+                            $original = ( ! empty( $setting['original'] ) ? json_encode( $setting['original'] ) : 'placeholder' );
+                            $scripts .= 'wp.customize("' . $this->id . '_more", function(value) {
+                            value.bind(function(newval) {
+                            newval = (newval !== "" ? newval : $original);
+                            newval = prepare(newval, "' . $this->id . '_more", "' . $selector . '");
+                            jQuery("' . $selector . '").html(newval);
+                            });
+                            });';
+                    }
+            }
+    
+
+            // Close container and return
+            echo $scripts . '});</script>';
+        }
+        
 }
 
 endif;

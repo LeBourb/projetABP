@@ -51,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse!important">
                           <tbody><tr>
                             <td align="center" style="border-radius:26px" bgcolor="#0570D4">
-                              <a href="'. get_site_url() .'" style="background: #613143;border: 1px solid #613143;border-radius: 14px;color:#ffffff;display:block;font-family:Open Sans,Helvetica,Arial,sans-serif;font-size:16px;padding:14px 26px;text-decoration:none" target="_blank" data-saferedirecturl="">サイトに移動</a>
+                              <a href="<?php get_site_url() ?>" style="background: #613143;border: 1px solid #613143;border-radius: 14px;color:#ffffff;display:block;font-family:Open Sans,Helvetica,Arial,sans-serif;font-size:16px;padding:14px 26px;text-decoration:none" target="_blank" data-saferedirecturl="">サイトに移動</a>
                             </td>
                           </tr>
                         </tbody></table>
@@ -62,7 +62,7 @@ if ( ! defined( 'ABSPATH' ) ) {
               </tr>
             <tr>
             <td align="left" style="padding:20px 0 15px">
-            ※本メールに関してお心当たりがない場合、または何かご不明点がございましたら、恐れ入りますがその旨をご記入のうえ<a href="mailto:contact@atelierbourgeons.com">contact@atelierbourgeons.com</a>までお問い合わせください。
+            
             </td>
             </tr>
             </tbody></table>

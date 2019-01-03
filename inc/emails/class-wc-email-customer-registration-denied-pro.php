@@ -39,6 +39,13 @@ class WC_Email_Customer_Registration_Denied_Pro extends WC_Email {
 	 * @var string
 	 */
 	public $reset_key;
+        
+        /**
+	 * Site url.
+	 *
+	 * @var string
+	 */
+        public $site_url;
 
 	/**
 	 * Constructor.
@@ -48,8 +55,8 @@ class WC_Email_Customer_Registration_Denied_Pro extends WC_Email {
 		$this->id               = 'customer_registration_denied_pro';
 		$this->customer_email   = true;
 
-		$this->title            = __( 'Registration denied pro', 'woocommerce' );
-		$this->description      = __( 'Customer "reset password" emails are sent when customers reset their passwords.', 'woocommerce' );
+		$this->title            = __( 'Registration denied', 'woocommerce' );
+		$this->description      = __( 'Customer pro registration has been denied.', 'woocommerce' );
 
 		$this->template_html    = 'emails/customer-registration-denied-pro.php';
 		$this->template_plain   = 'emails/plain/customer-registration-denied-pro.php';
@@ -96,6 +103,7 @@ class WC_Email_Customer_Registration_Denied_Pro extends WC_Email {
 			$this->reset_key  = $reset_key;
 			$this->user_email = stripslashes( $this->object->user_email );
 			$this->recipient  = $this->user_email;
+                        $this->site_url = $site_url;
 		}
 
 		if ( $this->is_enabled() && $this->get_recipient() ) {

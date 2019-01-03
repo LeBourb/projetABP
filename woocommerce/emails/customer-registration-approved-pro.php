@@ -51,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse!important">
                           <tbody><tr>
                             <td align="center" style="border-radius:26px" bgcolor="#0570D4">
-                              <a href="'. get_site_url() .'" style="background: #613143;border: 1px solid #613143;border-radius: 14px;color:#ffffff;display:block;font-family:Open Sans,Helvetica,Arial,sans-serif;font-size:16px;padding:14px 26px;text-decoration:none" target="_blank" data-saferedirecturl="">サイトに移動</a>
+                              <a href="<?php echo get_site_url(); ?>'" style="background: #613143;border: 1px solid #613143;border-radius: 14px;color:#ffffff;display:block;font-family:Open Sans,Helvetica,Arial,sans-serif;font-size:16px;padding:14px 26px;text-decoration:none" target="_blank" data-saferedirecturl="">サイトに移動</a>
                             </td>
                           </tr>
                         </tbody></table>

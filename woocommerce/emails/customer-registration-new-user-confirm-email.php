@@ -41,6 +41,15 @@ if ( ! defined( 'ABSPATH' ) ) {
                     </tr>
                     <tr>
                       <td align="center" style="">                        
+                        <?php 
+                            /*$email_body = Kadence_Woomail_Customizer::opt( $key . '_body' );
+                            if ( ! empty( $email_body ) ) {
+                                $email_body = Kadence_Woomail_Designer::filter_subtitle( $email_body, $email );                                
+                            }
+                            echo 'body: ' . $email_body;
+                             * 
+                             */
+                        ?>
                         <p style="">
                             atelier Bourgeons （アトリエブルジョン）への会員登録にお申し込みいただき、誠にありがとうございます。下記のURLをクリックして、登録を完了してください。
                   </p><p>会員登録認証用URL:
@@ -64,4 +73,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         </tr>
 <p></p>
 
-<?php do_action( 'woocommerce_email_footer', $email ); ?>
+<?php 
+    
+    do_action( 'woocommerce_email_footer', $email );
+?>

@@ -140,6 +140,27 @@ class WC_Email_Customer_Registration_Approved_Pro extends WC_Email {
 			'email'			=> $this,
 		) );
 	}
+        
+        /**
+	 * Get customize register 
+	 *
+	 * @access public
+	 * @return string
+	 */
+        public function customize_register($wp_customize) {
+            
+            $wp_customize->add_setting('kt_woomail[' . $setting_key . ']' , array(
+                'type'          => 'option',
+                'transport'     => isset( $setting['transport'] ) ? $setting['transport'] : 'postMessage',
+                'capability'    => Kadence_Woomail_Designer::get_admin_capability(),
+                'default'       => isset( $setting['default'] ) ? $setting['default'] : '',
+                'sanitize_callback' => isset( $settings['sanitize_callback'] ) ? array(
+						'WP_Customize_' . $setting['control_type'] . 'Control',
+						$settings['sanitize_callback']
+						) : '',
+            ));
+    
+        }
 }
 
 endif;

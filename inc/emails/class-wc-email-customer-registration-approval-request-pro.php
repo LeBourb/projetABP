@@ -49,7 +49,7 @@ class WC_Email_Customer_Registration_Approval_Request_Pro extends WC_Email {
 		$this->customer_email   = true;
 
 		$this->title            = __( 'Registration approval request pro', 'woocommerce' );
-		$this->description      = __( 'Customer "reset password" emails are sent when customers reset their passwords.', 'woocommerce' );
+		$this->description      = __( 'Customer pro regustration requiring approval from admin.', 'woocommerce' );
 
 		$this->template_html    = 'emails/customer-registration-approval-request-pro.php';
 		$this->template_plain   = 'emails/plain/customer-registration-approval-request-pro.php';

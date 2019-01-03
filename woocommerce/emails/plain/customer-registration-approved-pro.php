@@ -22,14 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 echo "= " . $email_heading . " =\n\n";
 
-echo __( 'Someone requested that the password be reset for the following account:', 'woocommerce' ) . "\r\n\r\n";
+echo __( 'atelier Bourgeons （アトリエブルジョン）の ビジネス会員登録にお申し込みいただき、誠にありがとうございます。 会員の登録認証が完了しましたので、お知らせいたします。ログイン後、ビジネス会員様のみに公開される卸価格にて商品をご購入いただけます。', 'woocommerce' ) . "\r\n\r\n";
 echo esc_url( network_home_url( '/' ) ) . "\r\n\r\n";
-echo sprintf( __( 'Username: %s', 'woocommerce' ), $user_login ) . "\r\n\r\n";
-echo __( 'If this was a mistake, just ignore this email and nothing will happen.', 'woocommerce' ) . "\r\n\r\n";
-echo __( 'To reset your password, visit the following address:', 'woocommerce' ) . "\r\n\r\n";
-
-echo esc_url( add_query_arg( array( 'key' => $reset_key, 'login' => $user_login ), wc_get_endpoint_url( 'lost-password', '', wc_get_page_permalink( 'myaccount' ) ) ) ) . "\r\n";
-
 echo "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
-
+echo '※本メールに関してお心当たりがない場合、または何かご不明点がございましたら、恐れ入りますがその旨をご記入のうえ contact@atelierbourgeons.com までお問い合わせください。';
 echo apply_filters( 'woocommerce_email_footer_text', get_option( 'woocommerce_email_footer_text' ) );
