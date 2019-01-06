@@ -94,13 +94,12 @@ class WC_Email_Customer_Registration_Denied_Pro extends WC_Email {
 	 * @param string $user_login
 	 * @param string $reset_key
 	 */
-	public function trigger( $user_login = '', $reset_key = '' ) {
+	public function trigger( $user_login = '' ) {
 		$this->setup_locale();
 
-		if ( $user_login && $reset_key ) {
+		if ( $user_login ) {
 			$this->object     = get_user_by( 'login', $user_login );
 			$this->user_login = $user_login;
-			$this->reset_key  = $reset_key;
 			$this->user_email = stripslashes( $this->object->user_email );
 			$this->recipient  = $this->user_email;
                         $this->site_url = $site_url;

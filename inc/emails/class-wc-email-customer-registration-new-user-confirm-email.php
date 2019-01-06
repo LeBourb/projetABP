@@ -55,6 +55,7 @@ class WC_Email_Customer_Registration_New_User_Confirm_Email extends WC_Email {
 		$this->template_plain   = 'emails/plain/customer-registration-new-user-confirm-email.php';
 
 		// Trigger
+                
 		add_action( 'woocommerce_registration_new_user_confirm_email_notification', array( $this, 'trigger' ), 10, 2 );
 
 		// Call parent constructor
@@ -84,16 +85,17 @@ class WC_Email_Customer_Registration_New_User_Confirm_Email extends WC_Email {
 	/**
 	 * Trigger.
 	 *
-	 * @param string $user_login
-	 * @param string $reset_key
+	 * @param string $user_id
+	 * @param string $activation_url
 	 */
-	public function trigger( $user_login = '', $activation_url = '' ) {
+	public function trigger( $user_id = '', $activation_url = '' ) {
 		$this->setup_locale();
-
-		if ( $user_login ) {
-			$this->object     = get_user_by( 'login', $user_login );
-			$this->user_login = $user_login;
-			$this->user_email = stripslashes( $this->object->user_email );			
+		if ( $user_id ) {
+                        $user_info = get_userdata($user_id);
+			$this->object     = get_user_by( 'id', $user_id );
+			$this->user_login = $user_info->data->user_login;
+			$this->user_email = stripslashes( $this->object->user_email );		
+                        $this->recipient = $this->user_email;
                         //$code = sha1( $this->object->ID . time() ); 
                         //global $wpdb;
                         //$wpdb->update( $wpdb->users, array( 'user_activation_key' => $code ), array( 'ID' => $this->object->ID ) );
@@ -123,7 +125,7 @@ class WC_Email_Customer_Registration_New_User_Confirm_Email extends WC_Email {
 			'blogname'      => $this->get_blogname(),
 			'sent_to_admin' => false,
 			'plain_text'    => false,
-			'email'         => $this,
+			'email'         => $this->user_email,
 		) );
 	}
 
@@ -141,7 +143,7 @@ class WC_Email_Customer_Registration_New_User_Confirm_Email extends WC_Email {
 			'blogname'      => $this->get_blogname(),
 			'sent_to_admin' => false,
 			'plain_text'    => true,
-			'email'			=> $this,
+			'email'			=> $this->user_email,
 		) );
 	}
         

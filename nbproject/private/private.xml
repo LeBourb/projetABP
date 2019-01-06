@@ -3,42 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/content-single-product-timeline.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/css/style.css</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/functions.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/style.css</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-workshop.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/views/html-product-workshop.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/page.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/single-product/add-to-cart/variable.footer.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-product-attribute-workshop.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-product-attribute-page-description.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-add-to-cart.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/atelier-product-tile.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/owl.carousel.js</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/content-product.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/header.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/navbar.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-login.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/class-storefront.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/single-product/add-to-cart/variable.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/archive-product.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/content-homepage.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-product-price.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/loop/loop-start.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/global/quantity-input.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/style.scss</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/img-lazy-loading.js</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/comments.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/views/html-product-page-description.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-prod-item-functions.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/views/html-product-workshop-address.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/style.min.css</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/views/html-product-page-description-admin-link.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/classes/class-dc-checkout-terms-conditions-popup.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/single-shop_workshop.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/content-single-product.php</file>
-            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-admin-workshop.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/emails/class-wc-email-customer-registration-denied-pro.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/emails/class-wc-email-customer-registration-approved-pro.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/emails/class-wc-email-customer-registration-new-user-confirm-email.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/emails/customer-registration-new-user-confirm-email.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/emails/plain/customer-registration-new-user-confirm-email.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/emails/class-wc-email-customer-registration-new-user-checking-pro.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/emails/customer-registration-new-user-checking-pro.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/emails/class-wc-email-customer-registration-approval-request-pro.php</file>
         </group>
     </open-files>
 </project-private>

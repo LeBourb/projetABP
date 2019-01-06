@@ -4,20 +4,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if ( ! class_exists( 'WC_Email_Customer_Registration_New_User_Checking_Pro', false ) ) :
+if ( ! class_exists( 'WC_Email_Customer_Registration_New_User_Registered', false ) ) :
 
 /**
  * Customer Reset Password.
  *
  * An email sent to the customer when they reset their password.
  *
- * @class       WC_Email_Customer_Registration_New_User_Checking_Pro
+ * @class       WC_Email_Customer_Registration_New_User_Registered
  * @version     2.3.0
  * @package     WooCommerce/Classes/Emails
  * @author      WooThemes
  * @extends     WC_Email
  */
-class WC_Email_Customer_Registration_New_User_Checking_Pro extends WC_Email {
+class WC_Email_Customer_Registration_New_User_Registered extends WC_Email {
 
 	/**
 	 * User login name.
@@ -38,14 +38,14 @@ class WC_Email_Customer_Registration_New_User_Checking_Pro extends WC_Email {
 	 */
 	public function __construct() {
 
-		$this->id               = 'customer_registration_new_user_checking_pro';
+		$this->id               = 'customer_registration_new_user_registered';
 		$this->customer_email   = true;
 
 		$this->title            = __( 'Registration approved', 'woocommerce' );
 		$this->description      = __( 'Customer "reset password" emails are sent when customers reset their passwords.', 'woocommerce' );
 
-		$this->template_html    = 'emails/customer-registration-new-user-checking-pro.php';
-		$this->template_plain   = 'emails/plain/customer-registration-new-user-checking-pro.php';
+		$this->template_html    = 'emails/customer-registration-new-user-registered.php';
+		$this->template_plain   = 'emails/plain/customer-registration-new-user-registered.php';
                 
                 $this->setting = array( 'live_method'   => 'replace',
                                         'selectors'     => array(
@@ -57,7 +57,7 @@ class WC_Email_Customer_Registration_New_User_Checking_Pro extends WC_Email {
                 ));
 
 		// Trigger
-		add_action( 'woocommerce_registration_new_user_checking_pro_notification', array( $this, 'trigger' ), 10, 1 );
+		add_action( 'woocommerce_registration_new_user_registered_notification', array( $this, 'trigger' ), 10, 1 );
                 add_action( 'customize_register', array( $this, 'customize') );
                 add_action( 'wp_footer', array( $this, 'print_live_preview_scripts' ), 999 );
                 
@@ -229,4 +229,4 @@ class WC_Email_Customer_Registration_New_User_Checking_Pro extends WC_Email {
 
 endif;
 
-return new WC_Email_Customer_Registration_New_User_Checking_Pro();
+return new WC_Email_Customer_Registration_New_User_Registered();

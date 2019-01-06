@@ -55,7 +55,7 @@ class WC_Email_Customer_Registration_Approval_Request_Pro extends WC_Email {
 		$this->template_plain   = 'emails/plain/customer-registration-approval-request-pro.php';
 
 		// Trigger
-		add_action( 'woocommerce_registration_approval_request_pro_notification', array( $this, 'trigger' ), 10, 2 );
+		add_action( 'woocommerce_registration_approval_request_pro_notification', array( $this, 'trigger' ), 10, 1 );
 
 		// Call parent constructor
 		parent::__construct();
@@ -85,17 +85,17 @@ class WC_Email_Customer_Registration_Approval_Request_Pro extends WC_Email {
 	 * Trigger.
 	 *
 	 * @param string $user_login
-	 * @param string $reset_key
+	 * @param string $admin_url
 	 */
-	public function trigger( $user_login = '', $reset_key = '' ) {
+	public function trigger( $user_login = '' , $admin_url = '') {
 		$this->setup_locale();
 
-		if ( $user_login && $reset_key ) {
+		if ( $user_login ) {
 			$this->object     = get_user_by( 'login', $user_login );
 			$this->user_login = $user_login;
-			$this->reset_key  = $reset_key;
 			$this->user_email = stripslashes( $this->object->user_email );
-			$this->recipient  = $this->user_email;
+			$this->recipient  = get_option( 'admin_email' );
+                        $this->$admin_url = $admin_url;
 		}
 
 		if ( $this->is_enabled() && $this->get_recipient() ) {
@@ -120,6 +120,7 @@ class WC_Email_Customer_Registration_Approval_Request_Pro extends WC_Email {
 			'sent_to_admin' => false,
 			'plain_text'    => false,
 			'email'			=> $this,
+                        'admin_url' => $admin_url
 		) );
 	}
 
@@ -138,6 +139,7 @@ class WC_Email_Customer_Registration_Approval_Request_Pro extends WC_Email {
 			'sent_to_admin' => false,
 			'plain_text'    => true,
 			'email'			=> $this,
+                        'admin_url' => $admin_url
 		) );
 	}
 }

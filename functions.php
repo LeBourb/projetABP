@@ -66,7 +66,11 @@ if ( storefront_is_woocommerce_activated() ) {
         require 'inc/admin/class-wc-meta-box-page-workshop-metadata.php';
         require 'inc/admin/class-wc-meta-box-product-size-details.php';
         require 'inc/admin/class-wc-meta-box-product-size-guide.php';
-        
+        //require 'inc/emails/class-wc-email-customer-registration-approval-request-pro.php';
+        //require 'inc/emails/class-wc-email-customer-registration-approved-pro.php';
+        //require 'inc/emails/class-wc-email-customer-registration-denied-pro.php';
+        //require 'inc/emails/class-wc-email-customer-registration-new-user-checking-pro.php';
+        //require 'inc/emails/class-wc-email-customer-registration-new-user-confirm-email.php';
         //require 'inc/woocommerce/wc-custom-product-workshop-tab.php';
         //require 'inc/woocommerce/wc-custom-product-fabrics-tab.php';
 }
@@ -940,6 +944,7 @@ function abourgeons_woomail_email_types ( $types ) {
     $types['customer_registration_approval_request_pro'] = 'Customer Registration Approval Request Pro'; 
     $types['customer_registration_new_user_confirm_email'] = 'Customer Registration New User Confirm Email'; 
     $types['customer_registration_new_user_checking_pro'] = 'Customer Registration New User Pro Checking'; 
+    $types['customer_registration_new_user_registered'] = 'Customer Registration New User Registered'; 
     //if(class_exists('WC_Email_Customer_Registration_Approved'))
       //  throw new Exception ('Hello World');
     return $types;    
@@ -947,11 +952,18 @@ function abourgeons_woomail_email_types ( $types ) {
 add_filter( 'kadence_woomail_email_types', 'abourgeons_woomail_email_types' , 10 ,1);
 
 function abourgeons_email_classes($classes){
+    /*require_once 'inc/emails/class-wc-email-customer-registration-approved-pro.php';
+    require_once 'inc/emails/class-wc-email-customer-registration-denied-pro.php';
+    require_once 'inc/emails/class-wc-email-customer-registration-approval-request-pro.php';
+    require_once 'inc/emails/class-wc-email-customer-registration-new-user-confirm-email.php';
+    require_once 'inc/emails/class-wc-email-customer-registration-new-user-checking-pro.php';
+    */
     $classes['WC_Email_Customer_Registration_Approved_Pro'] = include( 'inc/emails/class-wc-email-customer-registration-approved-pro.php' );    
     $classes['WC_Email_Customer_Registration_Denied_Pro'] = include( 'inc/emails/class-wc-email-customer-registration-denied-pro.php' );    
     $classes['WC_Email_Customer_Registration_Approval_Request_Pro'] = include( 'inc/emails/class-wc-email-customer-registration-approval-request-pro.php' );        
     $classes['WC_Email_Customer_Registration_New_User_Confirm_Email'] = include( 'inc/emails/class-wc-email-customer-registration-new-user-confirm-email.php' );
     $classes['WC_Email_Customer_Registration_New_User_Checking_Pro'] = include( 'inc/emails/class-wc-email-customer-registration-new-user-checking-pro.php' );
+    $classes['WC_Email_Customer_Registration_New_User_Registered'] = include( 'inc/emails/class-wc-email-customer-registration-new-user-registered.php' );
     //print_r($classes);
     return $classes;    
 }
@@ -963,6 +975,7 @@ function abourgeons_woomail_email_type_class_name_array($classes){
     $classes['customer_registration_approval_request_pro'] = 'WC_Email_Customer_Registration_Approval_Request_Pro';
     $classes['customer_registration_new_user_confirm_email'] = 'WC_Email_Customer_Registration_New_User_Confirm_Email'; 
     $classes['customer_registration_new_user_checking_pro'] = 'WC_Email_Customer_Registration_New_User_Checking_Pro'; 
+    $classes['customer_registration_new_user_registered'] = 'WC_Email_Customer_Registration_New_User_Registered'; 
     //print_r($classes);
     return $classes;    
 }
@@ -1425,6 +1438,7 @@ function display_bank_details_and_timeline_order($order_id)
     echo '</section>';
       
 }*/
+
 
 
 	/**
