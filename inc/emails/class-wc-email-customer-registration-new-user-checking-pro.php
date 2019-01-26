@@ -88,18 +88,19 @@ class WC_Email_Customer_Registration_New_User_Checking_Pro extends WC_Email {
 	/**
 	 * Trigger.
 	 *
-	 * @param string $user_login
-	 * @param string $reset_key
+	 * @param string $user_id
 	 */
-	public function trigger( $user_login = '' ) {
+	public function trigger( $user_id = '' ) {
 		$this->setup_locale();
 
-		if ( $user_login ) {
-			$this->object     = get_user_by( 'login', $user_login );
-			$this->user_login = $user_login;
+		  if ( $user_id ) {
+                        $user_info = get_userdata($user_id);
+			$this->object     = get_user_by( 'ID', $user_id );
+                        $this->user_login = $user_info->data->user_login;
 			$this->user_email = stripslashes( $this->object->user_email );
 			$this->recipient  = $this->user_email;
 		}
+
 
 		if ( $this->is_enabled() && $this->get_recipient() ) {
 			$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );

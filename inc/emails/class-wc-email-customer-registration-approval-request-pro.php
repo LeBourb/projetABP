@@ -39,6 +39,14 @@ class WC_Email_Customer_Registration_Approval_Request_Pro extends WC_Email {
 	 * @var string
 	 */
 	public $reset_key;
+        
+        
+        /**
+	 * admin url.
+	 *
+	 * @var string
+	 */
+	public $admin_url;
 
 	/**
 	 * Constructor.
@@ -87,16 +95,18 @@ class WC_Email_Customer_Registration_Approval_Request_Pro extends WC_Email {
 	 * @param string $user_login
 	 * @param string $admin_url
 	 */
-	public function trigger( $user_login = '' , $admin_url = '') {
+	public function trigger( $user_id = '' , $admin_url = '') {
 		$this->setup_locale();
-
-		if ( $user_login ) {
-			$this->object     = get_user_by( 'login', $user_login );
-			$this->user_login = $user_login;
+		                
+                if ( $user_id ) {
+                        $user_info = get_userdata($user_id);
+			$this->object     = get_user_by( 'ID', $user_id );
+                        $this->user_login = $user_info->data->user_login;
 			$this->user_email = stripslashes( $this->object->user_email );
 			$this->recipient  = get_option( 'admin_email' );
-                        $this->$admin_url = $admin_url;
+                        $this->admin_url = $admin_url;
 		}
+
 
 		if ( $this->is_enabled() && $this->get_recipient() ) {
 			$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );

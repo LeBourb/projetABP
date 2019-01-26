@@ -378,7 +378,8 @@ if(isset($attachment_ids[1]))
         }
         
         .product-price {            
-            font-size: 2rem;            
+            font-size: 2rem;     
+            display: flex;
         }
         
         .product-price p {
@@ -391,7 +392,7 @@ if(isset($attachment_ids[1]))
         }
         
         .product-price .regular {
-            margin-left: 2rem;
+            margin-left: 5rem;
         }
         
         .product-short-description {
@@ -616,7 +617,8 @@ if(isset($attachment_ids[1]))
                             <div class="product-add-to-cart">
                                 <?php
                                     global $WOO_Product_Stock_Alert;
-                                    $WOO_Product_Stock_Alert->frontend->get_alert_form();
+                                    if($WOO_Product_Stock_Alert) 
+                                        $WOO_Product_Stock_Alert->frontend->get_alert_form();
                                 ?>
                                 <div id="icon-suite">
                                    <div class="icon-container">

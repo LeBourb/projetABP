@@ -393,14 +393,15 @@ function my_custom_submenu_page_callback() {
 
 add_action( 'manage_prod_posts_custom_column', 'render_prod_columns' );
 
-add_filter( 'woocommerce_order_item_meta_start', 'atelierbourgeons_order_item_production_status' , 10, 2 );
+add_action( 'woocommerce_order_item_meta_start', 'atelierbourgeons_order_item_production_status' , 10, 2 );
 function atelierbourgeons_order_item_production_status( $item_name, $item ) {
          $production_id = $item->get_meta('_production_id',true);
-         $html = '<p>生産状況: ';
+         $html = '';
          if($production_id == '') {
-             $html .= '生産前（予約注文受付期間）';
+             return;             
          }
          else {
+             $html = '<p>生産状況: ';
              $status = get_post_status($production_id);
              switch($status) {
                 case 'wc-not-started':
@@ -419,12 +420,12 @@ function atelierbourgeons_order_item_production_status( $item_name, $item ) {
                     $html .= '生産完了';
                     break;                       
                 default:
-                    $html .= $status;
+                    //$html .= $status;
+                    $html .= '生産前（予約注文受付期間）';
                     break;
              }
-             
-         }
-         $html .= '</p>';
+             $html .= '</p>';
+         }         
          print($html);
  }
 
@@ -632,6 +633,7 @@ function atelierbourgeons_tml_message( $message, $action ) {
         if(hash_equals( $row->user_activation_key, $_GET['key'])) {
             $message .= 'ありがとうございます！お客さまのアカウントが有効になりました。こちらからログインしてください。';
             update_user_meta( $_GET['user'], 'pw_user_status', 'approved'  );
+            WC()->mailer()->emails['WC_Email_Customer_Registration_New_User_Registered']->trigger($_GET['user']);
             //pw_new_user_approve()->update_user_status( $_GET['user'] , 'approved' );
         }
     }
@@ -980,6 +982,18 @@ function abourgeons_woomail_email_type_class_name_array($classes){
     return $classes;    
 }
 add_filter( 'kadence_woomail_email_type_class_name_array', 'abourgeons_woomail_email_type_class_name_array', 10 , 1 );
+
+function tinymce_fix_table_styles() {	
+  echo '<script>jQuery(function($){
+    if (typeof tinymce !== "undefined") {
+      tinymce.overrideDefaults({
+        table_default_attributes:{},
+        table_default_styles:{}
+      });
+    }
+  });</script>';
+}
+add_action('admin_footer', 'tinymce_fix_table_styles');
 
 /*function atelierbourgeons_new_user_approve_subject ( $subject ) {
     return '【ビジネス会員登録の認証が完了しました】/atelier Bourgeons （ｱﾄﾘｴﾌﾞﾙｼﾞｮﾝ）';
