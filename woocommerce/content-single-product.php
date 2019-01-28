@@ -510,7 +510,11 @@ if(isset($attachment_ids[1]))
         }
         
         .product-title h3.product_title {            
-            
+            margin-bottom: 2rem;
+        }
+        
+        acticle.product .product-price {
+            margin-bottom: 1rem;
         }
         
         form.cart .single_add_to_cart_button.button {

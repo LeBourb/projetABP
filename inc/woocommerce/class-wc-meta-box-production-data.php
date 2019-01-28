@@ -206,14 +206,10 @@ class WC_Meta_Box_Production_Data {
                                                     <input type="datetime-local" class="date-picker" name="funding_end" id="funding_end" maxlength="10" value="<?php echo $production->get_funding_end(); ?>" />
 						</p>
                                                 
-                                                <p class="form-field form-field-wide"><label for="estimated_shipping_start"><?php _e( 'Estimated shipping start:', 'woocommerce' ) ?></label>
-                                                    <input type="date" class="date-picker" name="estimated_shipping_start" id="estimated_shipping_start" maxlength="10" value="<?php echo $production->get_estimated_shipping_start(); ?>" />
+                                                <p class="form-field form-field-wide"><label for="estimated_shipping_date_txt"><?php _e( 'Estimated shipping date text:', 'woocommerce' ) ?></label>
+                                                    <input type="text" name="estimated_shipping_date_txt" id="estimated_shipping_date_txt" maxlength="100" value="<?php echo $production->get_estimated_shipping_date_txt(); ?>" />
 						</p>
                                                 
-                                                <p class="form-field form-field-wide"><label for="estimated_shipping_end"><?php _e( 'Estimated shipping end:', 'woocommerce' ) ?></label>
-                                                    <input type="date" class="date-picker" name="estimated_shipping_end" id="estimated_shipping_end" maxlength="10" value="<?php echo $production->get_estimated_shipping_end(); ?>" />
-						</p>
-
 						<p class="form-field form-field-wide"><label for="production_minimum"><?php _e( 'Minimum Order:', 'woocommerce' ) ?></label>
                                                     <input type=number name="production_minimum" step=1 value="<?php echo intval( $production->get_production_minimum() ); ?>" /> 
 						</p>
@@ -342,24 +338,15 @@ class WC_Meta_Box_Production_Data {
                         }
 		}
                 
-                if ( !empty( $_POST['estimated_shipping_start'] ) ) {
-			$date =  $_POST['estimated_shipping_start'];
-                        if(!$production->meta_exists( 'estimated_shipping_start' ) ) {
-                            $production->add_meta_data( 'estimated_shipping_start' , $date, true);
+                if ( !empty( $_POST['estimated_shipping_date_txt'] ) ) {
+			$date =  $_POST['estimated_shipping_date_txt'];
+                        if(!$production->meta_exists( 'estimated_shipping_date_txt' ) ) {
+                            $production->add_meta_data( 'estimated_shipping_date_txt' , $date, true);
                         }else {
-                            $production->update_meta_data( 'estimated_shipping_start', $date );
+                            $production->update_meta_data( 'estimated_shipping_date_txt', $date );
                         }
 		}
-                
-                if ( !empty( $_POST['estimated_shipping_end'] ) ) {
-			$date =  $_POST['estimated_shipping_end'];
-                        if(!$production->meta_exists( 'estimated_shipping_end' ) ) {
-                            $production->add_meta_data( 'estimated_shipping_end' , $date, true);
-                        }else {
-                            $production->update_meta_data( 'estimated_shipping_end', $date );
-                        }
-		}
-                
+                              
                 
                 //Update production minium
                 if ( !empty( $_POST['production_minimum'] ) ) {

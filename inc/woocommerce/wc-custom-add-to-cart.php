@@ -87,12 +87,12 @@ add_action( 'woocommerce_before_add_to_cart_form', 'wc_before_add_to_cart_fundin
 function wc_before_add_to_cart_funding() {
     global $post;
     $production_id = wc_get_not_stated_production_item($post->ID);
-    $min_order = wc_get_prod_min_order($production_id);
-    if ($production_id !== '' && $min_order > 0) {
+    if ($production_id !== '' ) {        
         $production = wc_get_prod($production_id);
-        $qty = wc_get_prod_total_ordered_item($production_id);
+        //$min_order = wc_get_prod_min_order($production_id);
+        //$qty = wc_get_prod_total_ordered_item($production_id);
         
-        $percent = intval($qty/$min_order*100);
+        //$percent = intval($qty/$min_order*100);
      ?> <style>
         .goalProgress {
             background: #f2f2f2;
@@ -141,6 +141,10 @@ function wc_before_add_to_cart_funding() {
             flex-basis: 49%;
         }
         
+        .tricky-countdown {
+            margin-left: 1rem;
+        }
+        
         @media screen and (max-width: 760px) {
             .progress-text, #days {
                 font-size: 9px;
@@ -154,21 +158,23 @@ function wc_before_add_to_cart_funding() {
                     <div class="progressBar" data-percent="<?php //echo $percent; ?>%" style="width:0%;"></div>
                 </div>
             </div>
-        <span class="progress-text">目標達成度: <?php echo $percent;?>%</span>
+        <span class="progress-text">目標達成度: <?php //echo $percent;?>%</span>
         </div-->
         <div style="background-color: lightgray;
     border-radius: 1em;
     padding: 2rem;">
-            <p>このアイテムは予約商品です。　お届け予定：<time class="tricky-countdown" data-funding-end="<?php echo $production->get_funding_end(); ?>"></time>
-            </p>
-            <ul>
-                <li>※実際にお届けする商品は、見た目に変化が無い範囲で仕様やサイズが異なる場合がございます。</li>
-                <li>※受注生産の都合上、お届け時期が予定より前後する場合がございます。</li>
+            <p><span style="font-size: 1.8rem;">このアイテムは予約商品です。</span></p>
+            <p>お届け予定：<?php echo $production->get_estimated_shipping_date_txt(); ?></p>
+            <p>受注期間終了まであと <span style="font-size: 1.8rem; text-decoration: underline;"><time class="tricky-countdown" data-funding-end="<?php echo $production->get_funding_end(); ?>"></time></span>
+            </p>        
+            <ul style="margin-left:1rem;">
+                <li style="display: block">※実際にお届けする商品は、見た目に変化が無い範囲で仕様やサイズが異なる場合がございます。</li>
+                <li style="display: block">※受注生産の都合上、お届け時期が予定より前後する場合がございます。</li>
             </ul>
-            <a>予約商品について（ご利用ガイド）</a>        
+            <a href="<?php echo get_permalink(get_option('woocommerce_shopping_guide_page_id')); ?>">予約商品について（ご利用ガイド）</a>            
         </div>
         <script>
-            (function($) {
+            /*(function($) {
                      
             $(document).ready(function () {
                 $(".btn-reservation").click(function() { 
@@ -181,7 +187,7 @@ function wc_before_add_to_cart_funding() {
                 });
             })
             }(jQuery));
-            
+            */
         </script>
         
         <!--div style="background-color:#e8e8e8;margin:1em;padding:1em;margin-top: 4em;">
@@ -192,7 +198,7 @@ function wc_before_add_to_cart_funding() {
             <li>生産の都合上、お届け時期が予定より前後する場合がございます。</li>
             <li>ご注文後、商品のお届け時期は「MY ORDER」ページより随時ご確認いただけます。</li>
             </ul>
-            <red style="color:red;">【お買い物前にご一読ください】<a href="<?php //echo get_permalink(get_option('woocommerce_shopping_guide_page_id')); ?>">ご利用ガイド</a></red>
+            <red style="color:red;">【お買い物前にご一読ください】</red>
         </div-->
             <?php
     }

@@ -120,8 +120,8 @@ if( !function_exists('get_variation_from_term_slug') ) {
 				<?php endforeach; ?>
 			                <?php
     global $post;
-    $production_id = wc_get_not_stated_production_item($post->ID);
-    if($production_id !== '') {        
+    //$production_id = wc_get_not_stated_production_item($post->ID);
+    /*if($production_id !== '') {        
         $production = wc_get_prod($production_id);
         $start = $production->get_estimated_shipping_start();
         $start = strtotime($start); 
@@ -131,9 +131,8 @@ if( !function_exists('get_variation_from_term_slug') ) {
         $end = date("m/d",$end);
         echo '<div class="estimated-ship-date" style="margin-top: 1em; padding: 1em 1.41575em; text-align: center;">
             【お届け予定: ' . $start  . '〜' . $end . '】</div>';
-    }
+    }*/
 
-                
 		
 		woocommerce_quantity_input( array(
 			'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),

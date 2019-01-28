@@ -115,7 +115,8 @@ if( !function_exists('get_variation_from_term_slug') ) {
     
 </style>
 <form class="variations_form cart" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data' data-product_id="<?php echo absint( $product->get_id() ); ?>" data-product_variations="<?php echo htmlspecialchars( wp_json_encode( $available_variations ) ); // WPCS: XSS ok. ?>">
-	<?php do_action( 'woocommerce_before_variations_form' ); ?>
+	<?php do_action( 'woocommerce_before_variations_form' );
+        ?>
 
 	<?php if ( empty( $available_variations ) && false !== $available_variations ) : ?>
 		<p class="stock out-of-stock"><?php esc_html_e( 'This product is currently out of stock and unavailable.', 'woocommerce' ); ?></p>
@@ -196,7 +197,7 @@ if( !function_exists('get_variation_from_term_slug') ) {
 
                 <?php
     global $post;
-    $production_id = wc_get_not_stated_production_item($post->ID);
+    /*$production_id = wc_get_not_stated_production_item($post->ID);
     if($production_id !== '') {        
         $production = wc_get_prod($production_id);
         $start = $production->get_estimated_shipping_start();
@@ -207,7 +208,7 @@ if( !function_exists('get_variation_from_term_slug') ) {
         $end = date("m/d",$end);
         echo '<div class="estimated-ship-date" style="margin-top: 1em; padding: 1em 1.41575em; text-align: center;">
             【お届け予定: ' . $start  . '〜' . $end . '】</div>';
-    }
+    }*/
 ?>
                 
 		<div class="single_variation_wrap">

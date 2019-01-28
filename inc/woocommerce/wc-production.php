@@ -156,22 +156,12 @@ class WC_Production extends WC_Data  {
 	 *
 	 * @since 3.0.0
 	 * @param  string $context
-	 * @return WC_DateTime|NULL object if the date is set or null if there is no date.
+	 * @return string 
 	 */
-	public function get_estimated_shipping_start( $context = 'view' ) {
-		return $this->get_meta( 'estimated_shipping_start', true, $context );
+	public function get_estimated_shipping_date_txt( $context = 'view' ) {
+		return $this->get_meta( 'estimated_shipping_date_txt', true, $context );
 	}
         
-        /**
-	 * Get estimated shipping end date.
-	 *
-	 * @since 3.0.0
-	 * @param  string $context
-	 * @return WC_DateTime|NULL object if the date is set or null if there is no date.
-	 */
-	public function get_estimated_shipping_end( $context = 'view' ) {
-		return $this->get_meta( 'estimated_shipping_end', true, $context );
-	}
 
 	/**
 	 * Get product created date.
