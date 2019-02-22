@@ -62,8 +62,8 @@ if ( ! function_exists( 'admin_wc_after_order_itemmeta' ) )
             return;
         }
         $product_id = null;
-        //print_r($_product);
-        if(is_a($_product,'WC_Product_Variation')) {            
+        //print_r($_product);        
+        if($_product->is_type( 'variable' )) {            
             $product_id = $_product->get_parent_id();
         }else {
             $product_id = $_product->get_id();

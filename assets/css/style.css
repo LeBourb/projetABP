@@ -287,7 +287,9 @@ footer {
     margin-left: 0;
 }
 
-.custom-navbar.navbar-fixed-top.active .nav li a {
+.custom-navbar.navbar-fixed-top.active .nav li a,
+.custom-navbar.navbar-fixed-top.active .nav li p
+{
     color: black;
 }
 
@@ -298,7 +300,8 @@ footer {
     line-height: 40px;
 }
 
-.custom-navbar .nav li a {
+.custom-navbar .nav li a,
+.custom-navbar .nav li p {
     color: #ddd;
     font-size: 12px;
     font-weight: 500;
@@ -326,6 +329,11 @@ footer {
     display: flex;
 }
 
+.custom-navbar.active  .nav li  .subnavContainer.active.mobile {
+    position: relative;
+    width: 100%;
+}
+
 .custom-navbar .nav li .subnav:hover {
     background-color: hsla(0, 0%, 0%, 0.03);
 }
@@ -343,6 +351,22 @@ footer {
 .custom-navbar .nav li a:hover {
     background: transparent;
     color: #e9dccd;
+}
+
+.navbar-nav li a,
+.navbar-nav li p
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 20px;
+    margin-bottom: 0px;
+}
+
+.nav li a,
+.nav li p{
+    position: relative;
+    display: block;
+    padding: 10px 15px;
 }
 
 .custom-navbar .navbar-nav > li > a:hover,
@@ -370,6 +394,14 @@ footer {
     border-color: transparent;
 }
 
+.custom-navbar .nav li{
+    display: none;   
+}
+
+.custom-navbar .nav li .sub-menu-image a {
+    padding: 0;
+}
+
 @media(min-width:768px) {
     .custom-navbar {
         padding-top: 20px;
@@ -388,6 +420,11 @@ footer {
         margin-top: 0;
     }
     
+    .custom-navbar .nav li.navDesktop{
+        display: block;   
+    }
+    
+    
     .custom-navbar.top-nav-collapse {
         background: white;
         padding: 0;
@@ -399,6 +436,7 @@ footer {
     .custom-navbar.top-nav-collapse .site-logo svg {
         fill: black;
     }
+    
 }
 
 
@@ -519,6 +557,7 @@ footer {
     .breadcrumb-nav {
         display: none;
     }
+    
 
 }
 
@@ -701,7 +740,8 @@ ul.custom-products li .product-tile-footer {
         opacity: 1;
     }
     
-    .custom-navbar .nav li a { 
+    .custom-navbar .nav li a,
+    .custom-navbar .nav li p { 
         color:#444;
     }
     
@@ -730,8 +770,8 @@ ul.custom-products li .product-tile-footer {
         height:auto;
     }
     
-    .custom-navbar.active  .nav li  .subnavContainer {
-        display: none!important;
+    .custom-navbar .navbar-collapse[aria-expanded="true"] .nav li.navMobile {
+        display: block;   
     }
     
     .navbar .container > .navbar-header {
@@ -1422,7 +1462,8 @@ footer {
     font-size: 2rem;
   }
 
-  .custom-navbar .nav li a {
+  .custom-navbar .nav li a,
+  .custom-navbar .nav li p{
     font-size: 11px;
 	line-height: 20px;
   }

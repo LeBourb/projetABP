@@ -62,7 +62,7 @@ if ( !$product || empty( $product ) || ! $product->is_visible() || $new_producti
                                     <h3 class="title"><?php echo get_the_title(); ?></h3>
                                     <p class="price"><?php echo $product->get_price_html();?></p>                                    
                                     <?php
-                                        if(!is_a($product, 'WC_Product_Variation') && !is_a($product, 'WC_Product_Simple') && !empty($product->get_available_variations( ))) {
+                                        if( $product->is_type( 'variable' )  && !empty($product->get_available_variations( ))) {
                                             $variations = $product->get_available_variations( );
                                             echo '<ul class="product-variation">';
                                             foreach($variations as $variation) {

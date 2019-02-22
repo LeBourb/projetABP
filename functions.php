@@ -761,6 +761,18 @@ function atelierbourgeons_pro_terms_conditions( $array ) {
             'desc_tip' => true,
             'autoload' => false,
     );
+    $array[] = array(
+            'title'    => __( 'Collection Ete', 'woocommerce' ),
+            'desc'     => __( 'La collection été', 'woocommerce' ),
+            'id'       => 'woocommerce_collection_summer_page_id',
+            'default'  => '',
+            'class'    => 'wc-enhanced-select-nostd',
+            'css'      => 'min-width:300px;',
+            'type'     => 'single_select_page',
+            'args'     => array(  ),
+            'desc_tip' => true,
+            'autoload' => false,
+    );
     return $array;    
 }
 
@@ -850,6 +862,9 @@ function atelierbourgeons_update_options() {
     }
     if(isset($_POST['woocommerce_collection_page_id'])) {
         update_option('woocommerce_collection_page_id', $_POST['woocommerce_collection_page_id'] );
+    }
+    if(isset($_POST['woocommerce_collection_summer_page_id'])) {
+        update_option('woocommerce_collection_summer_page_id', $_POST['woocommerce_collection_summer_page_id'] );
     }
 }
 
@@ -1320,8 +1335,50 @@ function custom_postimage_meta_box(){
     add_meta_box( 'pageworkshopmetadatafacet', __( 'Workshop Metadata', 'woocommerce' ), 'WC_Meta_Box_Page_Workshop_Metadata::output', 'shop_workshop');
     add_meta_box( 'awesomefacets', __( 'Add facets', 'woocommerce' ), 'WC_Meta_Box_Product_Awesome_Description::output', 'product');
     add_meta_box( 'productsizedetails', __( 'Size&Details', 'woocommerce' ), 'WC_Meta_Box_Product_Size_Details::output', 'product');
-    add_meta_box( 'productsizeguide', __( 'Sizing Guide', 'woocommerce' ), 'WC_Meta_Box_Product_Size_Guide::output', 'product');
+    add_meta_box( 'productsizeguide', __( 'Sizing Guide', 'woocommerce' ), 'WC_Meta_Box_Product_Size_Guide::output', 'product');    
+    add_meta_box( 'woocommerce-product-parent-page', __( 'Parent Page', 'woocommerce' ), 'wc_meta_box_product_parent_page', "product", 'side', 'default' );        
+
 }
+
+function wc_meta_box_product_parent_page() {
+    /**
+         * Filters the arguments used to generate a Pages drop-down element.
+         *
+         * @since 3.3.0
+         *
+         * @see wp_dropdown_pages()
+         *
+         * @param array   $dropdown_args Array of arguments used to generate the pages drop-down.
+         * @param WP_Post $post          The current post.
+         */
+        global $post;
+        
+        $page_id = get_post_meta($post->ID, '_parent_page_id', true);
+        $dropdown_args = array(
+            'post_type'        => 'page',
+            'exclude_tree'     => $post->ID,
+            'selected'         => $page_id,
+            'name'             => 'parent_id',
+            'show_option_none' => __('(no parent)'),
+            'sort_column'      => 'menu_order, post_title',
+            'echo'             => 0,
+        );
+        
+        $pages = wp_dropdown_pages( $dropdown_args );
+              
+        if ( ! empty($pages) ) :
+        ?>
+        <p class="post-attributes-label-wrapper"><label class="post-attributes-label" for="parent_id"><?php _e( 'Parent' ); ?></label></p>
+        <?php echo $pages; ?>
+        <?php
+        endif; // end empty pages check
+}
+
+function WC_Meta_Box_Product_Parent_Id_save($post_id) {
+    if (isset( $_POST['parent_id'] ) ) {
+        update_post_meta( $post_id, '_parent_page_id', $_POST['parent_id']  );
+    } 
+    }
 
 //add_action( 'save_post', 'WC_Meta_Box_Product_Awesome_Description::save' );
 add_action( 'wp_ajax_woocommerce_add_awesome_description', 'WC_Meta_Box_Product_Awesome_Description::add' );
@@ -1336,7 +1393,7 @@ add_action( 'wp_ajax_woocommerce_remove_workshop_product_partnership', 'WC_Meta_
 
 add_action( 'save_post_product', 'WC_Meta_Box_Product_Size_Details::save' );
 add_action( 'save_post_product', 'WC_Meta_Box_Product_Size_Guide::save' );
-    
+add_action( 'save_post_product', 'WC_Meta_Box_Product_Parent_Id_save' );
 function custom_postimage_meta_box_func($post){
 
     //an array with all the images (ba meta key). The same array has to be in custom_postimage_meta_box_save($post_id) as well.
@@ -1398,7 +1455,6 @@ function custom_postimage_meta_box_func($post){
 }
 
 function custom_postimage_meta_box_save($post_id){
-
     if ( ! current_user_can( 'edit_posts', $post_id ) ){ return 'not permitted'; }
 
     if (isset( $_POST['custom_postimage_meta_box_nonce'] ) && wp_verify_nonce($_POST['custom_postimage_meta_box_nonce'],'custom_postimage_meta_box' )){
@@ -1413,7 +1469,25 @@ function custom_postimage_meta_box_save($post_id){
             }
         }
     }
+    
 }
+
+/*$classname = apply_filters( 'woocommerce_product_class', self::get_classname_from_product_type( $product_type ), $product_type, 'variation' === $product_type ? 'product_variation' : 'product', $product_id );
+*/
+
+function atelierbourgeons_product_class($classname) {
+
+require_once 'inc/woocommerce/classes/class-wc-abourgeons-product-simple.php';   
+ require_once 'inc/woocommerce/classes/class-wc-abourgeons-product-variation.php';   
+ 
+ if($classname == 'WC_Product_Variable' && class_exists('AB_Product_Variation')) {
+     return 'AB_Product_Variation';
+ }else if ($classname == 'WC_Product_Simple' && class_exists('AB_Product_Simple')) {
+     return 'AB_Product_Simple';
+ }
+ return $classname;
+}
+add_filter( 'woocommerce_product_class', 'atelierbourgeons_product_class');
 
 add_filter( 'woocommerce_get_breadcrumb', 'atelierbourgeons_get_breadcrumb' ,10, 2);
 function atelierbourgeons_get_breadcrumb($crumbs, $item) {
@@ -1431,8 +1505,6 @@ function atelierbourgeons_get_breadcrumb($crumbs, $item) {
         }
         return $crumbs;
 }
-
-
 
 /*add_action('woocommerce_view_order','display_bank_details_and_timeline_order');
  

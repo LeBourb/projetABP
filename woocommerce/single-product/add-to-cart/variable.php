@@ -153,7 +153,7 @@ if( !function_exists('get_variation_from_term_slug') ) {
 			$options    = $attributes[ $attribute ];
 		}
 
-		$html  = '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '" data-attribute_name="attribute_' . esc_attr( sanitize_title( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
+		$html  = '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '" data-attribute_name="attribute_' . esc_attr( sanitize_title( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'yes' ) . '">';
                                 
                 if ( ! empty( $options ) ) {
 			if ( $product && taxonomy_exists( $attribute ) ) {
@@ -170,9 +170,9 @@ if( !function_exists('get_variation_from_term_slug') ) {
                                                 //print_r($variation);
                                                 
                                                 if($variation['is_in_stock'] == 1) {
-                                                    $html .= '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $selected ), $term->slug, false ) . ' class="">' . $value . '</option>';
+                                                    $html .= '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $selected ), $term->slug, false ) . ' class="attached">' . $value . '</option>';
                                                 }else {
-                                                    $html .= '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $selected ), $term->slug, false ) . ' class="not-in-stock">' . $value . '</option>';
+                                                    $html .= '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $selected ), $term->slug, false ) . ' class="attached not-in-stock">' . $value . '</option>';
                                                 }
 					}
 				}
@@ -241,7 +241,7 @@ if( !function_exists('get_variation_from_term_slug') ) {
 </form>
 <script>
     (function($) {
-        $('table.variations select').customSelect();
+        var selects = $('table.variations select').customSelect();
     }(jQuery));
     </script>
 <?php

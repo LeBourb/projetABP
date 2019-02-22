@@ -30,7 +30,7 @@ global $product;
 		 * @since 3.0.0.
 		 */
 		do_action( 'woocommerce_after_add_to_cart_quantity' );
-                
+                                
                 do_action( 'woocommerce_before_add_to_cart_button');
                 
 	?>

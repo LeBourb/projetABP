@@ -33,7 +33,7 @@ if ( empty( $prices['price'] ) ) {
     $priv_sale_price = null;
     $regular_price = null; 
     
-    if(!is_a($that, 'WC_Product_Variation') && !is_a($that, 'WC_Product_Simple') && !empty($that->get_available_variations( ))) {
+    if($that->is_type( 'variable' ) && !empty($that->get_available_variations( ))) {
         $variations = $that->get_available_variations( );
         if($variations[0]['variation_id']) {
             $pre_sale_price = wc_price(get_post_meta($variations[0]['variation_id'],'pre_sale_price',true));
@@ -52,7 +52,6 @@ if ( empty( $prices['price'] ) ) {
         $role = ( array ) $user->roles;
         if(in_array( 'customer-pro', $role )) {
             return '<div class="priv-sale"><small>卸価格: </small>' . $priv_sale_price . '</div>'            
-                . '<div class="pre-sale"><small>先行予約価格: </small><del>' . $pre_sale_price . '</del></div>'
                 . '<div class="regular"><small>通常価格: </small><del>' . $regular_price .'</del></div>';            
         }
 

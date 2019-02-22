@@ -97,6 +97,10 @@
                 align-items: center;
             }
             
+            .subnavContainer.eshop.active {
+                display: block;
+            }
+            
             .navbar nav.categories .downArrow {            
                 background: url(<?php echo get_site_url() . '/wp-content/themes/atelierbourgeonspro/assets/images/drop-arrow.svg'; ?>) no-repeat;
                 background-size: 100%;
@@ -112,6 +116,18 @@
             .navbar nav.categories .downArrow {            
                 display: flex;
                 align-items: center ;
+            }
+            
+            .sub-menu-image > div {
+                display: none;
+            }
+            
+            .sub-menu-image > div.active {
+                display: block;
+            }
+            
+            .sub-menu h6:hover {
+                text-decoration: underline;
             }
               
             @media screen and ( min-width: 768px ) {        
@@ -195,7 +211,14 @@
                         $new_production_id = wc_get_not_stated_production_item($post->ID);
                         $link_url = '';
                         if( $new_production_id  !== null ) {*/
-                            $link_url = get_permalink(get_option('woocommerce_collection_page_id'));
+                            $link_url = '';
+                            global $post;
+                            $page_id = get_post_meta($post->ID, '_parent_page_id', true);
+                            if(get_post_meta($post->ID, '_parent_page_id', true) !== "") {
+                                $link_url = get_permalink(get_post_meta($post->ID, '_parent_page_id', true));
+                            }else {
+                                $link_url = get_permalink(get_option('woocommerce_collection_page_id'));
+                            }
                         //}
                     ?>
                        <a class="arrow" style="position: relative;width: 1.7rem; height: 2.3rem;" href="<?php echo $link_url;?>">
@@ -235,7 +258,8 @@
                                 // if user connected => display orders ! 
                                 //echo wc_get_page_id ( 'view_order' );
                                 
-                                echo '<li id="product-nav"><a href="' . (!is_front_page() ? get_home_url() : '') . '" >Home</a></li>';                
+                                echo '<li id="product-nav" class="navMobile"><a href="' . (!is_front_page() ? get_home_url() : '') . '" >Home</a></li>';                
+                                echo '<li id="product-nav" class="navDesktop"><a href="' . (!is_front_page() ? get_home_url() : '') . '" >Home</a></li>';                
 
                                 /*echo '<li><a href="' . get_permalink( wc_get_page_id ( 'shop' )) . '" >Shop</a></li>';                                            
                                 $query = new WC_Product_Query( array(
@@ -247,49 +271,79 @@
                                 ) );   */     
                                 $image = array();
                                 $image['media_id'] = array( get_post_thumbnail_id( get_option('woocommerce_collection_page_id')) );
-                                $image['hlink'] = get_permalink(get_option('woocommerce_collection_page_id'));
-                                $image['headline'] = get_the_title(get_option('woocommerce_collection_page_id'));
+                                $image['hlink'] = get_permalink(get_option('woocommerce_collection_page_id'));                                
                                 $image['textColor'] = 'white';
-                                $image['button'] = 'Check Now';
+                                
+                                $image_summer = array();
+                                $image_summer['media_id'] = array( get_post_thumbnail_id( get_option('woocommerce_collection_summer_page_id')) );
+                                $image_summer['hlink'] = get_permalink(get_option('woocommerce_collection_summer_page_id'));                                
+                                $image_summer['textColor'] = 'white';
                                 ?>    
-                               <li><a href="<?php echo get_permalink(get_option('woocommerce_collection_page_id')); ?>">E-Shop</a>
-                                    <div class="subnavContainer" style="width: 49rem;">
-                                    <?php echo abourgeons_fall18_render_image_featuring($image, true); 
-                                    ?>
+                               <li class="navDesktop"><a href="<?php echo get_permalink(get_option('woocommerce_collection_page_id')); ?>">E-Shop</a>
+                                    <div class="subnavContainer eshop" style="width: unset;padding: 1rem;" >
+                                        <div class="frame" style="width: 49rem;flex-wrap: unset;flex-direction: unset;border: solid gray 1px; display:flex;">
+                                            <div class="sub-menu" style="width: 32em;padding-left: 2rem;">
+                                                <h5 style="margin-bottom: 2rem;">Collections</h5>
+                                                <div id="title-winter-2019"><a href="<?php echo get_permalink(get_option('woocommerce_collection_page_id')); ?>"><h6><?php echo get_the_title(get_option('woocommerce_collection_page_id')); ?></h6></a></div>
+                                                <div id="title-summer-2019"><a href="<?php echo get_permalink(get_option('woocommerce_collection_summer_page_id')); ?>"><h6><?php  echo get_the_title(get_option('woocommerce_collection_summer_page_id'));  ?></h6></a></div>                                            
+                                            </div>
+                                            <div class="sub-menu-image">
+                                                <div id="image-winter-2019" class="active">
+                                                    <?php echo abourgeons_fall18_render_image_featuring($image, true); ?>
+                                                </div>
+                                                <div id="image-summer-2019" class="" style="">
+                                                    <?php echo abourgeons_fall18_render_image_featuring($image_summer, true); ?>
+                                                </div>    
+                                            </div>
+                                        </div>
                                     </div>
                                 </li>
+                            <li class="navMobile"><p>E-Shop</p>
+                                <div class="subnavContainer mobile" style="" >   
+                                    <a href="<?php  echo get_permalink( get_option('woocommerce_collection_page_id') ); ?>" ><?php echo get_the_title(get_option('woocommerce_collection_page_id')); ?></a>
+                                    <a href="<?php  echo get_permalink( get_option('woocommerce_collection_summer_page_id') );?>" ><?php echo get_the_title(get_option('woocommerce_collection_summer_page_id')); ?></a>
+                                </div>
+                            </li>
                                <?php 
-                                echo '<li id="btob-nav"><a href="' . get_permalink(get_option('woocommerce_btob_page_id')) . '">B to B SALES</a></li>';
-                                echo '<li><a class="separator">|</a></li>';                                                                  
-                                echo '<li><a href="' . get_permalink(get_option('woocommerce_shopping_guide_page_id')) . '" >' . 'Help' . '</a></li>';                                
-                                echo '<li><a href="' . get_permalink( wc_get_page_id ( 'cart' )) . '" >Cart</a></li>'; 
+                                echo '<li id="btob-nav" class="navMobile"><a href="' . get_permalink(get_option('woocommerce_btob_page_id')) . '">B to B SALES</a></li>';
+                                echo '<li id="btob-nav" class="navDesktop"><a href="' . get_permalink(get_option('woocommerce_btob_page_id')) . '">B to B SALES</a></li>';
+                                echo '<li class="navDesktop"><a class="separator">|</a></li>';                                                                  
+                                echo '<li class="navMobile"><a href="' . get_permalink(get_option('woocommerce_shopping_guide_page_id')) . '" >' . 'Help' . '</a></li>';                                
+                                echo '<li class="navMobile"><a href="' . get_permalink( wc_get_page_id ( 'cart' )) . '" >Cart</a></li>'; 
+                                echo '<li class="navDesktop"><a href="' . get_permalink(get_option('woocommerce_shopping_guide_page_id')) . '" >' . 'Help' . '</a></li>';                                
+                                echo '<li class="navDesktop"><a href="' . get_permalink( wc_get_page_id ( 'cart' )) . '" >Cart</a></li>'; 
                                 
                                 if(is_user_logged_in()) {                                    
-                                    echo '<li><a href="' . get_permalink( wc_get_page_id ( 'myaccount' )) . '" >My Account</a>'
+                                    echo '<li class="navDesktop"><a href="' . get_permalink( wc_get_page_id ( 'myaccount' )) . '" >My Account</a>'
                                             . '<div class="subnavContainer" style="">'
                                             . '<a href="' . get_permalink( wc_get_page_id ( 'myaccount' )) . '" >マイアカウント</a>'
                                             . '<a href="' . get_permalink( wc_get_page_id ( 'myaccount' )) . 'orders/" >ご注文履歴</a>'
                                             . '</div>'
                                             . '</li>';
+                                    echo '<li class="navMobile"><a href="' . get_permalink( wc_get_page_id ( 'myaccount' )) . '" >My Account</a>' . '</li>';
                                 }
                                 else {
-                                   echo '<li><a href="' . Theme_My_Login::get_page_link( 'login' ) . '" >Login</a>'
+                                    echo '<li class="navDesktop"><a href="' . Theme_My_Login::get_page_link( 'login' ) . '" >Login</a>'
                                         . '<div class="subnavContainer" style="">'
                                         . '<a class="subnav" href="' .  Theme_My_Login::get_page_link( 'login' ) . '">ログイン</a>'
                                         . '</div>'
                                         . '</li>';
                                     
-                                    echo '<li><a href="' . Theme_My_Login::get_page_link( 'register' ) . '" >Register</a>'
+                                    echo '<li class="navDesktop"><a href="' . Theme_My_Login::get_page_link( 'register' ) . '" >Register</a>'
                                         . '<div class="subnavContainer" style="">'
                                         . '<a class="subnav" href="' .  Theme_My_Login::get_page_link( 'register' ) . '">新規会員登録</a>'
                                         . '</div>'    
-                                        .'</li>';                                
+                                        .'</li>'; 
+                                    
+                                    echo '<li class="navMobile"><a href="' . Theme_My_Login::get_page_link( 'login' ) . '" >Login</a>'  . '</li>';
+                                    echo '<li class="navMobile"><a href="' . Theme_My_Login::get_page_link( 'register' ) . '" >Register</a>' . '</li>';
                                 }                   
-                                echo '<li><a href="' . get_permalink( get_option('woocommerce_contact_form_page_id')) . '" >Contact-us</a>'
+                                echo '<li class="navDesktop"><a href="' . get_permalink( get_option('woocommerce_contact_form_page_id')) . '" >Contact-us</a>'
                                         . '<div class="subnavContainer" style="">'
                                         . '<a class="subnav" href="' .  get_permalink( get_option('woocommerce_contact_form_page_id')) . '">お問い合わせ</a>'
                                         . '</div>'    
                                         . '</li>';
+                                echo '<li class="navMobile"><a href="' . get_permalink( get_option('woocommerce_contact_form_page_id')) . '" >Contact-us</a>' . '</li>';
                                 ?>
                             
 			</ul>
@@ -359,9 +413,28 @@
             $(this).find('.subnavContainer').removeClass('active');
         });
         
+        $( ".nav.navbar-nav li" ).click(function(evt) {
+            if($(this).find('.subnavContainer').hasClass('active')) {
+                $(this).find('.subnavContainer').removeClass('active');
+            }else {
+                $(this).find('.subnavContainer').addClass('active');
+            }
+            evt.stopPropagation();
+        });
+        
         $( 'nav.categories' ).click(function() {
             $('nav.categories .categories.cd-tabs-navigation').toggle();
         });
+        
+        $('#title-summer-2019').mouseenter(function() {
+              $('#image-winter-2019').removeClass('active');
+             $('#image-summer-2019').addClass('active');
+        });
+        $('#title-summer-2019').mouseleave(function() {
+              $('#image-summer-2019').removeClass('active');
+             $('#image-winter-2019').addClass('active');
+        });
+        
     }(jQuery));
 </script>
 
