@@ -726,6 +726,18 @@ function atelierbourgeons_pro_terms_conditions( $array ) {
             'autoload' => false,
     );
      $array[] = array(
+            'title'    => __( 'Concept', 'woocommerce' ),
+            'desc'     => __( 'Concept', 'woocommerce' ),
+            'id'       => 'woocommerce_concept_page_id',
+            'default'  => '',
+            'class'    => 'wc-enhanced-select-nostd',
+            'css'      => 'min-width:300px;',
+            'type'     => 'single_select_page',
+            'args'     => array(  ),
+            'desc_tip' => true,
+            'autoload' => false,
+    );
+     $array[] = array(
             'title'    => __( 'Atelier', 'woocommerce' ),
             'desc'     => __( 'This is l\'Atelier', 'woocommerce' ),
             'id'       => 'woocommerce_atelier_page_id',
@@ -866,6 +878,10 @@ function atelierbourgeons_update_options() {
     if(isset($_POST['woocommerce_collection_summer_page_id'])) {
         update_option('woocommerce_collection_summer_page_id', $_POST['woocommerce_collection_summer_page_id'] );
     }
+    if(isset($_POST['woocommerce_concept_page_id'])) {
+        update_option('woocommerce_concept_page_id', $_POST['woocommerce_concept_page_id'] );
+    }
+
 }
 
 add_filter( 'wc_stripe_description', 'atelierbourgeons_stripe_description', 10, 2);
@@ -1308,6 +1324,11 @@ function my_login_redirect( $url, $request, $user ){
 }
 add_filter('login_redirect', 'my_login_redirect', 10, 3 );
 */
+
+add_filter( 'woocommerce_return_to_shop_redirect', 'abourgons_return_to_shop_redirect' );
+function abourgons_return_to_shop_redirect($wc_get_page_permalink) {
+     return get_home_url();
+}
 
        /*
 function my_login_error( $errors ){

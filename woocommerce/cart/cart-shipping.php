@@ -49,7 +49,7 @@ if($free_shipping) {
 ?>
 <tr class="woocommerce-shipping-totals shipping">
 	<th><?php echo wp_kses_post( $package_name ); ?></th>
-	<td data-title="<?php echo esc_attr( $package_name ); ?>">
+	<td data-title="<?php echo strip_tags( $package_name ); ?>">
 		<?php if ( 1 < count( $available_methods ) ) : ?>
 			<ul id="shipping_method" class="woocommerce-shipping-methods">
 				<?php 

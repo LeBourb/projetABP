@@ -298,11 +298,17 @@
                                         </div>
                                     </div>
                                 </li>
-                            <li class="navMobile"><p>E-Shop</p>
-                                <div class="subnavContainer mobile" style="" >   
-                                    <a href="<?php  echo get_permalink( get_option('woocommerce_collection_page_id') ); ?>" ><?php echo get_the_title(get_option('woocommerce_collection_page_id')); ?></a>
+                            <li class="navMobile">
+                                <a href="<?php  echo get_permalink( get_option('woocommerce_collection_page_id') ); ?>" ><?php echo get_the_title(get_option('woocommerce_collection_page_id')); ?></a>                                    
+                            </li>
+                            <li class="navMobile">
                                     <a href="<?php  echo get_permalink( get_option('woocommerce_collection_summer_page_id') );?>" ><?php echo get_the_title(get_option('woocommerce_collection_summer_page_id')); ?></a>
-                                </div>
+                            </li>
+                            <li class="navMobile">
+                                    <a href="<?php  echo get_permalink( get_option('woocommerce_concept_page_id') );?>" ><?php echo get_the_title(get_option('woocommerce_concept_page_id')); ?></a>
+                            </li>
+                            <li class="navDesktop">
+                                    <a href="<?php  echo get_permalink( get_option('woocommerce_concept_page_id') );?>" ><?php echo get_the_title(get_option('woocommerce_concept_page_id')); ?></a>
                             </li>
                                <?php 
                                 echo '<li id="btob-nav" class="navMobile"><a href="' . get_permalink(get_option('woocommerce_btob_page_id')) . '">B to B SALES</a></li>';
@@ -326,14 +332,9 @@
                                     echo '<li class="navDesktop"><a href="' . Theme_My_Login::get_page_link( 'login' ) . '" >Login</a>'
                                         . '<div class="subnavContainer" style="">'
                                         . '<a class="subnav" href="' .  Theme_My_Login::get_page_link( 'login' ) . '">ログイン</a>'
+                                        . '<a class="subnav" href="' .  Theme_My_Login::get_page_link( 'register' ) . '">新規会員登録</a>'
                                         . '</div>'
                                         . '</li>';
-                                    
-                                    echo '<li class="navDesktop"><a href="' . Theme_My_Login::get_page_link( 'register' ) . '" >Register</a>'
-                                        . '<div class="subnavContainer" style="">'
-                                        . '<a class="subnav" href="' .  Theme_My_Login::get_page_link( 'register' ) . '">新規会員登録</a>'
-                                        . '</div>'    
-                                        .'</li>'; 
                                     
                                     echo '<li class="navMobile"><a href="' . Theme_My_Login::get_page_link( 'login' ) . '" >Login</a>'  . '</li>';
                                     echo '<li class="navMobile"><a href="' . Theme_My_Login::get_page_link( 'register' ) . '" >Register</a>' . '</li>';
