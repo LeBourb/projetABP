@@ -1956,6 +1956,15 @@ button.menu-toggle {
     .widget-area .widget a:not(.button):hover {
       text-decoration: none; }
 
+    
+    .hentry.type-post .entry-content {    
+    max-width: 100rem;
+    float: none;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 1rem;
+  }
+    
 /**
  * Strictly Layout Styles
  */
@@ -2249,10 +2258,7 @@ button.menu-toggle {
     float: left;
     margin-right: 5.8823529412%;
     font-size: 0.875em; }
-  .hentry.type-post .entry-content {
-    width: 76.4705882353%;
-    float: right;
-    margin-right: 0; }
+  
 
   /**
    * Menus

@@ -418,6 +418,7 @@ if ( ! function_exists( 'storefront_post_meta' ) ) {
 	 * @since 1.0.0
 	 */
 	function storefront_post_meta() {
+            return;
 		?>
 		<aside class="entry-meta">
 			<?php if ( 'post' == get_post_type() ) : // Hide category and tag text for pages on Search.
@@ -458,7 +459,7 @@ if ( ! function_exists( 'storefront_post_meta' ) ) {
 
 		<?php endif; // End if 'post' == get_post_type(). ?>
 
-			<?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
+			<?php if ( 0 && ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
 				<div class="comments-link">
 					<?php echo '<div class="label">' . esc_attr( __( 'Comments', 'storefront' ) ) . '</div>'; ?>
 					<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'storefront' ), __( '1 Comment', 'storefront' ), __( '% Comments', 'storefront' ) ); ?></span>

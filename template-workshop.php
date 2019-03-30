@@ -57,18 +57,18 @@ $data = get_post_meta($post->ID, 'page_awesome_paragraphs', true);
                 ?>
             </div>
 
-            <!--div class="image-wrapper is-loaded" data-arrival-index="3" data-departure-index="1" style="background-image: url(&quot;https://static1.fr.squarespace.com/static/ta/5134cbefe4b0c6fb04df8065/9258/assets/blocks/content/customers/about-daniel-arsham/portrait-1.jpg&quot;);">
-                <img data-load="false" data-use-bg-image="true" data-size-format="filename" data-src="https://static1.fr.squarespace.com/static/ta/5134cbefe4b0c6fb04df8065/9258/assets/blocks/content/customers/about-daniel-arsham/portrait-1.jpg" class="" style="display: none;" data-image-dimensions="100x150" data-image-resolution="750w" alt="Interview de Daniel Arsham.">
+            <div class="image-wrapper is-loaded" data-arrival-index="3" data-departure-index="1" style="background-image: url(&quot;https://asia-bc95.kxcdn.com/wp-content/uploads/2019/02/DSC1116.jpg&quot;);">
+                <img data-load="false" data-use-bg-image="true" data-size-format="filename" data-src="https://asia-bc95.kxcdn.com/wp-content/uploads/2019/02/DSC1116.jpg" class="" style="display: none;" data-image-dimensions="100x150" data-image-resolution="750w" alt="Interview de Daniel Arsham.">
             </div>
-            <div class="image-wrapper is-loaded" data-arrival-index="1" data-departure-index="0" style="background-image: url(&quot;https://static1.fr.squarespace.com/static/ta/5134cbefe4b0c6fb04df8065/9258/assets/blocks/content/customers/about-daniel-arsham/portrait-2.jpg&quot;);">
-                <img data-load="false" data-use-bg-image="true" data-size-format="filename" data-src="https://static1.fr.squarespace.com/static/ta/5134cbefe4b0c6fb04df8065/9258/assets/blocks/content/customers/about-daniel-arsham/portrait-2.jpg" class="" style="display: none;" data-image-dimensions="100x150" data-image-resolution="750w" alt="Interview de Daniel Arsham.">
+            <div class="image-wrapper is-loaded" data-arrival-index="1" data-departure-index="0" style="background-image: url(&quot;https://asia-bc95.kxcdn.com/wp-content/uploads/2019/02/DSC1116.jpg&quot;);">
+                <img data-load="false" data-use-bg-image="true" data-size-format="filename" data-src="https://asia-bc95.kxcdn.com/wp-content/uploads/2019/02/DSC1116.jpg" class="" style="display: none;" data-image-dimensions="100x150" data-image-resolution="750w" alt="Interview de Daniel Arsham.">
             </div>
-            <div class="image-wrapper is-loaded" data-arrival-index="2" data-departure-index="2" style="background-image: url(&quot;https://static1.fr.squarespace.com/static/ta/5134cbefe4b0c6fb04df8065/9258/assets/blocks/content/customers/about-daniel-arsham/portrait-3.jpg&quot;);">
-                <img data-load="false" data-use-bg-image="true" data-size-format="filename" data-src="https://static1.fr.squarespace.com/static/ta/5134cbefe4b0c6fb04df8065/9258/assets/blocks/content/customers/about-daniel-arsham/portrait-3.jpg" class="" style="display: none;" data-image-dimensions="100x150" data-image-resolution="750w" alt="Interview de Daniel Arsham.">
+            <div class="image-wrapper is-loaded" data-arrival-index="2" data-departure-index="2" style="background-image: url(&quot;https://asia-bc95.kxcdn.com/wp-content/uploads/2019/02/DSC1116.jpg&quot;);">
+                <img data-load="false" data-use-bg-image="true" data-size-format="filename" data-src="https://asia-bc95.kxcdn.com/wp-content/uploads/2019/02/DSC1116.jpg" class="" style="display: none;" data-image-dimensions="100x150" data-image-resolution="750w" alt="Interview de Daniel Arsham.">
             </div>
-        </div-->
+        </div>
 
-            <!--div class="blockquotes desktop-only">
+            <div class="blockquotes desktop-only">
                 <blockquote class="trigger-target" data-target="quote-1" data-height="719.2000122070312">
                     «&nbsp;Mon travail consiste principalement à transformer le quotidien.&nbsp;»
                 </blockquote>
@@ -78,15 +78,15 @@ $data = get_post_meta($post->ID, 'page_awesome_paragraphs', true);
                 <blockquote class="trigger-target" data-target="quote-3" data-height="719.2000122070312">
                     «&nbsp;Mon nouveau site Web doit pouvoir permettre aux visiteurs d'avoir une vision complète de mon&nbsp;travail.&nbsp;»
                 </blockquote>
-            </div-->
+            </div>
 
             <div class="sections" id="yui_3_17_2_1_1526119896883_115">
                 <article class="qa section trigger" data-target="3" data-active-at="middle" data-inactive-at="bottom" id="yui_3_17_2_1_1526119896883_111">
-                    <!--h2 class="title right trigger-target relative-to-center is-active" data-target="3" data-height="160.5625">Questions et réponses</h2-->
+                    <h2 class="title right trigger-target relative-to-center is-active" data-target="3" data-height="160.5625">Questions et réponses</h2>
                     <div class="sqs-layout sqs-grid-1 columns-1 qa-content" data-type="block-field" data-updated-on="1507234851023" id="qa-daniel-arsham">
                         <div class="row sqs-row" id="yui_3_17_2_1_1526119896883_110">
                             <div class="col sqs-col-1 span-1" id="yui_3_17_2_1_1526119896883_109">
-                                <!--div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-8ceacc9fd34c65018493">
+                                <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-8ceacc9fd34c65018493">
                                     <div class="sqs-block-content"><p><strong>Pouvez-vous me donner votre nom et votre profession&nbsp;? </strong></p>
                                         <p>Je m'appelle Daniel Arsham et je suis artiste. Je réalise des œuvres d'art visuelles, des films, des peintures et des sculptures. Je viens de Cleveland, dans l'Ohio&nbsp;; mais je suis désormais un vrai New-yorkais.</p><p>&nbsp;</p><p><strong>Quelle difficulté, probablement ignorée du public, rencontrez-vous dans votre travail&nbsp;? </strong></p><p>Il n'existe aucune règle pour mouler ou créer la plupart de mes œuvres. &nbsp;La plupart des matériaux que j'utilise —&nbsp;le cristal, les cendres volcaniques —&nbsp;ne sont pas habituellement utilisés pour mouler ou créer des œuvres d'art. Ce ne sont pas des matériaux communs pour donner naissance à de nouvelles idées</p><p>&nbsp;</p>
                                     </div>
@@ -100,7 +100,7 @@ $data = get_post_meta($post->ID, 'page_awesome_paragraphs', true);
 
                                         </figure>
                                     </div>
-                                </div-->
+                                </div>
                                 <?php
                                 if (is_array($data)) {
                                     //print_r($data);
@@ -140,7 +140,7 @@ $data = get_post_meta($post->ID, 'page_awesome_paragraphs', true);
                                     }
                                 }
                                 ?>
-                                <!--div class="sqs-block code-block sqs-block-code" data-block-type="23" id="block-yui_3_17_2_3_1504126019030_5028">
+                                <div class="sqs-block code-block sqs-block-code" data-block-type="23" id="block-yui_3_17_2_3_1504126019030_5028">
                                     <div class="sqs-block-content">
                                         <div class="blockquote-trigger trigger" data-target="1">
                                         </div>
@@ -226,7 +226,7 @@ $data = get_post_meta($post->ID, 'page_awesome_paragraphs', true);
                                     <div class="sqs-block-content">
                                         <p><strong>Souhaitez-vous que votre art soit accessible à tous&nbsp;? </strong></p><p>Je veux que mon travail soit vu et vécu par un maximum de personnes&nbsp;; j'ai envie qu'il soit très accessible.</p><p>&nbsp;</p><p><strong>Quelle est votre vision pour votre nouveau site Daniel Arsham&nbsp;?</strong></p><p>J'ai envie que mon nouveau site crée une véritable expérience. J'ai envie de créer un espace dans lequel les personnes qui connaissent déjà mon travail et celles qui ne le connaissent pas puissent se retrouver et avoir une vue d'ensemble de mon travail. Il existe de nombreux endroits très différents où voir mon travail,&nbsp;par exemple sur les réseaux sociaux et assurément dans une galerie ou un musée. Le site Web me permet de créer ma propre version, organisée comme je le souhaite, de mon travail. Je pense que c'est le seul endroit où je peux le contrôler de A à Z.</p>
                                     </div>
-                                </div-->
+                                </div>
                             </div>
                         </div>
                     </div>
