@@ -18,58 +18,24 @@ get_header();
 <?php 
 get_sidebar( 'left' );
 ?>
+<script>
+    window.appticles={
+        config:{
+            SHOP_NAME:"MY SHOP",
+            API_CATEGORIES_URL:"<?php echo get_site_url(); ?>/wp-json/wp/v2/categories/",
+            API_PRODUCTS_URL:"<?php echo get_site_url(); ?>/wp-json/wp/v2/products/",
+            API_PRODUCT_URL:"<?php echo get_site_url(); ?>/wp-json/wp/v2/product/",
+            API_REVIEWS_URL:"<?php echo get_site_url(); ?>/wp-json/pwacommercepro/reviews/",
+            API_VARIATIONS_URL:"<?php echo get_site_url(); ?>/wp-json/pwacommercepro/product-variations/",
+            API_CHECKOUT_URL:"<?php echo get_site_url(); ?>/wp-json/pwacommercepro/proceed-checkout",
+            CHECKOUT_URL:"<?php echo get_site_url(); ?>/checkout/",CURRENCY:"$",OFFLINE:!0
+        }
+    }
+</script>
 	<div id="primary" class="content-area" style="padding-top: 7rem;">
-		<main id="main" class="site-main" style="max-width: 1031px;margin-left: auto;margin-right: auto;">
+		<main id="blog" class="site-main" style="max-width: 1400px;margin-left: auto;margin-right: auto;">
 			
 
-		<?php
-
-		if ( have_posts() ) :
-
-			if ( is_home() && ! is_front_page() ) :
-				?>
-				<header>
-					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-				</header>
-				<?php
-			endif;
-
-			/* Masonry Start Section */
-			do_action('free_blog_masonry_start_hook'); 
-
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
-
-				/*
-				 * Include the Post-Type-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-				 */
-
-				get_template_part( 'template-parts/content', get_post_type() );
-
-			endwhile;
-
-			/* Masonry end Section */
-			do_action('free_blog_masonry_end_hook'); 
-
-			/**
-             * free_blog_action_navigation hook
-             * @since Free Blog 1.0.0
-             *
-             * @hooked free_blog_action_navigation -  10
-             */
-
-            do_action( 'free_blog_action_navigation');
-
-		else :
-
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-		?>
-	
 		</main><!-- #main -->
 	</div><!-- #primary -->
 

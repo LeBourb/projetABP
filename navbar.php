@@ -307,9 +307,14 @@
                             <li class="navMobile">
                                     <a href="<?php  echo get_permalink( get_option('woocommerce_concept_page_id') );?>" ><?php echo get_the_title(get_option('woocommerce_concept_page_id')); ?></a>
                             </li>
+                            <?php
+                            $user = wp_get_current_user();
+                            $allowed_roles = array('editor', 'administrator', 'author');
+ if( array_intersect($allowed_roles, $user->roles ) ) {  ?>
                             <li class="navDesktop">
                                     <a href="<?php  echo get_permalink( get_option('woocommerce_concept_page_id') );?>" ><?php echo get_the_title(get_option('woocommerce_concept_page_id')); ?></a>
                             </li>
+                            <?php } ?>
                                <?php 
                                 echo '<li id="btob-nav" class="navMobile"><a href="' . get_permalink(get_option('woocommerce_btob_page_id')) . '">B to B SALES</a></li>';
                                 echo '<li id="btob-nav" class="navDesktop"><a href="' . get_permalink(get_option('woocommerce_btob_page_id')) . '">B to B SALES</a></li>';

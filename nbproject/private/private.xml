@@ -7,7 +7,9 @@
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/functions.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/single-product/add-to-cart/variation-add-to-cart-button.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/class-wc-meta-box-production-data.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/style.css</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/emails/customer-registration-new-user-confirm-email.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-workshop.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/class-wc-product-attribute-supply-form.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/emails/class-wc-email-customer-registration-new-user-checking-pro.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/classes/class-wc-abourgeons-product-simple.php</file>
@@ -15,6 +17,9 @@
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/class-admin-wc-prod-list.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-add-to-cart.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/emails/class-wc-email-customer-registration-denied-pro.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/content-single.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/content.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-parts/content.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-custom-admin-order.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/emails/class-wc-email-customer-registration-new-user-confirm-email.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/emails/plain/customer-registration-new-user-confirm-email.php</file>
@@ -27,16 +32,21 @@
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/cart/cart-shipping.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/classes/dc-checkout-terms-conditions-popup-core-functions.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/assets/js/jquery.customSelect.js</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/comments.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-production.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/cart/cart.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/customizer/class-storefront-customizer.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/nux/class-storefront-nux-starter-content.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-homepage.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/cart/cross-sells.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/index.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/emails/customer-registration-new-user-checking-pro.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/wc-prod-item-functions.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/woocommerce/classes/class-dc-checkout-terms-conditions-popup-library.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/emails/class-wc-email-customer-registration-approved-pro.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/template-parts/content-single.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/woocommerce/content-single-product.php</file>
+            <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/storefront-template-functions.php</file>
             <file>file:/C:/Users/smash/wwwpro/themes/projetABP/inc/emails/class-wc-email-customer-registration-approval-request-pro.php</file>
         </group>
     </open-files>
