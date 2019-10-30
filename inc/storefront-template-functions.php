@@ -357,10 +357,61 @@ if ( ! function_exists( 'storefront_post_header' ) ) {
 	function storefront_post_header() {
 		?>
 		<header class="entry-header">
+                    <style>
+                    
+                    .tagWrap ul {
+                        display: flex;
+                        margin: 0;
+                        justify-content: center;
+                    }
+    
+                    .tagWrap ul li.tag {
+                            display: block;
+                            padding: 4px 8px;
+                            border: solid 1px #444;
+                            margin: 4px;
+                            border-radius: 20px;
+                            -moz-border-radius: 20px;
+                            -webkit-border-radius: 20px;
+                            -o-border-radius: 20px;
+                            -ms-border-radius: 20px;
+                            display: inline-table;
+                            float: left;
+                            font-size: 12px;
+                            line-height: 20px;
+                            letter-spacing: .075em;
+                            display: block;
+                            position: relative;
+                            z-index: 300;
+                            color: #444;
+                    }
+                    
+                    .tagWrap ul li.tag a {
+                        color: #444;
+                    }
+                    
+                    </style>
 		<?php
 		if ( is_single() ) {
 			storefront_posted_on();
 			the_title( '<h1 class="entry-title prout">', '</h1>' );
+                        ?>
+                        <div class="tagWrap">
+                            <ul>
+                                <?php 
+//                                print_r(get_post());
+                                    $posttags = get_the_tags(get_post()->ID);
+                                    if ($posttags) {
+                                      foreach($posttags as $tag) {
+                                          echo '<li class="tag"><a href="' . get_permalink( get_option( 'page_for_posts' ) ) . '?tag=' . $tag->name . '" rel="tag">' . $tag->name . '</a></li>'; 
+                                      }
+                                    }
+                                ?>
+                                    
+                            </ul>
+                        </div>
+                        <?php
+                        
 		} else {
 			if ( 'post' == get_post_type() ) {
 				storefront_posted_on();

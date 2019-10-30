@@ -228,9 +228,9 @@ footer .fa:before {
                 <p>〒500-8435</p>
                 <p>岐阜県岐阜市宮北町5-3</p>
                 <br>
-                <p>Atelier:</p>
-                <p>24 rue traversière</p>
-                <p>92100 Boulogne-Billancourt FRANCE</p>
+                <p>France atelier:</p>
+                <p>9 avenue du centre</p>
+                <p>91940 Gometz-le-chatel</p>
                 <a class="email" href="mailto:contact@atelierbourgeons.com">contact@atelierbourgeons.com</a>
             </div>
  

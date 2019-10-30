@@ -251,6 +251,7 @@ if(isset($attachment_ids[1]))
         #variante {
             padding-left: 5%;
             padding-right: 5%;
+            background: #f3f3f3;
         }
         
         
@@ -323,6 +324,7 @@ if(isset($attachment_ids[1]))
         #product-carousel.owl-carousel .owl-item {
             /*height: 100%;*/
             width: 100%;
+            display: inline-block;
            
         }
         #product-carousel.owl-carousel .owl-item img {
