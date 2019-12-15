@@ -433,7 +433,7 @@ if ( ! function_exists( 'storefront_post_content' ) ) {
 	 */
 	function storefront_post_content() {
 		?>
-		<div class="entry-content">
+		<div class="entry-content" style="max-width:135rem;">
 		<?php
 
 		/**
