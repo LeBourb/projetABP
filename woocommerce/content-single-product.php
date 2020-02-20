@@ -314,6 +314,7 @@ if(isset($attachment_ids[1]))
         #product-carousel .owl-stage-outer {
             height: 100%;
             width: 100%;
+            overflow: hidden;
         }
 
         #product-carousel.owl-carousel .owl-stage {

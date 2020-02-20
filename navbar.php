@@ -255,6 +255,8 @@
 			<ul class="nav navbar-nav navbar-right">
 				
                                 <?php
+                                
+                      
                                 // if user connected => display orders ! 
                                 //echo wc_get_page_id ( 'view_order' );
                                 
@@ -304,16 +306,17 @@
                             <li class="navMobile">
                                     <a href="<?php  echo get_permalink( get_option('woocommerce_collection_summer_page_id') );?>" ><?php echo get_the_title(get_option('woocommerce_collection_summer_page_id')); ?></a>
                             </li>
-                            <li class="navMobile">
-                                    <a href="<?php  echo get_permalink( get_option('woocommerce_concept_page_id') );?>" ><?php echo get_the_title(get_option('woocommerce_concept_page_id')); ?></a>
-                            </li>
                             <?php
-                            $user = wp_get_current_user();
-                            $allowed_roles = array('editor', 'administrator', 'author');
- if( array_intersect($allowed_roles, $user->roles ) ) {  ?>
-                            <li class="navDesktop">
-                                    <a href="<?php  echo get_permalink( get_option('woocommerce_concept_page_id') );?>" ><?php echo get_the_title(get_option('woocommerce_concept_page_id')); ?></a>
-                            </li>
+                                      $user = wp_get_current_user();
+                                $allowed_roles = array('editor', 'administrator', 'author');
+                                if( array_intersect($allowed_roles, $user->roles ) ) { 
+                            ?>    
+                                <li class="navMobile">
+                                        <a href="<?php  echo get_permalink( get_option('woocommerce_concept_page_id') );?>" ><?php echo get_the_title(get_option('woocommerce_concept_page_id')); ?></a>
+                                </li>
+                                <li class="navDesktop">
+                                        <a href="<?php  echo get_permalink( get_option('woocommerce_concept_page_id') );?>" ><?php echo get_the_title(get_option('woocommerce_concept_page_id')); ?></a>
+                                </li>
                             <?php } ?>
                                <?php 
                                 echo '<li id="btob-nav" class="navMobile"><a href="' . get_permalink(get_option('woocommerce_btob_page_id')) . '">B to B SALES</a></li>';

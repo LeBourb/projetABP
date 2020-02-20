@@ -433,7 +433,7 @@ if ( ! function_exists( 'storefront_post_content' ) ) {
 	 */
 	function storefront_post_content() {
 		?>
-		<div class="entry-content" style="max-width:135rem;">
+		<div class="entry-content" style="/*max-width:135rem;*/">
 		<?php
 
 		/**
@@ -441,7 +441,7 @@ if ( ! function_exists( 'storefront_post_content' ) ) {
 		 *
 		 * @hooked storefront_post_thumbnail - 10
 		 */
-		do_action( 'storefront_post_content_before' );
+		//do_action( 'storefront_post_content_before' );
 
 		the_content(
 			sprintf(
