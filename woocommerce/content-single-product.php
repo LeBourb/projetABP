@@ -13,7 +13,7 @@
  * @see 	    https://docs.woocommerce.com/document/template-structure/
  * @author 		WooThemes
  * @package 	WooCommerce/Templates
- * @version     3.4.0
+ * @version 3.6.0
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -527,11 +527,12 @@ if(isset($attachment_ids[1]))
 
         form.cart .quantity {
             text-align: center;
-            margin-bottom: 2em;
+            flex-grow: 1;
+            width: 19em;
         }
-
-        form.cart .quantity input {
-            width: 23%;
+        
+        .product-add-to-cart .woocommerce-variation-add-to-cart {
+            display: flex;
         }
 
         
@@ -629,8 +630,10 @@ if(isset($attachment_ids[1]))
                                 ?>
                                 <div id="icon-suite">
                                    <div class="icon-container">
-                                        <div class="icon-click icon-sizing" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing</span></div>
-                                        <div class="icon-click icon-sizing-guide" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing Guide</span></div>
+                                        <div class="icon-click icon-sizing" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing & Details</span></div>
+                                        <?php //if (!empty(get_post_meta(  $post->ID, 'wc_size_guide', true)  ) ) { ?>
+                                            <div class="icon-click icon-sizing-guide" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing Guide</span></div>
+                                        <?php //} ?>
                                     </div>
                                 </div>
                             </div>
