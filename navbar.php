@@ -280,6 +280,11 @@
                                 $image_summer['media_id'] = array( get_post_thumbnail_id( get_option('woocommerce_collection_summer_page_id')) );
                                 $image_summer['hlink'] = get_permalink(get_option('woocommerce_collection_summer_page_id'));                                
                                 $image_summer['textColor'] = 'white';
+                                
+                                $image_accessories = array();
+                                $image_accessories['media_id'] = array( get_post_thumbnail_id( get_option('woocommerce_accessories_page_id')) );
+                                $image_accessories['hlink'] = get_permalink(get_option('woocommerce_accessories_page_id'));                                
+                                $image_accessories['textColor'] = 'white';
                                 ?>    
                                <li class="navDesktop"><a href="<?php echo get_permalink(get_option('woocommerce_collection_page_id')); ?>">E-Shop</a>
                                     <div class="subnavContainer eshop" style="width: unset;padding: 1rem;" >
@@ -287,7 +292,8 @@
                                             <div class="sub-menu" style="width: 32em;padding-left: 2rem;">
                                                 <h5 style="margin-bottom: 2rem;">Collections</h5>
                                                 <div id="title-winter-2019"><a href="<?php echo get_permalink(get_option('woocommerce_collection_page_id')); ?>"><h6><?php echo get_the_title(get_option('woocommerce_collection_page_id')); ?></h6></a></div>
-                                                <div id="title-summer-2019"><a href="<?php echo get_permalink(get_option('woocommerce_collection_summer_page_id')); ?>"><h6><?php  echo get_the_title(get_option('woocommerce_collection_summer_page_id'));  ?></h6></a></div>                                            
+                                                <div id="title-summer-2019"><a href="<?php echo get_permalink(get_option('woocommerce_collection_summer_page_id')); ?>"><h6><?php  echo get_the_title(get_option('woocommerce_collection_summer_page_id'));  ?></h6></a></div>
+                                                <div id="title-accessories-2019"><a href="<?php echo get_permalink(get_option('woocommerce_accessories_page_id')); ?>"><h6><?php  echo get_the_title(get_option('woocommerce_accessories_page_id'));  ?></h6></a></div>
                                             </div>
                                             <div class="sub-menu-image">
                                                 <div id="image-winter-2019" class="active">
@@ -295,6 +301,9 @@
                                                 </div>
                                                 <div id="image-summer-2019" class="" style="">
                                                     <?php echo abourgeons_fall18_render_image_featuring($image_summer, true); ?>
+                                                </div>    
+                                                <div id="image-accessories-2019" class="" style="">
+                                                    <?php echo abourgeons_fall18_render_image_featuring($image_accessories, true); ?>
                                                 </div>    
                                             </div>
                                         </div>
@@ -305,6 +314,9 @@
                             </li>
                             <li class="navMobile">
                                     <a href="<?php  echo get_permalink( get_option('woocommerce_collection_summer_page_id') );?>" ><?php echo get_the_title(get_option('woocommerce_collection_summer_page_id')); ?></a>
+                            </li>
+                             <li class="navMobile">
+                                    <a href="<?php  echo get_permalink( get_option('woocommerce_accessories_page_id') );?>" ><?php echo get_the_title(get_option('woocommerce_accessories_page_id')); ?></a>
                             </li>
                             <?php
                                       $user = wp_get_current_user();
@@ -441,6 +453,15 @@
         });
         $('#title-summer-2019').mouseleave(function() {
               $('#image-summer-2019').removeClass('active');
+             $('#image-winter-2019').addClass('active');
+        });
+        
+        $('#title-accessories-2019').mouseenter(function() {
+              $('#image-winter-2019').removeClass('active');
+             $('#image-accessories-2019').addClass('active');
+        });
+        $('#title-accessories-2019').mouseleave(function() {
+              $('#image-accessories-2019').removeClass('active');
              $('#image-winter-2019').addClass('active');
         });
         

@@ -631,9 +631,9 @@ if(isset($attachment_ids[1]))
                                 <div id="icon-suite">
                                    <div class="icon-container">
                                         <div class="icon-click icon-sizing" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing & Details</span></div>
-                                        <?php //if (!empty(get_post_meta(  $post->ID, 'wc_size_guide', true)  ) ) { ?>
+                                        <?php if (!empty(get_post_meta(  $post->ID, 'wc_size_guide', true)  ) ) { ?>
                                             <div class="icon-click icon-sizing-guide" data-t3featherlight="#size-guide-modal"><span style="padding: 45px 10px 0;">Sizing Guide</span></div>
-                                        <?php //} ?>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>

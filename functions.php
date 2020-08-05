@@ -792,6 +792,18 @@ function atelierbourgeons_pro_terms_conditions( $array ) {
             'desc_tip' => true,
             'autoload' => false,
     );
+    $array[] = array(
+            'title'    => __( 'Accessoires', 'woocommerce' ),
+            'desc'     => __( 'Pages des accessoires', 'woocommerce' ),
+            'id'       => 'woocommerce_accessories_page_id',
+            'default'  => '',
+            'class'    => 'wc-enhanced-select-nostd',
+            'css'      => 'min-width:300px;',
+            'type'     => 'single_select_page',
+            'args'     => array(  ),
+            'desc_tip' => true,
+            'autoload' => false,
+    );
     return $array;    
 }
 
@@ -884,6 +896,9 @@ function atelierbourgeons_update_options() {
     }
     if(isset($_POST['woocommerce_collection_summer_page_id'])) {
         update_option('woocommerce_collection_summer_page_id', $_POST['woocommerce_collection_summer_page_id'] );
+    }
+    if(isset($_POST['woocommerce_accessories_page_id'])) {
+        update_option('woocommerce_accessories_page_id', $_POST['woocommerce_accessories_page_id'] );
     }
     if(isset($_POST['woocommerce_concept_page_id'])) {
         update_option('woocommerce_concept_page_id', $_POST['woocommerce_concept_page_id'] );
