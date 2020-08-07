@@ -175,7 +175,10 @@ function wc_custom_product_available_variation( $output , $product, $variation) 
 }
 add_filter( 'woocommerce_available_variation', 'wc_custom_product_available_variation', 10 ,3);
 
-
+function wc_custom_product_show_variation_price( $show_variation_price, $product, $variation) { 
+    return true;
+}
+add_filter( 'woocommerce_show_variation_price', 'wc_custom_product_show_variation_price', 10 ,3 );
 
 
 //add_filter( 'woocommerce_variable_price_html' , 'wc_custom_variable_product_price', 20 , 3 );
