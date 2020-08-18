@@ -537,6 +537,99 @@ if(isset($attachment_ids[1]))
 
         
     </style>
+    
+<script>
+    window.addEventListener("DOMContentLoaded", function() {
+        // Select the node that will be observed for mutations
+        const targetNode = document.querySelector('.product-add-to-cart');
+        
+        var $select = jQuery('form.variations_form.cart select');
+        
+        
+         /**
+            * See if attributes match.
+            * @return {Boolean}
+            */
+         var isMatch = function( variation_attributes, attributes ) {
+                   var match = true;
+                   for ( var attr_name in variation_attributes ) {
+                           if ( variation_attributes.hasOwnProperty( attr_name ) ) {
+                                   var val1 = variation_attributes[ attr_name ];
+                                   var val2 = attributes[ attr_name ];
+                                   if ( val1 !== undefined && val2 !== undefined && val1.length !== 0 && val2.length !== 0 && val1 !== val2 ) {
+                                           match = false;
+                                   }
+                           }
+                   }
+                   return match;
+           };
+        
+        /**
+            * Find matching variations for attributes.
+            */
+        var findMatchingVariations = function( variations, attributes ) {
+                   var matching = [];
+                   for ( var i = 0; i < variations.length; i++ ) {
+                           var variation = variations[i];
+
+                           if ( isMatch( variation.attributes, attributes ) ) {
+                                   matching.push( variation );
+                           }
+                   }
+                   return matching;
+           };
+
+          
+        var onChange = function(evt) {
+            var variationData = jQuery(document.querySelector('.variations_form.cart')).data( 'product_variations' );
+            var selection = {};
+            $select.each(function(idx, slc) {
+                selection[jQuery(slc).data('attribute_name')] = slc.value;
+            })
+            
+            var variations = findMatchingVariations( variationData, selection );
+            if(variations.length == 1) {
+                 document.querySelector('.product-price .regular .price').innerHTML = variations[0].price_html;
+                 var pre_sale = document.querySelector('.product-price .pre_sale .price');
+                 if(pre_sale) pre_sale.innerHTML = variations[0].pre_sale_price_html;
+            }
+        }
+        
+        $select.change(onChange);
+        
+        onChange();
+        
+            /*
+
+        // Options for the observer (which mutations to observe)
+        const config = { attributes: true, childList: true, subtree: true };
+
+        // Callback function to execute when mutations are observed
+        const callback = function(mutationsList, observer) {
+            // Use traditional 'for loops' for IE 11
+        for(let mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    console.log('A child node has been added or removed.');
+                }
+                else if (mutation.type === 'attributes') {
+                    console.log('The ' + mutation.attributeName + ' attribute was modified.');
+                }
+            }
+            var sourceNode = document.querySelector('.product-add-to-cart span.woocommerce-Price-amount.amount');
+            var variationData = document.querySelector('.variations_form.cart').data( 'product_variations' );
+            var targetNode = document.querySelector('.product-price .price.variable');
+            alert('change');
+        };
+
+        // Create an observer instance linked to the callback function
+        const observer = new MutationObserver(callback);
+
+        // Start observing the target node for configured mutations
+        observer.observe(targetNode, config);
+        */
+    });
+</script>
+
     <!-- =========================
     INTRO SECTION   
 ============================== -->
