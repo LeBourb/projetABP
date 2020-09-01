@@ -9,7 +9,7 @@
  * Assign the Storefront version to a var
  */
 $theme              = wp_get_theme( 'storefront' );
-$storefront_version = '5.0.5';
+$storefront_version = '5.0.6';
 
 /**
  * Set the content width based on the theme's design and stylesheet.

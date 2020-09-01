@@ -93,13 +93,13 @@ if( !function_exists('get_variation_from_term_slug') ) {
 				foreach ( $terms as $term ) {
 					if ( in_array( $term->slug, $options, true ) ) {
                                                 $value = $term->name;
-                                                $variation = get_variation_from_term_slug($variations, $attribute, $term->slug);
+                                                $variation = new WC_Product_Variation(get_variation_from_term_slug($variations, $attribute, $term->slug)['variation_id'] );
                                                 //print_r($variation);
                                                 
-                                                if($variation['is_in_stock'] == 1) {
-                                                    $html .= '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $selected ), $term->slug, false ) . ' class="">' . $value . '</option>';
-                                                }else {
+                                                if($variation->managing_stock() && !$variation->is_in_stock()) {
                                                     $html .= '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $selected ), $term->slug, false ) . ' class="not-in-stock">' . $value . '</option>';
+                                                }else {
+                                                    $html .= '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $selected ), $term->slug, false ) . ' class="">' . $value . '</option>';
                                                 }
 					}
 				}

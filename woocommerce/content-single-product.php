@@ -530,11 +530,7 @@ if(isset($attachment_ids[1]))
             flex-grow: 1;
             width: 19em;
         }
-        
-        .product-add-to-cart .woocommerce-variation-add-to-cart {
-            display: flex;
-        }
-
+     
         
     </style>
     
@@ -550,15 +546,20 @@ if(isset($attachment_ids[1]))
             * See if attributes match.
             * @return {Boolean}
             */
-         var isMatch = function( variation_attributes, attributes ) {
+         var isMatch = function( variation_attributes, attributes ) {                   
+                   if(variation_attributes.length !== attributes.length)
+                       return false;
+                   
                    var match = true;
                    for ( var attr_name in variation_attributes ) {
-                           if ( variation_attributes.hasOwnProperty( attr_name ) ) {
+                           if ( attributes.hasOwnProperty( attr_name ) ) {
                                    var val1 = variation_attributes[ attr_name ];
                                    var val2 = attributes[ attr_name ];
-                                   if ( val1 !== undefined && val2 !== undefined && val1.length !== 0 && val2.length !== 0 && val1 !== val2 ) {
+                                   if ( val1 !== val2 ) {
                                            match = false;
                                    }
+                           }else {
+                               match = false;
                            }
                    }
                    return match;

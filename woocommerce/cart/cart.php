@@ -29,7 +29,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 				<th class="product-thumbnail">&nbsp;</th>
 				<th class="product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
 				<th class="product-price"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
-                                <th class="product-shipping"><?php esc_html_e( 'お届け予定', 'woocommerce' ); ?></th>
+                                <!--th class="product-shipping"><?php //esc_html_e( 'お届け予定', 'woocommerce' ); ?></th-->
 				<th class="product-quantity"><?php esc_html_e( 'Quantity', 'woocommerce' ); ?></th>
 				<th class="product-subtotal"><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
 			</tr>
@@ -98,17 +98,17 @@ do_action( 'woocommerce_before_cart' ); ?>
 							?>
 						</td>
                                                 
-                                                <td class="product-shipping" data-title="<?php esc_attr_e( 'お届け予定', 'woocommerce' ); ?>">
+                                                <!--td class="product-shipping" data-title="<?php esc_attr_e( 'お届け予定', 'woocommerce' ); ?>">
                                                     <?php                                                      
-                                                        $production_id = wc_get_not_stated_production_item($product_id);                                                          
+                                                        /*$production_id = wc_get_not_stated_production_item($product_id);                                                          
                                                         if($production_id) {
                                                             $production = new WC_Production($production_id);
                                                             echo $production->get_estimated_shipping_date_txt();                                                            
                                                         }else {
                                                             echo "Tomorrow";
-                                                        }
+                                                        }*/
                                                     ?>
-						</td>
+						</td-->
 
 						<td class="product-quantity" data-title="<?php esc_attr_e( 'Quantity', 'woocommerce' ); ?>">
 						<?php

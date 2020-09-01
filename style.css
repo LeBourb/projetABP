@@ -282,7 +282,9 @@ pre[class*="language-"] {
     text-transform: capitalize; }
   .modal .modal-inner p {
     color: #333;
-    line-height: 1.5em; }
+    line-height: 1.5em;
+    text-align: center;
+  }
   .modal .modal-inner .modal-intro {
     margin-bottom: 1em; }
   .modal .modal-inner .modal-content {
